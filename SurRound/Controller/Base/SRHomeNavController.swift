@@ -1,19 +1,17 @@
 //
-//  ViewController.swift
+//  SRHomeNavController.swift
 //  SurRound
 //
-//  Created by Kai-Ta Hsieh on 2020/1/15.
+//  Created by Kai-Ta Hsieh on 2020/1/22.
 //  Copyright © 2020 Kai-Ta Hsieh. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class SRHomeNavController: UINavigationController {
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
   }
-
 }
-
