@@ -41,43 +41,43 @@ class SRProgressHUD {
     return AppDelegate.shared.window!.visibleViewController!.view
   }
   
-  func showSuccess(text: String = "Success") {
+  static func showSuccess(text: String = "Success") {
     show(type: .success(text))
   }
   
-  func showFailure(text: String = "Failure") {
+  static func showFailure(text: String = "Failure") {
     show(type: .failure(text))
   }
   
-  func show(type: HUDType, delay: TimeInterval = 1.0) {
+  static func show(type: HUDType, delay: TimeInterval = 1.0) {
     if !Thread.isMainThread {
-      DispatchQueue.main.async { [weak self] in
-        self?.show(type: type, delay: delay)
+      DispatchQueue.main.async {
+        show(type: type, delay: delay)
       }
     }
-    hud.indicatorView = type.indicatorView
-    hud.textLabel.text = type.text
-    hud.show(in: view)
-    hud.dismiss(afterDelay: delay)
+    shared.hud.indicatorView = type.indicatorView
+    shared.hud.textLabel.text = type.text
+    shared.hud.show(in: shared.view)
+    shared.hud.dismiss(afterDelay: delay)
   }
   
-  func showLoading(text: String = "Loading") {
+  static func showLoading(text: String = "Loading") {
     if !Thread.isMainThread {
-      DispatchQueue.main.async { [weak self] in
-        self?.showLoading()
+      DispatchQueue.main.async {
+        showLoading()
       }
     }
-    hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-    hud.textLabel.text = text
-    hud.show(in: view)
+    shared.hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+    shared.hud.textLabel.text = text
+    shared.hud.show(in: shared.view)
   }
   
-  func dismiss() {
+  static func dismiss() {
     if !Thread.isMainThread {
-      DispatchQueue.main.async { [weak self] in
-        self?.dismiss()
+      DispatchQueue.main.async {
+        dismiss()
       }
     }
-    hud.dismiss(animated: true)
+    shared.hud.dismiss(animated: true)
   }
 }

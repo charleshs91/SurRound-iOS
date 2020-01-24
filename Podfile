@@ -9,6 +9,13 @@ target 'SurRound' do
   pod 'SwiftLint'
   pod 'JGProgressHUD'
   pod 'Kingfisher', '~> 5.0'
+  pod 'IQKeyboardManagerSwift'
+  
+  # Firebase
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
 
   target 'SurRoundTests' do
     inherit! :search_paths

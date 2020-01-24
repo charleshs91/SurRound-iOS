@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class SignUpViewController: UIViewController {
   
@@ -14,7 +16,17 @@ class SignUpViewController: UIViewController {
   @IBOutlet weak var usernameTextField: SRRoundedTextField!
   @IBOutlet weak var passwordTextField: SRRoundedTextField!
   @IBOutlet weak var confirmPwdTextField: SRRoundedTextField!
+  @IBOutlet weak var errorLabel: UILabel!
   @IBOutlet weak var signUpBtn: UIButton!
+  
+  private func setupTextField() {
+    let textFields = [emailTextField, usernameTextField, passwordTextField, confirmPwdTextField]
+    let inputFields: [AuthInputField] = [.email, .username, .password, .confirmPwd]
+    for (textField, inputField) in zip(textFields, inputFields) {
+      textField?.delegate = self
+      textField?.placeholder = inputField.placeholder
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,22 +39,59 @@ class SignUpViewController: UIViewController {
   }
   
   @IBAction func didTapSignUpBtn(_ sender: Any) {
-    SRProgressHUD.shared.showLoading()
-    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-      SRProgressHUD.shared.dismiss()
-      self?.navigationController?.dismiss(animated: true, completion: nil)
+    createAccount(completion: { [weak self] (result) in
+      switch result {
+      case .success(let username):
+        self?.navigationController?.dismiss(animated: true, completion: nil)
+      case .failure(let error):
+        SRProgressHUD.showFailure(text: error.localizedDescription)
+      }
+    })
+  }
+  
+  func createAccount(completion: @escaping (Result<String, Error>) -> Void) {
+    guard let email = emailTextField.text,
+      let password = confirmPwdTextField.text,
+      let username = usernameTextField.text else { return }
+    SRProgressHUD.showLoading()
+    AuthManager.shared.signUp(email: email, password: password) { (authResult) in
+      switch authResult {
+      case .success(let uid):
+        let user = SRUser(uid: uid, email: email, username: username)
+        UserManager.createUser(user: user) { (dbResult) in
+          SRProgressHUD.dismiss()
+          switch dbResult {
+          case .success(let srUser):
+            completion(.success(srUser.username))
+          case .failure(let error):
+            completion(.failure(error))
+          }
+        }
+      case .failure(let error):
+        SRProgressHUD.dismiss()
+        completion(.failure(error))
+      }
     }
   }
   
-  private func setupTextField() {
-    emailTextField.delegate = self
-    usernameTextField.delegate = self
-    passwordTextField.delegate = self
-    confirmPwdTextField.delegate = self
+  func checkTextFieldsContent() {
+    errorLabel.clear()
+    if passwordTextField.text != confirmPwdTextField.text {
+      errorLabel.isHidden = false
+      errorLabel.text = "密碼確認不符，請重新輸入"
+    }
+    signUpBtn.isEnabled = !emailTextField.isEmpty &&
+                          !usernameTextField.isEmpty &&
+                          !passwordTextField.isEmpty &&
+                          passwordTextField.text == confirmPwdTextField.text
   }
 }
 
 extension SignUpViewController: UITextFieldDelegate {
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    checkTextFieldsContent()
+  }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()

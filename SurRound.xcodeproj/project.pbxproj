@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		564A824FFB57AA129F675756 /* Pods_SurRoundTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA4380C1D93C2985090644F /* Pods_SurRoundTests.framework */; };
 		A078A017AD033AFF50C5C4B7 /* Pods_SurRoundUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253A10C56E3CBE6F2A4E48AA /* Pods_SurRoundUITests.framework */; };
+		D3086B6E23DB57E80071F378 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B6D23DB57E80071F378 /* AuthManager.swift */; };
+		D3086B7023DB59950071F378 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B6F23DB59950071F378 /* UserManager.swift */; };
+		D3086B7223DB5DD50071F378 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B7123DB5DD50071F378 /* UserModel.swift */; };
 		D32022DD23DAA8310057EB24 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32022DC23DAA8310057EB24 /* SignUpViewController.swift */; };
 		D35C488F23CF352B000951D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35C488E23CF352B000951D2 /* AppDelegate.swift */; };
 		D35C489623CF352B000951D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D35C489423CF352B000951D2 /* Main.storyboard */; };
@@ -26,6 +29,10 @@
 		D3949B0123D9ACBB006DA9AA /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3949B0023D9ACBB006DA9AA /* AuthViewController.swift */; };
 		D3949B0323D9AE12006DA9AA /* InvisibleNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3949B0223D9AE12006DA9AA /* InvisibleNavController.swift */; };
 		D3949B0523D9B07B006DA9AA /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3949B0423D9B07B006DA9AA /* UIView+Extension.swift */; };
+		D39997EB23DAE43B00595B2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D39997EA23DAE43B00595B2F /* GoogleService-Info.plist */; };
+		D39997ED23DB487B00595B2F /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39997EC23DB487B00595B2F /* UITextField+Extension.swift */; };
+		D39997EF23DB4DBD00595B2F /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39997EE23DB4DBD00595B2F /* UILabel+Extension.swift */; };
+		D39997F323DB4FD000595B2F /* AuthInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39997F223DB4FD000595B2F /* AuthInputField.swift */; };
 		D39A754223D5DACF00A20879 /* SRTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A754123D5DACF00A20879 /* SRTabBarController.swift */; };
 		D39A754523D5E30600A20879 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D39A754323D5E30600A20879 /* Home.storyboard */; };
 		D39A754923D5E3A200A20879 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D39A754723D5E3A200A20879 /* Explore.storyboard */; };
@@ -66,6 +73,9 @@
 		8EEF37FDB33146FC6FC83E90 /* Pods-SurRoundTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRoundTests.debug.xcconfig"; path = "Target Support Files/Pods-SurRoundTests/Pods-SurRoundTests.debug.xcconfig"; sourceTree = "<group>"; };
 		934CDAF51DE8A38F689F9CA3 /* Pods-SurRound-SurRoundUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRound-SurRoundUITests.debug.xcconfig"; path = "Target Support Files/Pods-SurRound-SurRoundUITests/Pods-SurRound-SurRoundUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A1C511EBAFDB457C3847BD75 /* Pods_SurRound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurRound.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3086B6D23DB57E80071F378 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		D3086B6F23DB59950071F378 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		D3086B7123DB5DD50071F378 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		D32022DC23DAA8310057EB24 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D35C488B23CF352B000951D2 /* SurRound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SurRound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D35C488E23CF352B000951D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +99,10 @@
 		D3949B0023D9ACBB006DA9AA /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		D3949B0223D9AE12006DA9AA /* InvisibleNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvisibleNavController.swift; sourceTree = "<group>"; };
 		D3949B0423D9B07B006DA9AA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		D39997EA23DAE43B00595B2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "SurRound/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D39997EC23DB487B00595B2F /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		D39997EE23DB4DBD00595B2F /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		D39997F223DB4FD000595B2F /* AuthInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInputField.swift; sourceTree = "<group>"; };
 		D39A754123D5DACF00A20879 /* SRTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRTabBarController.swift; sourceTree = "<group>"; };
 		D39A754423D5E30600A20879 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		D39A754823D5E3A200A20879 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Explore.storyboard; sourceTree = "<group>"; };
@@ -179,9 +193,11 @@
 			children = (
 				D364978323D82B4D0078C4E0 /* Third Party Wrapper */,
 				D39A755023D5E50400A20879 /* Extension */,
+				D39997F023DB4F9F00595B2F /* Model */,
 				D39A755323D5E6E800A20879 /* Controller */,
 				D39A754623D5E36F00A20879 /* View */,
 				D35C488E23CF352B000951D2 /* AppDelegate.swift */,
+				D39997EA23DAE43B00595B2F /* GoogleService-Info.plist */,
 				D35C489C23CF352E000951D2 /* Info.plist */,
 				D35C489723CF352E000951D2 /* Assets.xcassets */,
 			);
@@ -232,9 +248,36 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		D39997F023DB4F9F00595B2F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D39997F123DB4FB600595B2F /* Auth */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D39997F123DB4FB600595B2F /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				D39997F223DB4FD000595B2F /* AuthInputField.swift */,
+				D3086B6D23DB57E80071F378 /* AuthManager.swift */,
+				D3086B6F23DB59950071F378 /* UserManager.swift */,
+				D3086B7123DB5DD50071F378 /* UserModel.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		D39997F423DB510800595B2F /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		D39A754623D5E36F00A20879 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D39997F423DB510800595B2F /* Auth */,
 				D3949AFC23D9AB28006DA9AA /* Base */,
 				D39A754323D5E30600A20879 /* Home.storyboard */,
 				D39A754723D5E3A200A20879 /* Explore.storyboard */,
@@ -256,6 +299,8 @@
 				D39A755723D5FFD000A20879 /* UIColor+Extension.swift */,
 				D3949B0423D9B07B006DA9AA /* UIView+Extension.swift */,
 				D3850D7D23DAD879008F1F7E /* UIWindow+Extension.swift */,
+				D39997EC23DB487B00595B2F /* UITextField+Extension.swift */,
+				D39997EE23DB4DBD00595B2F /* UILabel+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -395,6 +440,7 @@
 				D39A754923D5E3A200A20879 /* Explore.storyboard in Resources */,
 				D35C489623CF352B000951D2 /* Main.storyboard in Resources */,
 				D39A754C23D5E3E700A20879 /* Message.storyboard in Resources */,
+				D39997EB23DAE43B00595B2F /* GoogleService-Info.plist in Resources */,
 				D39A754F23D5E44100A20879 /* Profile.storyboard in Resources */,
 				D39A754523D5E30600A20879 /* Home.storyboard in Resources */,
 			);
@@ -525,6 +571,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D39997ED23DB487B00595B2F /* UITextField+Extension.swift in Sources */,
+				D3086B6E23DB57E80071F378 /* AuthManager.swift in Sources */,
+				D3086B7023DB59950071F378 /* UserManager.swift in Sources */,
 				D3949B0523D9B07B006DA9AA /* UIView+Extension.swift in Sources */,
 				D364978523D82B720078C4E0 /* KingfisherWrapper.swift in Sources */,
 				D3949AFE23D9AB65006DA9AA /* SRRoundedTextField.swift in Sources */,
@@ -532,12 +581,15 @@
 				D39A754223D5DACF00A20879 /* SRTabBarController.swift in Sources */,
 				D35C488F23CF352B000951D2 /* AppDelegate.swift in Sources */,
 				D39A755223D5E57F00A20879 /* UIStoryboard+Extension.swift in Sources */,
+				D39997EF23DB4DBD00595B2F /* UILabel+Extension.swift in Sources */,
 				D32022DD23DAA8310057EB24 /* SignUpViewController.swift in Sources */,
 				D39A755623D5E85C00A20879 /* UIImage+Extension.swift in Sources */,
+				D39997F323DB4FD000595B2F /* AuthInputField.swift in Sources */,
 				D3850D7E23DAD879008F1F7E /* UIWindow+Extension.swift in Sources */,
 				D364978223D816370078C4E0 /* SRHomeNavController.swift in Sources */,
 				D3949B0323D9AE12006DA9AA /* InvisibleNavController.swift in Sources */,
 				D3949B0123D9ACBB006DA9AA /* AuthViewController.swift in Sources */,
+				D3086B7223DB5DD50071F378 /* UserModel.swift in Sources */,
 				D39A755823D5FFD000A20879 /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

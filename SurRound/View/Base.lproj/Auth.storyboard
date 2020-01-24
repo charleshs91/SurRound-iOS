@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gt4-sW-53A">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gt4-sW-53A">
                                 <rect key="frame" x="179.5" y="431.5" width="55" height="33"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <state key="normal" title="Sign In"/>
@@ -145,7 +145,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h8D-VC-kys" customClass="SRRoundedTextField" customModule="SurRound" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h8D-VC-kys" customClass="SRRoundedTextField" customModule="SurRound" customModuleProvider="target">
                                 <rect key="frame" x="80" y="331" width="254" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="sPl-Hd-1ys"/>
@@ -153,7 +153,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Display name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WCu-Yh-jV7" customClass="SRRoundedTextField" customModule="SurRound" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WCu-Yh-jV7" customClass="SRRoundedTextField" customModule="SurRound" customModuleProvider="target">
                                 <rect key="frame" x="80" y="381" width="254" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="agD-bV-bAr"/>
@@ -161,7 +161,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Set password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gbg-W8-HNQ" customClass="SRRoundedTextField" customModule="SurRound" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gbg-W8-HNQ" customClass="SRRoundedTextField" customModule="SurRound" customModuleProvider="target">
                                 <rect key="frame" x="80" y="431" width="254" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="ccM-iZ-oqQ"/>
@@ -169,7 +169,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="prw-ZG-J9l" customClass="SRRoundedTextField" customModule="SurRound" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="prw-ZG-J9l" customClass="SRRoundedTextField" customModule="SurRound" customModuleProvider="target">
                                 <rect key="frame" x="80" y="481" width="254" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="caG-8U-QXZ"/>
@@ -177,22 +177,30 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Raj-7U-7hH">
-                                <rect key="frame" x="175.5" y="539" width="63" height="33"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Raj-7U-7hH">
+                                <rect key="frame" x="175.5" y="561.5" width="63" height="33"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
                                     <action selector="didTapSignUpBtn:" destination="Col-S6-O24" eventType="touchUpInside" id="Knl-2d-rGG"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="error label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVU-cY-1gb">
+                                <rect key="frame" x="178" y="531" width="58" height="14.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Raj-7U-7hH" firstAttribute="top" secondItem="prw-ZG-J9l" secondAttribute="bottom" constant="24" id="EBV-DQ-FsW"/>
+                            <constraint firstItem="xVU-cY-1gb" firstAttribute="centerX" secondItem="mDo-fb-WAL" secondAttribute="centerX" id="4W1-oV-hVl"/>
                             <constraint firstItem="gbg-W8-HNQ" firstAttribute="centerY" secondItem="mDo-fb-WAL" secondAttribute="centerY" id="LWX-4w-T8T"/>
+                            <constraint firstItem="xVU-cY-1gb" firstAttribute="top" secondItem="prw-ZG-J9l" secondAttribute="bottom" constant="16" id="Mde-Io-B1G"/>
                             <constraint firstItem="h8D-VC-kys" firstAttribute="leading" secondItem="WCu-Yh-jV7" secondAttribute="leading" id="N0o-hq-pK9"/>
                             <constraint firstItem="prw-ZG-J9l" firstAttribute="top" secondItem="gbg-W8-HNQ" secondAttribute="bottom" constant="16" id="Q3v-53-WMF"/>
                             <constraint firstItem="WCu-Yh-jV7" firstAttribute="trailing" secondItem="gbg-W8-HNQ" secondAttribute="trailing" id="QEv-Ef-kd6"/>
+                            <constraint firstItem="Raj-7U-7hH" firstAttribute="top" secondItem="xVU-cY-1gb" secondAttribute="bottom" constant="16" id="QvU-Bu-Ldv"/>
                             <constraint firstItem="WCu-Yh-jV7" firstAttribute="leading" secondItem="gbg-W8-HNQ" secondAttribute="leading" id="akj-0K-aCa"/>
                             <constraint firstItem="Raj-7U-7hH" firstAttribute="centerX" secondItem="mDo-fb-WAL" secondAttribute="centerX" id="bJ9-eT-wcV"/>
                             <constraint firstItem="prw-ZG-J9l" firstAttribute="trailing" secondItem="gbg-W8-HNQ" secondAttribute="trailing" id="c1X-65-pzA"/>
@@ -209,6 +217,7 @@
                     <connections>
                         <outlet property="confirmPwdTextField" destination="prw-ZG-J9l" id="UWy-If-lVx"/>
                         <outlet property="emailTextField" destination="h8D-VC-kys" id="Aqc-ke-dlU"/>
+                        <outlet property="errorLabel" destination="xVU-cY-1gb" id="6q4-Du-V0c"/>
                         <outlet property="passwordTextField" destination="gbg-W8-HNQ" id="d4K-xd-wCz"/>
                         <outlet property="signUpBtn" destination="Raj-7U-7hH" id="aE5-Uc-nRy"/>
                         <outlet property="usernameTextField" destination="WCu-Yh-jV7" id="AMP-Vt-Ya9"/>
