@@ -36,7 +36,6 @@ extension UIStoryboard {
   static var auth: UIStoryboard { return getStoryboard(name: StoryboardCategory.auth) }
   
   private static func getStoryboard(name: String) -> UIStoryboard {
-
       return UIStoryboard(name: name, bundle: nil)
   }
 }

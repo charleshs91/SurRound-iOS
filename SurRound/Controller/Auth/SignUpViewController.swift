@@ -27,13 +27,11 @@ class SignUpViewController: UIViewController {
   }
   
   @IBAction func didTapSignUpBtn(_ sender: Any) {
-    let hud = SRProgressHUD(target: self)
-    hud.showLoading()
+    SRProgressHUD.shared.showLoading()
     DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-      hud.dismiss()
+      SRProgressHUD.shared.dismiss()
       self?.navigationController?.dismiss(animated: true, completion: nil)
     }
-    
   }
   
   private func setupTextField() {

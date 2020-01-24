@@ -38,14 +38,15 @@ class SRProgressHUD {
   let hud = JGProgressHUD(style: .dark)
   
   var view: UIView {
-    return target?.view ??
-      AppDelegate.shared.window!.rootViewController!.view
+    return AppDelegate.shared.window!.visibleViewController!.view
   }
   
-  private var target: UIViewController?
+  func showSuccess(text: String = "Success") {
+    show(type: .success(text))
+  }
   
-  init(target viewController: UIViewController? = nil) {
-    self.target = viewController
+  func showFailure(text: String = "Failure") {
+    show(type: .failure(text))
   }
   
   func show(type: HUDType, delay: TimeInterval = 1.0) {
@@ -79,5 +80,4 @@ class SRProgressHUD {
     }
     hud.dismiss(animated: true)
   }
-  
 }
