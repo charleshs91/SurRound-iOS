@@ -10,6 +10,7 @@ import UIKit
 
 enum ImageAsset: String {
   
+  // swiftlint:disable identifier_name
   case TabBarIcon_42px_Home
   case TabBarIcon_42px_Explore
   case TabBarIcon_42px_Message
@@ -20,6 +21,7 @@ enum ImageAsset: String {
   case TabBarIcon_42px_Explore_Selected
   case TabBarIcon_42px_Message_Selected
   case TabBarIcon_42px_Profile_Selected
+  // swiftlint:enable identifier_name
 }
 
 extension UIImage {

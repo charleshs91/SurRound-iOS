@@ -18,6 +18,7 @@
 		D35C48B123CF352E000951D2 /* SurRoundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35C48B023CF352E000951D2 /* SurRoundUITests.swift */; };
 		D364978223D816370078C4E0 /* SRHomeNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D364978123D816370078C4E0 /* SRHomeNavController.swift */; };
 		D364978523D82B720078C4E0 /* KingfisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D364978423D82B720078C4E0 /* KingfisherWrapper.swift */; };
+		D3850D7C23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3850D7B23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift */; };
 		D3949AF823D9A81E006DA9AA /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3949AF623D9A81E006DA9AA /* Auth.storyboard */; };
 		D3949AFB23D9A912006DA9AA /* Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3949AF923D9A912006DA9AA /* Create.storyboard */; };
 		D3949AFE23D9AB65006DA9AA /* SRRoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3949AFD23D9AB65006DA9AA /* SRRoundedTextField.swift */; };
@@ -79,6 +80,7 @@
 		D35C48B223CF352E000951D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D364978123D816370078C4E0 /* SRHomeNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRHomeNavController.swift; sourceTree = "<group>"; };
 		D364978423D82B720078C4E0 /* KingfisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingfisherWrapper.swift; sourceTree = "<group>"; };
+		D3850D7B23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGProgressHUDWrapper.swift; sourceTree = "<group>"; };
 		D3949AF723D9A81E006DA9AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Auth.storyboard; sourceTree = "<group>"; };
 		D3949AFA23D9A912006DA9AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Create.storyboard; sourceTree = "<group>"; };
 		D3949AFD23D9AB65006DA9AA /* SRRoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRRoundedTextField.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				D364978423D82B720078C4E0 /* KingfisherWrapper.swift */,
+				D3850D7B23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift */,
 			);
 			path = "Third Party Wrapper";
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				D35C488823CF352B000951D2 /* Frameworks */,
 				D35C488923CF352B000951D2 /* Resources */,
 				692B53D5FBA641CB1092CA4A /* [CP] Embed Pods Frameworks */,
+				D3850D7A23DAC198008F1F7E /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -493,6 +497,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D3850D7A23DAC198008F1F7E /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -503,6 +525,7 @@
 				D3949B0523D9B07B006DA9AA /* UIView+Extension.swift in Sources */,
 				D364978523D82B720078C4E0 /* KingfisherWrapper.swift in Sources */,
 				D3949AFE23D9AB65006DA9AA /* SRRoundedTextField.swift in Sources */,
+				D3850D7C23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift in Sources */,
 				D39A754223D5DACF00A20879 /* SRTabBarController.swift in Sources */,
 				D35C488F23CF352B000951D2 /* AppDelegate.swift in Sources */,
 				D39A755223D5E57F00A20879 /* UIStoryboard+Extension.swift in Sources */,

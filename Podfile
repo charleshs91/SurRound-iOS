@@ -6,6 +6,8 @@ target 'SurRound' do
   use_frameworks!
 
   # Pods for SurRound
+  pod 'SwiftLint'
+  pod 'JGProgressHUD'
   pod 'Kingfisher', '~> 5.0'
 
   target 'SurRoundTests' do

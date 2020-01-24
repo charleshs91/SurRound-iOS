@@ -1,18 +1,26 @@
 PODS:
+  - JGProgressHUD (2.1)
   - Kingfisher (5.12.0):
     - Kingfisher/Core (= 5.12.0)
   - Kingfisher/Core (5.12.0)
+  - SwiftLint (0.38.2)
 
 DEPENDENCIES:
+  - JGProgressHUD
   - Kingfisher (~> 5.0)
+  - SwiftLint
 
 SPEC REPOS:
   trunk:
+    - JGProgressHUD
     - Kingfisher
+    - SwiftLint
 
 SPEC CHECKSUMS:
+  JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
   Kingfisher: dc6e0f53bb5b12c3e75bedb0e01bbd7a640eea69
+  SwiftLint: 8f5d2f903e1c9bcbc832fd16771e80a263ac6cbb
 
-PODFILE CHECKSUM: d16efb6d59c0aea558de0d87ad3c4e2ba256b6b2
+PODFILE CHECKSUM: 743ef4e40ec6e642f908979ac69e22ddc361fe89
 
 COCOAPODS: 1.8.4

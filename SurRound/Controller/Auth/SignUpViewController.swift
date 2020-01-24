@@ -27,9 +27,14 @@ class SignUpViewController: UIViewController {
   }
   
   @IBAction func didTapSignUpBtn(_ sender: Any) {
-    navigationController?.dismiss(animated: true, completion: nil)
+    let hud = SRProgressHUD(target: self)
+    hud.showLoading()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+      hud.dismiss()
+      self?.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
   }
-  
   
   private func setupTextField() {
     emailTextField.delegate = self
