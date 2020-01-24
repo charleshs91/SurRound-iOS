@@ -11,6 +11,24 @@ import Firebase
 
 class UserManager {
   
+  static let shared = UserManager()
+  
+  var currentUser: SRUser?
+  
+  class func queryUser(uid: String, completion: @escaping (SRUser) -> Void) {
+    let db = Firestore.firestore()
+    db.collection("users").document(uid).getDocument { (snapshot, error) in
+      guard let data = snapshot?.data(), error == nil else {
+        print(error!)
+        return
+      }
+      guard let uid = data["uid"] as? String,
+            let email = data["email"] as? String,
+            let username = data["username"] as? String else { return }
+      completion(SRUser(uid: uid, email: email, username: username))
+    }
+  }
+  
   class func createUser(user: SRUser, completion: @escaping (Result<SRUser, Error>) -> Void) {
     let db = Firestore.firestore()
     db.collection("users").document(user.uid).setData([

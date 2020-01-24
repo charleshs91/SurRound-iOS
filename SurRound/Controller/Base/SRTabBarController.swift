@@ -75,21 +75,24 @@ class SRTabBarController: UITabBarController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    AuthManager.shared.addListener()
     viewControllers = tabs.map { $0.controller() }
-    
     tabBar.tintColor = UIColor.hexStringToUIColor(hex: "004445")
-    
     delegate = self
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    guard let authVC = UIStoryboard.auth.instantiateInitialViewController() else { return }
-    authVC.modalTransitionStyle = .coverVertical
-    authVC.modalPresentationStyle = .overCurrentContext
-    present(authVC, animated: true, completion: nil)
+    guard let userID = AuthManager.shared.currentUserID else {
+      guard let authVC = UIStoryboard.auth.instantiateInitialViewController() else { return }
+      authVC.modalTransitionStyle = .coverVertical
+      authVC.modalPresentationStyle = .overCurrentContext
+      present(authVC, animated: true, completion: nil)
+      return
+    }
+    
+    // Get current user's data.
   }
 }
 

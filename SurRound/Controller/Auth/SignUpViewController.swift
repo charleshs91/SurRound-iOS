@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseFirestore
 
 class SignUpViewController: UIViewController {
   
@@ -21,16 +19,21 @@ class SignUpViewController: UIViewController {
   
   private func setupTextField() {
     let textFields = [emailTextField, usernameTextField, passwordTextField, confirmPwdTextField]
-    let inputFields: [AuthInputField] = [.email, .username, .password, .confirmPwd]
-    for (textField, inputField) in zip(textFields, inputFields) {
+    let categories: [AuthInputCategory] = [.email, .username, .password, .confirmPwd]
+    for (textField, category) in zip(textFields, categories) {
       textField?.delegate = self
-      textField?.placeholder = inputField.placeholder
+      textField?.placeholder = category.placeholder
     }
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupTextField()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    emailTextField.becomeFirstResponder()
+    super.viewDidAppear(animated)
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -41,7 +44,7 @@ class SignUpViewController: UIViewController {
   @IBAction func didTapSignUpBtn(_ sender: Any) {
     createAccount(completion: { [weak self] (result) in
       switch result {
-      case .success(let username):
+      case .success:
         self?.navigationController?.dismiss(animated: true, completion: nil)
       case .failure(let error):
         SRProgressHUD.showFailure(text: error.localizedDescription)
@@ -49,7 +52,7 @@ class SignUpViewController: UIViewController {
     })
   }
   
-  func createAccount(completion: @escaping (Result<String, Error>) -> Void) {
+  private func createAccount(completion: @escaping (Result<Void, Error>) -> Void) {
     guard let email = emailTextField.text,
       let password = confirmPwdTextField.text,
       let username = usernameTextField.text else { return }
@@ -62,7 +65,8 @@ class SignUpViewController: UIViewController {
           SRProgressHUD.dismiss()
           switch dbResult {
           case .success(let srUser):
-            completion(.success(srUser.username))
+            print("# `\(srUser.username)` created")
+            completion(.success(()))
           case .failure(let error):
             completion(.failure(error))
           }
@@ -74,7 +78,7 @@ class SignUpViewController: UIViewController {
     }
   }
   
-  func checkTextFieldsContent() {
+  private func checkTextFieldsContent() {
     errorLabel.clear()
     if passwordTextField.text != confirmPwdTextField.text {
       errorLabel.isHidden = false

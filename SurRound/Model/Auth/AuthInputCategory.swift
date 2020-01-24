@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum AuthInputField {
+enum AuthInputCategory {
   
   case email
   case username
