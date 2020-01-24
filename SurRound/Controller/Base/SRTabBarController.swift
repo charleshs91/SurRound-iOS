@@ -82,6 +82,15 @@ class SRTabBarController: UITabBarController {
     
     delegate = self
   }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    guard let authVC = UIStoryboard.auth.instantiateInitialViewController() else { return }
+    authVC.modalTransitionStyle = .coverVertical
+    authVC.modalPresentationStyle = .overCurrentContext
+    present(authVC, animated: true, completion: nil)
+  }
 }
 
 extension SRTabBarController: UITabBarControllerDelegate {
