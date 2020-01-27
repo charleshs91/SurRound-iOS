@@ -15,7 +15,14 @@ class UserManager {
   
   var currentUser: SRUser?
   
-  class func queryUser(uid: String, completion: @escaping (SRUser) -> Void) {
+  static func updateCurrentUser() {
+    guard let uid = AuthManager.shared.currentUserID else { return }
+    queryUser(uid: uid) { (srUser) in
+      shared.currentUser = srUser
+    }
+  }
+  
+  static func queryUser(uid: String, completion: @escaping (SRUser) -> Void) {
     let db = Firestore.firestore()
     db.collection("users").document(uid).getDocument { (snapshot, error) in
       guard let data = snapshot?.data(), error == nil else {
@@ -29,7 +36,7 @@ class UserManager {
     }
   }
   
-  class func createUser(user: SRUser, completion: @escaping (Result<SRUser, Error>) -> Void) {
+  static func createUser(user: SRUser, completion: @escaping (Result<SRUser, Error>) -> Void) {
     let db = Firestore.firestore()
     db.collection("users").document(user.uid).setData([
       "uid": user.uid,

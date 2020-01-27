@@ -1,5 +1,5 @@
 //
-//  AuthViewController.swift
+//  SignInViewController.swift
 //  SurRound
 //
 //  Created by Kai-Ta Hsieh on 2020/1/23.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-class AuthViewController: UIViewController {
+class SignInViewController: UIViewController {
   
-  @IBOutlet weak var emailTextField: SRRoundedTextField!
-  @IBOutlet weak var passwordTextField: SRRoundedTextField!
+  @IBOutlet weak var emailTextField: SRAuthTextField!
+  @IBOutlet weak var passwordTextField: SRAuthTextField!
   @IBOutlet weak var signInBtn: UIButton!
   
   private func setupTextField() {
@@ -26,6 +26,11 @@ class AuthViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupTextField()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    emailTextField.becomeFirstResponder()
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -49,12 +54,8 @@ class AuthViewController: UIViewController {
     }
   }
   
-  @IBAction func didTapSignInAsGuest(_ sender: UIButton) {
-    dismiss(animated: true, completion: nil)
-  }
-  
-  @IBAction func didTapAppleSignInBtn(_ sender: UIButton) {
-    
+  @IBAction func close(_ sender: UIBarButtonItem) {
+    navigationController?.dismiss(animated: true, completion: nil)
   }
   
   private func checkTextFieldsContent() {
@@ -62,7 +63,7 @@ class AuthViewController: UIViewController {
   }
 }
 
-extension AuthViewController: UITextFieldDelegate {
+extension SignInViewController: UITextFieldDelegate {
   
   func textFieldDidEndEditing(_ textField: UITextField) {
     checkTextFieldsContent()

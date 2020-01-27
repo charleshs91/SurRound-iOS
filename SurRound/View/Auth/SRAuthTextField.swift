@@ -1,5 +1,5 @@
 //
-//  SRRoundedTextField.swift
+//  SRAuthTextField.swift
 //  SurRound
 //
 //  Created by Kai-Ta Hsieh on 2020/1/23.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SRRoundedTextField: UITextField {
+class SRAuthTextField: UITextField {
 
   private let padding = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
   

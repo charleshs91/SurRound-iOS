@@ -15,23 +15,16 @@ class AuthManager {
   
   static let shared = AuthManager()
   
-  var currentUserID: String?
-  
-  private init() { }
-  
-  func addListener() {
-    Auth.auth().addStateDidChangeListener { (_, user) in
-      guard let uid = user?.uid else {
-        self.currentUserID = nil
-        UserManager.shared.currentUser = nil
-        return
-      }
-      self.currentUserID = uid
-      UserManager.queryUser(uid: uid) { (srUser) in
-        UserManager.shared.currentUser = srUser
-      }
+  var currentUserID: String? {
+    get {
+      UserDefaults.standard.string(forKey: "SRUserID")
+    }
+    set {
+      UserDefaults.standard.set(newValue, forKey: "SRUserID")
     }
   }
+  
+  private init() { }
   
   func signIn(email: String, password: String, completion: @escaping UserIDResult) {
     Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
@@ -39,6 +32,7 @@ class AuthManager {
         completion(.failure(error!))
         return
       }
+      self.currentUserID = user.uid
       completion(.success(user.uid))
     }
   }

@@ -10,10 +10,10 @@ import UIKit
 
 class SignUpViewController: UIViewController {
   
-  @IBOutlet weak var emailTextField: SRRoundedTextField!
-  @IBOutlet weak var usernameTextField: SRRoundedTextField!
-  @IBOutlet weak var passwordTextField: SRRoundedTextField!
-  @IBOutlet weak var confirmPwdTextField: SRRoundedTextField!
+  @IBOutlet weak var emailTextField: SRAuthTextField!
+  @IBOutlet weak var usernameTextField: SRAuthTextField!
+  @IBOutlet weak var passwordTextField: SRAuthTextField!
+  @IBOutlet weak var confirmPwdTextField: SRAuthTextField!
   @IBOutlet weak var errorLabel: UILabel!
   @IBOutlet weak var signUpBtn: UIButton!
   
