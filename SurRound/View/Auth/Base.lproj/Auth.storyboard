@@ -35,7 +35,7 @@
                                     <constraint firstAttribute="height" constant="42" id="aSY-Yo-cNW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ezl-GM-VDF" customClass="SRAuthTextField" customModule="SurRound" customModuleProvider="target">
                                 <rect key="frame" x="80" y="170" width="274" height="42"/>
@@ -43,7 +43,7 @@
                                     <constraint firstAttribute="height" constant="42" id="Ck4-zx-Qr7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="envelope.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nxJ-vQ-pL8">
                                 <rect key="frame" x="42" y="119.5" width="30" height="26.5"/>
@@ -81,7 +81,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.8901960784313725" green="0.96470588235294119" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="zdE-mI-tIl" firstAttribute="trailing" secondItem="ezl-GM-VDF" secondAttribute="trailing" id="Epk-78-L59"/>
                             <constraint firstItem="gt4-sW-53A" firstAttribute="top" secondItem="ezl-GM-VDF" secondAttribute="bottom" constant="24" id="G37-Ib-Jhd"/>
@@ -126,7 +126,7 @@
                                     <constraint firstAttribute="height" constant="42" id="sPl-Hd-1ys"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WCu-Yh-jV7" customClass="SRAuthTextField" customModule="SurRound" customModuleProvider="target">
                                 <rect key="frame" x="60" y="170" width="294" height="42"/>
@@ -134,7 +134,7 @@
                                     <constraint firstAttribute="height" constant="42" id="agD-bV-bAr"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="username"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gbg-W8-HNQ" customClass="SRAuthTextField" customModule="SurRound" customModuleProvider="target">
                                 <rect key="frame" x="60" y="228" width="294" height="42"/>
@@ -142,7 +142,7 @@
                                     <constraint firstAttribute="height" constant="42" id="ccM-iZ-oqQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="new-password"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="prw-ZG-J9l" customClass="SRAuthTextField" customModule="SurRound" customModuleProvider="target">
                                 <rect key="frame" x="60" y="286" width="294" height="42"/>
@@ -150,7 +150,7 @@
                                     <constraint firstAttribute="height" constant="42" id="caG-8U-QXZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="new-password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Raj-7U-7hH" customClass="SRAuthButton" customModule="SurRound" customModuleProvider="target">
                                 <rect key="frame" x="60" y="374.5" width="294" height="36"/>
@@ -173,7 +173,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.8901960784313725" green="0.96470588235294119" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="xVU-cY-1gb" firstAttribute="centerX" secondItem="mDo-fb-WAL" secondAttribute="centerX" id="4W1-oV-hVl"/>
                             <constraint firstItem="Raj-7U-7hH" firstAttribute="leading" secondItem="prw-ZG-J9l" secondAttribute="leading" id="A0O-qD-uLf"/>

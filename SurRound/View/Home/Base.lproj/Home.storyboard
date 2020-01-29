@@ -26,7 +26,7 @@
         <!--Home Nav Controller-->
         <scene sceneID="4L3-m6-sGl">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="t2a-zz-b8S" customClass="SRHomeNavController" customModule="SurRound" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="t2a-zz-b8S" customClass="HomeNavController" customModule="SurRound" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="76k-Ea-dNx">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

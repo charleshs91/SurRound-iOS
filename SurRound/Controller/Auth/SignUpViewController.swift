@@ -36,11 +36,6 @@ class SignUpViewController: UIViewController {
     super.viewDidAppear(animated)
   }
   
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    view.endEditing(false)
-    super.touchesBegan(touches, with: event)
-  }
-  
   @IBAction func didTapSignUpBtn(_ sender: Any) {
     createAccount(completion: { [weak self] (result) in
       switch result {

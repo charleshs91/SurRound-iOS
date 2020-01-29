@@ -20,7 +20,7 @@ private enum Tab {
     var controller: UIViewController
     
     switch self {
-    case .home: controller = UIStoryboard.post.instantiateInitialViewController()!
+    case .home: controller = UIStoryboard.home.instantiateInitialViewController()!
     case .explore: controller = UIStoryboard.explore.instantiateInitialViewController()!
     case .message: controller = UIStoryboard.message.instantiateInitialViewController()!
     case .profile: controller = UIStoryboard.profile.instantiateInitialViewController()!
@@ -76,20 +76,8 @@ class SRTabBarController: UITabBarController {
   override func viewDidLoad() {
     super.viewDidLoad()
     viewControllers = tabs.map { $0.controller() }
-    tabBar.tintColor = UIColor.hexStringToUIColor(hex: "004445")
+    tabBar.tintColor = .systemBlue
     delegate = self
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    
-    guard let userID = AuthManager.shared.currentUserID else {
-      guard let authVC = UIStoryboard.auth.instantiateInitialViewController() else { return }
-      authVC.modalTransitionStyle = .coverVertical
-      authVC.modalPresentationStyle = .overCurrentContext
-      present(authVC, animated: true, completion: nil)
-      return
-    }
   }
 }
 
@@ -98,6 +86,15 @@ extension SRTabBarController: UITabBarControllerDelegate {
   func tabBarController(
     _ tabBarController: UITabBarController,
     shouldSelect viewController: UIViewController) -> Bool {
+    
+    if let nav = viewController as? UINavigationController,
+      nav.viewControllers.first is CreatePostViewController {
+      
+      let createPostVC = UIStoryboard.create.instantiateInitialViewController()!
+      createPostVC.modalPresentationStyle = .currentContext
+      present(createPostVC, animated: true, completion: nil)
+      return false
+    }
     
     return true
   }

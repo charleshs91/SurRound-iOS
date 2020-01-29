@@ -33,21 +33,16 @@ class SignInViewController: UIViewController {
     emailTextField.becomeFirstResponder()
   }
   
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    view.endEditing(false)
-    super.touchesBegan(touches, with: event)
-  }
-  
   @IBAction func didTapSignInBtn(_ sender: UIButton) {
     guard let email = emailTextField.text,
           let password = passwordTextField.text else { return }
     SRProgressHUD.showLoading()
-    AuthManager.shared.signIn(email: email, password: password) { [weak self] (loginResult) in
+    AuthManager.shared.signIn(email: email, password: password) { loginResult in
       SRProgressHUD.dismiss()
       switch loginResult {
       case .success(let uid):
         print("User ID: \(uid)")
-        self?.navigationController?.dismiss(animated: true, completion: nil)
+        self.displayMainView()
       case .failure(let error):
         SRProgressHUD.showFailure(text: error.localizedDescription)
       }
@@ -60,6 +55,15 @@ class SignInViewController: UIViewController {
   
   private func checkTextFieldsContent() {
     signInBtn.isEnabled = !emailTextField.isEmpty && !passwordTextField.isEmpty
+  }
+  
+  private func displayMainView() {
+    if let window = AppDelegate.shared.window {
+      let tbc = UIStoryboard.main.instantiateInitialViewController()
+      window.rootViewController = tbc
+      window.makeKeyAndVisible()
+      
+    }
   }
 }
 
