@@ -15,31 +15,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KyO-VT-ypW">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KyO-VT-ypW">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="wCm-bQ-T5q" id="ggk-bL-z3Z"/>
                                     <outlet property="delegate" destination="wCm-bQ-T5q" id="vbO-Z0-ecb"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qb2-rc-fGc">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
-                                <items>
-                                    <barButtonItem systemItem="camera" id="M6v-Zr-o9N"/>
-                                    <barButtonItem title="Video" style="plain" id="CZz-b8-0fN"/>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="KyO-VT-ypW" firstAttribute="top" secondItem="JJg-oO-L5O" secondAttribute="top" id="Aq4-gJ-MFD"/>
-                            <constraint firstItem="Qb2-rc-fGc" firstAttribute="leading" secondItem="vYv-f5-MhV" secondAttribute="leading" symbolic="YES" id="ELW-fv-liU"/>
                             <constraint firstItem="KyO-VT-ypW" firstAttribute="trailing" secondItem="JJg-oO-L5O" secondAttribute="trailing" id="QTv-VV-9qs"/>
-                            <constraint firstItem="Qb2-rc-fGc" firstAttribute="bottom" secondItem="JJg-oO-L5O" secondAttribute="bottom" id="U2I-E2-mCv"/>
                             <constraint firstItem="KyO-VT-ypW" firstAttribute="leading" secondItem="JJg-oO-L5O" secondAttribute="leading" id="V1k-1f-bqh"/>
-                            <constraint firstItem="Qb2-rc-fGc" firstAttribute="top" secondItem="KyO-VT-ypW" secondAttribute="bottom" symbolic="YES" id="Yao-5X-W8h"/>
-                            <constraint firstItem="JJg-oO-L5O" firstAttribute="trailing" secondItem="Qb2-rc-fGc" secondAttribute="trailing" id="vAq-DD-5Ki"/>
+                            <constraint firstItem="JJg-oO-L5O" firstAttribute="bottom" secondItem="KyO-VT-ypW" secondAttribute="bottom" id="gj4-96-Hwo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JJg-oO-L5O"/>
                     </view>

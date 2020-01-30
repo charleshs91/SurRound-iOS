@@ -14,11 +14,20 @@ class NewPostMediaCell: UITableViewCell {
     return String(describing: NewPostMediaCell.self)
   }
   
+  @IBOutlet weak var deleteBtn: UIButton!
+  
   @IBOutlet weak var imgView: UIImageView!
   
   override func awakeFromNib() {
     super.awakeFromNib()
     // Initialization code
+  }
+  
+  @IBAction func didTapCamera(_ sender: UIButton) {
+    
+  }
+  
+  @IBAction func didTapDelete(_ sender: UIButton) {
   }
   
 }

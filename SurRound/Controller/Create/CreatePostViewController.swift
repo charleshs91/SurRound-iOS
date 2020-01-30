@@ -65,10 +65,18 @@ extension CreatePostViewController: UITableViewDataSource {
 extension CreatePostViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 60
+    return 66
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 100
+    if indexPath.section == 0 {
+      switch indexPath.row {
+      case 0: return 150
+      case 1: return 135
+      default: break
+      }
+    }
+    return 0
   }
+  
 }

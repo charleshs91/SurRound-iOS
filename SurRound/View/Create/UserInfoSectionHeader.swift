@@ -10,8 +10,11 @@ import UIKit
 
 class UserInfoSectionHeader: UITableViewHeaderFooterView {
   
+  @IBOutlet weak var userImgView: UIImageView!
+  
+  @IBOutlet weak var userLabel: UILabel!
+  
   static var identifier: String {
     return String(describing: UserInfoSectionHeader.self)
   }
-  
 }

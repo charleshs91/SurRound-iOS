@@ -10,6 +10,7 @@ target 'SurRound' do
   pod 'JGProgressHUD'
   pod 'Kingfisher', '~> 5.0'
   pod 'IQKeyboardManagerSwift'
+  pod 'KMPlaceholderTextView', '~> 1.4.0'
   
   # Firebase
   pod 'Firebase/Core'

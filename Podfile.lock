@@ -272,6 +272,7 @@ PODS:
   - Kingfisher (5.12.0):
     - Kingfisher/Core (= 5.12.0)
   - Kingfisher/Core (5.12.0)
+  - KMPlaceholderTextView (1.4.0)
   - leveldb-library (1.22)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
@@ -288,6 +289,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - JGProgressHUD
   - Kingfisher (~> 5.0)
+  - KMPlaceholderTextView (~> 1.4.0)
   - SwiftLint
 
 SPEC REPOS:
@@ -314,6 +316,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - JGProgressHUD
     - Kingfisher
+    - KMPlaceholderTextView
     - leveldb-library
     - nanopb
     - SwiftLint
@@ -341,10 +344,11 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
   JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
   Kingfisher: dc6e0f53bb5b12c3e75bedb0e01bbd7a640eea69
+  KMPlaceholderTextView: 2206c3df39979e9396e2d96fa9f427a8951121b0
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   SwiftLint: 8f5d2f903e1c9bcbc832fd16771e80a263ac6cbb
 
-PODFILE CHECKSUM: 0308cb755f7d1ac87a98d47186f937889bd8be7c
+PODFILE CHECKSUM: b06f5db48e7eb0dcb56c721a8e0055a4dad93aba
 
 COCOAPODS: 1.8.4

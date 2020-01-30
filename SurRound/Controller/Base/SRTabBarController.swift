@@ -28,7 +28,7 @@ private enum Tab {
     }
     
     controller.tabBarItem = tabBarItem()
-    controller.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 4, bottom: -6, right: 4)
+    controller.tabBarItem.imageInsets = UIEdgeInsets(top: 12, left: 6, bottom: 0, right: 6)
     
     return controller
   }
