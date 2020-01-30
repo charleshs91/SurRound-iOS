@@ -36,7 +36,12 @@ class NewPostMediaCell: UITableViewCell {
     super.awakeFromNib()
     deleteBtn.isHidden = true
   }
-
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    contentImgView.layer.cornerRadius = 10
+  }
+  
   @IBAction func didTapCamera(_ sender: UIButton) {
     attachHandler?()
   }

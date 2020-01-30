@@ -24,6 +24,8 @@
 		D3086B9423DCA0940071F378 /* BodyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3086B9223DCA0940071F378 /* BodyTableViewCell.xib */; };
 		D3086B9623DCA2160071F378 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B9523DCA2160071F378 /* UITableView+Extension.swift */; };
 		D32022DD23DAA8310057EB24 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32022DC23DAA8310057EB24 /* SignUpViewController.swift */; };
+		D326796323E2940100F94BFD /* NewPostMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D326796123E2940100F94BFD /* NewPostMapCell.swift */; };
+		D326796423E2940100F94BFD /* NewPostMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D326796223E2940100F94BFD /* NewPostMapCell.xib */; };
 		D335D5DF23DEA9500021B461 /* SRAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D335D5DE23DEA9500021B461 /* SRAuthButton.swift */; };
 		D335D5E123DEB4FF0021B461 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D335D5E023DEB4FF0021B461 /* WelcomeViewController.swift */; };
 		D3552B2B23DF34D700453FAA /* NewPostTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3552B2923DF34D700453FAA /* NewPostTextViewCell.swift */; };
@@ -60,6 +62,7 @@
 		D39A755223D5E57F00A20879 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A755123D5E57F00A20879 /* UIStoryboard+Extension.swift */; };
 		D39A755623D5E85C00A20879 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A755523D5E85C00A20879 /* UIImage+Extension.swift */; };
 		D39A755823D5FFD000A20879 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A755723D5FFD000A20879 /* UIColor+Extension.swift */; };
+		D3A3B5F123E29C35003201E1 /* NewPostCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */; };
 		E4B97A8690B7E157BF297F0B /* Pods_SurRound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1C511EBAFDB457C3847BD75 /* Pods_SurRound.framework */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +110,8 @@
 		D3086B9223DCA0940071F378 /* BodyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyTableViewCell.xib; sourceTree = "<group>"; };
 		D3086B9523DCA2160071F378 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		D32022DC23DAA8310057EB24 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		D326796123E2940100F94BFD /* NewPostMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostMapCell.swift; sourceTree = "<group>"; };
+		D326796223E2940100F94BFD /* NewPostMapCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewPostMapCell.xib; sourceTree = "<group>"; };
 		D335D5DE23DEA9500021B461 /* SRAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRAuthButton.swift; sourceTree = "<group>"; };
 		D335D5E023DEB4FF0021B461 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		D3552B2923DF34D700453FAA /* NewPostTextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostTextViewCell.swift; sourceTree = "<group>"; };
@@ -149,6 +154,7 @@
 		D39A755123D5E57F00A20879 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		D39A755523D5E85C00A20879 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		D39A755723D5FFD000A20879 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostCellType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,12 +231,14 @@
 			isa = PBXGroup;
 			children = (
 				D3949AF923D9A912006DA9AA /* Create.storyboard */,
+				D3552B3523DF362100453FAA /* UserInfoSectionHeader.swift */,
+				D3552B3723DF364500453FAA /* UserInfoSectionHeader.xib */,
 				D3552B2923DF34D700453FAA /* NewPostTextViewCell.swift */,
 				D3552B2A23DF34D700453FAA /* NewPostTextViewCell.xib */,
 				D3552B3123DF359500453FAA /* NewPostMediaCell.swift */,
 				D3552B3223DF359500453FAA /* NewPostMediaCell.xib */,
-				D3552B3523DF362100453FAA /* UserInfoSectionHeader.swift */,
-				D3552B3723DF364500453FAA /* UserInfoSectionHeader.xib */,
+				D326796123E2940100F94BFD /* NewPostMapCell.swift */,
+				D326796223E2940100F94BFD /* NewPostMapCell.xib */,
 			);
 			path = Create;
 			sourceTree = "<group>";
@@ -351,6 +359,7 @@
 		D39997F023DB4F9F00595B2F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D3A3B5EF23E29C25003201E1 /* Create */,
 				D39997F123DB4FB600595B2F /* Auth */,
 			);
 			path = Model;
@@ -427,6 +436,14 @@
 				D3949B0223D9AE12006DA9AA /* InvisibleNavController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		D3A3B5EF23E29C25003201E1 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */,
+			);
+			path = Create;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -540,6 +557,7 @@
 			files = (
 				D3949AF823D9A81E006DA9AA /* Auth.storyboard in Resources */,
 				D3949AFB23D9A912006DA9AA /* Create.storyboard in Resources */,
+				D326796423E2940100F94BFD /* NewPostMapCell.xib in Resources */,
 				D3086B9023DC9D3A0071F378 /* LocationTableViewCell.xib in Resources */,
 				D35C489B23CF352E000951D2 /* LaunchScreen.storyboard in Resources */,
 				D3552B3823DF364500453FAA /* UserInfoSectionHeader.xib in Resources */,
@@ -687,6 +705,7 @@
 				D3086B6E23DB57E80071F378 /* AuthManager.swift in Sources */,
 				D335D5DF23DEA9500021B461 /* SRAuthButton.swift in Sources */,
 				D3086B7023DB59950071F378 /* UserManager.swift in Sources */,
+				D326796323E2940100F94BFD /* NewPostMapCell.swift in Sources */,
 				D3949B0523D9B07B006DA9AA /* UIView+Extension.swift in Sources */,
 				D364978523D82B720078C4E0 /* KingfisherWrapper.swift in Sources */,
 				D3552B2B23DF34D700453FAA /* NewPostTextViewCell.swift in Sources */,
@@ -710,6 +729,7 @@
 				D3086B7D23DB8A830071F378 /* PostContentViewController.swift in Sources */,
 				D364978223D816370078C4E0 /* HomeNavController.swift in Sources */,
 				D3949B0323D9AE12006DA9AA /* InvisibleNavController.swift in Sources */,
+				D3A3B5F123E29C35003201E1 /* NewPostCellType.swift in Sources */,
 				D3086B9623DCA2160071F378 /* UITableView+Extension.swift in Sources */,
 				D3949B0123D9ACBB006DA9AA /* SignInViewController.swift in Sources */,
 				D3086B7223DB5DD50071F378 /* UserModel.swift in Sources */,

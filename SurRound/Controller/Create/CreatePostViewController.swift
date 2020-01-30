@@ -10,19 +10,27 @@ import UIKit
 
 class CreatePostViewController: UIViewController {
   
-  @IBOutlet weak var newPostTableView: UITableView!
-  
+  @IBOutlet weak var newPostTableView: UITableView! {
+    didSet { setupTableView() }
+  }
   weak var textCell: NewPostTextViewCell?
   weak var mediaCell: NewPostMediaCell?
+  weak var mapCell: NewPostMapCell?
   
   let imagePicker = UIImagePickerController()
+  
+  let cellFields: [NewPostCellType] = [.text, .media, .map]
   
   override func viewDidLoad() {
     super.viewDidLoad()
     imagePicker.delegate = self
+  }
+  
+  private func setupTableView() {
     newPostTableView.registerHeaderFooterWithNib(withHeaderFooterViewClass: UserInfoSectionHeader.self)
     newPostTableView.registerCellWithNib(withCellClass: NewPostTextViewCell.self)
     newPostTableView.registerCellWithNib(withCellClass: NewPostMediaCell.self)
+    newPostTableView.registerCellWithNib(withCellClass: NewPostMapCell.self)
   }
   
   @IBAction func post(_ sender: UIBarButtonItem) {
@@ -64,26 +72,30 @@ extension CreatePostViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 2
+    return cellFields.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    switch indexPath.row {
-    case 0:
-      let cell = tableView.dequeueReusableCell(withIdentifier: NewPostTextViewCell.identifier, for: indexPath)
+    let cellType = cellFields[indexPath.row]
+    let cell = cellType.makeCell(tableView, at: indexPath)
+    
+    switch cellType {
+    case .text:
       guard let textViewCell = cell as? NewPostTextViewCell else { return cell }
       self.textCell = textViewCell
-      return textViewCell
-    case 1:
-      let cell = tableView.dequeueReusableCell(withIdentifier: NewPostMediaCell.identifier, for: indexPath)
+      
+    case .media:
       guard let mediaCell = cell as? NewPostMediaCell else { return cell }
       mediaCell.attachHandler = displayImagePicker
       mediaCell.deleteHandler = handleDeletingImage
       self.mediaCell = mediaCell
-      return mediaCell
-    default:
-      return UITableViewCell()
+      
+    case .map:
+      guard let mapCell = cell as? NewPostMapCell else { return cell }
+      self.mapCell = mapCell
     }
+    
+    return cell
   }
 }
 
@@ -95,11 +107,7 @@ extension CreatePostViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath.section == 0 {
-      switch indexPath.row {
-      case 0: return 135
-      case 1: return 160
-      default: break
-      }
+      return cellFields[indexPath.row].cellHeight
     }
     return 0
   }
