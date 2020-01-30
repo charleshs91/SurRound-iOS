@@ -19,6 +19,7 @@ class CreatePostViewController: UIViewController {
   
   let imagePicker = UIImagePickerController()
   
+  var currentLocation: Location?
   let cellFields: [NewPostCellType] = [.text, .media, .map]
   
   override func viewDidLoad() {
@@ -92,6 +93,9 @@ extension CreatePostViewController: UITableViewDataSource {
       
     case .map:
       guard let mapCell = cell as? NewPostMapCell else { return cell }
+      if let currentLoc = LocationProvider.current.location {
+        mapCell.location = LocationProvider.map(currentLoc)
+      }
       self.mapCell = mapCell
     }
     

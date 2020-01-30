@@ -15,11 +15,22 @@ class NewPostMapCell: UITableViewCell {
     return String(describing: NewPostMapCell.self)
   }
   
+  var location: Location? {
+    didSet {
+      guard let location = self.location else { return }
+      let clLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+      let region = MKCoordinateRegion(center: clLocation.coordinate, latitudinalMeters: 100, longitudinalMeters: 100)
+      mkMapView.setRegion(region, animated: true)
+    }
+  }
+  
   @IBOutlet weak var mkMapView: MKMapView!
   @IBOutlet weak var placeNameLabel: UILabel!
   
   override func awakeFromNib() {
     super.awakeFromNib()
+    mkMapView.mapType = .mutedStandard
+    mkMapView.isUserInteractionEnabled = false
   }
   
   override func layoutSubviews() {
