@@ -64,6 +64,7 @@
 		D39A755823D5FFD000A20879 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A755723D5FFD000A20879 /* UIColor+Extension.swift */; };
 		D3A3B5F123E29C35003201E1 /* NewPostCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */; };
 		D3A3B5F423E2A7E1003201E1 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F323E2A7E1003201E1 /* LocationProvider.swift */; };
+		D3A3B5F823E31E9B003201E1 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F723E31E9B003201E1 /* StorageManager.swift */; };
 		E4B97A8690B7E157BF297F0B /* Pods_SurRound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1C511EBAFDB457C3847BD75 /* Pods_SurRound.framework */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +158,7 @@
 		D39A755723D5FFD000A20879 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostCellType.swift; sourceTree = "<group>"; };
 		D3A3B5F323E2A7E1003201E1 /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
+		D3A3B5F723E31E9B003201E1 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -361,6 +363,7 @@
 		D39997F023DB4F9F00595B2F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D3A3B5F523E31D12003201E1 /* Storage */,
 				D3A3B5F223E2A7CF003201E1 /* Location */,
 				D3A3B5EF23E29C25003201E1 /* Create */,
 				D39997F123DB4FB600595B2F /* Auth */,
@@ -455,6 +458,14 @@
 				D3A3B5F323E2A7E1003201E1 /* LocationProvider.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		D3A3B5F523E31D12003201E1 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				D3A3B5F723E31E9B003201E1 /* StorageManager.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -720,6 +731,7 @@
 				D3949B0523D9B07B006DA9AA /* UIView+Extension.swift in Sources */,
 				D364978523D82B720078C4E0 /* KingfisherWrapper.swift in Sources */,
 				D3552B2B23DF34D700453FAA /* NewPostTextViewCell.swift in Sources */,
+				D3A3B5F823E31E9B003201E1 /* StorageManager.swift in Sources */,
 				D3086B7523DB763A0071F378 /* HomeViewController.swift in Sources */,
 				D3949AFE23D9AB65006DA9AA /* SRAuthTextField.swift in Sources */,
 				D3850D7C23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift in Sources */,

@@ -17,14 +17,11 @@ class CreatePostViewController: UIViewController {
   weak var mediaCell: NewPostMediaCell?
   weak var mapCell: NewPostMapCell?
   
-  let imagePicker = UIImagePickerController()
-  
   var currentLocation: Location?
   let cellFields: [NewPostCellType] = [.text, .media, .map]
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    imagePicker.delegate = self
   }
   
   private func setupTableView() {
@@ -47,9 +44,32 @@ class CreatePostViewController: UIViewController {
   }
   
   func displayImagePicker() {
-    imagePicker.sourceType = .photoLibrary
-    imagePicker.allowsEditing = true
-    self.present(imagePicker, animated: true, completion: nil)
+    let imagePicker = UIImagePickerController()
+    imagePicker.delegate = self
+    
+    let imagePickerAlertController = UIAlertController(
+      title: "Upload image", message: "Select image source from", preferredStyle: .actionSheet)
+    
+    let imageFromLibAction = UIAlertAction(title: "Photo library", style: .default) { _ in
+      if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+        imagePicker.sourceType = .photoLibrary
+        self.present(imagePicker, animated: true, completion: nil)
+      }
+    }
+    let imageFromCameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
+      if UIImagePickerController.isSourceTypeAvailable(.camera) {
+        imagePicker.sourceType = .camera
+        self.present(imagePicker, animated: true, completion: nil)
+      }
+    }
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+      imagePickerAlertController.dismiss(animated: true, completion: nil)
+    }
+    imagePickerAlertController.addAction(imageFromLibAction)
+    imagePickerAlertController.addAction(imageFromCameraAction)
+    imagePickerAlertController.addAction(cancelAction)
+    
+    present(imagePickerAlertController, animated: true, completion: nil)
   }
   
   func handleDeletingImage() {
