@@ -14,20 +14,35 @@ class NewPostMediaCell: UITableViewCell {
     return String(describing: NewPostMediaCell.self)
   }
   
-  @IBOutlet weak var deleteBtn: UIButton!
+  var pickedImage: UIImage? {
+    didSet {
+      guard let image = pickedImage else {
+        contentImgView.image = UIImage.asset(.Image_Placeholder)
+        deleteBtn.isHidden = true
+        return
+      }
+      contentImgView.image = image
+      deleteBtn.isHidden = false
+    }
+  }
   
-  @IBOutlet weak var imgView: UIImageView!
+  var attachHandler: (() -> Void)?
+  var deleteHandler: (() -> Void)?
+  
+  @IBOutlet weak var deleteBtn: UIButton!
+  @IBOutlet weak var contentImgView: UIImageView!
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    // Initialization code
+    deleteBtn.isHidden = true
   }
-  
+
   @IBAction func didTapCamera(_ sender: UIButton) {
-    
+    attachHandler?()
   }
   
   @IBAction func didTapDelete(_ sender: UIButton) {
+    deleteHandler?()
   }
   
 }

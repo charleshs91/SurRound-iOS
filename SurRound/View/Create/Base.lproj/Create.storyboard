@@ -39,7 +39,11 @@
                                 <action selector="cancel:" destination="wCm-bQ-T5q" id="1Sc-dV-cjQ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Post" id="rBw-Kk-CRf"/>
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="rBw-Kk-CRf">
+                            <connections>
+                                <action selector="post:" destination="wCm-bQ-T5q" id="zmn-0m-GXd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="newPostTableView" destination="KyO-VT-ypW" id="d3R-Pw-mVf"/>
