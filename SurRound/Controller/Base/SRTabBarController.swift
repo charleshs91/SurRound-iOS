@@ -17,6 +17,7 @@ private enum Tab {
   case create
   
   func controller() -> UIViewController {
+    
     var controller: UIViewController
     
     switch self {
@@ -75,8 +76,12 @@ class SRTabBarController: UITabBarController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    viewControllers = tabs.map { $0.controller() }
-    tabBar.tintColor = .systemBlue
+    
+    viewControllers = tabs.map {
+        $0.controller()
+    }
+    tabBar.tintColor = UIColor.bluyGreen
+    
     delegate = self
   }
 }

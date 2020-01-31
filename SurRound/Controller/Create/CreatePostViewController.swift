@@ -29,6 +29,8 @@ class CreatePostViewController: UIViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "New Post"
     }
     
     // MARK: - User Actions

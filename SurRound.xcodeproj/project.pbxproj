@@ -47,6 +47,7 @@
 		D365E4DC23E4542A00480F11 /* TrendingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365E4DB23E4542A00480F11 /* TrendingListViewController.swift */; };
 		D365E4DE23E4546300480F11 /* NearestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365E4DD23E4546300480F11 /* NearestListViewController.swift */; };
 		D365E4E123E455C000480F11 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365E4E023E455C000480F11 /* ExploreView.swift */; };
+		D365E4E323E4720900480F11 /* SRColoredNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365E4E223E4720900480F11 /* SRColoredNavController.swift */; };
 		D3850D7C23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3850D7B23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift */; };
 		D3850D7E23DAD879008F1F7E /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3850D7D23DAD879008F1F7E /* UIWindow+Extension.swift */; };
 		D38C570223E43111001C6C9D /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38C570123E43111001C6C9D /* SelectionView.swift */; };
@@ -149,6 +150,7 @@
 		D365E4DB23E4542A00480F11 /* TrendingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingListViewController.swift; sourceTree = "<group>"; };
 		D365E4DD23E4546300480F11 /* NearestListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestListViewController.swift; sourceTree = "<group>"; };
 		D365E4E023E455C000480F11 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
+		D365E4E223E4720900480F11 /* SRColoredNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRColoredNavController.swift; sourceTree = "<group>"; };
 		D3850D7B23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGProgressHUDWrapper.swift; sourceTree = "<group>"; };
 		D3850D7D23DAD879008F1F7E /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		D38C570123E43111001C6C9D /* SelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
@@ -372,6 +374,8 @@
 		D365E4DF23E4559E00480F11 /* Explore */ = {
 			isa = PBXGroup;
 			children = (
+				D39A754723D5E3A200A20879 /* Explore.storyboard */,
+				D38C570123E43111001C6C9D /* SelectionView.swift */,
 				D365E4E023E455C000480F11 /* ExploreView.swift */,
 			);
 			path = Explore;
@@ -398,9 +402,9 @@
 		D39997F023DB4F9F00595B2F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D3A3B5F923E3D55F003201E1 /* Post */,
 				D3A3B5F523E31D12003201E1 /* Storage */,
 				D3A3B5F223E2A7CF003201E1 /* Location */,
+				D3A3B5F923E3D55F003201E1 /* Post */,
 				D3A3B5EF23E29C25003201E1 /* Create */,
 				D39997F123DB4FB600595B2F /* Auth */,
 			);
@@ -432,12 +436,10 @@
 			isa = PBXGroup;
 			children = (
 				D365E4DF23E4559E00480F11 /* Explore */,
-				D3A3B5FE23E43041003201E1 /* Base */,
 				D3086B8423DC85320071F378 /* Post */,
 				D3086B7E23DC81C00071F378 /* Create */,
-				D39997F423DB510800595B2F /* Auth */,
 				D3949AFC23D9AB28006DA9AA /* Home */,
-				D39A754723D5E3A200A20879 /* Explore.storyboard */,
+				D39997F423DB510800595B2F /* Auth */,
 				D39A754A23D5E3E700A20879 /* Message.storyboard */,
 				D39A754D23D5E44100A20879 /* Profile.storyboard */,
 				D35C489423CF352B000951D2 /* Main.storyboard */,
@@ -464,8 +466,8 @@
 		D39A755323D5E6E800A20879 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D3086B7B23DB8A480071F378 /* Post */,
 				D365E4D623E452F200480F11 /* Explore */,
+				D3086B7B23DB8A480071F378 /* Post */,
 				D3086B8123DC82D40071F378 /* Create */,
 				D3086B7323DB76270071F378 /* Home */,
 				D3949AFF23D9AC8D006DA9AA /* Auth */,
@@ -478,6 +480,7 @@
 			isa = PBXGroup;
 			children = (
 				D39A754123D5DACF00A20879 /* SRTabBarController.swift */,
+				D365E4E223E4720900480F11 /* SRColoredNavController.swift */,
 				D3949B0223D9AE12006DA9AA /* InvisibleNavController.swift */,
 			);
 			path = Base;
@@ -514,14 +517,6 @@
 				D3A3B5FC23E3F5E6003201E1 /* PostCreator.swift */,
 			);
 			path = Post;
-			sourceTree = "<group>";
-		};
-		D3A3B5FE23E43041003201E1 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				D38C570123E43111001C6C9D /* SelectionView.swift */,
-			);
-			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -874,6 +869,7 @@
 				D364978523D82B720078C4E0 /* KingfisherWrapper.swift in Sources */,
 				D3552B2B23DF34D700453FAA /* NewPostTextViewCell.swift in Sources */,
 				D3A3B5F823E31E9B003201E1 /* StorageManager.swift in Sources */,
+				D365E4E323E4720900480F11 /* SRColoredNavController.swift in Sources */,
 				D3086B7523DB763A0071F378 /* HomeViewController.swift in Sources */,
 				D3949AFE23D9AB65006DA9AA /* SRAuthTextField.swift in Sources */,
 				D3850D7C23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift in Sources */,
@@ -995,6 +991,7 @@
 				D39A754823D5E3A200A20879 /* Base */,
 			);
 			name = Explore.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		D39A754A23D5E3E700A20879 /* Message.storyboard */ = {

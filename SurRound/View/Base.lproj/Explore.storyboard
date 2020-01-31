@@ -53,13 +53,11 @@
                         <connections>
                             <outlet property="followingListView" destination="Hkf-KG-xgF" id="5Ez-EL-UFz"/>
                             <outlet property="nearestListView" destination="Mn1-FO-nDs" id="Enf-tl-LCU"/>
+                            <outlet property="selectionView" destination="LvU-2A-6s1" id="sGW-CW-N0N"/>
                             <outlet property="trendingListView" destination="uhv-XD-To4" id="Kpq-IL-NX6"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="P74-9j-jnK"/>
-                    <connections>
-                        <outlet property="selectionView" destination="LvU-2A-6s1" id="RX7-11-6Hl"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rsk-tR-QBD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -86,14 +84,15 @@
         <!--Trending List View Controller-->
         <scene sceneID="LdX-fJ-633">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lMl-yB-j3f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="dCc-LZ-ZAh" customClass="TrendingListViewController" customModule="SurRound" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2ac-yh-FR4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="706"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="726"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="5X2-4n-ZF4"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lMl-yB-j3f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="923" y="727"/>
         </scene>
@@ -105,6 +104,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="726"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="WCM-5q-8Yb"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azf-HL-Mbc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -116,9 +116,10 @@
             <objects>
                 <viewController id="VDG-fr-PYK" customClass="FollowingListViewController" customModule="SurRound" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FNx-cH-03F">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="706"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="726"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="9CD-U7-pWE"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hKN-cj-Ugo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
