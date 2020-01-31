@@ -13,4 +13,5 @@ struct SRUser {
   let uid: String
   let email: String
   let username: String
+  var avatar: String?
 }

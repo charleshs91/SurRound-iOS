@@ -65,6 +65,8 @@
 		D3A3B5F123E29C35003201E1 /* NewPostCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */; };
 		D3A3B5F423E2A7E1003201E1 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F323E2A7E1003201E1 /* LocationProvider.swift */; };
 		D3A3B5F823E31E9B003201E1 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F723E31E9B003201E1 /* StorageManager.swift */; };
+		D3A3B5FB23E3D56E003201E1 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5FA23E3D56E003201E1 /* PostModel.swift */; };
+		D3A3B5FD23E3F5E6003201E1 /* PostCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5FC23E3F5E6003201E1 /* PostCreator.swift */; };
 		E4B97A8690B7E157BF297F0B /* Pods_SurRound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1C511EBAFDB457C3847BD75 /* Pods_SurRound.framework */; };
 /* End PBXBuildFile section */
 
@@ -159,6 +161,8 @@
 		D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostCellType.swift; sourceTree = "<group>"; };
 		D3A3B5F323E2A7E1003201E1 /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		D3A3B5F723E31E9B003201E1 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		D3A3B5FA23E3D56E003201E1 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		D3A3B5FC23E3F5E6003201E1 /* PostCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -363,6 +367,7 @@
 		D39997F023DB4F9F00595B2F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D3A3B5F923E3D55F003201E1 /* Post */,
 				D3A3B5F523E31D12003201E1 /* Storage */,
 				D3A3B5F223E2A7CF003201E1 /* Location */,
 				D3A3B5EF23E29C25003201E1 /* Create */,
@@ -466,6 +471,15 @@
 				D3A3B5F723E31E9B003201E1 /* StorageManager.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		D3A3B5F923E3D55F003201E1 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				D3A3B5FA23E3D56E003201E1 /* PostModel.swift */,
+				D3A3B5FC23E3F5E6003201E1 /* PostCreator.swift */,
+			);
+			path = Post;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -737,6 +751,7 @@
 				D3850D7C23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift in Sources */,
 				D3086B8323DC83110071F378 /* CreatePostViewController.swift in Sources */,
 				D39A754223D5DACF00A20879 /* SRTabBarController.swift in Sources */,
+				D3A3B5FD23E3F5E6003201E1 /* PostCreator.swift in Sources */,
 				D35C488F23CF352B000951D2 /* AppDelegate.swift in Sources */,
 				D39A755223D5E57F00A20879 /* UIStoryboard+Extension.swift in Sources */,
 				D3552B3623DF362100453FAA /* UserInfoSectionHeader.swift in Sources */,
@@ -755,6 +770,7 @@
 				D3949B0323D9AE12006DA9AA /* InvisibleNavController.swift in Sources */,
 				D3A3B5F123E29C35003201E1 /* NewPostCellType.swift in Sources */,
 				D3086B9623DCA2160071F378 /* UITableView+Extension.swift in Sources */,
+				D3A3B5FB23E3D56E003201E1 /* PostModel.swift in Sources */,
 				D3949B0123D9ACBB006DA9AA /* SignInViewController.swift in Sources */,
 				D3086B7223DB5DD50071F378 /* UserModel.swift in Sources */,
 				D39A755823D5FFD000A20879 /* UIColor+Extension.swift in Sources */,

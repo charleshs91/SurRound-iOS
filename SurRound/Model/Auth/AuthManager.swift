@@ -33,7 +33,9 @@ class AuthManager {
         return
       }
       self.currentUserID = user.uid
-      completion(.success(user.uid))
+      UserManager.updateCurrentUser { (srUser) in
+        completion(.success(srUser.uid))
+      }
     }
   }
   

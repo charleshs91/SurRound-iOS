@@ -9,15 +9,26 @@
 import Foundation
 import CoreLocation
 
-struct Location {
+struct Location: Codable {
+  
   let latitude: Double
+  
   let longitude: Double
+  
   let date: Date
+  
   var description: String?
+  
   var dateString: String {
     let formatter = DateFormatter()
     formatter.dateFormat = "MM-dd-yyyy hh:mm:ss"
     return formatter.string(from: date)
+  }
+  
+  enum CodingKeys: String, CodingKey {
+    case latitude
+    case longitude
+    case date
   }
 }
 
@@ -27,7 +38,11 @@ class LocationProvider {
   
   var location: CLLocation?
   
-  static func map(_ clLocation: CLLocation?) -> Location? {
+  static func getCurrentLocation() -> Location? {
+    return convert(current.location)
+  }
+  
+  static func convert(_ clLocation: CLLocation?) -> Location? {
     guard let location = clLocation else { return nil }
     return Location(latitude: location.coordinate.latitude,
                     longitude: location.coordinate.longitude,

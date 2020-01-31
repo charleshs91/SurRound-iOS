@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class CreatePostViewController: UIViewController {
+  deinit {
+    print("CreatePostViewController deinit()")
+  }
   
   @IBOutlet weak var newPostTableView: UITableView! {
     didSet { setupTableView() }
@@ -32,15 +37,36 @@ class CreatePostViewController: UIViewController {
   }
   
   @IBAction func post(_ sender: UIBarButtonItem) {
+    guard let text = self.textCell?.textView.text,
+          let user = UserManager.shared.currentUser,
+          let currentLocation = LocationProvider.getCurrentLocation() else { return }
     
+    let creator = PostCreator()
+    
+    let post = Post(id: PostCreator.documentID(),
+                    category: "chat",
+                    author: Post.Author(uid: user.uid, username: user.username, avatar: "123"),
+                    createdTime: Date(),
+                    text: text,
+                    location: currentLocation)
+ 
+    if let imageToUpload = self.mediaCell?.pickedImage {
+      SRProgressHUD.showLoading(text: "Creating post")
+      creator.createPostWithImage(post: post, image: imageToUpload) { [weak self] result in
+        SRProgressHUD.dismiss()
+        self?.dismiss(animated: true, completion: nil)
+      }
+    } else {
+      SRProgressHUD.showLoading(text: "Creating post")
+      creator.createPost(post) { [weak self] result in
+        SRProgressHUD.dismiss()
+        self?.dismiss(animated: true, completion: nil)
+      }
+    }
   }
   
   @IBAction func cancel(_ sender: UIBarButtonItem) {
-    if presentingViewController != nil {
-      self.dismiss(animated: true, completion: nil)
-    } else {
-      self.navigationController?.popViewController(animated: true)
-    }
+    presentingViewController?.dismiss(animated: true, completion: nil)
   }
   
   func displayImagePicker() {
@@ -50,16 +76,16 @@ class CreatePostViewController: UIViewController {
     let imagePickerAlertController = UIAlertController(
       title: "Upload image", message: "Select image source from", preferredStyle: .actionSheet)
     
-    let imageFromLibAction = UIAlertAction(title: "Photo library", style: .default) { _ in
+    let imageFromLibAction = UIAlertAction(title: "Photo library", style: .default) { [weak self] _ in
       if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
         imagePicker.sourceType = .photoLibrary
-        self.present(imagePicker, animated: true, completion: nil)
+        self?.present(imagePicker, animated: true, completion: nil)
       }
     }
-    let imageFromCameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
+    let imageFromCameraAction = UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
       if UIImagePickerController.isSourceTypeAvailable(.camera) {
         imagePicker.sourceType = .camera
-        self.present(imagePicker, animated: true, completion: nil)
+        self?.present(imagePicker, animated: true, completion: nil)
       }
     }
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
@@ -89,6 +115,10 @@ extension CreatePostViewController: UITableViewDataSource {
       withIdentifier: UserInfoSectionHeader.identifier
       ) as? UserInfoSectionHeader else { return UIView() }
     
+    if let user = UserManager.shared.currentUser {
+      view.userLabel.text = user.username
+    }
+    
     return view
   }
   
@@ -107,15 +137,17 @@ extension CreatePostViewController: UITableViewDataSource {
       
     case .media:
       guard let mediaCell = cell as? NewPostMediaCell else { return cell }
-      mediaCell.attachHandler = displayImagePicker
-      mediaCell.deleteHandler = handleDeletingImage
+      mediaCell.attachHandler = { [weak self] in
+        self?.displayImagePicker()
+      }
+      mediaCell.deleteHandler = { [weak self] in
+        self?.handleDeletingImage()
+      }
       self.mediaCell = mediaCell
       
     case .map:
       guard let mapCell = cell as? NewPostMapCell else { return cell }
-      if let currentLoc = LocationProvider.current.location {
-        mapCell.location = LocationProvider.map(currentLoc)
-      }
+      mapCell.location = LocationProvider.getCurrentLocation()
       self.mapCell = mapCell
     }
     
