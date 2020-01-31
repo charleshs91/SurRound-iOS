@@ -20,7 +20,7 @@ class SignUpViewController: UIViewController {
     
     @IBOutlet weak var errorLabel: UILabel!
     
-    @IBOutlet weak var signUpBtn: UIButton!
+    @IBOutlet weak var signUpBtn: SRAuthButton!
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {

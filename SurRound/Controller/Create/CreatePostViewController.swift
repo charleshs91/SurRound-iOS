@@ -11,6 +11,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 class CreatePostViewController: UIViewController {
+    
     deinit {
         print("CreatePostViewController deinit()")
     }

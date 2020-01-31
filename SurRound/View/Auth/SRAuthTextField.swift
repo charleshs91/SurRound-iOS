@@ -29,11 +29,13 @@ class SRAuthTextField: UITextField {
   
   override func awakeFromNib() {
     super.awakeFromNib()
+    
     clearButtonMode = .unlessEditing
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
+    
     borderStyle = .none
     layer.borderColor = UIColor.lightGray.cgColor
     layer.borderWidth = 1

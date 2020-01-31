@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SRUser {
+struct SRUser: Codable {
   
   let uid: String
   let email: String

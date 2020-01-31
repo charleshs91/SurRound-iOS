@@ -44,6 +44,7 @@
 		D364978523D82B720078C4E0 /* KingfisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D364978423D82B720078C4E0 /* KingfisherWrapper.swift */; };
 		D3850D7C23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3850D7B23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift */; };
 		D3850D7E23DAD879008F1F7E /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3850D7D23DAD879008F1F7E /* UIWindow+Extension.swift */; };
+		D38C570223E43111001C6C9D /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38C570123E43111001C6C9D /* SelectionView.swift */; };
 		D3949AF823D9A81E006DA9AA /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3949AF623D9A81E006DA9AA /* Auth.storyboard */; };
 		D3949AFB23D9A912006DA9AA /* Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3949AF923D9A912006DA9AA /* Create.storyboard */; };
 		D3949AFE23D9AB65006DA9AA /* SRAuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3949AFD23D9AB65006DA9AA /* SRAuthTextField.swift */; };
@@ -140,6 +141,7 @@
 		D364978423D82B720078C4E0 /* KingfisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingfisherWrapper.swift; sourceTree = "<group>"; };
 		D3850D7B23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGProgressHUDWrapper.swift; sourceTree = "<group>"; };
 		D3850D7D23DAD879008F1F7E /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
+		D38C570123E43111001C6C9D /* SelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		D3949AF723D9A81E006DA9AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Auth.storyboard; sourceTree = "<group>"; };
 		D3949AFA23D9A912006DA9AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Create.storyboard; sourceTree = "<group>"; };
 		D3949AFD23D9AB65006DA9AA /* SRAuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRAuthTextField.swift; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 		D39A754623D5E36F00A20879 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D3A3B5FE23E43041003201E1 /* Base */,
 				D3086B8423DC85320071F378 /* Post */,
 				D3086B7E23DC81C00071F378 /* Create */,
 				D39997F423DB510800595B2F /* Auth */,
@@ -480,6 +483,14 @@
 				D3A3B5FC23E3F5E6003201E1 /* PostCreator.swift */,
 			);
 			path = Post;
+			sourceTree = "<group>";
+		};
+		D3A3B5FE23E43041003201E1 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				D38C570123E43111001C6C9D /* SelectionView.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -573,6 +584,89 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
+				de,
+				ur,
+				he,
+				"es-SV",
+				"zh-Hant-TW",
+				ar,
+				el,
+				"zh-Hans",
+				ja,
+				fa,
+				mr,
+				"es-GT",
+				"en-CA",
+				uk,
+				"es-PY",
+				gu,
+				kn,
+				nb,
+				"es-US",
+				"en-GB",
+				es,
+				"es-VE",
+				"es-CL",
+				sl,
+				da,
+				"es-419",
+				it,
+				bg,
+				sk,
+				"sr-Latn",
+				"nn-NO",
+				"es-PA",
+				"en-SG",
+				sr,
+				ms,
+				"es-CR",
+				ta,
+				sv,
+				cs,
+				"es-AR",
+				"es-PE",
+				ko,
+				"en-IE",
+				fil,
+				"es-CO",
+				gsw,
+				"en-ZA",
+				hu,
+				"es-PR",
+				"de-AT",
+				"en-AU",
+				tr,
+				pl,
+				"pt-BR",
+				vi,
+				lv,
+				"es-MX",
+				lt,
+				ru,
+				"es-DO",
+				"fr-CH",
+				"es-NI",
+				fr,
+				fi,
+				id,
+				nl,
+				th,
+				pt,
+				"de-CH",
+				bn,
+				"es-EC",
+				"pt-PT",
+				"es-BO",
+				ro,
+				ln,
+				"es-UY",
+				"es-HN",
+				hr,
+				hi,
+				ca,
+				zh,
+				"en-IN",
 			);
 			mainGroup = D35C488223CF352B000951D2;
 			productRefGroup = D35C488C23CF352B000951D2 /* Products */;
@@ -775,6 +869,7 @@
 				D3086B7223DB5DD50071F378 /* UserModel.swift in Sources */,
 				D39A755823D5FFD000A20879 /* UIColor+Extension.swift in Sources */,
 				D3086B9323DCA0940071F378 /* BodyTableViewCell.swift in Sources */,
+				D38C570223E43111001C6C9D /* SelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

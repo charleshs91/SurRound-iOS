@@ -9,20 +9,27 @@
 import UIKit
 
 class SRAuthButton: UIButton {
-  
-  struct SizeRatio {
-    static let roundCornerRatio = CGFloat(0.25)
-  }
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
     
-    titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline).withSize(20)
-  }
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    layer.cornerRadius = frame.size.height * SizeRatio.roundCornerRatio
-  }
-  
+    override var isEnabled: Bool {
+        didSet {
+            if isEnabled {
+                backgroundColor = UIColor.hexStringToUIColor(hex: "39375B")
+            } else {
+                backgroundColor = .lightGray
+            }
+        }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline).withSize(20)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        layer.cornerRadius = 10
+    }
+    
 }

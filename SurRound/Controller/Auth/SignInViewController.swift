@@ -14,7 +14,7 @@ class SignInViewController: UIViewController {
     
     @IBOutlet weak var passwordTextField: SRAuthTextField!
     
-    @IBOutlet weak var signInBtn: UIButton!
+    @IBOutlet weak var signInBtn: SRAuthButton!
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -42,7 +42,7 @@ class SignInViewController: UIViewController {
             SRProgressHUD.dismiss()
             
             switch loginResult {
-            case .success(_):
+            case .success:
                 self.displayMainView()
                 
             case .failure(let error):
@@ -63,7 +63,6 @@ class SignInViewController: UIViewController {
             textField?.placeholder = category.placeholder
         }
     }
-    
     
     private func checkTextFieldsContent() {
         
