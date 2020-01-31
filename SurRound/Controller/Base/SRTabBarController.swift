@@ -20,7 +20,7 @@ private enum Tab {
     var controller: UIViewController
     
     switch self {
-    case .home: controller = UIStoryboard.home.instantiateInitialViewController()!
+    case .home: controller = UIStoryboard.post.instantiateInitialViewController()!
     case .explore: controller = UIStoryboard.explore.instantiateInitialViewController()!
     case .message: controller = UIStoryboard.message.instantiateInitialViewController()!
     case .profile: controller = UIStoryboard.profile.instantiateInitialViewController()!
@@ -40,31 +40,31 @@ private enum Tab {
       return UITabBarItem(
         title: nil,
         image: UIImage.asset(ImageAsset.TabBarIcon_42px_Home),
-        selectedImage: UIImage.asset(ImageAsset.TabBarIcon_42px_Home_Selected))
+        selectedImage: UIImage.asset(.TabBarIcon_42px_Home_Selected))
       
     case .explore:
       return UITabBarItem(
         title: nil,
         image: UIImage.asset(ImageAsset.TabBarIcon_42px_Explore),
-        selectedImage: UIImage.asset(ImageAsset.TabBarIcon_42px_Explore_Selected))
+        selectedImage: UIImage.asset(.TabBarIcon_42px_Explore_Selected))
       
     case .message:
       return UITabBarItem(
         title: nil,
         image: UIImage.asset(ImageAsset.TabBarIcon_42px_Message),
-        selectedImage: UIImage.asset(ImageAsset.TabBarIcon_42px_Message_Selected))
+        selectedImage: UIImage.asset(.TabBarIcon_42px_Message_Selected))
       
     case .profile:
       return UITabBarItem(
         title: nil,
         image: UIImage.asset(ImageAsset.TabBarIcon_42px_Profile),
-        selectedImage: UIImage.asset(ImageAsset.TabBarIcon_42px_Profile_Selected))
+        selectedImage: UIImage.asset(.TabBarIcon_42px_Profile_Selected))
       
     case .create:
       return UITabBarItem(
         title: nil,
         image: UIImage.asset(ImageAsset.TabBarIcon_42px_Add),
-        selectedImage: UIImage.asset(ImageAsset.TabBarIcon_42px_Add))
+        selectedImage: UIImage.asset(.TabBarIcon_42px_Add))
     }
   }
 }
@@ -75,12 +75,21 @@ class SRTabBarController: UITabBarController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     viewControllers = tabs.map { $0.controller() }
-    
     tabBar.tintColor = UIColor.hexStringToUIColor(hex: "004445")
-    
     delegate = self
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    guard let userID = AuthManager.shared.currentUserID else {
+      guard let authVC = UIStoryboard.auth.instantiateInitialViewController() else { return }
+      authVC.modalTransitionStyle = .coverVertical
+      authVC.modalPresentationStyle = .overCurrentContext
+      present(authVC, animated: true, completion: nil)
+      return
+    }
   }
 }
 
