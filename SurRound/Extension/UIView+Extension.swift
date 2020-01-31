@@ -9,8 +9,5 @@
 import UIKit
 
 extension UIView {
-  
-  func setCornerRadius(by ratio: CGFloat) {
-    layer.cornerRadius = frame.size.width * ratio
-  }
+    
 }

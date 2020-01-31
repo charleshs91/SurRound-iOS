@@ -10,7 +10,7 @@
 		564A824FFB57AA129F675756 /* Pods_SurRoundTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA4380C1D93C2985090644F /* Pods_SurRoundTests.framework */; };
 		A078A017AD033AFF50C5C4B7 /* Pods_SurRoundUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253A10C56E3CBE6F2A4E48AA /* Pods_SurRoundUITests.framework */; };
 		D3086B6E23DB57E80071F378 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B6D23DB57E80071F378 /* AuthManager.swift */; };
-		D3086B7023DB59950071F378 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B6F23DB59950071F378 /* UserManager.swift */; };
+		D3086B7023DB59950071F378 /* UserDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B6F23DB59950071F378 /* UserDBService.swift */; };
 		D3086B7223DB5DD50071F378 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B7123DB5DD50071F378 /* UserModel.swift */; };
 		D3086B7523DB763A0071F378 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B7423DB763A0071F378 /* HomeViewController.swift */; };
 		D3086B7A23DB89E90071F378 /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3086B7823DB89E90071F378 /* Post.storyboard */; };
@@ -100,7 +100,7 @@
 		934CDAF51DE8A38F689F9CA3 /* Pods-SurRound-SurRoundUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRound-SurRoundUITests.debug.xcconfig"; path = "Target Support Files/Pods-SurRound-SurRoundUITests/Pods-SurRound-SurRoundUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A1C511EBAFDB457C3847BD75 /* Pods_SurRound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurRound.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3086B6D23DB57E80071F378 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		D3086B6F23DB59950071F378 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		D3086B6F23DB59950071F378 /* UserDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDBService.swift; sourceTree = "<group>"; };
 		D3086B7123DB5DD50071F378 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		D3086B7423DB763A0071F378 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D3086B7923DB89E90071F378 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Post.storyboard; sourceTree = "<group>"; };
@@ -381,7 +381,7 @@
 			children = (
 				D39997F223DB4FD000595B2F /* AuthInputCategory.swift */,
 				D3086B6D23DB57E80071F378 /* AuthManager.swift */,
-				D3086B6F23DB59950071F378 /* UserManager.swift */,
+				D3086B6F23DB59950071F378 /* UserDBService.swift */,
 				D3086B7123DB5DD50071F378 /* UserModel.swift */,
 			);
 			path = Auth;
@@ -740,7 +740,7 @@
 				D3552B3323DF359500453FAA /* NewPostMediaCell.swift in Sources */,
 				D3086B6E23DB57E80071F378 /* AuthManager.swift in Sources */,
 				D335D5DF23DEA9500021B461 /* SRAuthButton.swift in Sources */,
-				D3086B7023DB59950071F378 /* UserManager.swift in Sources */,
+				D3086B7023DB59950071F378 /* UserDBService.swift in Sources */,
 				D326796323E2940100F94BFD /* NewPostMapCell.swift in Sources */,
 				D3949B0523D9B07B006DA9AA /* UIView+Extension.swift in Sources */,
 				D364978523D82B720078C4E0 /* KingfisherWrapper.swift in Sources */,
