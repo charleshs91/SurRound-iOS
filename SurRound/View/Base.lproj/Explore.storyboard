@@ -115,12 +115,18 @@
         <scene sceneID="OyP-T1-U8k">
             <objects>
                 <viewController id="VDG-fr-PYK" customClass="FollowingListViewController" customModule="SurRound" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="FNx-cH-03F">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xsd-eh-sFk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="726"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="9CD-U7-pWE"/>
-                    </view>
+                        <connections>
+                            <outlet property="dataSource" destination="VDG-fr-PYK" id="koR-Xa-TJp"/>
+                            <outlet property="delegate" destination="VDG-fr-PYK" id="VAs-cH-9H6"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="tableView" destination="xsd-eh-sFk" id="G7e-hO-ro4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hKN-cj-Ugo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
