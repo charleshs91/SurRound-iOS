@@ -9,15 +9,22 @@
 import UIKit
 
 class FollowingListViewController: UIViewController {
-
-    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var tableView: UITableView! {
+        didSet { setupTableView() }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .yellow
+    }
+    
+    private func setupTableView() {
         
         tableView.registerCellWithNib(withCellClass: ImagePostListCell.self)
+        
+        tableView.separatorStyle = .none
     }
 }
 

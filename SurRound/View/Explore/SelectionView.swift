@@ -47,9 +47,11 @@ extension SelectionViewDataSource {
 
 @objc protocol SelectionViewDelegate: AnyObject {
     
-    @objc optional func selectionView(_ selectionView: SelectionView, didSelectItemAt index: Int)
+    @objc optional func selectionView(_ selectionView: SelectionView,
+                                      didSelectItemAt index: Int)
     
-    @objc optional func selectionView(_ selectionView: SelectionView, shouldSelectItemAt index: Int) -> Bool
+    @objc optional func selectionView(_ selectionView: SelectionView,
+                                      shouldSelectItemAt index: Int) -> Bool
 }
 
 class SelectionView: UIView {

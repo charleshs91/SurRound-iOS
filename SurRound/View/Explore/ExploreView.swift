@@ -31,32 +31,7 @@ class ExploreView: UIView {
         arrangeViews()
     }
     
-    // MARK: - Actions
-//    func movePage(to type: ExplorePageType) {
-//
-//        if currentPageType == type { return }
-//
-//        let currentView = convertToView(from: currentPageType)
-//        let nextView = convertToView(from: type)
-//
-//        nextView.frame = nextView.frame.insetBy(dx: Constant.maxWidth, dy: 0)
-//        bringSubviewToFront(nextView)
-//        nextView.isHidden = false
-//
-//        UIViewPropertyAnimator.runningPropertyAnimator(
-//            withDuration: 0.3,
-//            delay: 0,
-//            options: .curveLinear,
-//            animations: {
-//                nextView.isHidden = false
-//                nextView.frame = nextView.frame.insetBy(dx: -Constant.maxWidth, dy: 0)
-//            },
-//            completion: { _ in
-//                currentView.isHidden = true
-//            }
-//        )
-//    }
-    
+    // MARK: - Actions    
     func displayPage(with type: ExplorePageType) {
         
         let views: [UIView] = [followingListView, trendingListView, nearestListView]

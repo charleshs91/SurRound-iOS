@@ -88,13 +88,39 @@
                     <view key="view" contentMode="scaleToFill" id="2ac-yh-FR4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="726"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Pv6-tK-UDD">
+                                <rect key="frame" x="0.0" y="44" width="414" height="682"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="4" minimumInteritemSpacing="4" id="sW1-PS-ad5">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="dCc-LZ-ZAh" id="hZG-5R-dB2"/>
+                                    <outlet property="delegate" destination="dCc-LZ-ZAh" id="7T4-BA-pfo"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="5X2-4n-ZF4" firstAttribute="trailing" secondItem="Pv6-tK-UDD" secondAttribute="trailing" id="0ge-bl-fMS"/>
+                            <constraint firstItem="Pv6-tK-UDD" firstAttribute="leading" secondItem="5X2-4n-ZF4" secondAttribute="leading" id="54q-Q2-qHt"/>
+                            <constraint firstItem="Pv6-tK-UDD" firstAttribute="top" secondItem="5X2-4n-ZF4" secondAttribute="top" id="5Hm-F7-ESh"/>
+                            <constraint firstItem="5X2-4n-ZF4" firstAttribute="bottom" secondItem="Pv6-tK-UDD" secondAttribute="bottom" id="v6u-ZY-whb"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5X2-4n-ZF4"/>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="Pv6-tK-UDD" id="Clh-8M-0kW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lMl-yB-j3f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="923" y="727"/>
+            <point key="canvasLocation" x="921.73913043478262" y="726.5625"/>
         </scene>
         <!--Nearest List View Controller-->
         <scene sceneID="CBa-hH-Pd9">
@@ -103,9 +129,28 @@
                     <view key="view" contentMode="scaleToFill" id="MpO-zk-Nsq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="726"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gI5-Qf-aS1">
+                                <rect key="frame" x="0.0" y="44" width="414" height="682"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="E2r-PW-aWJ" id="zEI-jB-d6n"/>
+                                    <outlet property="delegate" destination="E2r-PW-aWJ" id="dD2-SA-haA"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="WCM-5q-8Yb" firstAttribute="bottom" secondItem="gI5-Qf-aS1" secondAttribute="bottom" id="5PF-dY-KMl"/>
+                            <constraint firstItem="gI5-Qf-aS1" firstAttribute="leading" secondItem="WCM-5q-8Yb" secondAttribute="leading" id="H1Q-o8-XNU"/>
+                            <constraint firstItem="gI5-Qf-aS1" firstAttribute="top" secondItem="WCM-5q-8Yb" secondAttribute="top" id="Rfk-Fa-oX4"/>
+                            <constraint firstItem="WCM-5q-8Yb" firstAttribute="trailing" secondItem="gI5-Qf-aS1" secondAttribute="trailing" id="vaU-7r-W6P"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="WCM-5q-8Yb"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="gI5-Qf-aS1" id="3RU-UQ-2Fg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azf-HL-Mbc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

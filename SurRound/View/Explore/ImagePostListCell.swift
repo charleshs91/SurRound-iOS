@@ -37,7 +37,6 @@ class ImagePostListCell: UITableViewCell {
         
     }
     
-    
     // MARK: - Private Methods
     private func configureCell() {
         
