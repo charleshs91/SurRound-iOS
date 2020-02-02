@@ -81,6 +81,8 @@ extension FollowingListViewController: UITableViewDelegate {
         
         guard let postDetailVC = UIStoryboard.post.instantiateInitialViewController() as? PostContentViewController else { return }
         
+        postDetailVC.post = posts[indexPath.row]
+        
         self.present(postDetailVC, animated: true, completion: nil)
     }
 }

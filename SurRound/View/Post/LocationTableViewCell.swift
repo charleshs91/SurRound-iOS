@@ -15,11 +15,11 @@ class LocationTableViewCell: UITableViewCell {
     }
     
     @IBOutlet weak var placeLabel: UILabel!
+    
     @IBOutlet weak var followBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     @IBAction func didTapFollowBtn(_ sender: UIButton) {

@@ -10,13 +10,33 @@ import UIKit
 
 class PostContentViewController: UIViewController {
     
-    @IBOutlet weak var postContentView: PostContentView!
+    var post: Post? {
+        didSet {
+            guard let postView = self.postContentView else { return }
+            postView.layoutView(from: post)
+            
+            guard let tableView = postView.tableView else { return }
+            tableView.reloadData()
+        }
+    }
+    
+    @IBOutlet weak var postContentView: PostContentView! {
+        didSet {
+            self.postContentView.layoutView(from: post)
+        }
+    }
     
     let sections: [PostDetailSectionType] = [.content, .review]
     let cellItems: [PostBodyCellType] = [.location, .body]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    // MARK: - User Actions
+    @IBAction func didTapClose(_ sender: Any) {
+        
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -55,12 +75,14 @@ extension PostContentViewController: UITableViewDataSource {
             case .location:
                 
                 guard let locationCell = cell as? LocationTableViewCell else { break }
-                locationCell.placeLabel.text = "台北市政府"
+                
+                locationCell.placeLabel.text = "Somewhere"
                 
             case .body:
                 
                 guard let bodyCell = cell as? BodyTableViewCell else { break }
-                bodyCell.descriptionLabel.text = "柯Ｐ上班的欸所在"
+                
+                bodyCell.descriptionLabel.text = post?.text
             }
             
             return cell
@@ -73,8 +95,5 @@ extension PostContentViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension PostContentViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
-    }
+
 }
