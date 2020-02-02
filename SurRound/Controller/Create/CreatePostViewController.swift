@@ -11,7 +11,7 @@ import UIKit
 class CreatePostViewController: UIViewController {
     
     deinit {
-        print("CreatePostViewController deinit()")
+        debugPrint("$ deinit: CreatePostViewController")
     }
     
     @IBOutlet weak var newPostTableView: UITableView! {
@@ -44,7 +44,9 @@ class CreatePostViewController: UIViewController {
         
         let post = Post(id: PostCreator.documentID(),
                         category: "chat",
-                        author: Post.Author(uid: user.uid, username: user.username, avatar: "123"),
+                        author: Post.Author(uid: user.uid,
+                                            username: user.username,
+                                            avatar: user.avatar ?? ""),
                         createdTime: Date(),
                         text: text,
                         location: currentCoordinate)

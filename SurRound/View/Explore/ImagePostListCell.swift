@@ -8,6 +8,24 @@
 
 import UIKit
 
+class PostListCellViewModel {
+    
+    let username: String
+    let text: String
+    var placeName: String?
+    var userImageUrlString: String?
+    var postImageUrlString: String?
+    
+    init(_ post: Post) {
+        
+        self.username = post.author.username
+        self.text = post.text
+        self.placeName = "Somewhere"
+        self.userImageUrlString = post.author.avatar
+        self.postImageUrlString = post.mediaLink
+    }
+}
+
 class ImagePostListCell: UITableViewCell {
     
     @IBOutlet weak var substrateView: UIView!
@@ -19,6 +37,8 @@ class ImagePostListCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     
     @IBOutlet weak var placeNameLabel: UILabel!
+    
+    @IBOutlet weak var postTextLabel: UILabel!
     
     @IBOutlet weak var likedButton: UIButton!
     
@@ -35,7 +55,18 @@ class ImagePostListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        configureCell()
+        initCell()
+    }
+    
+    func layoutCell(_ viewModel: PostListCellViewModel) {
+        
+        usernameLabel.text = viewModel.username
+        postTextLabel.text = viewModel.text
+        postImageView.loadImage(viewModel.postImageUrlString,
+                                placeholder: UIImage.asset(.Image_Placeholder))
+        userImageView.loadImage(viewModel.userImageUrlString,
+                                placeholder: UIImage.asset(.Icons_Avatar))
+        placeNameLabel.text = viewModel.placeName
     }
     
     // MARK: - User Actions
@@ -47,11 +78,11 @@ class ImagePostListCell: UITableViewCell {
     }
     
     // MARK: - Private Methods
-    private func configureCell() {
+    private func initCell() {
         
         selectionStyle = .none
         
-        postImageView.clipsToBounds = true
+        userImageView.layer.cornerRadius = userImageView.frame.height / 2
         
         substrateView.layer.cornerRadius = 8
         substrateView.layer.shadowColor = UIColor.lightGray.cgColor

@@ -12,6 +12,10 @@ import FirebaseFirestoreSwift
 
 class PostCreator {
     
+    deinit {
+        debugPrint("$ deinit: PostCreator")
+    }
+    
     static func documentID() -> String {
         
         return Firestore.firestore().collection("posts").document().documentID
@@ -24,7 +28,7 @@ class PostCreator {
         do {
             try documentRef.setData(from: post,
                                     merge: true,
-                                    encoder: Firestore.Encoder()) { [weak self] error in
+                                    encoder: Firestore.Encoder()) { error in
                 
                 guard error == nil else {
                     completion(.failure(error!))
@@ -32,7 +36,7 @@ class PostCreator {
                 }
                 
                 if let imageToAttach = image {
-                    self?.attachImage(to: documentRef, image: imageToAttach)
+                    self.attachImage(to: documentRef, image: imageToAttach)
                 }
                 
                 completion(.success(()))

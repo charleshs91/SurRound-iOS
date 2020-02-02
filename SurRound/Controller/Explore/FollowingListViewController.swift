@@ -14,10 +14,26 @@ class FollowingListViewController: UIViewController {
         didSet { setupTableView() }
     }
     
+    var posts: [Post] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .yellow
+          
+        PostFetcher().fetchAllPosts { [weak self] result in
+            
+            switch result {
+            case .success(let posts):
+                self?.posts.append(contentsOf: posts)
+                
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+                
+            case .failure(let error):
+                print(error)
+                SRProgressHUD.showFailure(text: error.localizedDescription)
+            }
+        }
     }
     
     private func setupTableView() {
@@ -32,14 +48,18 @@ extension FollowingListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return self.posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(
+        guard let cell = tableView.dequeueReusableCell(
             withIdentifier: ImagePostListCell.identifier,
-            for: indexPath)
+            for: indexPath) as? ImagePostListCell else { return UITableViewCell() }
+        
+        let post = posts[indexPath.row]
+        let viewModel = PostListCellViewModel(post)
+        cell.layoutCell(viewModel)
         
         return cell
     }
