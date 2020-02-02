@@ -10,31 +10,42 @@ import UIKit
 import MapKit
 
 class NewPostMapCell: UITableViewCell {
-  
-  static var identifier: String {
-    return String(describing: NewPostMapCell.self)
-  }
-  
-  var location: Location? {
-    didSet {
-      guard let location = self.location else { return }
-      let clLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
-      let region = MKCoordinateRegion(center: clLocation.coordinate, latitudinalMeters: 100, longitudinalMeters: 100)
-      mkMapView.setRegion(region, animated: true)
+    
+    static var identifier: String {
+        return String(describing: NewPostMapCell.self)
     }
-  }
-  
-  @IBOutlet weak var mkMapView: MKMapView!
-  @IBOutlet weak var placeNameLabel: UILabel!
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    mkMapView.mapType = .mutedStandard
-    mkMapView.isUserInteractionEnabled = false
-  }
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    mkMapView.layer.cornerRadius = 10
-  }
+    
+    var coordinate: Coordinate? {
+        didSet {
+            guard let coordinate = self.coordinate else { return }
+            
+            let location = coordinate.location
+            let region = MKCoordinateRegion(center: location.coordinate,
+                                            latitudinalMeters: 100,
+                                            longitudinalMeters: 100)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2D(latitude: coordinate.latitude,
+                                                           longitude: coordinate.longitude)
+            mkMapView.addAnnotation(annotation)
+            mkMapView.setRegion(region, animated: false)
+        }
+    }
+    
+    @IBOutlet weak var mkMapView: MKMapView!
+    
+    @IBOutlet weak var placeNameLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        mkMapView.mapType = .mutedStandard
+        mkMapView.isUserInteractionEnabled = false
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        mkMapView.layer.cornerRadius = 10
+    }
 }

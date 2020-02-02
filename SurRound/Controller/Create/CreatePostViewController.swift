@@ -22,7 +22,7 @@ class CreatePostViewController: UIViewController {
     weak var mediaCell: NewPostMediaCell?
     weak var mapCell: NewPostMapCell?
     
-    var currentLocation: Location?
+    var currentLocation: Coordinate?
     
     let cellFields: [NewPostCellType] = [.text, .media, .map]
     
@@ -38,7 +38,7 @@ class CreatePostViewController: UIViewController {
         
         guard let text = self.textCell?.textView.text,
             let user = AuthManager.shared.currentUser,
-            let currentLocation = LocationProvider.getCurrentLocation() else { return }
+            let currentCoordinate = PlaceManager.current.coordinate else { return }
         
         let creator = PostCreator()
         
@@ -47,7 +47,7 @@ class CreatePostViewController: UIViewController {
                         author: Post.Author(uid: user.uid, username: user.username, avatar: "123"),
                         createdTime: Date(),
                         text: text,
-                        location: currentLocation)
+                        location: currentCoordinate)
         
         SRProgressHUD.showLoading(text: "Creating post")
         creator.createPost(post, image: mediaCell?.pickedImage) { [weak self] result in
@@ -183,7 +183,7 @@ extension CreatePostViewController: UITableViewDataSource {
         case .map:
             guard let mapCell = cell as? NewPostMapCell else { return cell }
             
-            mapCell.location = LocationProvider.getCurrentLocation()
+            mapCell.coordinate = PlaceManager.current.coordinate
             self.mapCell = mapCell
         }
         

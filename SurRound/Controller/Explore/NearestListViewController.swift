@@ -38,19 +38,13 @@ extension NearestListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: PlaceItemListCell.identifier,
-            for: indexPath)
+            withIdentifier: PlaceItemListCell.identifier, for: indexPath)
         
         return cell
     }
 }
 
 extension NearestListViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 500
-    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         

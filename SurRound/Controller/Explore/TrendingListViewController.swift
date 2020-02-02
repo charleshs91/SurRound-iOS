@@ -52,8 +52,7 @@ extension TrendingListViewController: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: TrendingListGridCell.identifier,
-            for: indexPath)
+            withReuseIdentifier: TrendingListGridCell.identifier, for: indexPath)
         
         return cell
     }

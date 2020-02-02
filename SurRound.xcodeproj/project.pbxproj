@@ -81,7 +81,7 @@
 		D39A755623D5E85C00A20879 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A755523D5E85C00A20879 /* UIImage+Extension.swift */; };
 		D39A755823D5FFD000A20879 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A755723D5FFD000A20879 /* UIColor+Extension.swift */; };
 		D3A3B5F123E29C35003201E1 /* NewPostCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */; };
-		D3A3B5F423E2A7E1003201E1 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F323E2A7E1003201E1 /* LocationProvider.swift */; };
+		D3A3B5F423E2A7E1003201E1 /* PlaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F323E2A7E1003201E1 /* PlaceManager.swift */; };
 		D3A3B5F823E31E9B003201E1 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F723E31E9B003201E1 /* StorageManager.swift */; };
 		D3A3B5FB23E3D56E003201E1 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5FA23E3D56E003201E1 /* PostModel.swift */; };
 		D3A3B5FD23E3F5E6003201E1 /* PostCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5FC23E3F5E6003201E1 /* PostCreator.swift */; };
@@ -195,7 +195,7 @@
 		D39A755523D5E85C00A20879 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		D39A755723D5FFD000A20879 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostCellType.swift; sourceTree = "<group>"; };
-		D3A3B5F323E2A7E1003201E1 /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
+		D3A3B5F323E2A7E1003201E1 /* PlaceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceManager.swift; sourceTree = "<group>"; };
 		D3A3B5F723E31E9B003201E1 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		D3A3B5FA23E3D56E003201E1 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		D3A3B5FC23E3F5E6003201E1 /* PostCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreator.swift; sourceTree = "<group>"; };
@@ -537,7 +537,7 @@
 		D3A3B5F223E2A7CF003201E1 /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				D3A3B5F323E2A7E1003201E1 /* LocationProvider.swift */,
+				D3A3B5F323E2A7E1003201E1 /* PlaceManager.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -937,7 +937,7 @@
 				D365E4E123E455C000480F11 /* ExploreView.swift in Sources */,
 				D39A755623D5E85C00A20879 /* UIImage+Extension.swift in Sources */,
 				D39997F323DB4FD000595B2F /* AuthInputCategory.swift in Sources */,
-				D3A3B5F423E2A7E1003201E1 /* LocationProvider.swift in Sources */,
+				D3A3B5F423E2A7E1003201E1 /* PlaceManager.swift in Sources */,
 				D3086B8C23DC8E7B0071F378 /* Constant.swift in Sources */,
 				D3086B8F23DC9D3A0071F378 /* LocationTableViewCell.swift in Sources */,
 				D3850D7E23DAD879008F1F7E /* UIWindow+Extension.swift in Sources */,

@@ -16,7 +16,7 @@ struct Post: Codable {
   let author: Author
   let createdTime: Date
   let text: String
-  let location: Location
+  let location: Coordinate
   var mediaType: String?
   var mediaLink: String?
   
