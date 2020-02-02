@@ -56,4 +56,11 @@ extension FollowingListViewController: UITableViewDelegate {
         
         return UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let postDetailVC = UIStoryboard.post.instantiateInitialViewController() as? PostContentViewController else { return }
+        
+        self.present(postDetailVC, animated: true, completion: nil)
+    }
 }

@@ -10,6 +10,8 @@ import UIKit
 
 class ImagePostListCell: UITableViewCell {
     
+    @IBOutlet weak var substrateView: UIView!
+    
     @IBOutlet weak var userImageView: UIImageView!
     
     @IBOutlet weak var postImageView: UIImageView!
@@ -21,6 +23,10 @@ class ImagePostListCell: UITableViewCell {
     @IBOutlet weak var likedButton: UIButton!
     
     @IBOutlet weak var likedCountLabel: UILabel!
+    
+    @IBOutlet weak var reviewButton: UIButton!
+    
+    @IBOutlet weak var reviewCountLabel: UILabel!
     
     static var identifier: String {
         return String(describing: ImagePostListCell.self)
@@ -37,9 +43,20 @@ class ImagePostListCell: UITableViewCell {
         
     }
     
+    @IBAction func didTapReviewButton(_ sender: UIButton) {
+    }
+    
     // MARK: - Private Methods
     private func configureCell() {
         
         selectionStyle = .none
+        
+        postImageView.clipsToBounds = true
+        
+        substrateView.layer.cornerRadius = 8
+        substrateView.layer.shadowColor = UIColor.lightGray.cgColor
+        substrateView.layer.shadowOpacity = 0.7
+        substrateView.layer.shadowRadius = 2
+        substrateView.layer.shadowOffset = CGSize(width: 2, height: 2)
     }
 }

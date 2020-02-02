@@ -71,6 +71,7 @@ class CreatePostViewController: UIViewController {
     private func setupTableView() {
         
         newPostTableView.registerHeaderFooterWithNib(withHeaderFooterViewClass: UserInfoSectionHeader.self)
+        
         newPostTableView.registerCellWithNib(withCellClass: NewPostTextViewCell.self)
         newPostTableView.registerCellWithNib(withCellClass: NewPostMediaCell.self)
         newPostTableView.registerCellWithNib(withCellClass: NewPostMapCell.self)

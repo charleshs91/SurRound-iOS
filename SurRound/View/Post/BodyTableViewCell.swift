@@ -10,11 +10,15 @@ import UIKit
 
 class BodyTableViewCell: UITableViewCell {
     
-  @IBOutlet weak var descriptionLabel: UILabel!
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    // Initialization code
-  }
-  
+    static var identifier: String {
+        return String(describing: BodyTableViewCell.self)
+    }
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+    
 }
