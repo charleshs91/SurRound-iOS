@@ -7,16 +7,19 @@
 //
 
 import UIKit
-import CoreLocation
 import GoogleMaps
 
 class HomeViewController: UIViewController {
     
+    @IBOutlet weak var collectionView: UICollectionView! {
+        didSet { setupCollectionView() }
+    }
+    
     @IBOutlet weak var mapView: GMSMapView!
     
-    let locationManager = CLLocationManager()
-    
-    var currentLocation: Coordinate?
+    // MARK: - Private Constants
+    private let cellHeightInset: CGFloat = 16
+    private let cellLeadingInset: CGFloat = 10
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -24,61 +27,103 @@ class HomeViewController: UIViewController {
         
         updateLocation()
         
-        if let location = locationManager.location {
-            mapView.camera = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 14.0)
-            
-            let marker = GMSMarker()
-            marker.position = location.coordinate
-            marker.map = mapView
-        }
-        
-        if let mapStyleURL = Bundle.main.url(forResource: "MapStyle", withExtension: "json") {
-            mapView.mapStyle = try? GMSMapStyle(contentsOfFileURL: mapStyleURL)
-        }
+        configureMap()
     }
     
     // MARK: - Private Methods
     private func updateLocation() {
-        
-        let status = CLLocationManager.authorizationStatus()
-        
-        switch status {
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
+        do {
+            try PlaceManager.current.updateLocation()
             
-        case .denied, .restricted:
-            let alert = UIAlertController(title: "Location Services disabled", message: "Please enable Location Services in Settings", preferredStyle: .alert)
+        } catch PlaceManagerError.accessDenied {
+            let alert = UIAlertController(title: "Location Services disabled",
+                                          message: "Please enable Location Services in Settings",
+                                          preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
             return
             
-        case .authorizedAlways, .authorizedWhenInUse:
-            break
-            
-        @unknown default:
-            return
+        } catch { }
+    }
+    
+    private func configureMap() {
+        
+        if let mapStyleURL = Bundle.main.url(forResource: "MapStyle", withExtension: "json") {
+            mapView.mapStyle = try? GMSMapStyle(contentsOfFileURL: mapStyleURL)
         }
         
-        locationManager.delegate = self
-        locationManager.startUpdatingLocation()
+        if let location = PlaceManager.current.location {
+            mapView.camera = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 15.0)
+            
+            let marker = GMSMarker()
+            marker.position = location.coordinate
+            marker.map = mapView
+        }
+    }
+    
+    private func refreshMap() {
+        
+        if let location = PlaceManager.current.location {
+            mapView.moveCamera(GMSCameraUpdate.setTarget(location.coordinate))
+            mapView.clear()
+            
+            let marker = GMSMarker()
+            marker.position = location.coordinate
+            marker.map = mapView
+        }
+    }
+    
+    private func setupCollectionView() {
+        
+        collectionView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        
+        collectionView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        collectionView.layer.cornerRadius = 12
+        
+        collectionView.layer.shadowOffset = CGSize(width: 6, height: 6)
+        collectionView.layer.shadowOpacity = 0.7
+        collectionView.layer.shadowColor = UIColor.lightGray.cgColor
+        collectionView.layer.shadowRadius = 3
+        
+        collectionView.contentInset = UIEdgeInsets(top: cellHeightInset / 4,
+                                                   left: cellLeadingInset,
+                                                   bottom: 0,
+                                                   right: 0)
     }
 }
 
-// MARK: - CLLocationManagerDelegate
-extension HomeViewController: CLLocationManagerDelegate {
+// MARK: - UICollectionViewDataSource
+extension HomeViewController: UICollectionViewDataSource {
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         
-        if let current = locations.last {
-            PlaceManager.current.coordinate = Coordinate(current)
-            locationManager.stopUpdatingLocation()
-        }
+        return 20
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        SRProgressHUD.showFailure(text: error.localizedDescription)
-        locationManager.stopUpdatingLocation()
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: StoryCollectionCell.identifier, for: indexPath)
+        guard let storyCell = cell as? StoryCollectionCell else { return cell }
+        
+        storyCell.layoutIfNeeded()
+        
+        return storyCell
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let cellHeight = collectionView.frame.size.height - cellHeightInset
+        
+        return CGSize(width: cellHeight, height: cellHeight)
     }
 }
