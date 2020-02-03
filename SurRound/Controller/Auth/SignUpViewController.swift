@@ -42,7 +42,7 @@ class SignUpViewController: UIViewController {
             
             switch result {
             case .success:
-                self?.dismiss(animated: true, completion: nil)
+                self?.displayMainView()
                 
             case .failure(let error):
                 SRProgressHUD.showFailure(text: error.localizedDescription)
@@ -119,6 +119,14 @@ class SignUpViewController: UIViewController {
                                     options: [],
                                     range: NSRange(location: 0, length: candidate.count))
         return matches.count > 0
+    }
+    
+    private func displayMainView() {
+        
+        if let window = AppDelegate.shared.window {
+            let tbc = UIStoryboard.main.instantiateInitialViewController()
+            window.rootViewController = tbc
+        }
     }
 }
 

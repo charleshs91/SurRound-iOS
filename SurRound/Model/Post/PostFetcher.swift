@@ -18,7 +18,9 @@ class PostFetcher {
     
     func fetchAllPosts(completion: @escaping PostsResult) {
         
-        Firestore.firestore().collection("posts").getDocuments { snapshot, error in
+        Firestore.firestore().collection("posts")
+            .order(by: "created_time", descending: true)
+            .getDocuments { snapshot, error in
             
             guard let snapshot = snapshot, error == nil else {
                 completion(.failure(error!))

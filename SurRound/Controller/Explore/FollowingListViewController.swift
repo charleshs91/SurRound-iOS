@@ -83,6 +83,6 @@ extension FollowingListViewController: UITableViewDelegate {
         
         postDetailVC.post = posts[indexPath.row]
         
-        self.present(postDetailVC, animated: true, completion: nil)
+        navigationController?.show(postDetailVC, sender: nil)
     }
 }

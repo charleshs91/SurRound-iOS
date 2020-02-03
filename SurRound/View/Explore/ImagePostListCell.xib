@@ -110,13 +110,21 @@
                         <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Datetime" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHb-HK-rez">
+                        <rect key="frame" x="126" y="12" width="178" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="F5l-ND-4mn" secondAttribute="trailing" constant="16" id="Awu-W4-kaL"/>
                     <constraint firstAttribute="bottom" secondItem="F5l-ND-4mn" secondAttribute="bottom" constant="16" id="I7m-dF-JFo"/>
+                    <constraint firstItem="xHb-HK-rez" firstAttribute="top" secondItem="ipN-Sx-1e9" secondAttribute="top" id="IAQ-JI-U1n"/>
                     <constraint firstItem="F5l-ND-4mn" firstAttribute="top" secondItem="nsO-dp-4ip" secondAttribute="bottom" constant="8" id="U7R-no-0ZI"/>
                     <constraint firstItem="ipN-Sx-1e9" firstAttribute="leading" secondItem="nsO-dp-4ip" secondAttribute="trailing" constant="8" id="W8S-9q-re4"/>
                     <constraint firstItem="nsO-dp-4ip" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="WrW-Zq-etB"/>
+                    <constraint firstItem="xHb-HK-rez" firstAttribute="trailing" secondItem="m4J-cq-nCo" secondAttribute="trailing" id="bKB-SY-PvK"/>
                     <constraint firstItem="nsO-dp-4ip" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="dto-dZ-Iak"/>
                     <constraint firstItem="rPz-n3-VPR" firstAttribute="top" secondItem="ipN-Sx-1e9" secondAttribute="bottom" constant="4" id="gvr-tG-Ps2"/>
                     <constraint firstItem="ipN-Sx-1e9" firstAttribute="top" secondItem="nsO-dp-4ip" secondAttribute="top" id="k2L-rv-Yyg"/>
@@ -126,6 +134,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="datetimeLabel" destination="xHb-HK-rez" id="TD6-vw-AI4"/>
                 <outlet property="likedButton" destination="aRi-7v-o1t" id="CwV-LH-3aw"/>
                 <outlet property="likedCountLabel" destination="te6-VX-ddV" id="cSF-1j-VlR"/>
                 <outlet property="placeNameLabel" destination="rPz-n3-VPR" id="nOW-2v-2ZS"/>

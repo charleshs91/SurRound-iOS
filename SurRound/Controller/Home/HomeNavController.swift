@@ -12,5 +12,6 @@ class HomeNavController: SRColoredNavController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
   }
 }

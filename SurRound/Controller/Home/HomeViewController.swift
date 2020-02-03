@@ -49,12 +49,17 @@ class HomeViewController: UIViewController {
     
     private func configureMap() {
         
+        mapView.isMyLocationEnabled = true
+        
+        mapView.settings.myLocationButton = true
+        mapView.settings.rotateGestures = false
+        
         if let mapStyleURL = Bundle.main.url(forResource: "MapStyle", withExtension: "json") {
             mapView.mapStyle = try? GMSMapStyle(contentsOfFileURL: mapStyleURL)
         }
         
         if let location = PlaceManager.current.location {
-            mapView.camera = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 15.0)
+            mapView.camera = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 18.0)
             
             let marker = GMSMarker()
             marker.position = location.coordinate

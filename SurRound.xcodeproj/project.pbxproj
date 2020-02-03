@@ -304,8 +304,8 @@
 		D3086B8423DC85320071F378 /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				D3086B8523DC85550071F378 /* PostContentView.swift */,
 				D3086B7823DB89E90071F378 /* Post.storyboard */,
+				D3086B8523DC85550071F378 /* PostContentView.swift */,
 				D3086B8D23DC9D3A0071F378 /* LocationTableViewCell.swift */,
 				D3086B8E23DC9D3A0071F378 /* LocationTableViewCell.xib */,
 				D3086B9123DCA0940071F378 /* BodyTableViewCell.swift */,

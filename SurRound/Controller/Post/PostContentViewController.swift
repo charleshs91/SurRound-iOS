@@ -31,12 +31,16 @@ class PostContentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didTapClose(_:)))
+        view.addGestureRecognizer(panGesture)
     }
     
     // MARK: - User Actions
     @IBAction func didTapClose(_ sender: Any) {
         
-        dismiss(animated: true, completion: nil)
+        presentingViewController?.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -96,4 +100,13 @@ extension PostContentViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension PostContentViewController: UITableViewDelegate {
 
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return CGFloat.zero
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return UITableView.automaticDimension
+    }
 }

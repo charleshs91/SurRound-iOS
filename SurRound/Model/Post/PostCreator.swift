@@ -29,7 +29,7 @@ class PostCreator {
             try documentRef.setData(from: post,
                                     merge: true,
                                     encoder: Firestore.Encoder()) { error in
-                
+                                        
                 guard error == nil else {
                     completion(.failure(error!))
                     return

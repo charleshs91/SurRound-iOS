@@ -12,6 +12,7 @@ class PostListCellViewModel {
     
     let username: String
     let text: String
+    let datetime: String
     var placeName: String?
     var userImageUrlString: String?
     var postImageUrlString: String?
@@ -20,6 +21,7 @@ class PostListCellViewModel {
         
         self.username = post.author.username
         self.text = post.text
+        self.datetime = post.datetimeString
         self.placeName = "Somewhere"
         self.userImageUrlString = post.author.avatar
         self.postImageUrlString = post.mediaLink
@@ -39,6 +41,8 @@ class ImagePostListCell: UITableViewCell {
     @IBOutlet weak var placeNameLabel: UILabel!
     
     @IBOutlet weak var postTextLabel: UILabel!
+    
+    @IBOutlet weak var datetimeLabel: UILabel!
     
     @IBOutlet weak var likedButton: UIButton!
     
@@ -67,6 +71,7 @@ class ImagePostListCell: UITableViewCell {
         userImageView.loadImage(viewModel.userImageUrlString,
                                 placeholder: UIImage.asset(.Icons_Avatar))
         placeNameLabel.text = viewModel.placeName
+        datetimeLabel.text = viewModel.datetime
     }
     
     // MARK: - User Actions
