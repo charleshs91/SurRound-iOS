@@ -47,7 +47,6 @@ class PostContentView: UIView {
         }
     }
     
-    
     // MARK: - Private Methods
     private func setupTableView() {
         

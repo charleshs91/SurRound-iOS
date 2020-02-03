@@ -52,6 +52,7 @@
 		D363154D23E61FA00000150B /* PlacePostCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D363154B23E61FA00000150B /* PlacePostCollectionCell.xib */; };
 		D363154F23E6A97F0000150B /* PostContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D363154E23E6A97F0000150B /* PostContentModel.swift */; };
 		D363155123E6C3770000150B /* PostFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D363155023E6C3770000150B /* PostFetcher.swift */; };
+		D363155323E7E6020000150B /* MapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = D363155223E7E1E20000150B /* MapStyle.json */; };
 		D364978223D816370078C4E0 /* HomeNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D364978123D816370078C4E0 /* HomeNavController.swift */; };
 		D364978523D82B720078C4E0 /* KingfisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D364978423D82B720078C4E0 /* KingfisherWrapper.swift */; };
 		D365E4D823E4536D00480F11 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365E4D723E4536D00480F11 /* ExploreViewController.swift */; };
@@ -167,6 +168,7 @@
 		D363154B23E61FA00000150B /* PlacePostCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlacePostCollectionCell.xib; sourceTree = "<group>"; };
 		D363154E23E6A97F0000150B /* PostContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentModel.swift; sourceTree = "<group>"; };
 		D363155023E6C3770000150B /* PostFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFetcher.swift; sourceTree = "<group>"; };
+		D363155223E7E1E20000150B /* MapStyle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = MapStyle.json; path = "/Users/charleshs91/SurRound-iOS/SurRound/MapStyle.json"; sourceTree = "<absolute>"; };
 		D364978123D816370078C4E0 /* HomeNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavController.swift; sourceTree = "<group>"; };
 		D364978423D82B720078C4E0 /* KingfisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingfisherWrapper.swift; sourceTree = "<group>"; };
 		D365E4D723E4536D00480F11 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 				D35C488E23CF352B000951D2 /* AppDelegate.swift */,
 				D39997EA23DAE43B00595B2F /* GoogleService-Info.plist */,
 				D35C489C23CF352E000951D2 /* Info.plist */,
+				D363155223E7E1E20000150B /* MapStyle.json */,
 				D35C489723CF352E000951D2 /* Assets.xcassets */,
 			);
 			path = SurRound;
@@ -576,6 +579,7 @@
 				D35C488923CF352B000951D2 /* Resources */,
 				692B53D5FBA641CB1092CA4A /* [CP] Embed Pods Frameworks */,
 				D3850D7A23DAC198008F1F7E /* SwiftLint */,
+				45608E1F130D68406FB4FDE2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -766,6 +770,7 @@
 				D3552B3823DF364500453FAA /* UserInfoSectionHeader.xib in Resources */,
 				D35C489823CF352E000951D2 /* Assets.xcassets in Resources */,
 				D3086B7A23DB89E90071F378 /* Post.storyboard in Resources */,
+				D363155323E7E6020000150B /* MapStyle.json in Resources */,
 				D39A754923D5E3A200A20879 /* Explore.storyboard in Resources */,
 				D35C489623CF352B000951D2 /* Main.storyboard in Resources */,
 				D3552B2C23DF34D700453FAA /* NewPostTextViewCell.xib in Resources */,
@@ -796,6 +801,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		45608E1F130D68406FB4FDE2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SurRound/Pods-SurRound-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SurRound/Pods-SurRound-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SurRound/Pods-SurRound-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5D2EA05BE2CF5DB04BDB7927 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

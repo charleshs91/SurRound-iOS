@@ -14,10 +14,24 @@
                     <view key="view" contentMode="scaleToFill" id="XRS-Rl-U8U">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ja2-Ho-mF0" userLabel="Map View" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="168" width="414" height="694"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="01r-1D-3Sn" firstAttribute="trailing" secondItem="Ja2-Ho-mF0" secondAttribute="trailing" id="2at-5q-NvZ"/>
+                            <constraint firstItem="01r-1D-3Sn" firstAttribute="bottom" secondItem="Ja2-Ho-mF0" secondAttribute="bottom" id="5VC-op-iBq"/>
+                            <constraint firstItem="Ja2-Ho-mF0" firstAttribute="leading" secondItem="01r-1D-3Sn" secondAttribute="leading" id="Svt-Jt-vU2"/>
+                            <constraint firstItem="Ja2-Ho-mF0" firstAttribute="top" secondItem="01r-1D-3Sn" secondAttribute="top" constant="80" id="eEM-fh-eu2"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="01r-1D-3Sn"/>
                     </view>
                     <navigationItem key="navigationItem" id="1hh-oj-oPw"/>
+                    <connections>
+                        <outlet property="mapView" destination="Ja2-Ho-mF0" id="aPD-ac-QPf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N79-Cz-EaY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

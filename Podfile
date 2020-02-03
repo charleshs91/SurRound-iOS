@@ -20,6 +20,10 @@ target 'SurRound' do
   pod 'FirebaseFirestoreSwift'
   pod 'Firebase/Storage'
 
+  # Google Maps
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+
   target 'SurRoundTests' do
     inherit! :search_paths
     # Pods for testing

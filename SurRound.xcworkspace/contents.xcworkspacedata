@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/charleshs91/SurRound-iOS/SurRound/MapStyle.json">
+   </FileRef>
+   <FileRef
       location = "group:SurRound.xcodeproj">
    </FileRef>
    <FileRef
