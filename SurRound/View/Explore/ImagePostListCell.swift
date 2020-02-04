@@ -62,6 +62,14 @@ class ImagePostListCell: UITableViewCell {
         initCell()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        placeNameLabel.clear()
+        userImageView.image = nil
+        postImageView.image = nil
+    }
+    
     func layoutCell(_ viewModel: PostListCellViewModel) {
         
         usernameLabel.text = viewModel.username

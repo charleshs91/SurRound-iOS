@@ -12,6 +12,7 @@ target 'SurRound' do
   pod 'IQKeyboardManagerSwift'
   pod 'KMPlaceholderTextView', '~> 1.4.0'
   pod 'collection-view-layouts'
+  pod 'ESPullToRefresh'
   
   # Firebase
   pod 'Firebase/Core'

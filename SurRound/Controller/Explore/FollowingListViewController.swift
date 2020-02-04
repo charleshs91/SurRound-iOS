@@ -16,9 +16,35 @@ class FollowingListViewController: UIViewController {
     
     var posts: [Post] = []
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-          
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        tableView.beginHeaderRefreshing()
+    }
+    
+    // MARK: - Private Methods
+    private func setupTableView() {
+        
+        tableView.registerCellWithNib(withCellClass: ImagePostListCell.self)
+        
+        tableView.addHeaderRefreshing { [weak self] in
+            
+            self?.refreshPosts {
+                self?.tableView.reloadData()
+                self?.tableView.endHeaderRefreshing()
+            }
+        }
+        
+        tableView.separatorStyle = .none
+    }
+    
+    private func refreshPosts(callback: @escaping () -> Void) {
+        
         PostFetcher().fetchAllPosts { [weak self] result in
             
             switch result {
@@ -26,7 +52,7 @@ class FollowingListViewController: UIViewController {
                 self?.posts.append(contentsOf: posts)
                 
                 DispatchQueue.main.async {
-                    self?.tableView.reloadData()
+                    callback()
                 }
                 
             case .failure(let error):
@@ -34,13 +60,6 @@ class FollowingListViewController: UIViewController {
                 SRProgressHUD.showFailure(text: error.localizedDescription)
             }
         }
-    }
-    
-    private func setupTableView() {
-        
-        tableView.registerCellWithNib(withCellClass: ImagePostListCell.self)
-        
-        tableView.separatorStyle = .none
     }
 }
 
