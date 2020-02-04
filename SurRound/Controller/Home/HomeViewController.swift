@@ -9,6 +9,12 @@
 import UIKit
 import GoogleMaps
 
+struct PostMarker {
+    
+    let post: Post
+    let mapMarker: GMSMarker
+}
+
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView! {
@@ -16,6 +22,8 @@ class HomeViewController: UIViewController {
     }
     
     @IBOutlet weak var mapView: GMSMapView!
+    
+    private var postMarkers = [PostMarker]()
     
     // MARK: - Private Constants
     private let cellHeightInset: CGFloat = 16
@@ -28,6 +36,32 @@ class HomeViewController: UIViewController {
         updateLocation()
         
         configureMap()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        PostFetcher().fetchAllPosts { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+            case .success(let posts):
+                posts.forEach { post in
+                    let position = CLLocationCoordinate2D(latitude: post.location.latitude,
+                                                          longitude: post.location.longitude)
+                    let marker = GMSMarker(position: position)
+                    strongSelf.postMarkers.append(PostMarker(post: post, mapMarker: marker))
+                }
+                
+                DispatchQueue.main.async {
+                    strongSelf.displayPostsOnMap()
+                }
+                
+            case .failure(let error):
+                SRProgressHUD.showFailure(text: error.localizedDescription)
+            }
+        }
     }
     
     // MARK: - Private Methods
@@ -49,8 +83,8 @@ class HomeViewController: UIViewController {
     
     private func configureMap() {
         
+        mapView.delegate = self
         mapView.isMyLocationEnabled = true
-        
         mapView.settings.myLocationButton = true
         mapView.settings.rotateGestures = false
         
@@ -60,22 +94,22 @@ class HomeViewController: UIViewController {
         
         if let location = PlaceManager.current.location {
             mapView.camera = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 18.0)
-            
-            let marker = GMSMarker()
-            marker.position = location.coordinate
-            marker.map = mapView
         }
     }
     
-    private func refreshMap() {
+    private func markerView() -> UIView {
         
-        if let location = PlaceManager.current.location {
-            mapView.moveCamera(GMSCameraUpdate.setTarget(location.coordinate))
-            mapView.clear()
-            
-            let marker = GMSMarker()
-            marker.position = location.coordinate
-            marker.map = mapView
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 12))
+        view.backgroundColor = .black
+        view.layer.cornerRadius = view.frame.size.width / 2
+        return view
+    }
+    
+    private func displayPostsOnMap() {
+        
+        postMarkers.forEach { [weak self] postPin in
+            postPin.mapMarker.icon = UIImage.asset(.Icons_16px_RestaurantMarker)
+            postPin.mapMarker.map = self?.mapView
         }
     }
     
@@ -130,5 +164,24 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         let cellHeight = collectionView.frame.size.height - cellHeightInset
         
         return CGSize(width: cellHeight, height: cellHeight)
+    }
+}
+
+extension HomeViewController: GMSMapViewDelegate {
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        
+        let matches = postMarkers.filter { (postMarker) -> Bool in
+            return postMarker.mapMarker == marker
+        }
+        
+        if let first = matches.first {
+            guard let postVC = UIStoryboard.post.instantiateInitialViewController() as? PostContentViewController else { return false }
+            
+            postVC.post = first.post
+            navigationController?.show(postVC, sender: nil)
+        }
+        
+        return false
     }
 }
