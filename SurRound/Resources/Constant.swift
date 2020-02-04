@@ -10,13 +10,18 @@ import UIKit
 
 struct Constant {
     
-    static let maxWidth = UIScreen.main.bounds.width
-    static let maxHeight = UIScreen.main.bounds.height
-    
     struct Google {
         
         static let googleServiceInfo = "GoogleService-Info"
         static let plist = "plist"
         static let apiKey = "API_KEY"
+    }
+    
+    struct Auth {
+        
+        static let uid = "uid"
+        static let username = "username"
+        static let email = "email"
+        static let avatar = "avatar"
     }
 }

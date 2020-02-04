@@ -25,7 +25,7 @@ private enum Tab {
     case .explore: controller = UIStoryboard.explore.instantiateInitialViewController()!
     case .message: controller = UIStoryboard.message.instantiateInitialViewController()!
     case .profile: controller = UIStoryboard.profile.instantiateInitialViewController()!
-    case .create: controller = UIStoryboard.create.instantiateInitialViewController()!
+    case .create: controller = UIStoryboard.newPost.instantiateInitialViewController()!
     }
     
     controller.tabBarItem = tabBarItem()
@@ -93,9 +93,9 @@ extension SRTabBarController: UITabBarControllerDelegate {
     shouldSelect viewController: UIViewController) -> Bool {
     
     if let nav = viewController as? UINavigationController,
-      nav.viewControllers.first is CreatePostViewController {
+      nav.viewControllers.first is NewPostViewController {
       
-      let createPostVC = UIStoryboard.create.instantiateInitialViewController()!
+      let createPostVC = UIStoryboard.newPost.instantiateInitialViewController()!
       createPostVC.modalPresentationStyle = .currentContext
       present(createPostVC, animated: true, completion: nil)
       return false

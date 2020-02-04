@@ -51,7 +51,7 @@ class ExploreView: UIView {
         views.forEach { view in
             view.frame = CGRect(x: 0,
                                 y: selectionView.frame.maxY,
-                                width: Constant.maxWidth,
+                                width: UIScreen.width,
                                 height: height)
             view.isHidden = true
         }

@@ -1,5 +1,5 @@
 //
-//  CreatePostViewController.swift
+//  NewPostViewController.swift
 //  SurRound
 //
 //  Created by Kai-Ta Hsieh on 2020/1/25.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-class CreatePostViewController: UIViewController {
+class NewPostViewController: UIViewController {
     
     deinit {
-        debugPrint("$ deinit: CreatePostViewController")
+        debugPrint("$ deinit: NewPostViewController")
     }
     
     @IBOutlet weak var newPostTableView: UITableView! {
@@ -133,7 +133,7 @@ class CreatePostViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension CreatePostViewController: UITableViewDataSource {
+extension NewPostViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -194,7 +194,7 @@ extension CreatePostViewController: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-extension CreatePostViewController: UITableViewDelegate {
+extension NewPostViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
@@ -212,7 +212,7 @@ extension CreatePostViewController: UITableViewDelegate {
 }
 
 // MARK: - UIImagePickerControllerDelegate
-extension CreatePostViewController: UIImagePickerControllerDelegate {
+extension NewPostViewController: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
@@ -226,6 +226,6 @@ extension CreatePostViewController: UIImagePickerControllerDelegate {
 }
 
 // MARK: - UINavigationControllerDelegate
-extension CreatePostViewController: UINavigationControllerDelegate {
+extension NewPostViewController: UINavigationControllerDelegate {
     
 }

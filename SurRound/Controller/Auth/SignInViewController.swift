@@ -21,6 +21,7 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         
         setupTextField()
+        checkTextFieldsContent()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -61,6 +62,7 @@ class SignInViewController: UIViewController {
         for (textField, category) in zip(textFields, categories) {
             textField?.delegate = self
             textField?.placeholder = category.placeholder
+            textField?.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
     }
     
@@ -76,15 +78,15 @@ class SignInViewController: UIViewController {
             window.rootViewController = tbc
         }
     }
+    
+    @objc func textFieldDidChange(_ sender: UITextField) {
+        
+        checkTextFieldsContent()
+    }
 }
 
 // MARK: - UITextFieldDelegate
 extension SignInViewController: UITextFieldDelegate {
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        checkTextFieldsContent()
-    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         

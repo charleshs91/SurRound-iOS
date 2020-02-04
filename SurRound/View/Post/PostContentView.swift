@@ -28,7 +28,7 @@ class PostContentView: UIView {
         
         super.awakeFromNib()
         
-        postImageView.frame = CGRect(x: 0, y: 0, width: Constant.maxWidth, height: 500)
+        postImageView.frame = CGRect(x: 0, y: 0, width: UIScreen.width, height: 500)
         
         onOutletsBinded()
     }

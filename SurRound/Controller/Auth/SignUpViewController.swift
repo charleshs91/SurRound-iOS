@@ -27,6 +27,7 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         setupTextField()
+        checkTextFieldsContent()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,6 +61,7 @@ class SignUpViewController: UIViewController {
         for (textField, category) in zip(textFields, categories) {
             textField?.delegate = self
             textField?.placeholder = category.placeholder
+            textField?.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
     }
     
@@ -105,6 +107,11 @@ class SignUpViewController: UIViewController {
             !usernameTextField.isEmpty &&
             !passwordTextField.isEmpty &&
             passwordTextField.text == confirmPwdTextField.text
+    }
+    
+    @objc func textFieldDidChange(_ sender: UITextField) {
+        
+        checkTextFieldsContent()
     }
     
     private func validateEmail(_ candidate: String) -> Bool {
