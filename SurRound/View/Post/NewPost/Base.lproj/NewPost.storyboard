@@ -51,7 +51,113 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="poA-ix-wpV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1952.1739130434785" y="123.88392857142857"/>
+            <point key="canvasLocation" x="1962" y="124"/>
+        </scene>
+        <!--Category Selector View Controller-->
+        <scene sceneID="gut-15-q7F">
+            <objects>
+                <viewController storyboardIdentifier="CategorySelectorViewController" id="yi0-qu-b79" customClass="CategorySelectorViewController" customModule="SurRound" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="fgN-dP-qER">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Fzx-Zt-GU7"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="SC8-eG-lqi"/>
+                    <connections>
+                        <outlet property="popUpView" destination="0Ju-eX-Dlf" id="mey-CY-bOO"/>
+                        <outletCollection property="categoryButtons" destination="gXN-4z-LMo" collectionClass="NSMutableArray" id="GEu-lt-QZE"/>
+                        <outletCollection property="categoryButtons" destination="Fs5-WA-ufh" collectionClass="NSMutableArray" id="roh-FX-vIj"/>
+                        <outletCollection property="categoryButtons" destination="VLF-c4-n3M" collectionClass="NSMutableArray" id="UxL-BL-i5J"/>
+                        <outletCollection property="categoryButtons" destination="pOu-lh-Zo9" collectionClass="NSMutableArray" id="exJ-Yh-F8j"/>
+                        <outletCollection property="categoryButtons" destination="zlN-gE-7Lw" collectionClass="NSMutableArray" id="45a-Of-K3M"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="syi-EW-DlI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="0Ju-eX-Dlf">
+                    <rect key="frame" x="0.0" y="0.0" width="413" height="250"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="HID-bm-Ghd">
+                            <rect key="frame" x="59.5" y="84" width="294" height="24"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXN-4z-LMo" customClass="SRVerticalAlignedButton" customModule="SurRound" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="94" height="24"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Food" image="Icons_24px_Add"/>
+                                    <connections>
+                                        <action selector="didTapCategoryBtn:" destination="yi0-qu-b79" eventType="touchUpInside" id="6ba-jH-fdt"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fs5-WA-ufh" customClass="SRVerticalAlignedButton" customModule="SurRound" customModuleProvider="target">
+                                    <rect key="frame" x="100" y="0.0" width="94" height="24"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Scenary" image="Icons_24px_Add"/>
+                                    <connections>
+                                        <action selector="didTapCategoryBtn:" destination="yi0-qu-b79" eventType="touchUpInside" id="qfq-Fz-dDv"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLF-c4-n3M" customClass="SRVerticalAlignedButton" customModule="SurRound" customModuleProvider="target">
+                                    <rect key="frame" x="200" y="0.0" width="94" height="24"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Shopping" image="Icons_24px_Add"/>
+                                    <connections>
+                                        <action selector="didTapCategoryBtn:" destination="yi0-qu-b79" eventType="touchUpInside" id="LAb-v7-1q7"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="b4Q-kQ-QLb">
+                            <rect key="frame" x="24.5" y="148" width="364" height="24"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pOu-lh-Zo9" customClass="SRVerticalAlignedButton" customModule="SurRound" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="179" height="24"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Chat" image="Icons_24px_Add"/>
+                                    <connections>
+                                        <action selector="didTapCategoryBtn:" destination="yi0-qu-b79" eventType="touchUpInside" id="AAq-ex-chP"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zlN-gE-7Lw" customClass="SRVerticalAlignedButton" customModule="SurRound" customModuleProvider="target">
+                                    <rect key="frame" x="185" y="0.0" width="179" height="24"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Question" image="Icons_24px_Add"/>
+                                    <connections>
+                                        <action selector="didTapCategoryBtn:" destination="yi0-qu-b79" eventType="touchUpInside" id="Gof-ps-taj"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <viewLayoutGuide key="safeArea" id="S1e-PH-BSl"/>
+                        </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gen-Jk-KcX">
+                            <rect key="frame" x="184" y="177" width="45" height="33"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <state key="normal" title="Close">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="didTapCloseBtn:" destination="yi0-qu-b79" eventType="touchUpInside" id="cqa-F0-Q5f"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="HID-bm-Ghd" firstAttribute="centerX" secondItem="0Ju-eX-Dlf" secondAttribute="centerX" id="OUr-TX-3M9"/>
+                        <constraint firstItem="HID-bm-Ghd" firstAttribute="top" secondItem="D66-Gt-45K" secondAttribute="top" constant="40" id="Oyg-4P-841"/>
+                        <constraint firstItem="Gen-Jk-KcX" firstAttribute="centerX" secondItem="0Ju-eX-Dlf" secondAttribute="centerX" id="eng-ZG-kgZ"/>
+                        <constraint firstAttribute="bottom" secondItem="Gen-Jk-KcX" secondAttribute="bottom" constant="40" id="hXL-Zh-YpQ"/>
+                        <constraint firstItem="b4Q-kQ-QLb" firstAttribute="top" secondItem="HID-bm-Ghd" secondAttribute="bottom" constant="40" id="nvK-SR-Ngd"/>
+                        <constraint firstItem="b4Q-kQ-QLb" firstAttribute="centerX" secondItem="0Ju-eX-Dlf" secondAttribute="centerX" id="swJ-Iq-c4U"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="D66-Gt-45K"/>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="128" y="124"/>
         </scene>
         <!--Colored Nav Controller-->
         <scene sceneID="Af2-eS-2J3">
@@ -64,7 +170,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="wCm-bQ-T5q" kind="relationship" relationship="rootViewController" id="WT7-vs-qsM"/>
+                        <segue destination="wCm-bQ-T5q" kind="relationship" relationship="rootViewController" id="KmJ-7A-N0B"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CPq-KH-KVX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -72,4 +178,7 @@
             <point key="canvasLocation" x="1042.0289855072465" y="123.88392857142857"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Icons_24px_Add" width="24" height="24"/>
+    </resources>
 </document>

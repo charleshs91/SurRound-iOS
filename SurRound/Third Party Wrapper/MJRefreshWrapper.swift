@@ -1,5 +1,5 @@
 //
-//  ESPullToRefreshWrapper.swift
+//  MJRefreshWrapper.swift
 //  SurRound
 //
 //  Created by Kai-Ta Hsieh on 2020/2/4.
@@ -7,80 +7,80 @@
 //
 
 import UIKit
-import ESPullToRefresh
+import MJRefresh
 
 extension UITableView {
     
     func addHeaderRefreshing(refreshingBlock: @escaping () -> Void) {
         
-        self.es.addPullToRefresh(handler: refreshingBlock)
+        mj_header = MJRefreshHeader(refreshingBlock: refreshingBlock)
     }
     
     func beginHeaderRefreshing() {
         
-        self.es.startPullToRefresh()
+        mj_header?.beginRefreshing()
     }
     
     func endHeaderRefreshing() {
         
-        self.es.stopPullToRefresh()
+        mj_header?.endRefreshing()
     }
     
     func addFooterRefreshing(refreshingBlock: @escaping () -> Void) {
         
-        self.es.addInfiniteScrolling(handler: refreshingBlock)
+        mj_footer = MJRefreshFooter(refreshingBlock: refreshingBlock)
     }
     
     func endFooterRefreshing() {
         
-        self.es.stopLoadingMore()
+        mj_footer?.endRefreshing()
     }
     
     func endWithNoMoreData() {
         
-        self.es.noticeNoMoreData()
+        mj_footer?.endRefreshingWithNoMoreData()
     }
     
     func resetNoMoreData() {
         
-        self.es.resetNoMoreData()
+        mj_footer?.resetNoMoreData()
     }
 }
 
 extension UICollectionView {
     
-    func addHeaderRefreshing(refreshingBlock: @escaping () -> Void) {
+        func addHeaderRefreshing(refreshingBlock: @escaping () -> Void) {
         
-        self.es.addPullToRefresh(handler: refreshingBlock)
+        mj_header = MJRefreshHeader(refreshingBlock: refreshingBlock)
     }
     
     func beginHeaderRefreshing() {
         
-        self.es.startPullToRefresh()
+        mj_header?.beginRefreshing()
     }
     
     func endHeaderRefreshing() {
         
-        self.es.stopPullToRefresh()
+        mj_header?.endRefreshing()
     }
     
     func addFooterRefreshing(refreshingBlock: @escaping () -> Void) {
         
-        self.es.addInfiniteScrolling(handler: refreshingBlock)
+        mj_footer = MJRefreshFooter(refreshingBlock: refreshingBlock)
     }
     
     func endFooterRefreshing() {
         
-        self.es.stopLoadingMore()
+        mj_footer?.endRefreshing()
     }
     
     func endWithNoMoreData() {
         
-        self.es.noticeNoMoreData()
+        mj_footer?.endRefreshingWithNoMoreData()
     }
     
     func resetNoMoreData() {
         
-        self.es.resetNoMoreData()
+        mj_footer?.resetNoMoreData()
     }
 }

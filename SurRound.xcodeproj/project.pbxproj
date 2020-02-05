@@ -26,8 +26,9 @@
 		D32022DD23DAA8310057EB24 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32022DC23DAA8310057EB24 /* SignUpViewController.swift */; };
 		D326796323E2940100F94BFD /* NewPostMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D326796123E2940100F94BFD /* NewPostMapCell.swift */; };
 		D326796423E2940100F94BFD /* NewPostMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D326796223E2940100F94BFD /* NewPostMapCell.xib */; };
-		D32F7F3023E9A25600FBC0D3 /* CategorySelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F7F2F23E9A25600FBC0D3 /* CategorySelectorView.swift */; };
-		D32F7F3223E9C60800FBC0D3 /* ESPullToRefreshWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F7F3123E9C60800FBC0D3 /* ESPullToRefreshWrapper.swift */; };
+		D32F7F3223E9C60800FBC0D3 /* MJRefreshWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F7F3123E9C60800FBC0D3 /* MJRefreshWrapper.swift */; };
+		D32F7F3423EA6D9100FBC0D3 /* CategorySelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F7F3323EA6D9100FBC0D3 /* CategorySelectorViewController.swift */; };
+		D32F7F3623EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F7F3523EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift */; };
 		D335D5DF23DEA9500021B461 /* SRAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D335D5DE23DEA9500021B461 /* SRAuthButton.swift */; };
 		D335D5E123DEB4FF0021B461 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D335D5E023DEB4FF0021B461 /* WelcomeViewController.swift */; };
 		D338FF3F23E8119700CAB8CB /* StoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D338FF3E23E8119700CAB8CB /* StoryCollectionCell.swift */; };
@@ -142,8 +143,9 @@
 		D32022DC23DAA8310057EB24 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D326796123E2940100F94BFD /* NewPostMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostMapCell.swift; sourceTree = "<group>"; };
 		D326796223E2940100F94BFD /* NewPostMapCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewPostMapCell.xib; sourceTree = "<group>"; };
-		D32F7F2F23E9A25600FBC0D3 /* CategorySelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorView.swift; sourceTree = "<group>"; };
-		D32F7F3123E9C60800FBC0D3 /* ESPullToRefreshWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPullToRefreshWrapper.swift; sourceTree = "<group>"; };
+		D32F7F3123E9C60800FBC0D3 /* MJRefreshWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJRefreshWrapper.swift; sourceTree = "<group>"; };
+		D32F7F3323EA6D9100FBC0D3 /* CategorySelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorViewController.swift; sourceTree = "<group>"; };
+		D32F7F3523EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRVerticalAlignedButton.swift; sourceTree = "<group>"; };
 		D335D5DE23DEA9500021B461 /* SRAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRAuthButton.swift; sourceTree = "<group>"; };
 		D335D5E023DEB4FF0021B461 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		D338FF3E23E8119700CAB8CB /* StoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCollectionCell.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 			children = (
 				D3086B8223DC83110071F378 /* NewPostViewController.swift */,
 				D3086B7C23DB8A830071F378 /* PostContentViewController.swift */,
+				D32F7F3323EA6D9100FBC0D3 /* CategorySelectorViewController.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -396,7 +399,7 @@
 			isa = PBXGroup;
 			children = (
 				D35CA75A23E524550055F84E /* SRRoundedTableViewCell.swift */,
-				D32F7F2F23E9A25600FBC0D3 /* CategorySelectorView.swift */,
+				D32F7F3523EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -406,7 +409,7 @@
 			children = (
 				D364978423D82B720078C4E0 /* KingfisherWrapper.swift */,
 				D3850D7B23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift */,
-				D32F7F3123E9C60800FBC0D3 /* ESPullToRefreshWrapper.swift */,
+				D32F7F3123E9C60800FBC0D3 /* MJRefreshWrapper.swift */,
 			);
 			path = "Third Party Wrapper";
 			sourceTree = "<group>";
@@ -942,7 +945,6 @@
 				D365E4DE23E4546300480F11 /* NearestListViewController.swift in Sources */,
 				D3086B6E23DB57E80071F378 /* AuthManager.swift in Sources */,
 				D35CA75523E523710055F84E /* ImagePostListCell.swift in Sources */,
-				D32F7F3023E9A25600FBC0D3 /* CategorySelectorView.swift in Sources */,
 				D335D5DF23DEA9500021B461 /* SRAuthButton.swift in Sources */,
 				D363154C23E61FA00000150B /* PlacePostCollectionCell.swift in Sources */,
 				D365E4DA23E4541A00480F11 /* FollowingListViewController.swift in Sources */,
@@ -962,6 +964,7 @@
 				D3086B8323DC83110071F378 /* NewPostViewController.swift in Sources */,
 				D39A754223D5DACF00A20879 /* SRTabBarController.swift in Sources */,
 				D3A3B5FD23E3F5E6003201E1 /* PostCreator.swift in Sources */,
+				D32F7F3623EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift in Sources */,
 				D35C488F23CF352B000951D2 /* AppDelegate.swift in Sources */,
 				D365E4D823E4536D00480F11 /* ExploreViewController.swift in Sources */,
 				D39A755223D5E57F00A20879 /* UIStoryboard+Extension.swift in Sources */,
@@ -984,7 +987,7 @@
 				D364978223D816370078C4E0 /* HomeNavController.swift in Sources */,
 				D338FF4623E94EE000CAB8CB /* UIScreen+Extension.swift in Sources */,
 				D3949B0323D9AE12006DA9AA /* InvisibleNavController.swift in Sources */,
-				D32F7F3223E9C60800FBC0D3 /* ESPullToRefreshWrapper.swift in Sources */,
+				D32F7F3223E9C60800FBC0D3 /* MJRefreshWrapper.swift in Sources */,
 				D3A3B5F123E29C35003201E1 /* NewPostCellType.swift in Sources */,
 				D3086B9623DCA2160071F378 /* UITableView+Extension.swift in Sources */,
 				D3A3B5FB23E3D56E003201E1 /* PostModel.swift in Sources */,
@@ -994,6 +997,7 @@
 				D338FF3F23E8119700CAB8CB /* StoryCollectionCell.swift in Sources */,
 				D39A755823D5FFD000A20879 /* UIColor+Extension.swift in Sources */,
 				D363154F23E6A97F0000150B /* PostContentModel.swift in Sources */,
+				D32F7F3423EA6D9100FBC0D3 /* CategorySelectorViewController.swift in Sources */,
 				D3086B9323DCA0940071F378 /* BodyTableViewCell.swift in Sources */,
 				D38C570223E43111001C6C9D /* SelectionView.swift in Sources */,
 			);

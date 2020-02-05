@@ -139,11 +139,12 @@ extension SRTabBarController: UITabBarControllerDelegate {
         if let nav = viewController as? UINavigationController,
             nav.viewControllers.first is NewPostViewController {
             
-            displayNewPostView()
-            
-            //            let createPostVC = UIStoryboard.newPost.instantiateInitialViewController()!
-            //            createPostVC.modalPresentationStyle = .currentContext
-            //            present(createPostVC, animated: true, completion: nil)
+            let newVC = CategorySelectorViewController.storyboardInstance()!
+            newVC.modalPresentationStyle = .overCurrentContext
+            self.present(newVC, animated: false, completion: nil)
+//            let newPostVC = UIStoryboard.newPost.instantiateInitialViewController()!
+//            newPostVC.modalPresentationStyle = .currentContext
+//            present(newPostVC, animated: false, completion: nil)
             
             return false
         }
