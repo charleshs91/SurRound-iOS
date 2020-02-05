@@ -4,6 +4,7 @@ platform :ios, '11.0'
 target 'SurRound' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
+  # use_modular_headers!
 
   # Pods for SurRound
   pod 'SwiftLint'
@@ -12,7 +13,7 @@ target 'SurRound' do
   pod 'IQKeyboardManagerSwift'
   pod 'KMPlaceholderTextView', '~> 1.4.0'
   pod 'collection-view-layouts'
-  pod 'MJRefresh'
+  pod 'ESPullToRefresh'
   
   # Firebase
   pod 'Firebase/Core'

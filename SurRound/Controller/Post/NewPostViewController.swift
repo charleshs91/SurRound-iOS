@@ -22,6 +22,8 @@ class NewPostViewController: UIViewController {
     weak var mediaCell: NewPostMediaCell?
     weak var mapCell: NewPostMapCell?
     
+    var postCategory: PostCategory!
+    
     var currentLocation: Coordinate?
     
     let cellFields: [NewPostCellType] = [.text, .media, .map]
@@ -146,10 +148,9 @@ extension NewPostViewController: UITableViewDataSource {
             withIdentifier: UserInfoSectionHeader.identifier
             ) as? UserInfoSectionHeader else { return UIView() }
         
-        if let user = AuthManager.shared.currentUser {
-            view.userLabel.text = user.username
-        }
-        
+        let user = AuthManager.shared.currentUser
+        view.updateView(category: postCategory, user: user)
+        view.layoutIfNeeded()
         return view
     }
     

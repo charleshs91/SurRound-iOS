@@ -60,6 +60,7 @@
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="fgN-dP-qER">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Fzx-Zt-GU7"/>
                     </view>
                     <navigationItem key="navigationItem" id="SC8-eG-lqi"/>
@@ -78,7 +79,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="HID-bm-Ghd">
-                            <rect key="frame" x="59.5" y="84" width="294" height="24"/>
+                            <rect key="frame" x="59.5" y="80" width="294" height="24"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXN-4z-LMo" customClass="SRVerticalAlignedButton" customModule="SurRound" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="94" height="24"/>
@@ -110,7 +111,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="b4Q-kQ-QLb">
-                            <rect key="frame" x="24.5" y="148" width="364" height="24"/>
+                            <rect key="frame" x="24.5" y="152" width="364" height="24"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pOu-lh-Zo9" customClass="SRVerticalAlignedButton" customModule="SurRound" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="179" height="24"/>
@@ -145,13 +146,13 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" red="0.54740279213387344" green="0.60929281799807822" blue="0.66666668653488159" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="HID-bm-Ghd" firstAttribute="centerX" secondItem="0Ju-eX-Dlf" secondAttribute="centerX" id="OUr-TX-3M9"/>
-                        <constraint firstItem="HID-bm-Ghd" firstAttribute="top" secondItem="D66-Gt-45K" secondAttribute="top" constant="40" id="Oyg-4P-841"/>
+                        <constraint firstItem="HID-bm-Ghd" firstAttribute="top" secondItem="D66-Gt-45K" secondAttribute="top" constant="36" id="Oyg-4P-841"/>
                         <constraint firstItem="Gen-Jk-KcX" firstAttribute="centerX" secondItem="0Ju-eX-Dlf" secondAttribute="centerX" id="eng-ZG-kgZ"/>
                         <constraint firstAttribute="bottom" secondItem="Gen-Jk-KcX" secondAttribute="bottom" constant="40" id="hXL-Zh-YpQ"/>
-                        <constraint firstItem="b4Q-kQ-QLb" firstAttribute="top" secondItem="HID-bm-Ghd" secondAttribute="bottom" constant="40" id="nvK-SR-Ngd"/>
+                        <constraint firstItem="b4Q-kQ-QLb" firstAttribute="top" secondItem="HID-bm-Ghd" secondAttribute="bottom" constant="48" id="nvK-SR-Ngd"/>
                         <constraint firstItem="b4Q-kQ-QLb" firstAttribute="centerX" secondItem="0Ju-eX-Dlf" secondAttribute="centerX" id="swJ-Iq-c4U"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="D66-Gt-45K"/>

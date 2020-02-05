@@ -20,25 +20,33 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AppWorks School" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPE-T3-IVp">
-                    <rect key="frame" x="68" y="23.666666666666671" width="338" height="21"/>
+                    <rect key="frame" x="68.000000000000014" y="23.666666666666671" width="135.33333333333337" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRZ-zK-fNF" customClass="SRRoundedLabel" customModule="SurRound" customModuleProvider="target">
+                    <rect key="frame" x="305" y="16" width="85" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <constraints>
                 <constraint firstItem="SPE-T3-IVp" firstAttribute="centerY" secondItem="qi4-Tq-Zgf" secondAttribute="centerY" id="WdC-R1-yuj"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SPE-T3-IVp" secondAttribute="trailing" constant="8" id="amg-g3-qez"/>
                 <constraint firstItem="SPE-T3-IVp" firstAttribute="leading" secondItem="qi4-Tq-Zgf" secondAttribute="trailing" constant="16" id="mdK-rp-wxt"/>
                 <constraint firstItem="qi4-Tq-Zgf" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="mrQ-m2-L4p"/>
-                <constraint firstItem="qi4-Tq-Zgf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="rpn-0n-t5X"/>
+                <constraint firstItem="qi4-Tq-Zgf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="rpn-0n-t5X"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="categoryLabel" destination="BRZ-zK-fNF" id="euc-pU-SpT"/>
                 <outlet property="userImgView" destination="qi4-Tq-Zgf" id="iWy-jJ-QQ5"/>
                 <outlet property="userLabel" destination="SPE-T3-IVp" id="wnL-bD-0id"/>
             </connections>
-            <point key="canvasLocation" x="139" y="142"/>
+            <point key="canvasLocation" x="137.68115942028987" y="141.84782608695653"/>
         </view>
     </objects>
     <resources>

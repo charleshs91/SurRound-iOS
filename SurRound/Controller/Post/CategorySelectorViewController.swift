@@ -15,6 +15,16 @@ enum PostCategory: Int {
     case shopping = 2
     case chat = 3
     case question = 4
+    
+    var text: String {
+        switch self {
+        case .food: return "Food"
+        case .scenary: return "Scenary"
+        case .shopping: return "Shopping"
+        case .chat: return "Chat"
+        case .question: return "Question"
+        }
+    }
 }
 
 class CategorySelectorViewController: UIViewController {
@@ -32,7 +42,7 @@ class CategorySelectorViewController: UIViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
     }
     
@@ -53,22 +63,25 @@ class CategorySelectorViewController: UIViewController {
         guard let tapped = categoryButtons.firstIndex(of: sender),
             let category = PostCategory(rawValue: tapped) else { return }
         
-        switch category {
-        case .food:
-            
-            guard let newPostVC = UIStoryboard.newPost.instantiateInitialViewController() else { return }
-            
-            dismissThenPresent(newPostVC)
-            
-        case .scenary:
-            break
-        case .shopping:
-            break
-        case .chat:
-            break
-        case .question:
-            break
-        }
+        guard let nav = UIStoryboard.newPost.instantiateInitialViewController() as? UINavigationController,
+            let newPostVC = nav.viewControllers.first as? NewPostViewController else { return }
+        
+        newPostVC.postCategory = category
+        
+        dismissThenPresent(nav)
+        
+//        switch category {
+//        case .food:
+//            break
+//        case .scenary:
+//            break
+//        case .shopping:
+//            break
+//        case .chat:
+//            break
+//        case .question:
+//            break
+//        }
     }
     
     // MARK: - Private Methods
@@ -113,9 +126,9 @@ class CategorySelectorViewController: UIViewController {
     private func dismissThenPresent(_ viewController: UIViewController) {
         
         dismissPopUpView(completion: {
-            let visibleVC = AppDelegate.shared.window!.visibleViewController!
+            let rootVC = AppDelegate.shared.window!.rootViewController!
             viewController.modalPresentationStyle = .overCurrentContext
-            visibleVC.present(viewController, animated: true, completion: nil)
+            rootVC.present(viewController, animated: true, completion: nil)
         })
     }
 }

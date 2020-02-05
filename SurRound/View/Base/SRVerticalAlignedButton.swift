@@ -9,19 +9,19 @@
 import UIKit
 
 class SRVerticalAlignedButton: UIButton {
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.contentHorizontalAlignment = .center
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
         self.adjustImageAndTitleOffsetsForButton(spacing: 12)
     }
-
+    
     func adjustImageAndTitleOffsetsForButton (spacing: CGFloat = 6.0) {
         
         guard let label = titleLabel, let img = imageView else { return }
@@ -36,5 +36,9 @@ class SRVerticalAlignedButton: UIButton {
         imageEdgeInsets = UIEdgeInsets(top: -(titleSize.height + spacing),
                                        left: 0,
                                        bottom: 0,
-                                       right: -titleSize.width) }
+                                       right: -titleSize.width)
+        
+//        frame.size = CGSize(width: max(label.frame.width, img.frame.width) + spacing,
+//                            height: label.frame.height + img.frame.height + spacing * 2 )
+    }
 }

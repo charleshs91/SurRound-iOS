@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		564A824FFB57AA129F675756 /* Pods_SurRoundTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA4380C1D93C2985090644F /* Pods_SurRoundTests.framework */; };
-		A078A017AD033AFF50C5C4B7 /* Pods_SurRoundUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253A10C56E3CBE6F2A4E48AA /* Pods_SurRoundUITests.framework */; };
+		2EF1CEBADE690ED00BC543CF /* Pods_SurRound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090114F8BBA92ECF2E1DD7CD /* Pods_SurRound.framework */; };
+		6B104B6DE82318AB35B2993A /* Pods_SurRoundTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 341633E2C017048820A8225D /* Pods_SurRoundTests.framework */; };
 		D3086B6E23DB57E80071F378 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B6D23DB57E80071F378 /* AuthManager.swift */; };
 		D3086B7023DB59950071F378 /* UserDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B6F23DB59950071F378 /* UserDBService.swift */; };
 		D3086B7223DB5DD50071F378 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B7123DB5DD50071F378 /* UserModel.swift */; };
@@ -26,9 +26,11 @@
 		D32022DD23DAA8310057EB24 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32022DC23DAA8310057EB24 /* SignUpViewController.swift */; };
 		D326796323E2940100F94BFD /* NewPostMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D326796123E2940100F94BFD /* NewPostMapCell.swift */; };
 		D326796423E2940100F94BFD /* NewPostMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D326796223E2940100F94BFD /* NewPostMapCell.xib */; };
-		D32F7F3223E9C60800FBC0D3 /* MJRefreshWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F7F3123E9C60800FBC0D3 /* MJRefreshWrapper.swift */; };
+		D32F7F3223E9C60800FBC0D3 /* ESPullToRefreshWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F7F3123E9C60800FBC0D3 /* ESPullToRefreshWrapper.swift */; };
 		D32F7F3423EA6D9100FBC0D3 /* CategorySelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F7F3323EA6D9100FBC0D3 /* CategorySelectorViewController.swift */; };
 		D32F7F3623EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F7F3523EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift */; };
+		D32F7F3E23EAB30300FBC0D3 /* SRRoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F7F3D23EAB30300FBC0D3 /* SRRoundedLabel.swift */; };
+		D331D2FDEAEFBF00E03645ED /* Pods_SurRoundUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E3D9FDE9141C0D31127148A /* Pods_SurRoundUITests.framework */; };
 		D335D5DF23DEA9500021B461 /* SRAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D335D5DE23DEA9500021B461 /* SRAuthButton.swift */; };
 		D335D5E123DEB4FF0021B461 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D335D5E023DEB4FF0021B461 /* WelcomeViewController.swift */; };
 		D338FF3F23E8119700CAB8CB /* StoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D338FF3E23E8119700CAB8CB /* StoryCollectionCell.swift */; };
@@ -94,7 +96,6 @@
 		D3A3B5F823E31E9B003201E1 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F723E31E9B003201E1 /* StorageManager.swift */; };
 		D3A3B5FB23E3D56E003201E1 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5FA23E3D56E003201E1 /* PostModel.swift */; };
 		D3A3B5FD23E3F5E6003201E1 /* PostCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5FC23E3F5E6003201E1 /* PostCreator.swift */; };
-		E4B97A8690B7E157BF297F0B /* Pods_SurRound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1C511EBAFDB457C3847BD75 /* Pods_SurRound.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,16 +117,16 @@
 
 /* Begin PBXFileReference section */
 		01B53233B7AB8C94F499A9F9 /* Pods-SurRound.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRound.debug.xcconfig"; path = "Target Support Files/Pods-SurRound/Pods-SurRound.debug.xcconfig"; sourceTree = "<group>"; };
-		253A10C56E3CBE6F2A4E48AA /* Pods_SurRoundUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurRoundUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		090114F8BBA92ECF2E1DD7CD /* Pods_SurRound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurRound.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A8CF5E8C0DE123CE13274A7 /* Pods-SurRound-SurRoundUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRound-SurRoundUITests.release.xcconfig"; path = "Target Support Files/Pods-SurRound-SurRoundUITests/Pods-SurRound-SurRoundUITests.release.xcconfig"; sourceTree = "<group>"; };
+		341633E2C017048820A8225D /* Pods_SurRoundTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurRoundTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A3EC7D8C5C35F2AF098441B /* Pods-SurRoundTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRoundTests.release.xcconfig"; path = "Target Support Files/Pods-SurRoundTests/Pods-SurRoundTests.release.xcconfig"; sourceTree = "<group>"; };
-		4CA4380C1D93C2985090644F /* Pods_SurRoundTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurRoundTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50845B35D9E73BA4B759989C /* Pods-SurRoundUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRoundUITests.debug.xcconfig"; path = "Target Support Files/Pods-SurRoundUITests/Pods-SurRoundUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5906DA275732D6F210B1BE9C /* Pods-SurRound.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRound.release.xcconfig"; path = "Target Support Files/Pods-SurRound/Pods-SurRound.release.xcconfig"; sourceTree = "<group>"; };
 		6947236A34D429003EC74666 /* Pods-SurRoundUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRoundUITests.release.xcconfig"; path = "Target Support Files/Pods-SurRoundUITests/Pods-SurRoundUITests.release.xcconfig"; sourceTree = "<group>"; };
+		6E3D9FDE9141C0D31127148A /* Pods_SurRoundUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurRoundUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EEF37FDB33146FC6FC83E90 /* Pods-SurRoundTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRoundTests.debug.xcconfig"; path = "Target Support Files/Pods-SurRoundTests/Pods-SurRoundTests.debug.xcconfig"; sourceTree = "<group>"; };
 		934CDAF51DE8A38F689F9CA3 /* Pods-SurRound-SurRoundUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRound-SurRoundUITests.debug.xcconfig"; path = "Target Support Files/Pods-SurRound-SurRoundUITests/Pods-SurRound-SurRoundUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		A1C511EBAFDB457C3847BD75 /* Pods_SurRound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurRound.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3086B6D23DB57E80071F378 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		D3086B6F23DB59950071F378 /* UserDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDBService.swift; sourceTree = "<group>"; };
 		D3086B7123DB5DD50071F378 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -143,9 +144,11 @@
 		D32022DC23DAA8310057EB24 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D326796123E2940100F94BFD /* NewPostMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostMapCell.swift; sourceTree = "<group>"; };
 		D326796223E2940100F94BFD /* NewPostMapCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewPostMapCell.xib; sourceTree = "<group>"; };
-		D32F7F3123E9C60800FBC0D3 /* MJRefreshWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJRefreshWrapper.swift; sourceTree = "<group>"; };
+		D32F7F3123E9C60800FBC0D3 /* ESPullToRefreshWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPullToRefreshWrapper.swift; sourceTree = "<group>"; };
 		D32F7F3323EA6D9100FBC0D3 /* CategorySelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorViewController.swift; sourceTree = "<group>"; };
 		D32F7F3523EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRVerticalAlignedButton.swift; sourceTree = "<group>"; };
+		D32F7F3A23EAB0C700FBC0D3 /* SurRound.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SurRound.entitlements; sourceTree = "<group>"; };
+		D32F7F3D23EAB30300FBC0D3 /* SRRoundedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRRoundedLabel.swift; sourceTree = "<group>"; };
 		D335D5DE23DEA9500021B461 /* SRAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRAuthButton.swift; sourceTree = "<group>"; };
 		D335D5E023DEB4FF0021B461 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		D338FF3E23E8119700CAB8CB /* StoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCollectionCell.swift; sourceTree = "<group>"; };
@@ -224,7 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4B97A8690B7E157BF297F0B /* Pods_SurRound.framework in Frameworks */,
+				2EF1CEBADE690ED00BC543CF /* Pods_SurRound.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +235,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				564A824FFB57AA129F675756 /* Pods_SurRoundTests.framework in Frameworks */,
+				6B104B6DE82318AB35B2993A /* Pods_SurRoundTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,7 +243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A078A017AD033AFF50C5C4B7 /* Pods_SurRoundUITests.framework in Frameworks */,
+				D331D2FDEAEFBF00E03645ED /* Pods_SurRoundUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,9 +253,9 @@
 		3D2503A0D4B108BA23B015BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A1C511EBAFDB457C3847BD75 /* Pods_SurRound.framework */,
-				4CA4380C1D93C2985090644F /* Pods_SurRoundTests.framework */,
-				253A10C56E3CBE6F2A4E48AA /* Pods_SurRoundUITests.framework */,
+				090114F8BBA92ECF2E1DD7CD /* Pods_SurRound.framework */,
+				341633E2C017048820A8225D /* Pods_SurRoundTests.framework */,
+				6E3D9FDE9141C0D31127148A /* Pods_SurRoundUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -284,9 +287,9 @@
 		D3086B7B23DB8A480071F378 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				D32F7F3323EA6D9100FBC0D3 /* CategorySelectorViewController.swift */,
 				D3086B8223DC83110071F378 /* NewPostViewController.swift */,
 				D3086B7C23DB8A830071F378 /* PostContentViewController.swift */,
-				D32F7F3323EA6D9100FBC0D3 /* CategorySelectorViewController.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 		D35C488D23CF352B000951D2 /* SurRound */ = {
 			isa = PBXGroup;
 			children = (
+				D32F7F3A23EAB0C700FBC0D3 /* SurRound.entitlements */,
 				D338FF4723E9577700CAB8CB /* Resources */,
 				D364978323D82B4D0078C4E0 /* Third Party Wrapper */,
 				D39A755023D5E50400A20879 /* Extension */,
@@ -399,6 +403,7 @@
 			isa = PBXGroup;
 			children = (
 				D35CA75A23E524550055F84E /* SRRoundedTableViewCell.swift */,
+				D32F7F3D23EAB30300FBC0D3 /* SRRoundedLabel.swift */,
 				D32F7F3523EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift */,
 			);
 			path = Base;
@@ -409,7 +414,7 @@
 			children = (
 				D364978423D82B720078C4E0 /* KingfisherWrapper.swift */,
 				D3850D7B23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift */,
-				D32F7F3123E9C60800FBC0D3 /* MJRefreshWrapper.swift */,
+				D32F7F3123E9C60800FBC0D3 /* ESPullToRefreshWrapper.swift */,
 			);
 			path = "Third Party Wrapper";
 			sourceTree = "<group>";
@@ -590,9 +595,9 @@
 				D35C488723CF352B000951D2 /* Sources */,
 				D35C488823CF352B000951D2 /* Frameworks */,
 				D35C488923CF352B000951D2 /* Resources */,
-				692B53D5FBA641CB1092CA4A /* [CP] Embed Pods Frameworks */,
 				D3850D7A23DAC198008F1F7E /* SwiftLint */,
 				45608E1F130D68406FB4FDE2 /* [CP] Copy Pods Resources */,
+				67150D4FD809F696DEEB4D68 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -853,7 +858,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		692B53D5FBA641CB1092CA4A /* [CP] Embed Pods Frameworks */ = {
+		67150D4FD809F696DEEB4D68 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -954,6 +959,7 @@
 				D3949B0523D9B07B006DA9AA /* UIView+Extension.swift in Sources */,
 				D364978523D82B720078C4E0 /* KingfisherWrapper.swift in Sources */,
 				D3552B2B23DF34D700453FAA /* NewPostTextViewCell.swift in Sources */,
+				D32F7F3E23EAB30300FBC0D3 /* SRRoundedLabel.swift in Sources */,
 				D3A3B5F823E31E9B003201E1 /* StorageManager.swift in Sources */,
 				D365E4E323E4720900480F11 /* SRColoredNavController.swift in Sources */,
 				D35CA75B23E524550055F84E /* SRRoundedTableViewCell.swift in Sources */,
@@ -987,7 +993,7 @@
 				D364978223D816370078C4E0 /* HomeNavController.swift in Sources */,
 				D338FF4623E94EE000CAB8CB /* UIScreen+Extension.swift in Sources */,
 				D3949B0323D9AE12006DA9AA /* InvisibleNavController.swift in Sources */,
-				D32F7F3223E9C60800FBC0D3 /* MJRefreshWrapper.swift in Sources */,
+				D32F7F3223E9C60800FBC0D3 /* ESPullToRefreshWrapper.swift in Sources */,
 				D3A3B5F123E29C35003201E1 /* NewPostCellType.swift in Sources */,
 				D3086B9623DCA2160071F378 /* UITableView+Extension.swift in Sources */,
 				D3A3B5FB23E3D56E003201E1 /* PostModel.swift in Sources */,
@@ -1230,6 +1236,8 @@
 			baseConfigurationReference = 01B53233B7AB8C94F499A9F9 /* Pods-SurRound.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SurRound/SurRound.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HW9KY3R5BK;
 				INFOPLIST_FILE = SurRound/Resources/Info.plist;
@@ -1240,6 +1248,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.charleshs.SurRound;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1250,6 +1259,8 @@
 			baseConfigurationReference = 5906DA275732D6F210B1BE9C /* Pods-SurRound.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SurRound/SurRound.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HW9KY3R5BK;
 				INFOPLIST_FILE = SurRound/Resources/Info.plist;
@@ -1260,6 +1271,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.charleshs.SurRound;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
