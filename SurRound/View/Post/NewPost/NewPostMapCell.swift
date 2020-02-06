@@ -9,18 +9,11 @@
 import UIKit
 import MapKit
 
-protocol NewPostMapCellDelegate: AnyObject {
-    
-    func mapCell(_ mapCell: NewPostMapCell, didTapSelectLocation )
-}
-
 class NewPostMapCell: UITableViewCell {
     
     static var identifier: String {
         return String(describing: NewPostMapCell.self)
     }
-    
-    weak var delegate: NewPostMapCellDelegate?
     
     var canChangeLocation: Bool! {
         didSet {

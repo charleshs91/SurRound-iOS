@@ -74,6 +74,9 @@ class NewPostViewController: UIViewController {
     
     @objc func handleLocationSelection(_ sender: UIButton) {
         
+        guard let newVC = SelectLocationViewController.storyboardInstance() else { return }
+        
+        navigationController?.show(newVC, sender: nil)
     }
     
     // MARK: - Private Methods
