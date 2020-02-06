@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GooglePlaces
 
 class NewPostViewController: UIViewController {
     
@@ -69,6 +70,10 @@ class NewPostViewController: UIViewController {
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func handleLocationSelection(_ sender: UIButton) {
+        
     }
     
     // MARK: - Private Methods
@@ -187,6 +192,9 @@ extension NewPostViewController: UITableViewDataSource {
             guard let mapCell = cell as? NewPostMapCell else { return cell }
             
             mapCell.coordinate = PlaceManager.current.coordinate
+            mapCell.canChangeLocation = postCategory.placeSelectionAllowed
+            mapCell.chooseLocationBtn.addTarget(self, action: #selector(handleLocationSelection(_:)), for: .touchUpInside)
+            
             self.mapCell = mapCell
         }
         
@@ -205,7 +213,8 @@ extension NewPostViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.section == 0 {
-            return cellFields[indexPath.row].cellHeight
+//            return cellFields[indexPath.row].cellHeight
+            return UITableView.automaticDimension
         }
         
         return 0
