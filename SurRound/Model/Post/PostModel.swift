@@ -16,7 +16,7 @@ struct Post: Codable {
     let author: Author
     let createdTime: Date
     let text: String
-    let location: Coordinate
+    let place: SRPlace
     var mediaType: String?
     var mediaLink: String?
     
@@ -33,7 +33,7 @@ struct Post: Codable {
         case author
         case createdTime = "created_time"
         case text
-        case location
+        case place
         case mediaType = "media_type"
         case mediaLink = "media_link"
     }

@@ -15,19 +15,21 @@ class NewPostViewController: UIViewController {
         debugPrint("$ deinit: NewPostViewController")
     }
     
+    @IBOutlet weak var postButton: UIBarButtonItem!
+    
     @IBOutlet weak var newPostTableView: UITableView! {
         didSet { setupTableView() }
     }
     
-    weak var textCell: NewPostTextViewCell?
-    weak var mediaCell: NewPostMediaCell?
-    weak var mapCell: NewPostMapCell?
-    
     var postCategory: PostCategory!
     
-    var currentLocation: Coordinate?
+    private weak var textCell: NewPostTextViewCell?
+    private weak var mediaCell: NewPostMediaCell?
+    private weak var mapCell: NewPostMapCell?
     
-    let cellFields: [NewPostCellType] = [.text, .media, .map]
+    private var postPlace: SRPlace?
+    
+    private let cellFields: [NewPostCellType] = [.text, .media, .map]
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -42,21 +44,20 @@ class NewPostViewController: UIViewController {
         
         guard let text = self.textCell?.textView.text,
             let user = AuthManager.shared.currentUser,
-            let currentCoordinate = PlaceManager.current.coordinate else { return }
-        
-        let creator = PostCreator()
+            let place = self.postPlace else { return }
         
         let post = Post(id: PostCreator.documentID(),
-                        category: "chat",
+                        category: postCategory.text,
                         author: Post.Author(uid: user.uid,
                                             username: user.username,
                                             avatar: user.avatar ?? ""),
                         createdTime: Date(),
                         text: text,
-                        location: currentCoordinate)
+                        place: place)
         
         SRProgressHUD.showLoading(text: "Creating post")
-        creator.createPost(post, image: mediaCell?.pickedImage) { [weak self] result in
+        PostCreator().createPost(post, image: mediaCell?.pickedImage) { [weak self] result in
+            SRProgressHUD.dismiss()
             
             switch result {
             case .success:
@@ -68,16 +69,16 @@ class NewPostViewController: UIViewController {
         }
     }
     
-    @IBAction func cancel(_ sender: UIBarButtonItem) {
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
     @objc func handleLocationSelection(_ sender: UIButton) {
         
         guard let newVC = SelectLocationViewController.storyboardInstance() else { return }
         newVC.delegate = self
         navigationController?.show(newVC, sender: nil)
+    }
+    
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        
+        presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Private Methods
@@ -176,7 +177,7 @@ extension NewPostViewController: UITableViewDataSource {
         switch cellType {
         case .text:
             guard let textViewCell = cell as? NewPostTextViewCell else { return cell }
-            
+            textViewCell.textView.delegate = self
             self.textCell = textViewCell
             
         case .media:
@@ -203,6 +204,14 @@ extension NewPostViewController: UITableViewDataSource {
         }
         
         return cell
+    }
+}
+
+extension NewPostViewController: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        
+        postButton.isEnabled = !textView.isEmpty
     }
 }
 
@@ -244,10 +253,12 @@ extension NewPostViewController: UINavigationControllerDelegate {
     
 }
 
+// MARK: - SelectLocationViewControllerDelegate
 extension NewPostViewController: SelectLocationViewControllerDelegate {
     
     func didSelectLocation(_ controller: SelectLocationViewController, with place: SRPlace) {
         
+        self.postPlace = place
         self.mapCell?.setPlace(with: place)
     }
 }

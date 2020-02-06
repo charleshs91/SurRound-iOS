@@ -8,39 +8,12 @@
 
 import UIKit
 
-enum PostCategory: Int {
-    
-    case food = 0
-    case scenary = 1
-    case shopping = 2
-    case chat = 3
-    case question = 4
-    
-    var text: String {
-        
-        switch self {
-        case .food: return "Food"
-        case .scenary: return "Scenary"
-        case .shopping: return "Shopping"
-        case .chat: return "Chat"
-        case .question: return "Question"
-        }
-    }
-    
-    var placeSelectionAllowed: Bool {
-        
-        switch self {
-        case .food, .scenary, .shopping:
-            return true
-            
-        case .chat, .question:
-            return false
-        }
-    }
-}
-
 class CategorySelectorViewController: UIViewController {
 
+    deinit {
+        debugPrint("$ deinit: CategorySelectorViewController")
+    }
+    
     static func storyboardInstance() -> CategorySelectorViewController? {
         return UIStoryboard.newPost.instantiateViewController(
             identifier: String(describing: CategorySelectorViewController.self)
@@ -50,6 +23,9 @@ class CategorySelectorViewController: UIViewController {
     @IBOutlet var categoryButtons: [SRVerticalAlignedButton]!
     
     @IBOutlet var popUpView: UIView!
+    
+    // Private Constants
+    private let popUpViewHeight: CGFloat = 275
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -81,25 +57,12 @@ class CategorySelectorViewController: UIViewController {
         newPostVC.postCategory = category
         
         dismissThenPresent(nav)
-        
-//        switch category {
-//        case .food:
-//            break
-//        case .scenary:
-//            break
-//        case .shopping:
-//            break
-//        case .chat:
-//            break
-//        case .question:
-//            break
-//        }
     }
     
     // MARK: - Private Methods
     private func presentPopUpView() {
         
-        popUpView.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: 275)
+        popUpView.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: popUpViewHeight)
         popUpView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         popUpView.layer.cornerRadius = 16
         
@@ -124,14 +87,14 @@ class CategorySelectorViewController: UIViewController {
             withDuration: 0.3,
             delay: 0,
             options: .curveEaseInOut,
-            animations: { [weak self] in
+            animations: {
                 
-                self?.popUpView.frame.origin = CGPoint(x: 0, y: endYPosition)
+                self.popUpView.frame.origin = CGPoint(x: 0, y: endYPosition)
                 
-        }, completion: { [weak self] _ in
+        }, completion: { _ in
             
-            self?.popUpView.removeFromSuperview()
-            self?.presentingViewController?.dismiss(animated: false, completion: completion)
+            self.popUpView.removeFromSuperview()
+            self.presentingViewController?.dismiss(animated: false, completion: completion)
         })
     }
     

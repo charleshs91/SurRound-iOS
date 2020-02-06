@@ -14,17 +14,6 @@ enum NewPostCellType {
     case media
     case map
     
-    var cellHeight: CGFloat {
-        
-        switch self {
-        case .text: return 135
-            
-        case .media: return 150
-            
-        case .map: return 220
-        }
-    }
-    
     func makeCell(_ tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
         
         switch self {

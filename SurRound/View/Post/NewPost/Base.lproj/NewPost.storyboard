@@ -39,14 +39,15 @@
                                 <action selector="cancel:" destination="wCm-bQ-T5q" id="1Sc-dV-cjQ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Post" id="rBw-Kk-CRf">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Post" id="rBw-Kk-CRf">
                             <connections>
-                                <action selector="post:" destination="wCm-bQ-T5q" id="zmn-0m-GXd"/>
+                                <action selector="post:" destination="wCm-bQ-T5q" id="RHN-u5-8vU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="newPostTableView" destination="KyO-VT-ypW" id="d3R-Pw-mVf"/>
+                        <outlet property="postButton" destination="rBw-Kk-CRf" id="nz3-DP-zeM"/>
                         <segue destination="YjO-mC-ASe" kind="show" identifier="SegueSelectLocation" id="doX-x8-YIG"/>
                     </connections>
                 </viewController>

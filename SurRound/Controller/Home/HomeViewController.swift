@@ -48,8 +48,8 @@ class HomeViewController: UIViewController {
             switch result {
             case .success(let posts):
                 posts.forEach { post in
-                    let position = CLLocationCoordinate2D(latitude: post.location.latitude,
-                                                          longitude: post.location.longitude)
+                    let position = CLLocationCoordinate2D(latitude: post.place.coordinate.latitude,
+                                                          longitude: post.place.coordinate.longitude)
                     let marker = GMSMarker(position: position)
                     strongSelf.postMarkers.append(PostMarker(post: post, mapMarker: marker))
                 }

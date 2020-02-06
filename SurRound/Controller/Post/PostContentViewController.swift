@@ -32,12 +32,12 @@ class PostContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didTapClose(_:)))
+        let panGesture = UISwipeGestureRecognizer(target: self, action: #selector(didTapClose(_:)))
         view.addGestureRecognizer(panGesture)
     }
     
     // MARK: - User Actions
-    @IBAction func didTapClose(_ sender: Any) {
+    @IBAction func didTapClose(_ sender: UISwipeGestureRecognizer) {
         
         presentingViewController?.dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)

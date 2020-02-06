@@ -45,6 +45,8 @@ class FollowingListViewController: UIViewController {
     
     private func refreshPosts(callback: @escaping () -> Void) {
         
+        posts.removeAll()
+        
         PostFetcher().fetchAllPosts { [weak self] result in
             
             switch result {
@@ -102,6 +104,6 @@ extension FollowingListViewController: UITableViewDelegate {
         
         postDetailVC.post = posts[indexPath.row]
         
-        navigationController?.show(postDetailVC, sender: nil)
+        present(postDetailVC, animated: true, completion: nil)
     }
 }

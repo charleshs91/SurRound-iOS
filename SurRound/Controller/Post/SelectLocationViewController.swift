@@ -37,6 +37,8 @@ class SelectLocationViewController: UIViewController {
     private var searchController: UISearchController?
     private var resultView: UITextView?
     
+    private var isPlaceDefinedByScrolling: Bool = false
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +63,8 @@ class SelectLocationViewController: UIViewController {
         resultsViewController = GMSAutocompleteResultsViewController()
         resultsViewController?.delegate = self
         
+        //        searchController?.searchBar.barTintColor = .white
+        //        searchController?.searchBar.tintColor = .white
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController?.searchResultsUpdater = resultsViewController
         
@@ -103,9 +107,17 @@ class SelectLocationViewController: UIViewController {
 
 extension SelectLocationViewController: GMSMapViewDelegate {
     
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        
+        isPlaceDefinedByScrolling = gesture
+    }
+    
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         
-        self.place = SRPlace(coordinate: position.targets)
+        if isPlaceDefinedByScrolling {
+            self.place = SRPlace(coordinate: position.target)
+            return
+        }
     }
 }
 
@@ -117,9 +129,9 @@ extension SelectLocationViewController: GMSAutocompleteResultsViewControllerDele
         
         searchController?.isActive = false
         
-        print("Place name: \(String(describing: place.name))")
-        print("Place address: \(String(describing: place.formattedAddress))")
-        print("Place attributions: \(String(describing: place.attributions))")
+        //        print("Place name: \(String(describing: place.name))")
+        //        print("Place address: \(String(describing: place.formattedAddress))")
+        //        print("Place attributions: \(String(describing: place.attributions))")
         
         mapView.camera = GMSCameraPosition(latitude: place.coordinate.latitude,
                                            longitude: place.coordinate.longitude,
@@ -135,10 +147,10 @@ extension SelectLocationViewController: GMSAutocompleteResultsViewControllerDele
     
     // Turn the network activity indicator on and off again.
     func didRequestAutocompletePredictions(forResultsController resultsController: GMSAutocompleteResultsViewController) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        //        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
     func didUpdateAutocompletePredictions(forResultsController resultsController: GMSAutocompleteResultsViewController) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        //        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
