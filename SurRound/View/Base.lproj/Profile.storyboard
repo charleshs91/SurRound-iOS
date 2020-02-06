@@ -33,12 +33,12 @@
             </objects>
             <point key="canvasLocation" x="1010.144927536232" y="-303.34821428571428"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Colored Nav Controller-->
         <scene sceneID="i3I-rP-mpp">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yab-hb-Xqh" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yab-hb-Xqh" customClass="SRColoredNavController" customModule="SurRound" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="IeI-gq-420">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IeI-gq-420">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

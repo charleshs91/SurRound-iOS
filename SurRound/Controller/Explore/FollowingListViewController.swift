@@ -14,7 +14,8 @@ class FollowingListViewController: UIViewController {
         didSet { setupTableView() }
     }
     
-    var posts: [Post] = []
+    private var posts = [Post]()
+    private var viewModels = [PostListCellViewModel]()
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -31,6 +32,8 @@ class FollowingListViewController: UIViewController {
     private func setupTableView() {
         
         tableView.registerCellWithNib(withCellClass: ImagePostListCell.self)
+        tableView.registerCellWithNib(withCellClass: TextPostListCell.self)
+        tableView.registerCellWithNib(withCellClass: VideoPostListCell.self)
         
         tableView.addHeaderRefreshing { [weak self] in
             
@@ -46,13 +49,14 @@ class FollowingListViewController: UIViewController {
     private func refreshPosts(callback: @escaping () -> Void) {
         
         posts.removeAll()
+        viewModels.removeAll()
         
         PostFetcher().fetchAllPosts { [weak self] result in
             
             switch result {
             case .success(let posts):
                 self?.posts.append(contentsOf: posts)
-                
+                self?.viewModels.append(contentsOf: ViewModelFactory.viewModelFromPosts(posts))
                 DispatchQueue.main.async {
                     callback()
                 }
@@ -69,29 +73,24 @@ extension FollowingListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.posts.count
+        return self.viewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: ImagePostListCell.identifier,
-            for: indexPath) as? ImagePostListCell else { return UITableViewCell() }
+        let viewModel = viewModels[indexPath.row]
         
-        let post = posts[indexPath.row]
-        let viewModel = PostListCellViewModel(post)
-        cell.layoutCell(viewModel)
+        let cell = viewModel.cellType.makeCell(tableView, at: indexPath)
+        guard let postListCell = cell as? PostListCell else {
+            return cell
+        }
         
-        return cell
+        postListCell.layoutCell(with: viewModel)
+        return postListCell
     }
 }
 
 extension FollowingListViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 400
-    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         

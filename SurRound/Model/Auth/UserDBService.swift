@@ -47,6 +47,16 @@ class UserDBService {
             completion(.success(user))
         }
     }
+    
+    static func attachPost(user: SRUser, postRef: DocumentReference) {
+        
+        Firestore.firestore()
+            .collection("users").document(user.uid)
+            .collection("user_posts").document(postRef.documentID).setData([
+                "post_ref": postRef,
+                "post_id": postRef.documentID
+            ], merge: true, completion: nil)
+    }
 }
 
 extension Dictionary {

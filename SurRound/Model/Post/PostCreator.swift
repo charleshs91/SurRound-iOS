@@ -31,7 +31,9 @@ class PostCreator {
                     completion(.failure(error!))
                     return
                 }
-                
+                if let user = AuthManager.shared.currentUser {
+                    UserDBService.attachPost(user: user, postRef: documentRef)
+                }
                 if let imageToAttach = image {
                     self.attachImage(to: documentRef, image: imageToAttach)
                 }

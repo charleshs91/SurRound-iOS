@@ -35,6 +35,10 @@ class NewPostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let coordinate = PlaceManager.current.location?.coordinate {
+            postPlace = SRPlace(coordinate)
+        }
+        
         navigationItem.title = "New Post"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }

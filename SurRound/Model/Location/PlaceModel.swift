@@ -15,7 +15,7 @@ class SRPlace: Codable {
     var name: String?
     var address: String?
     
-    init(coordinate: CLLocationCoordinate2D) {
+    init(_ coordinate: CLLocationCoordinate2D) {
         
         self.coordinate = Coordinate(coordinate)
         self.name = nil
@@ -29,7 +29,7 @@ class SRPlace: Codable {
         self.address = place.formattedAddress
     }
     
-    init(coordinate: Coordinate, name: String?, address: String?) {
+    init(_ coordinate: Coordinate, name: String?, address: String?) {
         self.coordinate = coordinate
         self.name = name
         self.address = address

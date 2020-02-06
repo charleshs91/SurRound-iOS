@@ -92,7 +92,7 @@ class SelectLocationViewController: UIViewController {
         
         if let location = PlaceManager.current.location {
             mapView.camera = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 18.0)
-            self.place = SRPlace(coordinate: location.coordinate)
+            self.place = SRPlace(location.coordinate)
         }
     }
     
@@ -115,7 +115,7 @@ extension SelectLocationViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         
         if isPlaceDefinedByScrolling {
-            self.place = SRPlace(coordinate: position.target)
+            self.place = SRPlace(position.target)
             return
         }
     }

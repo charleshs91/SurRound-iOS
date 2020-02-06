@@ -18,7 +18,7 @@ class PlaceManager: NSObject {
     
     struct Default {
         
-        static let taipei: SRPlace = SRPlace(coordinate: Coordinate(lat: 25.0475847, long: 121.5162492),
+        static let taipei: SRPlace = SRPlace(Coordinate(lat: 25.0475847, long: 121.5162492),
                                              name: nil,
                                              address: nil)
     }
