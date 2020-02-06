@@ -97,6 +97,7 @@
 		D3A3B5FB23E3D56E003201E1 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5FA23E3D56E003201E1 /* PostModel.swift */; };
 		D3A3B5FD23E3F5E6003201E1 /* PostCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5FC23E3F5E6003201E1 /* PostCreator.swift */; };
 		D3C36E5423EBA05A00E2BD1C /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5323EBA05A00E2BD1C /* SelectLocationViewController.swift */; };
+		D3C36E5623EBCCFE00E2BD1C /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5523EBCCFE00E2BD1C /* PlaceModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -222,6 +223,7 @@
 		D3A3B5FA23E3D56E003201E1 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		D3A3B5FC23E3F5E6003201E1 /* PostCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreator.swift; sourceTree = "<group>"; };
 		D3C36E5323EBA05A00E2BD1C /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
+		D3C36E5523EBCCFE00E2BD1C /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -563,6 +565,7 @@
 			isa = PBXGroup;
 			children = (
 				D3A3B5F323E2A7E1003201E1 /* PlaceManager.swift */,
+				D3C36E5523EBCCFE00E2BD1C /* PlaceModel.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -997,6 +1000,7 @@
 				D364978223D816370078C4E0 /* HomeNavController.swift in Sources */,
 				D338FF4623E94EE000CAB8CB /* UIScreen+Extension.swift in Sources */,
 				D3949B0323D9AE12006DA9AA /* InvisibleNavController.swift in Sources */,
+				D3C36E5623EBCCFE00E2BD1C /* PlaceModel.swift in Sources */,
 				D32F7F3223E9C60800FBC0D3 /* ESPullToRefreshWrapper.swift in Sources */,
 				D3A3B5F123E29C35003201E1 /* NewPostCellType.swift in Sources */,
 				D3086B9623DCA2160071F378 /* UITableView+Extension.swift in Sources */,

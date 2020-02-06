@@ -176,12 +176,13 @@ extension HomeViewController: GMSMapViewDelegate {
         }
         
         if let first = matches.first {
-            guard let postVC = UIStoryboard.post.instantiateInitialViewController() as? PostContentViewController else { return false }
+            guard let postVC = UIStoryboard.post.instantiateInitialViewController()
+                as? PostContentViewController else { return false }
             
             postVC.post = first.post
             navigationController?.show(postVC, sender: nil)
         }
         
-        return false
+        return true
     }
 }

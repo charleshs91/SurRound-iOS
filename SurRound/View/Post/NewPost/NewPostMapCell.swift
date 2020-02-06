@@ -18,8 +18,6 @@ class NewPostMapCell: UITableViewCell {
     var canChangeLocation: Bool! {
         didSet {
             chooseLocationBtn.isHidden = !self.canChangeLocation
-            
-            layoutIfNeeded()
         }
     }
     
@@ -35,8 +33,9 @@ class NewPostMapCell: UITableViewCell {
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2D(latitude: coordinate.latitude,
                                                            longitude: coordinate.longitude)
-            mkMapView.addAnnotation(annotation)
             
+            mkMapView.removeAnnotations(mkMapView.annotations)
+            mkMapView.addAnnotation(annotation)
             mkMapView.setRegion(region, animated: false)
         }
     }
@@ -67,8 +66,20 @@ class NewPostMapCell: UITableViewCell {
         mkMapView.layer.cornerRadius = 10
     }
     
+    // MARK: - User Actions
+    func setPlace(with place: SRPlace) {
+        
+        coordinate = place.coordinate
+        placeNameLabel.text = place.name
+        chooseLocationBtn.isHidden.toggle()
+        setVisibleForLocationInfo(true)
+    }
+    
     @IBAction func removeLocation(_ sender: Any) {
         
+        coordinate = PlaceManager.current.coordinate
+        chooseLocationBtn.isHidden.toggle()
+        setVisibleForLocationInfo(false)
     }
     
     private func setVisibleForLocationInfo(_ isVisible: Bool) {

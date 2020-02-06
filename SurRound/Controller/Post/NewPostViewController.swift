@@ -34,6 +34,7 @@ class NewPostViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.title = "New Post"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     // MARK: - User Actions
@@ -75,7 +76,7 @@ class NewPostViewController: UIViewController {
     @objc func handleLocationSelection(_ sender: UIButton) {
         
         guard let newVC = SelectLocationViewController.storyboardInstance() else { return }
-        
+        newVC.delegate = self
         navigationController?.show(newVC, sender: nil)
     }
     
@@ -241,4 +242,12 @@ extension NewPostViewController: UIImagePickerControllerDelegate {
 // MARK: - UINavigationControllerDelegate
 extension NewPostViewController: UINavigationControllerDelegate {
     
+}
+
+extension NewPostViewController: SelectLocationViewControllerDelegate {
+    
+    func didSelectLocation(_ controller: SelectLocationViewController, with place: SRPlace) {
+        
+        self.mapCell?.setPlace(with: place)
+    }
 }

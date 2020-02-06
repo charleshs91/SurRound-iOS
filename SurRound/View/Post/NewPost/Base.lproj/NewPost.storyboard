@@ -210,6 +210,9 @@
                                         <integer key="value" value="16"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didSelectLocation:" destination="YjO-mC-ASe" eventType="touchUpInside" id="k8g-8T-2d4"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icons_MapLocationPin" translatesAutoresizingMaskIntoConstraints="NO" id="sWX-7W-aAd">
                                 <rect key="frame" x="187" y="392" width="40" height="40"/>
@@ -237,7 +240,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eQc-YD-dz8"/>
                     </view>
-                    <navigationItem key="navigationItem" id="IcS-C8-GHS">
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="IcS-C8-GHS">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="097-NO-1bA"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="magnifyingglass" catalog="system" id="zSN-RZ-6ps"/>
                     </navigationItem>
                     <connections>
