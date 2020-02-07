@@ -14,7 +14,18 @@
                     <view key="view" contentMode="scaleToFill" id="E2a-Ri-Qvg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="roL-ut-pcd">
+                                <rect key="frame" x="301" y="68" width="89" height="33"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <state key="normal" title="Send Story"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="bon-1C-XHs" firstAttribute="trailing" secondItem="roL-ut-pcd" secondAttribute="trailing" constant="24" id="oeC-nk-xu5"/>
+                            <constraint firstItem="roL-ut-pcd" firstAttribute="top" secondItem="bon-1C-XHs" secondAttribute="top" constant="24" id="ubE-A2-hV4"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="bon-1C-XHs"/>
                     </view>
                 </viewController>

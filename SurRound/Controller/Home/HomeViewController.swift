@@ -262,7 +262,7 @@ extension HomeViewController: UIImagePickerControllerDelegate {
         if error == nil {
             
             guard let newStoryVC = NewStoryViewController.storyboardInstance() else { return }
-            newStoryVC.movieURL = URL(string: videoPath)
+            newStoryVC.movieURL = URL(fileURLWithPath: videoPath)
             self.navigationController?.show(newStoryVC, sender: nil)
             
         } else {
