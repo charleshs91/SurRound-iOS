@@ -7,17 +7,40 @@
 //
 
 import UIKit
+import AVFoundation
 
 class NewStoryViewController: UIViewController {
-
+    
     static func storyboardInstance() -> NewStoryViewController? {
         
-        return UIStoryboard.newPost.instantiateViewController(identifier:
+        return UIStoryboard.story.instantiateViewController(identifier:
             String(describing: NewStoryViewController.self)) as? NewStoryViewController
     }
+    
+    var movieURL: URL?
+    var player: AVPlayer?
+    
+    private lazy var layer: AVPlayerLayer = {
+        self.player = AVPlayer(url: movieURL!)
+        let layer = AVPlayerLayer(player: self.player)
+        return layer
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.layer.addSublayer(self.layer)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        layer.frame = view.bounds
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        player?.play()
     }
 }
