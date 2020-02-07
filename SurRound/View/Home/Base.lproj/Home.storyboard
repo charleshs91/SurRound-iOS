@@ -85,7 +85,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="01r-1D-3Sn"/>
                     </view>
-                    <navigationItem key="navigationItem" id="1hh-oj-oPw"/>
+                    <navigationItem key="navigationItem" id="1hh-oj-oPw">
+                        <barButtonItem key="rightBarButtonItem" image="film.fill" catalog="system" id="0DL-mM-CkD">
+                            <connections>
+                                <action selector="showVideoRecording:" destination="T9V-En-WM8" id="o8R-6M-WwG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="M8w-fz-HHO" id="YpP-D0-mko"/>
                         <outlet property="mapView" destination="Ja2-Ho-mF0" id="aPD-ac-QPf"/>
@@ -114,4 +120,7 @@
             <point key="canvasLocation" x="95.652173913043484" y="83.705357142857139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="film.fill" catalog="system" width="64" height="46"/>
+    </resources>
 </document>

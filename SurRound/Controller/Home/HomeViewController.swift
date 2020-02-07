@@ -8,9 +8,9 @@
 
 import UIKit
 import GoogleMaps
+import MobileCoreServices
 
 struct PostMarker {
-    
     let post: Post
     let mapMarker: GMSMarker
 }
@@ -62,6 +62,46 @@ class HomeViewController: UIViewController {
                 SRProgressHUD.showFailure(text: error.localizedDescription)
             }
         }
+    }
+    
+    // MARK: - User Actions
+    @IBAction func showVideoRecording(_ sender: UIBarButtonItem) {
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        let imagePickerAlert = UIAlertController(title: "Create Story with Video",
+                                                 message: "Select video source from",
+                                                 preferredStyle: .actionSheet)
+        
+        imagePickerAlert.addAction(
+            UIAlertAction(title: "Video library", style: .default) { [weak self] _ in
+                
+                if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+                    imagePicker.sourceType = .photoLibrary
+                    imagePicker.mediaTypes = [kUTTypeMovie as String]
+                    self?.present(imagePicker, animated: true, completion: nil)
+                }
+        })
+        
+        imagePickerAlert.addAction(
+            UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
+                
+                if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                    imagePicker.sourceType = .camera
+                    imagePicker.mediaTypes = [kUTTypeMovie as String]
+                    imagePicker.videoQuality = .typeHigh
+                    self?.present(imagePicker, animated: true, completion: nil)
+                }
+        })
+        
+        imagePickerAlert.addAction(
+            UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                
+                imagePickerAlert.dismiss(animated: true, completion: nil)
+        })
+        
+        present(imagePickerAlert, animated: true, completion: nil)
     }
     
     // MARK: - Private Methods
@@ -185,4 +225,49 @@ extension HomeViewController: GMSMapViewDelegate {
         
         return true
     }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+extension HomeViewController: UIImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+                
+        guard let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String,
+              mediaType == (kUTTypeMovie as String),
+              let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL,
+              UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(url.path)
+              else { return }
+        
+        switch picker.sourceType {
+            
+        case .photoLibrary, .savedPhotosAlbum:
+            print(url)
+            
+        case .camera:
+            UISaveVideoAtPathToSavedPhotosAlbum(
+                url.path, self, #selector(video(_:didFinishSavingWithError:contextInfo:)), nil)
+            print(url)
+            
+        @unknown default:
+            break
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func video(_ videoPath: String, didFinishSavingWithError error: Error?, contextInfo info: AnyObject) {
+        
+        let title = (error == nil) ? "Success" : "Error"
+        let message = (error == nil) ? "Video was saved" : "Video failed to save"
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+// MARK: - UINavigationControllerDelegate
+extension HomeViewController: UINavigationControllerDelegate {
+    
 }
