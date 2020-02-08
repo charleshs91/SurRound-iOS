@@ -50,17 +50,15 @@ class NewPostViewController: UIViewController {
             let user = AuthManager.shared.currentUser,
             let place = self.postPlace else { return }
         
-        let post = Post(id: PostCreator.documentID(),
+        let post = Post(id: PostManager.documentID(),
                         category: postCategory.text,
-                        author: Post.Author(uid: user.uid,
-                                            username: user.username,
-                                            avatar: user.avatar ?? ""),
+                        author: Author(user: user),
                         createdTime: Date(),
                         text: text,
                         place: place)
         
         SRProgressHUD.showLoading(text: "Creating post")
-        PostCreator().createPost(post, image: mediaCell?.pickedImage) { [weak self] result in
+        PostManager().createPost(post, image: mediaCell?.pickedImage) { [weak self] result in
             SRProgressHUD.dismiss()
             
             switch result {

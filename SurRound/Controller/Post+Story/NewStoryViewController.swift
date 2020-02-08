@@ -43,4 +43,8 @@ class NewStoryViewController: UIViewController {
         
         player?.play()
     }
+    
+    @IBAction func sendStory(_ sender: UIButton) {
+        
+    }
 }

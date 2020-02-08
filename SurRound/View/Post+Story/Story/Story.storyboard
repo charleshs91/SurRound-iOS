@@ -19,6 +19,9 @@
                                 <rect key="frame" x="301" y="68" width="89" height="33"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <state key="normal" title="Send Story"/>
+                                <connections>
+                                    <action selector="sendStory:" destination="kbE-Y1-WdQ" eventType="touchUpInside" id="b4U-li-4in"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

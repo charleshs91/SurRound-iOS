@@ -40,6 +40,7 @@
 		D34A5BFF23ED5E4600F76172 /* Story.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D34A5BFE23ED5E4600F76172 /* Story.storyboard */; };
 		D34A5C0123ED5F1000F76172 /* NewStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34A5C0023ED5F1000F76172 /* NewStoryViewController.swift */; };
 		D34A5C0323ED5F7F00F76172 /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34A5C0223ED5F7F00F76172 /* StoryViewController.swift */; };
+		D34A5C0623EE912500F76172 /* StoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34A5C0523EE912500F76172 /* StoryManager.swift */; };
 		D3552B2B23DF34D700453FAA /* NewPostTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3552B2923DF34D700453FAA /* NewPostTextViewCell.swift */; };
 		D3552B2C23DF34D700453FAA /* NewPostTextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3552B2A23DF34D700453FAA /* NewPostTextViewCell.xib */; };
 		D3552B3323DF359500453FAA /* NewPostMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3552B3123DF359500453FAA /* NewPostMediaCell.swift */; };
@@ -63,7 +64,6 @@
 		D363154C23E61FA00000150B /* PlacePostCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D363154A23E61FA00000150B /* PlacePostCollectionCell.swift */; };
 		D363154D23E61FA00000150B /* PlacePostCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D363154B23E61FA00000150B /* PlacePostCollectionCell.xib */; };
 		D363154F23E6A97F0000150B /* PostContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D363154E23E6A97F0000150B /* PostContentModel.swift */; };
-		D363155123E6C3770000150B /* PostFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D363155023E6C3770000150B /* PostFetcher.swift */; };
 		D363155623E7F48F0000150B /* MapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = D363155523E7F48F0000150B /* MapStyle.json */; };
 		D364978223D816370078C4E0 /* HomeNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D364978123D816370078C4E0 /* HomeNavController.swift */; };
 		D364978523D82B720078C4E0 /* KingfisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D364978423D82B720078C4E0 /* KingfisherWrapper.swift */; };
@@ -104,8 +104,8 @@
 		D3A3B5F123E29C35003201E1 /* NewPostCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */; };
 		D3A3B5F423E2A7E1003201E1 /* PlaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F323E2A7E1003201E1 /* PlaceManager.swift */; };
 		D3A3B5F823E31E9B003201E1 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F723E31E9B003201E1 /* StorageManager.swift */; };
-		D3A3B5FB23E3D56E003201E1 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5FA23E3D56E003201E1 /* PostModel.swift */; };
-		D3A3B5FD23E3F5E6003201E1 /* PostCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5FC23E3F5E6003201E1 /* PostCreator.swift */; };
+		D3A3B5FB23E3D56E003201E1 /* Post+StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5FA23E3D56E003201E1 /* Post+StoryModel.swift */; };
+		D3A3B5FD23E3F5E6003201E1 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5FC23E3F5E6003201E1 /* PostManager.swift */; };
 		D3C36E5423EBA05A00E2BD1C /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5323EBA05A00E2BD1C /* SelectLocationViewController.swift */; };
 		D3C36E5623EBCCFE00E2BD1C /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5523EBCCFE00E2BD1C /* PlaceModel.swift */; };
 		D3C36E5823EBFC0E00E2BD1C /* PostCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5723EBFC0E00E2BD1C /* PostCategory.swift */; };
@@ -171,6 +171,7 @@
 		D34A5BFE23ED5E4600F76172 /* Story.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Story.storyboard; sourceTree = "<group>"; };
 		D34A5C0023ED5F1000F76172 /* NewStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStoryViewController.swift; sourceTree = "<group>"; };
 		D34A5C0223ED5F7F00F76172 /* StoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
+		D34A5C0523EE912500F76172 /* StoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryManager.swift; sourceTree = "<group>"; };
 		D3552B2923DF34D700453FAA /* NewPostTextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostTextViewCell.swift; sourceTree = "<group>"; };
 		D3552B2A23DF34D700453FAA /* NewPostTextViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewPostTextViewCell.xib; sourceTree = "<group>"; };
 		D3552B3123DF359500453FAA /* NewPostMediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostMediaCell.swift; sourceTree = "<group>"; };
@@ -200,7 +201,6 @@
 		D363154A23E61FA00000150B /* PlacePostCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePostCollectionCell.swift; sourceTree = "<group>"; };
 		D363154B23E61FA00000150B /* PlacePostCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlacePostCollectionCell.xib; sourceTree = "<group>"; };
 		D363154E23E6A97F0000150B /* PostContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentModel.swift; sourceTree = "<group>"; };
-		D363155023E6C3770000150B /* PostFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFetcher.swift; sourceTree = "<group>"; };
 		D363155523E7F48F0000150B /* MapStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MapStyle.json; sourceTree = "<group>"; };
 		D364978123D816370078C4E0 /* HomeNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavController.swift; sourceTree = "<group>"; };
 		D364978423D82B720078C4E0 /* KingfisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingfisherWrapper.swift; sourceTree = "<group>"; };
@@ -241,8 +241,8 @@
 		D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostCellType.swift; sourceTree = "<group>"; };
 		D3A3B5F323E2A7E1003201E1 /* PlaceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceManager.swift; sourceTree = "<group>"; };
 		D3A3B5F723E31E9B003201E1 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		D3A3B5FA23E3D56E003201E1 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
-		D3A3B5FC23E3F5E6003201E1 /* PostCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreator.swift; sourceTree = "<group>"; };
+		D3A3B5FA23E3D56E003201E1 /* Post+StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+StoryModel.swift"; sourceTree = "<group>"; };
+		D3A3B5FC23E3F5E6003201E1 /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		D3C36E5323EBA05A00E2BD1C /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		D3C36E5523EBCCFE00E2BD1C /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		D3C36E5723EBFC0E00E2BD1C /* PostCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategory.swift; sourceTree = "<group>"; };
@@ -644,9 +644,9 @@
 		D3A3B5F923E3D55F003201E1 /* Post+Story */ = {
 			isa = PBXGroup;
 			children = (
-				D3A3B5FA23E3D56E003201E1 /* PostModel.swift */,
-				D3A3B5FC23E3F5E6003201E1 /* PostCreator.swift */,
-				D363155023E6C3770000150B /* PostFetcher.swift */,
+				D34A5C0523EE912500F76172 /* StoryManager.swift */,
+				D3A3B5FC23E3F5E6003201E1 /* PostManager.swift */,
+				D3A3B5FA23E3D56E003201E1 /* Post+StoryModel.swift */,
 				D363154E23E6A97F0000150B /* PostContentModel.swift */,
 				D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */,
 				D3C36E5723EBFC0E00E2BD1C /* PostCategory.swift */,
@@ -1047,7 +1047,7 @@
 				D3850D7C23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift in Sources */,
 				D3086B8323DC83110071F378 /* NewPostViewController.swift in Sources */,
 				D39A754223D5DACF00A20879 /* SRTabBarController.swift in Sources */,
-				D3A3B5FD23E3F5E6003201E1 /* PostCreator.swift in Sources */,
+				D3A3B5FD23E3F5E6003201E1 /* PostManager.swift in Sources */,
 				D32F7F3623EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift in Sources */,
 				D35C488F23CF352B000951D2 /* AppDelegate.swift in Sources */,
 				D365E4D823E4536D00480F11 /* ExploreViewController.swift in Sources */,
@@ -1080,11 +1080,11 @@
 				D32F7F3223E9C60800FBC0D3 /* ESPullToRefreshWrapper.swift in Sources */,
 				D3A3B5F123E29C35003201E1 /* NewPostCellType.swift in Sources */,
 				D3086B9623DCA2160071F378 /* UITableView+Extension.swift in Sources */,
-				D3A3B5FB23E3D56E003201E1 /* PostModel.swift in Sources */,
+				D3A3B5FB23E3D56E003201E1 /* Post+StoryModel.swift in Sources */,
 				D3949B0123D9ACBB006DA9AA /* SignInViewController.swift in Sources */,
 				D3086B7223DB5DD50071F378 /* UserModel.swift in Sources */,
-				D363155123E6C3770000150B /* PostFetcher.swift in Sources */,
 				D338FF3F23E8119700CAB8CB /* StoryCollectionCell.swift in Sources */,
+				D34A5C0623EE912500F76172 /* StoryManager.swift in Sources */,
 				D39A755823D5FFD000A20879 /* UIColor+Extension.swift in Sources */,
 				D363154F23E6A97F0000150B /* PostContentModel.swift in Sources */,
 				D32F7F3423EA6D9100FBC0D3 /* CategorySelectorViewController.swift in Sources */,
