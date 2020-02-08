@@ -13,7 +13,7 @@ class SRAuthButton: UIButton {
     override var isEnabled: Bool {
         didSet {
             if isEnabled {
-                backgroundColor = UIColor.rgb(from hex: "39375B")
+                backgroundColor = UIColor.hexStringToUIColor(hex: "39375B")
             } else {
                 backgroundColor = .lightGray
             }

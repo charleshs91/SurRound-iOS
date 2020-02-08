@@ -38,7 +38,8 @@ class AuthManager {
         }
     }
     
-    func signIn(email: String, password: String, completion: @escaping SRUserResult) {
+    func signIn(email: String, password: String,
+                completion: @escaping SRUserResult) {
         
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] (authResult, error) in
             
@@ -54,7 +55,8 @@ class AuthManager {
         }
     }
     
-    func signUp(email: String, password: String, username: String, completion: @escaping SRUserResult) {
+    func signUp(email: String, password: String, username: String,
+                completion: @escaping SRUserResult) {
         
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             
@@ -68,7 +70,9 @@ class AuthManager {
                                  username: username,
                                  avatar: nil)
             
-            UserDBService.createUser(user: newUser, completion: completion)
+            UserDBService.createUser(user: newUser, completion: { _ in
+                self.signIn(email: email, password: password, completion: completion)
+            })
         }
     }
     

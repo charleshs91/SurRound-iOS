@@ -30,7 +30,7 @@ class UserDBService {
         }
     }
     
-    static func createUser(user: SRUser, completion: @escaping (Result<SRUser, Error>) -> Void) {
+    static func createUser(user: SRUser, completion: @escaping SRUserResult) {
         
         let db = Firestore.firestore()
         db.collection("users").document(user.uid).setData([
