@@ -9,10 +9,6 @@
 import UIKit
 
 class PlaceItemListCell: UITableViewCell {
-        
-    static var identifier: String {
-        return String(describing: PlaceItemListCell.self)
-    }
     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet { setupCollectionView() }
@@ -58,7 +54,7 @@ extension PlaceItemListCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: PlacePostCollectionCell.identifier, for: indexPath)
+            withReuseIdentifier: PlacePostCollectionCell.reuseIdentifier, for: indexPath)
         
         return cell
     }

@@ -27,15 +27,15 @@ enum PostListCellType {
         switch self {
         case .image:
             return tableView.dequeueReusableCell(
-                withIdentifier: ImagePostListCell.identifier, for: indexPath)
+                withIdentifier: ImagePostListCell.reuseIdentifier, for: indexPath)
             
         case .text:
             return tableView.dequeueReusableCell(
-                withIdentifier: TextPostListCell.identifier, for: indexPath)
+                withIdentifier: TextPostListCell.reuseIdentifier, for: indexPath)
             
         case .video:
             return tableView.dequeueReusableCell(
-                withIdentifier: NewPostMapCell.identifier, for: indexPath)
+                withIdentifier: NewPostMapCell.reuseIdentifier, for: indexPath)
         }
     }
 }

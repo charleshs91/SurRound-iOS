@@ -11,10 +11,6 @@ import KMPlaceholderTextView
 
 class NewPostTextViewCell: UITableViewCell {
   
-  static var identifier: String {
-    return String(describing: NewPostTextViewCell.self)
-  }
-  
   @IBOutlet weak var textView: KMPlaceholderTextView!
   
   override func awakeFromNib() {

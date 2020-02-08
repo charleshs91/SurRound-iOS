@@ -56,6 +56,7 @@
 		D35CA75523E523710055F84E /* ImagePostListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35CA75323E523710055F84E /* ImagePostListCell.swift */; };
 		D35CA75623E523710055F84E /* ImagePostListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D35CA75423E523710055F84E /* ImagePostListCell.xib */; };
 		D35CA75B23E524550055F84E /* SRRoundedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35CA75A23E524550055F84E /* SRRoundedTableViewCell.swift */; };
+		D361066E23EF205B007AFDC2 /* CellConfigurer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361066D23EF205B007AFDC2 /* CellConfigurer.swift */; };
 		D363153E23E5CEF30000150B /* TrendingListGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D363153C23E5CEF30000150B /* TrendingListGridCell.swift */; };
 		D363153F23E5CEF30000150B /* TrendingListGridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D363153D23E5CEF30000150B /* TrendingListGridCell.xib */; };
 		D363154123E5CF6E0000150B /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D363154023E5CF6E0000150B /* UICollectionView+Extension.swift */; };
@@ -193,6 +194,7 @@
 		D35CA75323E523710055F84E /* ImagePostListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePostListCell.swift; sourceTree = "<group>"; };
 		D35CA75423E523710055F84E /* ImagePostListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePostListCell.xib; sourceTree = "<group>"; };
 		D35CA75A23E524550055F84E /* SRRoundedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRRoundedTableViewCell.swift; sourceTree = "<group>"; };
+		D361066D23EF205B007AFDC2 /* CellConfigurer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellConfigurer.swift; sourceTree = "<group>"; };
 		D363153C23E5CEF30000150B /* TrendingListGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingListGridCell.swift; sourceTree = "<group>"; };
 		D363153D23E5CEF30000150B /* TrendingListGridCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrendingListGridCell.xib; sourceTree = "<group>"; };
 		D363154023E5CF6E0000150B /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
@@ -597,6 +599,7 @@
 				D39997EE23DB4DBD00595B2F /* UILabel+Extension.swift */,
 				D3086B9523DCA2160071F378 /* UITableView+Extension.swift */,
 				D363154023E5CF6E0000150B /* UICollectionView+Extension.swift */,
+				D361066D23EF205B007AFDC2 /* CellConfigurer.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1025,6 +1028,7 @@
 				D3086B6E23DB57E80071F378 /* AuthManager.swift in Sources */,
 				D35CA75523E523710055F84E /* ImagePostListCell.swift in Sources */,
 				D335D5DF23DEA9500021B461 /* SRAuthButton.swift in Sources */,
+				D361066E23EF205B007AFDC2 /* CellConfigurer.swift in Sources */,
 				D363154C23E61FA00000150B /* PlacePostCollectionCell.swift in Sources */,
 				D365E4DA23E4541A00480F11 /* FollowingListViewController.swift in Sources */,
 				D338FF4423E945F500CAB8CB /* ProfileViewController.swift in Sources */,

@@ -10,10 +10,6 @@ import UIKit
 
 class PlacePostCollectionCell: UICollectionViewCell {
 
-    static var identifier: String {
-        return String(describing: PlacePostCollectionCell.self)
-    }
-    
     @IBOutlet weak var postImageView: UIImageView!
     
     override func awakeFromNib() {

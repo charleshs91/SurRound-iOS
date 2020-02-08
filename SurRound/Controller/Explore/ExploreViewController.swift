@@ -52,7 +52,7 @@ extension ExploreViewController: SelectionViewDataSource {
     
     func indicatorLineColor(_ selectionView: SelectionView) -> UIColor {
         
-        return UIColor.hexStringToUIColor(hex: "39375B")
+        return UIColor.rgb(from hex: "39375B")
     }
     
     func textColor(_ selectionView: SelectionView) -> UIColor {

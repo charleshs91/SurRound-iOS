@@ -11,10 +11,6 @@ import MapKit
 
 class NewPostMapCell: UITableViewCell {
     
-    static var identifier: String {
-        return String(describing: NewPostMapCell.self)
-    }
-    
     var canChangeLocation: Bool! {
         didSet {
             chooseLocationBtn.isHidden = !self.canChangeLocation

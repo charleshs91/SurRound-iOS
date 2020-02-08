@@ -157,7 +157,7 @@ extension NewPostViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         guard let view = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: UserInfoSectionHeader.identifier
+            withIdentifier: UserInfoSectionHeader.reuseIdentifier
             ) as? UserInfoSectionHeader else { return UIView() }
         
         let user = AuthManager.shared.currentUser

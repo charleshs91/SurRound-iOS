@@ -10,10 +10,6 @@ import UIKit
 
 class StoryCollectionCell: UICollectionViewCell {
     
-    static var identifier: String {
-        return String(describing: StoryCollectionCell.self)
-    }
-    
     @IBOutlet weak var borderCircleView: UIView!
     
     @IBOutlet weak var avatarImageView: UIImageView!

@@ -15,7 +15,7 @@ typealias StoryResult = (Result<Story, Error>) -> Void
 
 struct StoryManagerError: Error {
     
-    static let uploadMovieError = StoryManagerError(message: "Failure uploading movie file.")
+    static let failUploadingVideo = StoryManagerError(message: "Failure uploading video file.")
     
     var localizedDescription: String
     
@@ -36,7 +36,7 @@ class StoryManager {
             StorageManager().uploadVideo(videoData, filename: ref.documentID) { url in
                 
                 guard let url = url else {
-                    completion(.failure(StoryManagerError.uploadMovieError))
+                    completion(.failure(StoryManagerError.failUploadingVideo))
                     return
                 }
                 

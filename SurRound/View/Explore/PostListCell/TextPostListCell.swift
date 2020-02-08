@@ -10,10 +10,6 @@ import UIKit
 
 class TextPostListCell: PostListCell {
     
-    static var identifier: String {
-        return String(describing: TextPostListCell.self)
-    }
-    
     @IBOutlet weak var substrateView: UIView!
     
     // Top Section

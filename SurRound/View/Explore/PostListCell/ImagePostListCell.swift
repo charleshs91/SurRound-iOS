@@ -27,11 +27,7 @@ class ImagePostListCell: PostListCell {
     @IBOutlet weak var likedCountLabel: UILabel!
     @IBOutlet weak var reviewButton: UIButton!
     @IBOutlet weak var reviewCountLabel: UILabel!
-    
-    static var identifier: String {
-        return String(describing: ImagePostListCell.self)
-    }
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         

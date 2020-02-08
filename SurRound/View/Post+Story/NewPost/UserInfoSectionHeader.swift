@@ -16,10 +16,6 @@ class UserInfoSectionHeader: UITableViewHeaderFooterView {
     
     @IBOutlet weak var categoryLabel: SRRoundedLabel!
     
-    static var identifier: String {
-        return String(describing: UserInfoSectionHeader.self)
-    }
-    
     func updateView(category: PostCategory, user: SRUser?) {
         
         categoryLabel.text = category.text

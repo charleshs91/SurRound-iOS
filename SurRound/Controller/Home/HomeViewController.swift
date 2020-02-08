@@ -185,7 +185,7 @@ extension HomeViewController: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: StoryCollectionCell.identifier, for: indexPath)
+            withReuseIdentifier: StoryCollectionCell.reuseIdentifier, for: indexPath)
         guard let storyCell = cell as? StoryCollectionCell else { return cell }
         
         storyCell.layoutIfNeeded()

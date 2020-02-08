@@ -10,10 +10,6 @@ import UIKit
 
 class NewPostMediaCell: UITableViewCell {
   
-  static var identifier: String {
-    return String(describing: NewPostMediaCell.self)
-  }
-  
   var pickedImage: UIImage? {
     didSet {
       guard let image = pickedImage else {

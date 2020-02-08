@@ -24,11 +24,11 @@ enum PostBodyCellType {
         switch self {
         case .location:
             return tableView.dequeueReusableCell(
-                withIdentifier: LocationTableViewCell.identifier, for: indexPath)
+                withIdentifier: LocationTableViewCell.reuseIdentifier, for: indexPath)
             
         case .body:
             return tableView.dequeueReusableCell(
-                withIdentifier: BodyTableViewCell.identifier, for: indexPath)
+                withIdentifier: BodyTableViewCell.reuseIdentifier, for: indexPath)
         }
     }
 }

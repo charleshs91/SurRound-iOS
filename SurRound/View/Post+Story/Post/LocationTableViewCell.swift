@@ -10,10 +10,6 @@ import UIKit
 
 class LocationTableViewCell: UITableViewCell {
     
-    static var identifier: String {
-        return String(describing: LocationTableViewCell.self)
-    }
-    
     @IBOutlet weak var placeLabel: UILabel!
     
     @IBOutlet weak var followBtn: UIButton!

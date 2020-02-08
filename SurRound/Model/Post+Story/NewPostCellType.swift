@@ -19,15 +19,15 @@ enum NewPostCellType {
         switch self {
         case .text:
             return tableView.dequeueReusableCell(
-                withIdentifier: NewPostTextViewCell.identifier, for: indexPath)
+                withIdentifier: NewPostTextViewCell.reuseIdentifier, for: indexPath)
             
         case .media:
             return tableView.dequeueReusableCell(
-                withIdentifier: NewPostMediaCell.identifier, for: indexPath)
+                withIdentifier: NewPostMediaCell.reuseIdentifier, for: indexPath)
             
         case .map:
             return tableView.dequeueReusableCell(
-                withIdentifier: NewPostMapCell.identifier, for: indexPath)
+                withIdentifier: NewPostMapCell.reuseIdentifier, for: indexPath)
         }
     }
 }
