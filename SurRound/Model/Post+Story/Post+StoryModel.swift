@@ -12,11 +12,10 @@ import FirebaseFirestore
 struct Story: Codable {
     
     let id: String
-    let author: String
+    let author: Author
     let createdTime: Date
     let place: SRPlace
     let movieLink: String
-    let movieDuration: Double
     
     var datetimeString: String {
         

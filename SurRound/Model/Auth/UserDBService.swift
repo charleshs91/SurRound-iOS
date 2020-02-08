@@ -57,6 +57,16 @@ class UserDBService {
                 "post_id": postRef.documentID
             ], merge: true, completion: nil)
     }
+    
+    static func attachStory(user: SRUser, storyRef: DocumentReference) {
+        
+        Firestore.firestore()
+        .collection("users").document(user.uid)
+        .collection("user_stories").document(storyRef.documentID).setData([
+            "story_ref": storyRef,
+            "story_id": storyRef.documentID
+        ], merge: true, completion: nil)
+    }
 }
 
 extension Dictionary {

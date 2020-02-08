@@ -51,7 +51,7 @@ class FollowingListViewController: UIViewController {
         posts.removeAll()
         viewModels.removeAll()
         
-        PostFetcher().fetchAllPosts { [weak self] result in
+        PostManager().fetchAllPosts { [weak self] result in
             
             switch result {
             case .success(let posts):

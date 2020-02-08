@@ -41,7 +41,7 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        PostFetcher().fetchAllPosts { [weak self] result in
+        PostManager().fetchAllPosts { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -240,41 +240,12 @@ extension HomeViewController: UIImagePickerControllerDelegate {
             let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL,
             UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(url.path)
             else { return }
-        
-        switch picker.sourceType {
-            
-        case .photoLibrary, .savedPhotosAlbum:
-            guard let newStoryVC = NewStoryViewController.storyboardInstance() else { return }
-            newStoryVC.movieURL = url
-            self.navigationController?.show(newStoryVC, sender: nil)
-            
-        case .camera:
-            UISaveVideoAtPathToSavedPhotosAlbum(
-                url.path, self, #selector(video(_:didFinishSavingWithError:contextInfo:)), nil)
-            
-        @unknown default:
-            break
-        }
+
+        guard let newStoryVC = NewStoryViewController.storyboardInstance() else { return }
+        newStoryVC.videoURL = url
+        self.present(newStoryVC, animated: true, completion: nil)
     }
     
-    @objc func video(_ videoPath: String, didFinishSavingWithError error: Error?, contextInfo info: AnyObject) {
-        
-        if error == nil {
-            
-            guard let newStoryVC = NewStoryViewController.storyboardInstance() else { return }
-            newStoryVC.movieURL = URL(fileURLWithPath: videoPath)
-            self.navigationController?.show(newStoryVC, sender: nil)
-            
-        } else {
-            
-            let title = "Error"
-            let message = "Video failed to save"
-            
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
-    }
 }
 
 // MARK: - UINavigationControllerDelegate

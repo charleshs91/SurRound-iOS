@@ -17,11 +17,13 @@ class NewStoryViewController: UIViewController {
             String(describing: NewStoryViewController.self)) as? NewStoryViewController
     }
     
-    var movieURL: URL?
+    @IBOutlet weak var sendButton: UIButton!
+    
+    var videoURL: URL?
     var player: AVPlayer?
     
     private lazy var layer: AVPlayerLayer = {
-        self.player = AVPlayer(url: movieURL!)
+        self.player = AVPlayer(url: videoURL!)
         let layer = AVPlayerLayer(player: self.player)
         return layer
     }()
@@ -30,6 +32,7 @@ class NewStoryViewController: UIViewController {
         super.viewDidLoad()
         
         view.layer.addSublayer(self.layer)
+        view.bringSubviewToFront(sendButton)
     }
     
     override func viewDidLayoutSubviews() {
@@ -46,5 +49,27 @@ class NewStoryViewController: UIViewController {
     
     @IBAction func sendStory(_ sender: UIButton) {
         
+        guard let url = videoURL else { return }
+        guard let place = PlaceManager.current.place else {
+            return
+        }
+        SRProgressHUD.showLoading(text: "Uploading Video...")
+        do {
+            try StoryManager().createStory(url, at: place) { result in
+                
+                SRProgressHUD.dismiss()
+                switch result {
+                case .success:
+                    self.presentingViewController?.dismiss(animated: true, completion: {
+                        SRProgressHUD.showSuccess()
+                    })
+                    
+                case .failure(let error):
+                    SRProgressHUD.showFailure(text: error.localizedDescription)
+                }
+            }
+        } catch {
+            SRProgressHUD.showFailure(text: "Unable to convert file to Data")
+        }
     }
 }
