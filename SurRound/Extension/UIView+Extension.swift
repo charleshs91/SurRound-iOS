@@ -10,6 +10,17 @@ import UIKit
 
 extension UIView {
     
+    func stickToView(_ superview: UIView) {
+        self.removeFromSuperview()
+        superview.addSubview(self)
+        NSLayoutConstraint.activate([
+            self.topAnchor.constraint(equalTo: superview.topAnchor),
+            self.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
+            self.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
+            self.bottomAnchor.constraint(equalTo: superview.bottomAnchor)
+        ])
+    }
+    
     func roundToHeight() {
         
         layer.masksToBounds = true

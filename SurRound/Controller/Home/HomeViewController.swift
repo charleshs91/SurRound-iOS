@@ -185,8 +185,8 @@ extension HomeViewController: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: StoryCollectionCell.reuseIdentifier, for: indexPath)
-        guard let storyCell = cell as? StoryCollectionCell else { return cell }
+            withReuseIdentifier: StoryPreviewCell.reuseIdentifier, for: indexPath)
+        guard let storyCell = cell as? StoryPreviewCell else { return cell }
         
         storyCell.layoutIfNeeded()
         
@@ -205,8 +205,16 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: cellHeight, height: cellHeight)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let storyVC = UIStoryboard.story.instantiateInitialViewController() as? StoryViewController else { return }
+        storyVC.modalPresentationStyle = .overCurrentContext
+        tabBarController?.present(storyVC, animated: true, completion: nil)
+    }
 }
 
+// MARK: - GMSMapViewDelegate
 extension HomeViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {

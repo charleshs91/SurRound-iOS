@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StoryCollectionCell: UICollectionViewCell {
+class StoryPreviewCell: UICollectionViewCell {
     
     @IBOutlet weak var borderCircleView: UIView!
     
