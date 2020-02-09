@@ -17,8 +17,7 @@ extension UITableView {
     
     func registerHeaderFooterWithNib<T: UITableViewHeaderFooterView>(withHeaderFooterViewClass name: T.Type) {
         
-        let nib = UINib(nibName: String(describing: name), bundle: nil)
-        register(nib, forHeaderFooterViewReuseIdentifier: String(describing: name))
+        register(T.nib, forHeaderFooterViewReuseIdentifier: String(describing: name))
     }
     
     func registerCell<T: UITableViewCell>(cellWithClass name: T.Type) {
@@ -28,7 +27,19 @@ extension UITableView {
     
     func registerCellWithNib<T: UITableViewCell>(withCellClass name: T.Type) {
         
-        let nib = UINib(nibName: String(describing: name), bundle: nil)
-        register(nib, forCellReuseIdentifier: String(describing: name))
+        register(T.nib, forCellReuseIdentifier: String(describing: name))
+    }
+}
+
+extension UICollectionView {
+    
+    func registerCell<T: UICollectionViewCell>(cellWithClass name: T.Type) {
+        
+        register(T.self, forCellWithReuseIdentifier: String(describing: name))
+    }
+    
+    func registerCellWithNib<T: UICollectionViewCell>(cellWithClass name: T.Type) {
+        
+        register(T.nib, forCellWithReuseIdentifier: String(describing: name))
     }
 }

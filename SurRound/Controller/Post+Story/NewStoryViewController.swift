@@ -11,23 +11,27 @@ import AVFoundation
 
 class NewStoryViewController: UIViewController {
     
+    // MARK: - Type Functions
     static func storyboardInstance() -> NewStoryViewController? {
         
         return UIStoryboard.story.instantiateViewController(identifier:
             String(describing: NewStoryViewController.self)) as? NewStoryViewController
     }
     
+    // MARK: - Public Properties
     @IBOutlet weak var sendButton: UIButton!
     
     var videoURL: URL?
     var player: AVPlayer?
     
+    // MARK: - Private Properties
     private lazy var layer: AVPlayerLayer = {
         self.player = AVPlayer(url: videoURL!)
         let layer = AVPlayerLayer(player: self.player)
         return layer
     }()
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,6 +51,7 @@ class NewStoryViewController: UIViewController {
         player?.play()
     }
     
+    // MARK: - User Actions
     @IBAction func sendStory(_ sender: UIButton) {
         
         guard let url = videoURL else { return }

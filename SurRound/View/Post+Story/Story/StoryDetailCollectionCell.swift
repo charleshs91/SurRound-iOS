@@ -22,7 +22,7 @@ class StoryDetailCollectionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupViews()
+        setupCloseButton()
         contentView.backgroundColor = .brown
     }
     
@@ -32,7 +32,7 @@ class StoryDetailCollectionCell: UICollectionViewCell {
         closeButton.roundToHeight()
     }
     
-    private func setupViews() {
+    private func setupCloseButton() {
         contentView.addSubview(closeButton)
         NSLayoutConstraint.activate([
             closeButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 12),

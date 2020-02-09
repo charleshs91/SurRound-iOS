@@ -24,10 +24,17 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
     
     private var postMarkers = [PostMarker]()
+    private var stories = [Story]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
     
     // MARK: - Private Constants
-    private let cellHeightInset: CGFloat = 16
-    private let cellLeadingInset: CGFloat = 10
+    private let cellHeightInset: CGFloat = 12
+    private let cellLeadingInset: CGFloat = 8
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -41,26 +48,11 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        PostManager().fetchAllPosts { [weak self] result in
-            
-            guard let strongSelf = self else { return }
-            
-            switch result {
-            case .success(let posts):
-                posts.forEach { post in
-                    let position = CLLocationCoordinate2D(latitude: post.place.coordinate.latitude,
-                                                          longitude: post.place.coordinate.longitude)
-                    let marker = GMSMarker(position: position)
-                    strongSelf.postMarkers.append(PostMarker(post: post, mapMarker: marker))
-                }
-                
-                DispatchQueue.main.async {
-                    strongSelf.displayPostsOnMap()
-                }
-                
-            case .failure(let error):
-                SRProgressHUD.showFailure(text: error.localizedDescription)
-            }
+        if postMarkers.count == 0 {
+            fetchPosts()
+        }
+        if stories.count == 0 {
+            fetchStories()
         }
     }
     
@@ -105,6 +97,48 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Private Methods
+    private func fetchStories() {
+        
+        stories.removeAll()
+        StoryManager().fetchAllStory { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+            case .success(let stories):
+                strongSelf.stories.append(contentsOf: stories)
+                
+            case .failure(let error):
+                SRProgressHUD.showFailure(text: error.localizedDescription)
+            }
+        }
+    }
+    
+    private func fetchPosts() {
+        
+        postMarkers.removeAll()
+        PostManager().fetchAllPosts { [weak self] result in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+            case .success(let posts):
+                posts.forEach { post in
+                    let position = CLLocationCoordinate2D(latitude: post.place.coordinate.latitude,
+                                                          longitude: post.place.coordinate.longitude)
+                    let marker = GMSMarker(position: position)
+                    strongSelf.postMarkers.append(PostMarker(post: post, mapMarker: marker))
+                }
+                DispatchQueue.main.async {
+                    strongSelf.displayPostsOnMap()
+                }
+                
+            case .failure(let error):
+                SRProgressHUD.showFailure(text: error.localizedDescription)
+            }
+        }
+    }
+    
     private func updateLocation() {
         do {
             try PlaceManager.current.updateLocation()
@@ -178,7 +212,7 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         
-        return 20
+        return stories.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -188,6 +222,8 @@ extension HomeViewController: UICollectionViewDataSource {
             withReuseIdentifier: StoryPreviewCell.reuseIdentifier, for: indexPath)
         guard let storyCell = cell as? StoryPreviewCell else { return cell }
         
+        let story = stories[indexPath.item]
+        storyCell.avatarImageView.loadImage(story.author.avatar, placeholder: UIImage.asset(.Icons_Avatar))
         storyCell.layoutIfNeeded()
         
         return storyCell

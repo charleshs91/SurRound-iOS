@@ -12,6 +12,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 typealias StoryResult = (Result<Story, Error>) -> Void
+typealias StoriesResult = (Result<[Story], Error>) -> Void
 
 struct StoryManagerError: Error {
     
@@ -26,20 +27,41 @@ struct StoryManagerError: Error {
 
 class StoryManager {
     
+    func fetchAllStory(completion: @escaping StoriesResult) {
+        
+        Firestore.firestore().collection("stories").getDocuments { (snapshot, error) in
+            
+            guard let snapshot = snapshot, error == nil else { return }
+            
+            var stories = [Story]()
+            
+            snapshot.documents.forEach { (document) in
+                do {
+                    if let story = try document.data(as: Story.self, decoder: Firestore.Decoder()) {
+                        stories.append(story)
+                    }
+                } catch {
+                    completion(.failure(error))
+                    return
+                }
+            }
+            
+            completion(.success(stories))
+        }
+    }
+    
     func createStory(_ videoURL: URL, at place: SRPlace, completion: @escaping StoryResult) throws {
         
         do {
             let videoData = try Data(contentsOf: videoURL)
             
             let ref = Firestore.firestore().collection("stories").document()
-            
             StorageManager().uploadVideo(videoData, filename: ref.documentID) { url in
                 
                 guard let url = url else {
                     completion(.failure(StoryManagerError.failUploadingVideo))
                     return
                 }
-                
                 let story = Story(id: ref.documentID,
                                   author: Author(user: AuthManager.shared.currentUser!),
                                   createdTime: Date(),
@@ -52,10 +74,8 @@ class StoryManager {
                             completion(.failure(error!))
                             return
                         }
-                        
                         UserDBService.attachStory(user: AuthManager.shared.currentUser!,
                                                   storyRef: ref)
-                        
                         completion(.success(story))
                     }
                 } catch {
@@ -64,6 +84,7 @@ class StoryManager {
                 }
             }
         } catch {
+            // Fail to convert video file to Data
             throw error
         }
     }

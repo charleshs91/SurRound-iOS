@@ -11,8 +11,10 @@ import UIKit
 extension UIView {
     
     func stickToView(_ superview: UIView) {
+        
         self.removeFromSuperview()
         superview.addSubview(self)
+        
         NSLayoutConstraint.activate([
             self.topAnchor.constraint(equalTo: superview.topAnchor),
             self.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
