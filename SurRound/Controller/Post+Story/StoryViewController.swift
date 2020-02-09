@@ -16,8 +16,15 @@ class StoryViewController: UIViewController {
         clv.isPagingEnabled = true
         clv.showsHorizontalScrollIndicator = false
         clv.showsVerticalScrollIndicator = false
+        clv.backgroundColor = .systemBackground
         return clv
     }()
+    
+    var indexPath: IndexPath = IndexPath(item: 0, section: 0)
+    
+    var stories = [Story]()
+    
+    private let videoProvider = VideoProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +33,6 @@ class StoryViewController: UIViewController {
         collectionView.delegate = self
         collectionView.stickToView(view)
         collectionView.registerCellWithNib(cellWithClass: StoryDetailCollectionCell.self)
-        
     }
     
     @objc func dismissStoryVC(_ sender: UIButton) {
@@ -37,7 +43,7 @@ class StoryViewController: UIViewController {
 extension StoryViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return stories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -45,6 +51,8 @@ extension StoryViewController: UICollectionViewDataSource {
             StoryDetailCollectionCell.reuseIdentifier, for: indexPath)
         guard let storyCell = cell as? StoryDetailCollectionCell else { return cell }
         storyCell.closeButton.addTarget(self, action: #selector(dismissStoryVC(_:)), for: .touchUpInside)
+        let url = URL(string: stories[indexPath.item].movieLink)
+        storyCell.url = url!
         storyCell.layoutIfNeeded()
         return storyCell
     }
@@ -55,5 +63,10 @@ extension StoryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return collectionView.frame.size
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let storyCell = cell as? StoryDetailCollectionCell else { return }
+        storyCell.startPlaying()
     }
 }

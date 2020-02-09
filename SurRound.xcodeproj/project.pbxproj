@@ -59,6 +59,7 @@
 		D36106D023EFC1C0007AFDC2 /* AnimatedCollectionViewLayoutWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36106CF23EFC1C0007AFDC2 /* AnimatedCollectionViewLayoutWrapper.swift */; };
 		D36106D323EFC954007AFDC2 /* StoryDetailCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36106D123EFC954007AFDC2 /* StoryDetailCollectionCell.swift */; };
 		D36106D423EFC954007AFDC2 /* StoryDetailCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36106D223EFC954007AFDC2 /* StoryDetailCollectionCell.xib */; };
+		D361071323F00A98007AFDC2 /* VideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361071223F00A98007AFDC2 /* VideoProvider.swift */; };
 		D363153E23E5CEF30000150B /* TrendingListGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D363153C23E5CEF30000150B /* TrendingListGridCell.swift */; };
 		D363153F23E5CEF30000150B /* TrendingListGridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D363153D23E5CEF30000150B /* TrendingListGridCell.xib */; };
 		D363154823E6132F0000150B /* PlaceItemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D363154623E6132F0000150B /* PlaceItemListCell.swift */; };
@@ -197,6 +198,7 @@
 		D36106CF23EFC1C0007AFDC2 /* AnimatedCollectionViewLayoutWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedCollectionViewLayoutWrapper.swift; sourceTree = "<group>"; };
 		D36106D123EFC954007AFDC2 /* StoryDetailCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDetailCollectionCell.swift; sourceTree = "<group>"; };
 		D36106D223EFC954007AFDC2 /* StoryDetailCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoryDetailCollectionCell.xib; sourceTree = "<group>"; };
+		D361071223F00A98007AFDC2 /* VideoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProvider.swift; sourceTree = "<group>"; };
 		D363153C23E5CEF30000150B /* TrendingListGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingListGridCell.swift; sourceTree = "<group>"; };
 		D363153D23E5CEF30000150B /* TrendingListGridCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrendingListGridCell.xib; sourceTree = "<group>"; };
 		D363154623E6132F0000150B /* PlaceItemListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceItemListCell.swift; sourceTree = "<group>"; };
@@ -640,6 +642,7 @@
 			isa = PBXGroup;
 			children = (
 				D3A3B5F723E31E9B003201E1 /* StorageManager.swift */,
+				D361071223F00A98007AFDC2 /* VideoProvider.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -1031,6 +1034,7 @@
 				D335D5DF23DEA9500021B461 /* SRAuthButton.swift in Sources */,
 				D361066E23EF205B007AFDC2 /* CellConfigurer.swift in Sources */,
 				D363154C23E61FA00000150B /* PlacePostCollectionCell.swift in Sources */,
+				D361071323F00A98007AFDC2 /* VideoProvider.swift in Sources */,
 				D365E4DA23E4541A00480F11 /* FollowingListViewController.swift in Sources */,
 				D338FF4423E945F500CAB8CB /* ProfileViewController.swift in Sources */,
 				D3086B7023DB59950071F378 /* UserDBService.swift in Sources */,

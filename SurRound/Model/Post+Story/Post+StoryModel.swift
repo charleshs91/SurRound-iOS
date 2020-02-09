@@ -9,6 +9,17 @@
 import Foundation
 import FirebaseFirestore
 
+class StoriesEntity {
+    
+    var stories: [Story]
+    var author: Author
+    
+    init(stories: [Story], author: Author) {
+        self.stories = stories
+        self.author = author
+    }
+}
+
 struct Story: Codable {
     
     let id: String

@@ -9,10 +9,6 @@
 import UIKit
 
 class CategorySelectorViewController: UIViewController {
-
-    deinit {
-        debugPrint("$ deinit: CategorySelectorViewController")
-    }
     
     static func storyboardInstance() -> CategorySelectorViewController? {
         return UIStoryboard.newPost.instantiateViewController(
@@ -30,8 +26,8 @@ class CategorySelectorViewController: UIViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
+        
+        view.backgroundColor = .blurViewColor
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,37 +58,31 @@ class CategorySelectorViewController: UIViewController {
     // MARK: - Private Methods
     private func presentPopUpView() {
         
-        popUpView.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: popUpViewHeight)
         popUpView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         popUpView.layer.cornerRadius = 16
-        
+        // initial position of popUpView
+        popUpView.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: popUpViewHeight)
         view.addSubview(popUpView)
-        
-        let yPos = view.frame.height - popUpView.frame.height
         
         UIViewPropertyAnimator(
             duration: 0.3,
             curve: .easeInOut,
             animations: {
-                self.popUpView.frame.origin = CGPoint(x: 0, y: yPos)
-            }
+                self.popUpView.transform = CGAffineTransform(translationX: 0,
+                                                             y: -self.popUpView.frame.height)
+        }
         ).startAnimation()
     }
     
     private func dismissPopUpView(completion: (() -> Void)? = nil) {
-        
-        let endYPosition = view.frame.height
         
         UIViewPropertyAnimator.runningPropertyAnimator(
             withDuration: 0.3,
             delay: 0,
             options: .curveEaseInOut,
             animations: {
-                
-                self.popUpView.frame.origin = CGPoint(x: 0, y: endYPosition)
-                
+                self.popUpView.transform = .identity
         }, completion: { _ in
-            
             self.popUpView.removeFromSuperview()
             self.presentingViewController?.dismiss(animated: false, completion: completion)
         })

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class StoryDetailCollectionCell: UICollectionViewCell {
     
@@ -20,16 +21,35 @@ class StoryDetailCollectionCell: UICollectionViewCell {
         return btn
     }()
     
+    var url: URL!
+    var player: AVPlayer!
+    
+    private lazy var playerLayer: AVPlayerLayer = {
+        self.player = AVPlayer(url: url)
+        let layer = AVPlayerLayer(player: self.player)
+        return layer
+    }()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        styleCell()
         setupCloseButton()
-        contentView.backgroundColor = .brown
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
         closeButton.roundToHeight()
+    }
+    
+    func startPlaying() {
+        playerLayer.frame = contentView.bounds
+        contentView.layer.insertSublayer(playerLayer, below: closeButton.layer)
+        player.play()
+    }
+    
+    private func styleCell() {
+        contentView.backgroundColor = .black
     }
     
     private func setupCloseButton() {
