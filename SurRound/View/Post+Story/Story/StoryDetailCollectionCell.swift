@@ -27,6 +27,7 @@ class StoryDetailCollectionCell: UICollectionViewCell {
     private lazy var playerLayer: AVPlayerLayer = {
         self.player = AVPlayer(url: url)
         let layer = AVPlayerLayer(player: self.player)
+        layer.videoGravity = .resizeAspectFill
         return layer
     }()
     

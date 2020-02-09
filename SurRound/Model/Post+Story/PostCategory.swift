@@ -6,7 +6,7 @@
 //  Copyright © 2020 Kai-Ta Hsieh. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum PostCategory: Int {
     
@@ -15,6 +15,7 @@ enum PostCategory: Int {
     case shopping = 2
     case chat = 3
     case question = 4
+    case cancel = 5
     
     var text: String {
         
@@ -24,6 +25,7 @@ enum PostCategory: Int {
         case .shopping: return "Shopping"
         case .chat: return "Chat"
         case .question: return "Question"
+        case .cancel: return "Close"
         }
     }
     
@@ -33,8 +35,19 @@ enum PostCategory: Int {
         case .food, .scenary, .shopping:
             return true
             
-        case .chat, .question:
+        case .chat, .question, .cancel:
             return false
+        }
+    }
+    
+    var image: UIImage {
+        switch self {
+        case .food: return UIImage.asset(.Icons_Category_Food)!
+        case .scenary: return UIImage.asset(.Icons_Category_Scenary)!
+        case .shopping: return UIImage.asset(.Icons_Category_Shop)!
+        case .chat: return UIImage.asset(.Icons_Category_Chat)!
+        case .question: return UIImage.asset(.Icons_Category_Ask)!
+        case .cancel: return UIImage.asset(.Icons_Close)!
         }
     }
 }

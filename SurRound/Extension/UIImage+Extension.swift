@@ -24,7 +24,14 @@ enum ImageAsset: String {
     
     case Icons_16px_RestaurantMarker
     case Icons_Avatar
+    case Icons_Close
     case Image_Placeholder
+    
+    case Icons_Category_Ask
+    case Icons_Category_Chat
+    case Icons_Category_Food
+    case Icons_Category_Scenary
+    case Icons_Category_Shop
     // swiftlint:enable identifier_name
 }
 

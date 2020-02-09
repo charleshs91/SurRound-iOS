@@ -16,6 +16,7 @@ target 'SurRound' do
   pod 'collection-view-layouts'
   pod 'AnimatedCollectionViewLayout'
   pod 'Alamofire', '~> 5.0.0-rc.3'
+  pod 'MaterialDesignWidgets'
   
   # Firebase
   pod 'Firebase/Core'

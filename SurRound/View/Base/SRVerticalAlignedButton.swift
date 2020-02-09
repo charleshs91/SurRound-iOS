@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MaterialDesignWidgets
 
 class SRVerticalAlignedButton: UIButton {
     

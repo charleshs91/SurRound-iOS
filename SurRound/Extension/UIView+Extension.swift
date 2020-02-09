@@ -29,3 +29,14 @@ extension UIView {
         layer.cornerRadius = frame.size.height / 2
     }
 }
+
+extension CALayer {
+    
+    func setShadow(radius: CGFloat, offset: CGSize, color: UIColor, opacity: Float) {
+        
+        shadowRadius = radius
+        shadowOffset = offset
+        shadowColor = color.cgColor
+        shadowOpacity = opacity
+    }
+}
