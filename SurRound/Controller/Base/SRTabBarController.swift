@@ -88,8 +88,7 @@ class SRTabBarController: UITabBarController {
         viewControllers = tabs.map {
             $0.controller()
         }
-        tabBar.tintColor = UIColor.bluyGreen
-        
+        tabBar.tintColor = UIColor.bluyGreen 
         delegate = self
     }
     
@@ -121,10 +120,8 @@ class SRTabBarController: UITabBarController {
             delay: 0,
             options: .curveEaseIn,
             animations: {
-                
                 self.newPostSelectorView.frame.origin = CGPoint(
                     x: 0, y: UIScreen.height - self.newPostSelectorView.frame.height)
-                
                 self.blurView.alpha = 1
         })
     }
@@ -142,13 +139,9 @@ extension SRTabBarController: UITabBarControllerDelegate {
             let newVC = CategorySelectorViewController.storyboardInstance()!
             newVC.modalPresentationStyle = .overCurrentContext
             self.present(newVC, animated: false, completion: nil)
-//            let newPostVC = UIStoryboard.newPost.instantiateInitialViewController()!
-//            newPostVC.modalPresentationStyle = .currentContext
-//            present(newPostVC, animated: false, completion: nil)
             
             return false
         }
-        
         return true
     }
 }

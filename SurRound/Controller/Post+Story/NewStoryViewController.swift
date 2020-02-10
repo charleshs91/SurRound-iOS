@@ -13,7 +13,6 @@ class NewStoryViewController: UIViewController {
     
     // MARK: - Type Functions
     static func storyboardInstance() -> NewStoryViewController? {
-        
         return UIStoryboard.story.instantiateViewController(identifier:
             String(describing: NewStoryViewController.self)) as? NewStoryViewController
     }
@@ -22,10 +21,11 @@ class NewStoryViewController: UIViewController {
     @IBOutlet weak var sendButton: UIButton!
     
     var videoURL: URL?
-    var player: AVPlayer?
     
     // MARK: - Private Properties
-    private lazy var layer: AVPlayerLayer = {
+    private var player: AVPlayer?
+    
+    private lazy var playerLayer: AVPlayerLayer = {
         self.player = AVPlayer(url: videoURL!)
         let layer = AVPlayerLayer(player: self.player)
         return layer
@@ -35,14 +35,13 @@ class NewStoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.layer.addSublayer(self.layer)
-        view.bringSubviewToFront(sendButton)
+        view.layer.insertSublayer(playerLayer, below: sendButton.layer)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        layer.frame = view.bounds
+        playerLayer.frame = view.bounds
     }
     
     override func viewDidAppear(_ animated: Bool) {

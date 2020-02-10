@@ -61,6 +61,8 @@
 		D36106D423EFC954007AFDC2 /* StoryDetailCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36106D223EFC954007AFDC2 /* StoryDetailCollectionCell.xib */; };
 		D361071323F00A98007AFDC2 /* VideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361071223F00A98007AFDC2 /* VideoProvider.swift */; };
 		D361071523F050B4007AFDC2 /* CategoryButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361071423F050B4007AFDC2 /* CategoryButtonCell.swift */; };
+		D361071823F0FEB2007AFDC2 /* StoryCounterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361071623F0FEB2007AFDC2 /* StoryCounterCell.swift */; };
+		D361071923F0FEB2007AFDC2 /* StoryCounterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D361071723F0FEB2007AFDC2 /* StoryCounterCell.xib */; };
 		D363153E23E5CEF30000150B /* TrendingListGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D363153C23E5CEF30000150B /* TrendingListGridCell.swift */; };
 		D363153F23E5CEF30000150B /* TrendingListGridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D363153D23E5CEF30000150B /* TrendingListGridCell.xib */; };
 		D363154823E6132F0000150B /* PlaceItemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D363154623E6132F0000150B /* PlaceItemListCell.swift */; };
@@ -201,6 +203,8 @@
 		D36106D223EFC954007AFDC2 /* StoryDetailCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoryDetailCollectionCell.xib; sourceTree = "<group>"; };
 		D361071223F00A98007AFDC2 /* VideoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProvider.swift; sourceTree = "<group>"; };
 		D361071423F050B4007AFDC2 /* CategoryButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButtonCell.swift; sourceTree = "<group>"; };
+		D361071623F0FEB2007AFDC2 /* StoryCounterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCounterCell.swift; sourceTree = "<group>"; };
+		D361071723F0FEB2007AFDC2 /* StoryCounterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoryCounterCell.xib; sourceTree = "<group>"; };
 		D363153C23E5CEF30000150B /* TrendingListGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingListGridCell.swift; sourceTree = "<group>"; };
 		D363153D23E5CEF30000150B /* TrendingListGridCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrendingListGridCell.xib; sourceTree = "<group>"; };
 		D363154623E6132F0000150B /* PlaceItemListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceItemListCell.swift; sourceTree = "<group>"; };
@@ -380,6 +384,8 @@
 			isa = PBXGroup;
 			children = (
 				D34A5BFE23ED5E4600F76172 /* Story.storyboard */,
+				D361071623F0FEB2007AFDC2 /* StoryCounterCell.swift */,
+				D361071723F0FEB2007AFDC2 /* StoryCounterCell.xib */,
 				D36106D123EFC954007AFDC2 /* StoryDetailCollectionCell.swift */,
 				D36106D223EFC954007AFDC2 /* StoryDetailCollectionCell.xib */,
 			);
@@ -871,6 +877,7 @@
 				D3086B7A23DB89E90071F378 /* Post.storyboard in Resources */,
 				D39A754923D5E3A200A20879 /* Explore.storyboard in Resources */,
 				D35C489623CF352B000951D2 /* Main.storyboard in Resources */,
+				D361071923F0FEB2007AFDC2 /* StoryCounterCell.xib in Resources */,
 				D3552B2C23DF34D700453FAA /* NewPostTextViewCell.xib in Resources */,
 				D3086B9423DCA0940071F378 /* BodyTableViewCell.xib in Resources */,
 				D36106D423EFC954007AFDC2 /* StoryDetailCollectionCell.xib in Resources */,
@@ -1031,6 +1038,7 @@
 				D39997ED23DB487B00595B2F /* TextRelatable.swift in Sources */,
 				D3552B3323DF359500453FAA /* NewPostMediaCell.swift in Sources */,
 				D365E4DC23E4542A00480F11 /* TrendingListViewController.swift in Sources */,
+				D361071823F0FEB2007AFDC2 /* StoryCounterCell.swift in Sources */,
 				D365E4DE23E4546300480F11 /* NearestListViewController.swift in Sources */,
 				D3086B6E23DB57E80071F378 /* AuthManager.swift in Sources */,
 				D35CA75523E523710055F84E /* ImagePostListCell.swift in Sources */,

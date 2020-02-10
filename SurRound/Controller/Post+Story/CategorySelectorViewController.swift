@@ -30,8 +30,9 @@ class CategorySelectorViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .blurViewColor
-        popUpView.backgroundColor = UIColor.hexStringToUIColor(hex: "FBFFE6")
+        
         setupCollectionView()
+        
         stylePopUpView()
     }
     
@@ -61,13 +62,15 @@ class CategorySelectorViewController: UIViewController {
     
     // MARK: - Private Methods
     private func setupCollectionView() {
-        btnsCollectionView.registerCell(cellWithClass: CategoryButtonCell.self)
         
         btnsCollectionView.backgroundColor = .clear
+        btnsCollectionView.registerCell(cellWithClass: CategoryButtonCell.self)
         btnsCollectionView.stickToView(popUpView)
     }
     
     private func stylePopUpView() {
+        
+        popUpView.backgroundColor = UIColor.hexStringToUIColor(hex: "FBFFE6")
         popUpView.layer.setShadow(radius: 3,
                                   offset: CGSize(width: 3, height: -3),
                                   color: .darkGray,
