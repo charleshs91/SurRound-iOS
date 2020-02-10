@@ -111,6 +111,7 @@
 		D3A3B5F823E31E9B003201E1 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F723E31E9B003201E1 /* StorageManager.swift */; };
 		D3A3B5FB23E3D56E003201E1 /* Post+StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5FA23E3D56E003201E1 /* Post+StoryModel.swift */; };
 		D3A3B5FD23E3F5E6003201E1 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5FC23E3F5E6003201E1 /* PostManager.swift */; };
+		D3A4BB6323F15678005E8196 /* Numbers+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A4BB6223F15678005E8196 /* Numbers+Extension.swift */; };
 		D3C36E5423EBA05A00E2BD1C /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5323EBA05A00E2BD1C /* SelectLocationViewController.swift */; };
 		D3C36E5623EBCCFE00E2BD1C /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5523EBCCFE00E2BD1C /* PlaceModel.swift */; };
 		D3C36E5823EBFC0E00E2BD1C /* PostCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5723EBFC0E00E2BD1C /* PostCategory.swift */; };
@@ -253,6 +254,7 @@
 		D3A3B5F723E31E9B003201E1 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		D3A3B5FA23E3D56E003201E1 /* Post+StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+StoryModel.swift"; sourceTree = "<group>"; };
 		D3A3B5FC23E3F5E6003201E1 /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
+		D3A4BB6223F15678005E8196 /* Numbers+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numbers+Extension.swift"; sourceTree = "<group>"; };
 		D3C36E5323EBA05A00E2BD1C /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		D3C36E5523EBCCFE00E2BD1C /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		D3C36E5723EBFC0E00E2BD1C /* PostCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategory.swift; sourceTree = "<group>"; };
@@ -608,6 +610,7 @@
 				D39A755723D5FFD000A20879 /* UIColor+Extension.swift */,
 				D3949B0423D9B07B006DA9AA /* UIView+Extension.swift */,
 				D3850D7D23DAD879008F1F7E /* UIWindow+Extension.swift */,
+				D3A4BB6223F15678005E8196 /* Numbers+Extension.swift */,
 				D39997EC23DB487B00595B2F /* TextRelatable.swift */,
 				D3086B9523DCA2160071F378 /* ReusableCellRegister.swift */,
 				D361066D23EF205B007AFDC2 /* CellConfigurer.swift */,
@@ -1069,6 +1072,7 @@
 				D39A754223D5DACF00A20879 /* SRTabBarController.swift in Sources */,
 				D3A3B5FD23E3F5E6003201E1 /* PostManager.swift in Sources */,
 				D32F7F3623EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift in Sources */,
+				D3A4BB6323F15678005E8196 /* Numbers+Extension.swift in Sources */,
 				D35C488F23CF352B000951D2 /* AppDelegate.swift in Sources */,
 				D365E4D823E4536D00480F11 /* ExploreViewController.swift in Sources */,
 				D39A755223D5E57F00A20879 /* UIStoryboard+Extension.swift in Sources */,

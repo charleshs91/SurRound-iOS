@@ -36,6 +36,10 @@ class StoryViewController: UIViewController {
     
     var storyEntities = [StoryEntity]()
     
+    var currentSection: Int = 0 {
+        didSet { progressBarCollectionView.reloadData() }
+    }
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +80,10 @@ extension StoryViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
-        storyEntities.count
+        if collectionView == storyCollectionView {
+            return storyEntities.count
+        }
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -86,7 +93,7 @@ extension StoryViewController: UICollectionViewDataSource {
             return storyEntities[section].stories.count
             
         } else {
-            return 5
+            return storyEntities[currentSection].stories.count
         }
     }
     
@@ -126,7 +133,7 @@ extension StoryViewController: UICollectionViewDelegateFlowLayout {
             return collectionView.frame.size
             
         } else {
-            let width = collectionView.frame.size.width / 5 - 1
+            let width = collectionView.frame.size.width / storyEntities[currentSection].stories.count.cgFloat
             return CGSize(width: width, height: 4)
         }
     }
@@ -138,6 +145,10 @@ extension StoryViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == storyCollectionView {
             guard let storyCell = cell as? StoryDetailCollectionCell else { return }
             storyCell.startPlaying()
+            
+            if currentSection != indexPath.section {
+                currentSection = indexPath.section
+            }
         }
     }
 }

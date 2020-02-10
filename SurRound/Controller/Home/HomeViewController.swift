@@ -100,7 +100,7 @@ class HomeViewController: UIViewController {
     private func fetchStories() {
         
         storyEntities.removeAll()
-        StoryManager().fetchAllStory { [weak self] result in
+        StoryManager().fetchAllStoryEntities { [weak self] result in
             
             guard let strongSelf = self else { return }
             
@@ -223,9 +223,8 @@ extension HomeViewController: UICollectionViewDataSource {
         guard let storyCell = cell as? StoryPreviewCell else { return cell }
         
         let storyEntity = storyEntities[indexPath.item]
-        storyCell.avatarImageView.loadImage(storyEntity.author.avatar,
-                                            placeholder: UIImage.asset(.Icons_Avatar))
-        storyCell.layoutIfNeeded()
+        
+        storyCell.layoutCell(storyEntity.author.avatar)
         
         return storyCell
     }

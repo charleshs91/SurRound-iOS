@@ -17,9 +17,9 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oB5-c1-8eS">
-                        <rect key="frame" x="0.0" y="25" width="97" height="3"/>
+                        <rect key="frame" x="2" y="25.5" width="93" height="2"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="3" id="5We-bp-kl0"/>
+                            <constraint firstAttribute="height" constant="2" id="5We-bp-kl0"/>
                         </constraints>
                         <color key="progressTintColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="trackTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -27,8 +27,8 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="oB5-c1-8eS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="tJy-si-wtE"/>
-                <constraint firstAttribute="trailing" secondItem="oB5-c1-8eS" secondAttribute="trailing" id="tgH-7I-flX"/>
+                <constraint firstItem="oB5-c1-8eS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="tJy-si-wtE"/>
+                <constraint firstAttribute="trailing" secondItem="oB5-c1-8eS" secondAttribute="trailing" constant="2" id="tgH-7I-flX"/>
                 <constraint firstItem="oB5-c1-8eS" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="x59-Ut-gwB"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>

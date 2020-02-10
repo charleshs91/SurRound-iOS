@@ -16,16 +16,23 @@ class StoryPreviewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        borderCircleView.layer.masksToBounds = true
+        avatarImageView.layer.masksToBounds = true
         
         borderCircleView.layer.cornerRadius = borderCircleView.frame.size.height / 2
         avatarImageView.layer.cornerRadius = avatarImageView.frame.size.height / 2
         
         borderCircleView.layer.borderWidth = 2
         borderCircleView.layer.borderColor = UIColor.red.cgColor
+    }
+    
+    func layoutCell(_ image: String) {
+        avatarImageView.loadImage(image, placeholder: UIImage.asset(.Icons_Avatar))
+        layoutIfNeeded()
     }
 }

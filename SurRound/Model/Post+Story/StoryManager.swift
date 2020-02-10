@@ -36,7 +36,7 @@ class StoryManager {
     
     var buffer: [StoryEntity] = []
     
-    func fetchAllStory(completion: @escaping StoryEntitiesResult) {
+    func fetchAllStoryEntities(completion: @escaping StoryEntitiesResult) {
         
         storiesCollection.getDocuments { (snapshot, error) in
             
@@ -53,7 +53,7 @@ class StoryManager {
                     return
                 }
             }
-            let entities = self.mapStoriesEntities(stories: stories)
+            let entities = self.mapping(stories: stories)
             completion(.success(entities))
         }
     }
@@ -79,30 +79,12 @@ class StoryManager {
                     return
                 }
             }
-            let entities = self.mapStoriesEntities(stories: stories)
+            let entities = self.mapping(stories: stories)
             completion(.success(entities))
         }
     }
     
-    private func mapStoriesEntities(stories: [Story]) -> [StoryEntity] {
-        
-        var buffer = [Author: [Story]]()
-        for story in stories {
-            if buffer[story.author] == nil {
-                buffer[story.author] = [story]
-            } else {
-                buffer[story.author]!.append(story)
-            }
-        }
-        var entities = [StoryEntity]()
-        buffer.forEach { key, value in
-            entities.append(StoryEntity(stories: value, author: key))
-        }
-        return entities
-    }
-    
     func createStory(_ videoFileURL: URL, at place: SRPlace, completion: @escaping StoryResult) throws {
-        
         do {
             let videoData = try Data(contentsOf: videoFileURL)
             
@@ -137,5 +119,22 @@ class StoryManager {
             // Fail to convert video file to Data
             throw error
         }
+    }
+    
+    private func mapping(stories: [Story]) -> [StoryEntity] {
+        
+        var buffer = [Author: [Story]]()
+        for story in stories {
+            if buffer[story.author] == nil {
+                buffer[story.author] = [story]
+            } else {
+                buffer[story.author]!.append(story)
+            }
+        }
+        var entities = [StoryEntity]()
+        buffer.forEach { key, value in
+            entities.append(StoryEntity(stories: value, author: key))
+        }
+        return entities
     }
 }
