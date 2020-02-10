@@ -247,6 +247,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         guard let storyVC = UIStoryboard.story.instantiateInitialViewController() as? StoryViewController else { return }
         storyVC.modalPresentationStyle = .overCurrentContext
         storyVC.storyEntities = storyEntities
+        storyVC.indexPath = IndexPath(item: 0, section: indexPath.item)
         tabBarController?.present(storyVC, animated: true, completion: nil)
     }
 }

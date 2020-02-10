@@ -48,7 +48,7 @@
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="BUJ-OM-MCT" secondAttribute="height" multiplier="1:1" id="29X-9N-WTe"/>
-                                                        <constraint firstAttribute="width" constant="50" id="96W-ty-rjX"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="96W-ty-rjX"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
