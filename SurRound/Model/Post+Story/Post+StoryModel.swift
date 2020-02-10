@@ -14,6 +14,8 @@ class StoryEntity {
     var stories: [Story]
     var author: Author
     
+    var isWatched: Bool = false
+    
     init(stories: [Story], author: Author) {
         self.stories = stories
         self.author = author

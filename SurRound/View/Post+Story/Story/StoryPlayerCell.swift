@@ -20,16 +20,6 @@ protocol StoryPlayerCellDelegate: AnyObject {
 
 class StoryPlayerCell: UICollectionViewCell {
     
-    lazy var closeButton: UIButton = {
-        let btn = UIButton()
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.backgroundColor = .systemGray3
-        btn.setTitleColor(.white, for: .normal)
-        btn.setTitle("X", for: .normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .heavy)
-        return btn
-    }()
-    
     var url: URL!
     
     weak var delegate: StoryPlayerCellDelegate?
@@ -41,14 +31,8 @@ class StoryPlayerCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        styleCell()
-        setupCloseButton()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
         
-        closeButton.roundToHeight()
+        styleCell()
     }
     
     override func prepareForReuse() {
@@ -57,9 +41,7 @@ class StoryPlayerCell: UICollectionViewCell {
         removeTimeObserver()
         
         player = nil
-        
         playerItem = nil
-        
         playerLayer.removeFromSuperlayer()
         playerLayer = nil
     }
@@ -92,10 +74,11 @@ class StoryPlayerCell: UICollectionViewCell {
         playerLayer = AVPlayerLayer(player: self.player)
         playerLayer.videoGravity = .resizeAspectFill
         playerLayer.frame = contentView.bounds
-        contentView.layer.insertSublayer(playerLayer, below: closeButton.layer)
+        contentView.layer.addSublayer(playerLayer)
     }
     
     private func removeTimeObserver() {
+        
         if let timeObserverToken = timeObserverToken {
             player.removeTimeObserver(timeObserverToken)
             self.timeObserverToken = nil
@@ -105,17 +88,5 @@ class StoryPlayerCell: UICollectionViewCell {
     private func styleCell() {
         
         contentView.backgroundColor = .black
-    }
-    
-    private func setupCloseButton() {
-        
-        contentView.addSubview(closeButton)
-        
-        NSLayoutConstraint.activate([
-            closeButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 12),
-            closeButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -12),
-            closeButton.widthAnchor.constraint(equalToConstant: 40),
-            closeButton.heightAnchor.constraint(equalToConstant: 40)
-        ])
     }
 }

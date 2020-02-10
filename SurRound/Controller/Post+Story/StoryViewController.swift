@@ -9,7 +9,26 @@
 import UIKit
 
 class StoryViewController: UIViewController {
-
+    
+    var indexPath: IndexPath = IndexPath(item: 0, section: 0)
+    
+    var storyEntities = [StoryEntity]()
+    
+    var currentSection: Int = 0 {
+        didSet { progressBarCollectionView.reloadData() }
+    }
+    
+    private lazy var closeButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.backgroundColor = .systemGray3
+        btn.setTitleColor(.white, for: .normal)
+        btn.setTitle("X", for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .heavy)
+        btn.addTarget(self, action: #selector(dismissStoryVC(_:)), for: .touchUpInside)
+        return btn
+    }()
+    
     private let progressBarCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
@@ -33,21 +52,14 @@ class StoryViewController: UIViewController {
         return clv
     }()
     
-    var indexPath: IndexPath = IndexPath(item: 0, section: 0)
-    
-    var storyEntities = [StoryEntity]()
-    
-    var currentSection: Int = 0 {
-        didSet { progressBarCollectionView.reloadData() }
-    }
-    
-    private var videoDuration: Double = 0.0
-    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .black
+        
         setupCollectionViews()
+        setupCloseButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -55,6 +67,12 @@ class StoryViewController: UIViewController {
         
         storyCollectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
         currentSection = indexPath.section
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        closeButton.roundToHeight()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -79,9 +97,18 @@ class StoryViewController: UIViewController {
         progressBarCollectionView.delegate = self
         view.addSubview(progressBarCollectionView)
         progressBarCollectionView.setConstraints(
-            to: view.safeAreaLayoutGuide, top: 0, leading: 0, trailing: 0)
+            to: view.safeAreaLayoutGuide, top: 4, leading: 0, trailing: 0)
         progressBarCollectionView.heightAnchor.constraint(equalToConstant: 4).isActive = true
         progressBarCollectionView.registerCellWithNib(cellWithClass: StoryCounterCell.self)
+    }
+    
+    private func setupCloseButton() {
+        
+        view.addSubview(closeButton)
+        closeButton.setConstraints(to: view.safeAreaLayoutGuide,
+                                   top: 18, leading: nil, trailing: -12, bottom: nil)
+        closeButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        closeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
 }
 
@@ -111,19 +138,18 @@ extension StoryViewController: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == storyCollectionView {
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
                 StoryPlayerCell.reuseIdentifier, for: indexPath)
             guard let storyCell = cell as? StoryPlayerCell else { return cell }
             
-            storyCell.closeButton.addTarget(self, action: #selector(dismissStoryVC(_:)), for: .touchUpInside)
-            
             storyCell.url = URL(string: storyEntities[indexPath.section].stories[indexPath.item].videoLink)!
-            
             storyCell.layoutIfNeeded()
             
             return storyCell
             
         } else {
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StoryCounterCell.reuseIdentifier, for: indexPath)
             guard let counterCell = cell as? StoryCounterCell else { return cell }
             
@@ -164,6 +190,10 @@ extension StoryViewController: UICollectionViewDelegateFlowLayout {
             }
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+
+    }
 }
 
 extension StoryViewController: StoryPlayerCellDelegate {
@@ -182,22 +212,33 @@ extension StoryViewController: StoryPlayerCellDelegate {
         if !percentage.isNaN {
             counterCell.timerBar.progress = Float(percentage)
         }
-        
     }
     
     func didEndPlayingVideo(_ cell: StoryPlayerCell) {
-        print("Did end playing")
-//        
-//        guard let indexPath = storyCollectionView.indexPath(for: cell) else { return }
-//        let sectionItems = storyCollectionView.numberOfItems(inSection: indexPath.section)
-//        
-//        let nextIndexPath: IndexPath
-//        if indexPath.item == (sectionItems - 1) {
-//            nextIndexPath = IndexPath(item: 0, section: indexPath.section + 1)
-//        } else {
-//            nextIndexPath = IndexPath(item: indexPath.item + 1, section: indexPath.section)
-//        }
-//        
-//        storyCollectionView.scrollToItem(at: nextIndexPath, at: .top, animated: false)
+        
+        guard let indexPath = storyCollectionView.indexPath(for: cell) else { return }
+        
+        let itemsInSection = storyCollectionView.numberOfItems(inSection: indexPath.section)
+        let sections = numberOfSections(in: storyCollectionView)
+        
+        let isEndOfSection = indexPath.item == (itemsInSection - 1)
+        let isEndOfColleciton = indexPath.section == (sections - 1)
+        
+        switch (isEndOfSection, isEndOfColleciton) {
+            
+        case (true, true):
+            presentingViewController?.dismiss(animated: true, completion: nil)
+            
+        case (true, false):
+            let nextIndexPath = IndexPath(item: 0, section: indexPath.section + 1)
+            storyCollectionView.scrollToItem(at: nextIndexPath, at: .left, animated: true)
+
+        case (false, false):
+            let nextIndexPath = IndexPath(item: indexPath.item + 1, section: indexPath.section)
+            storyCollectionView.scrollToItem(at: nextIndexPath, at: .left, animated: true)
+
+        default:
+            break
+        }
     }
 }

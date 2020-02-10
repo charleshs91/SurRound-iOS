@@ -10,6 +10,9 @@ import UIKit
 
 class StoryPreviewCell: UICollectionViewCell {
     
+    private let kUnreadColor = UIColor.hexStringToUIColor(hex: "66CCCC")
+    private let kReadColor = UIColor.lightGray
+    
     @IBOutlet weak var borderCircleView: UIView!
     
     @IBOutlet weak var avatarImageView: UIImageView!
