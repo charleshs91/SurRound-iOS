@@ -33,7 +33,8 @@ class StoryViewController: UIViewController {
     }()
     
     var indexPath: IndexPath = IndexPath(item: 0, section: 0)
-    var stories = [Story]()
+    
+    var storyEntities = [StoryEntity]()
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -73,11 +74,16 @@ class StoryViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 extension StoryViewController: UICollectionViewDataSource {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        storyEntities.count
+    }
+    
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == storyCollectionView {
-            return stories.count
+            return storyEntities[section].stories.count
             
         } else {
             return 5
@@ -93,7 +99,9 @@ extension StoryViewController: UICollectionViewDataSource {
             guard let storyCell = cell as? StoryDetailCollectionCell else { return cell }
             
             storyCell.closeButton.addTarget(self, action: #selector(dismissStoryVC(_:)), for: .touchUpInside)
-            storyCell.url = URL(string: stories[indexPath.item].videoLink)!
+            
+            storyCell.url = URL(string: storyEntities[indexPath.section].stories[indexPath.item].videoLink)!
+            
             storyCell.layoutIfNeeded()
             
             return storyCell

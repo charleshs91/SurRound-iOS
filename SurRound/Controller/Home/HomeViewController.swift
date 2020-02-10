@@ -24,7 +24,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
     
     private var postMarkers = [PostMarker]()
-    private var stories = [Story]() {
+    private var storyEntities = [StoryEntity]() {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -51,7 +51,7 @@ class HomeViewController: UIViewController {
         if postMarkers.count == 0 {
             fetchPosts()
         }
-        if stories.count == 0 {
+        if storyEntities.count == 0 {
             fetchStories()
         }
     }
@@ -99,14 +99,14 @@ class HomeViewController: UIViewController {
     // MARK: - Private Methods
     private func fetchStories() {
         
-        stories.removeAll()
+        storyEntities.removeAll()
         StoryManager().fetchAllStory { [weak self] result in
             
             guard let strongSelf = self else { return }
             
             switch result {
-            case .success(let stories):
-                strongSelf.stories.append(contentsOf: stories)
+            case .success(let entities):
+                strongSelf.storyEntities.append(contentsOf: entities)
                 
             case .failure(let error):
                 SRProgressHUD.showFailure(text: error.localizedDescription)
@@ -212,7 +212,7 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         
-        return stories.count
+        return storyEntities.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -222,8 +222,9 @@ extension HomeViewController: UICollectionViewDataSource {
             withReuseIdentifier: StoryPreviewCell.reuseIdentifier, for: indexPath)
         guard let storyCell = cell as? StoryPreviewCell else { return cell }
         
-        let story = stories[indexPath.item]
-        storyCell.avatarImageView.loadImage(story.author.avatar, placeholder: UIImage.asset(.Icons_Avatar))
+        let storyEntity = storyEntities[indexPath.item]
+        storyCell.avatarImageView.loadImage(storyEntity.author.avatar,
+                                            placeholder: UIImage.asset(.Icons_Avatar))
         storyCell.layoutIfNeeded()
         
         return storyCell
@@ -246,7 +247,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         
         guard let storyVC = UIStoryboard.story.instantiateInitialViewController() as? StoryViewController else { return }
         storyVC.modalPresentationStyle = .overCurrentContext
-        storyVC.stories = stories
+        storyVC.storyEntities = storyEntities
         tabBarController?.present(storyVC, animated: true, completion: nil)
     }
 }

@@ -11,9 +11,9 @@ import FirebaseStorage
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-typealias StoriesEntitiesResult = (Result<[StoriesEntity], Error>) -> Void
+typealias StoryEntitiesResult = (Result<[StoryEntity], Error>) -> Void
 typealias StoryResult = (Result<Story, Error>) -> Void
-typealias StoriesResult = (Result<[Story], Error>) -> Void
+//typealias StoriesResult = (Result<[Story], Error>) -> Void
 
 struct StoryManagerError: Error {
     
@@ -34,9 +34,9 @@ class StoryManager {
     
     lazy var storiesCollection = Firestore.firestore().collection("stories")
     
-    var buffer: [StoriesEntity] = []
+    var buffer: [StoryEntity] = []
     
-    func fetchAllStory(completion: @escaping StoriesResult) {
+    func fetchAllStory(completion: @escaping StoryEntitiesResult) {
         
         storiesCollection.getDocuments { (snapshot, error) in
             
@@ -53,11 +53,12 @@ class StoryManager {
                     return
                 }
             }
-            completion(.success(stories))
+            let entities = self.mapStoriesEntities(stories: stories)
+            completion(.success(entities))
         }
     }
     
-    func getStoriesEntityFromUsers(uids: [String], completion: @escaping StoriesEntitiesResult) {
+    func fetchStoryEntitiesFromUsers(uids: [String], completion: @escaping StoryEntitiesResult) {
         
         let query = storiesCollection.whereField(Story.CodingKeys.authorId.rawValue, isEqualTo: uids)
         
@@ -83,7 +84,7 @@ class StoryManager {
         }
     }
     
-    private func mapStoriesEntities(stories: [Story]) -> [StoriesEntity] {
+    private func mapStoriesEntities(stories: [Story]) -> [StoryEntity] {
         
         var buffer = [Author: [Story]]()
         for story in stories {
@@ -93,9 +94,9 @@ class StoryManager {
                 buffer[story.author]!.append(story)
             }
         }
-        var entities = [StoriesEntity]()
+        var entities = [StoryEntity]()
         buffer.forEach { key, value in
-            entities.append(StoriesEntity(stories: value, author: key))
+            entities.append(StoryEntity(stories: value, author: key))
         }
         return entities
     }
