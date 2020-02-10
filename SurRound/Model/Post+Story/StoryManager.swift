@@ -59,41 +59,45 @@ class StoryManager {
     
     func getStoriesEntityFromUsers(uids: [String], completion: @escaping StoriesEntitiesResult) {
         
-        let group = DispatchGroup()
-
-        uids.forEach { uid in
+        let query = storiesCollection.whereField(Story.CodingKeys.authorId.rawValue, isEqualTo: uids)
+        
+        query.getDocuments { (snapshot, error) in
             
-            group.enter()
-            Firestore.firestore().collection("users").document(uid).collection("user_stories").getDocuments { (snapshot, error) in
-                
-                guard let snapshot = snapshot, error == nil else {
-                    completion(.failure(error!))
+            guard let snapshot = snapshot, error == nil else {
+                completion(.failure(error!))
+                return
+            }
+            var stories = [Story]()
+            snapshot.documents.forEach { (document) in
+                do {
+                    if let story = try document.data(as: Story.self, decoder: Firestore.Decoder()) {
+                        stories.append(story)
+                    }
+                } catch {
+                    completion(.failure(error))
                     return
                 }
-
-                var stories = [Story]()
-                snapshot.documents.forEach { (document) in
-                    do {
-                        if let story = try document.data(as: Story.self, decoder: Firestore.Decoder()) {
-                            stories.append(story)
-                        }
-                    } catch {
-                        completion(.failure(error))
-                        return
-                    }
-                }
-                
-                if stories.count > 0 {
-                    let entity = StoriesEntity(stories: stories, author: stories.first!.author)
-                    self.buffer.append(entity)
-                }
-                group.leave()
+            }
+            let entities = self.mapStoriesEntities(stories: stories)
+            completion(.success(entities))
+        }
+    }
+    
+    private func mapStoriesEntities(stories: [Story]) -> [StoriesEntity] {
+        
+        var buffer = [Author: [Story]]()
+        for story in stories {
+            if buffer[story.author] == nil {
+                buffer[story.author] = [story]
+            } else {
+                buffer[story.author]!.append(story)
             }
         }
-        
-        group.notify(queue: .main) {
-            completion(.success(self.buffer))
+        var entities = [StoriesEntity]()
+        buffer.forEach { key, value in
+            entities.append(StoriesEntity(stories: value, author: key))
         }
+        return entities
     }
     
     func createStory(_ videoFileURL: URL, at place: SRPlace, completion: @escaping StoryResult) throws {

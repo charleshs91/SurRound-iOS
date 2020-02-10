@@ -133,7 +133,7 @@ struct Post: Codable {
     }
 }
 
-struct Author: Codable, Equatable {
+struct Author: Codable, Equatable, Hashable {
     
     let uid: String
     let username: String
