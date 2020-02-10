@@ -93,7 +93,7 @@ extension StoryViewController: UICollectionViewDataSource {
             guard let storyCell = cell as? StoryDetailCollectionCell else { return cell }
             
             storyCell.closeButton.addTarget(self, action: #selector(dismissStoryVC(_:)), for: .touchUpInside)
-            storyCell.url = URL(string: stories[indexPath.item].movieLink)!
+            storyCell.url = URL(string: stories[indexPath.item].videoLink)!
             storyCell.layoutIfNeeded()
             
             return storyCell

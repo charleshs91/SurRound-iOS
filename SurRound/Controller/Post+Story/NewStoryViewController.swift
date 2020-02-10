@@ -57,6 +57,7 @@ class NewStoryViewController: UIViewController {
         guard let place = PlaceManager.current.place else {
             return
         }
+        
         SRProgressHUD.showLoading(text: "Uploading Video...")
         do {
             try StoryManager().createStory(url, at: place) { result in

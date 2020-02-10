@@ -129,10 +129,6 @@ extension SelectLocationViewController: GMSAutocompleteResultsViewControllerDele
         
         searchController?.isActive = false
         
-        //        print("Place name: \(String(describing: place.name))")
-        //        print("Place address: \(String(describing: place.formattedAddress))")
-        //        print("Place attributions: \(String(describing: place.attributions))")
-        
         mapView.camera = GMSCameraPosition(latitude: place.coordinate.latitude,
                                            longitude: place.coordinate.longitude,
                                            zoom: 18)
@@ -145,12 +141,11 @@ extension SelectLocationViewController: GMSAutocompleteResultsViewControllerDele
         print("Error: ", error.localizedDescription)
     }
     
-    // Turn the network activity indicator on and off again.
     func didRequestAutocompletePredictions(forResultsController resultsController: GMSAutocompleteResultsViewController) {
-        //        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
     func didUpdateAutocompletePredictions(forResultsController resultsController: GMSAutocompleteResultsViewController) {
-        //        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }

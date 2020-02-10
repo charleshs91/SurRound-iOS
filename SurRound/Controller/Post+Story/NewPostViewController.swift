@@ -47,13 +47,12 @@ class NewPostViewController: UIViewController {
     @IBAction func post(_ sender: UIBarButtonItem) {
         
         guard let text = self.textCell?.textView.text,
-            let user = AuthManager.shared.currentUser,
+            let srUser = AuthManager.shared.currentUser,
             let place = self.postPlace else { return }
         
         let post = Post(id: PostManager.documentID(),
                         category: postCategory.text,
-                        author: Author(user: user),
-                        createdTime: Date(),
+                        author: Author(srUser),
                         text: text,
                         place: place)
         
