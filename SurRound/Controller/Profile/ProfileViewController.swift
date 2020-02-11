@@ -14,6 +14,12 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let user = AuthManager.shared.currentUser {
+            
+        }
+        
+        setupViews()
     }
     
     // MARK: - User Actions
@@ -22,9 +28,13 @@ class ProfileViewController: UIViewController {
         let isSuccessSignOut = AuthManager.shared.signOut()
         
         if isSuccessSignOut {
-            
             let authVC = UIStoryboard.auth.instantiateInitialViewController()
             AppDelegate.shared.window?.rootViewController = authVC
         }
+    }
+    
+    // MARK: - Private Methods
+    private func setupViews() {
+        
     }
 }

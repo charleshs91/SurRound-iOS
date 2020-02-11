@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseFirestore
 
-class StoryEntity {
+class StoryCollection {
     
     var stories: [Story]
     var author: Author

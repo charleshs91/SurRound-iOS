@@ -10,43 +10,60 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-typealias PostsResult = (Result<[Post], Error>) -> Void
+typealias PostsResult = (Result<[Post], FirestoreServiceError>) -> Void
 
-class PostManager {
+class PostManager: DataFetching {
     
     // Ask database for an unique id.
     static func documentID() -> String {
         return Firestore.firestore().collection("posts").document().documentID
     }
     
-    deinit {
-        debugPrint("$ deinit: PostManager")
+    private let dataFetcher: DataFetching
+    
+    init(dataFetcher: DataFetching = GenericFetcher()) {
+        self.dataFetcher = dataFetcher
     }
     
-    func fetchAllPosts(completion: @escaping PostsResult) {
+    func fetchPostOfUsers(uids: [String], completion: @escaping PostsResult) {
+
+        let query = FirestoreService.posts
+            .whereField(Post.CodingKeys.authorId.rawValue, in: uids)
+            .order(by: Post.CodingKeys.createdTime.rawValue, descending: false)
         
-        Firestore.firestore().collection("posts")
-            .order(by: "created_time", descending: true)
-            .getDocuments { snapshot, error in
-                
-                guard let snapshot = snapshot, error == nil else {
-                    completion(.failure(error!))
+        dataFetcher.fetch(from: query) { result in
+            
+            switch result {
+            case .success(let documents):
+                guard let posts = GenericParser.parse(documents, of: Post.self) else {
+                    completion(.failure(.parsingError))
                     return
                 }
+                completion(.success(posts))
                 
-                var posts: [Post] = []
-                
-                snapshot.documents.forEach { document in
-                    do {
-                        if let post = try document.data(as: Post.self, decoder: Firestore.Decoder()) {
-                            posts.append(post)
-                        }
-                    } catch {
-                        completion(.failure(error))
-                        return
-                    }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchAllPost(completion: @escaping PostsResult) {
+        
+        let query = FirestoreService.posts.order(by: "created_time", descending: true)
+        
+        dataFetcher.fetch(from: query) { result in
+            
+            switch result {
+            case .success(let documents):
+                guard let posts = GenericParser.parse(documents, of: Post.self) else {
+                    completion(.failure(.parsingError))
+                    return
                 }
                 completion(.success(posts))
+                
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
     

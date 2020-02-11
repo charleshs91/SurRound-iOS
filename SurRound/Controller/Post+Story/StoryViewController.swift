@@ -12,7 +12,7 @@ class StoryViewController: UIViewController {
     
     var indexPath: IndexPath = IndexPath(item: 0, section: 0)
     
-    var storyEntities = [StoryEntity]()
+    var storyEntities = [StoryCollection]()
     
     var currentSection: Int = 0 {
         didSet { progressBarCollectionView.reloadData() }

@@ -25,7 +25,7 @@ class HomeViewController: UIViewController {
     
     private var postMarkers = [PostMarker]()
     
-    private var storyEntities = [StoryEntity]() {
+    private var storyEntities = [StoryCollection]() {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -103,7 +103,7 @@ class HomeViewController: UIViewController {
     @objc private func fetchStories() {
         
         storyEntities.removeAll()
-        StoryManager().fetchAllStoryEntities { [weak self] result in
+        StoryManager().fetchStoryCollection { [weak self] result in
             
             switch result {
             case .success(let entities):
@@ -118,7 +118,7 @@ class HomeViewController: UIViewController {
     @objc private func fetchPosts() {
         
         postMarkers.removeAll()
-        PostManager().fetchAllPosts { [weak self] result in
+        PostManager().fetchAllPost { [weak self] result in
             
             switch result {
             case .success(let posts):

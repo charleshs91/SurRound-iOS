@@ -11,7 +11,7 @@ import FirebaseStorage
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-typealias StoryEntitiesResult = (Result<[StoryEntity], Error>) -> Void
+typealias StoryCollectionsResult = (Result<[StoryCollection], FirestoreServiceError>) -> Void
 typealias StoryResult = (Result<Story, Error>) -> Void
 //typealias StoriesResult = (Result<[Story], Error>) -> Void
 
@@ -32,55 +32,55 @@ class StoryManager {
         return Firestore.firestore().collection("stories").document().documentID
     }
     
+    private let dataFetcher: DataFetching
+    
     lazy var storiesCollection = Firestore.firestore().collection("stories")
     
-    var buffer: [StoryEntity] = []
+    var buffer: [StoryCollection] = []
     
-    func fetchAllStoryEntities(completion: @escaping StoryEntitiesResult) {
+    init(dataFetcher: DataFetching = GenericFetcher()) {
+        self.dataFetcher = dataFetcher
+    }
+    
+    func fetchStoryCollection(completion: @escaping StoryCollectionsResult) {
         
-        storiesCollection.getDocuments { (snapshot, error) in
+        let collection = FirestoreService.stories
+        
+        dataFetcher.fetch(from: collection) { result in
             
-            guard let snapshot = snapshot, error == nil else { return }
-            
-            var stories = [Story]()
-            snapshot.documents.forEach { (document) in
-                do {
-                    if let story = try document.data(as: Story.self, decoder: Firestore.Decoder()) {
-                        stories.append(story)
-                    }
-                } catch {
-                    completion(.failure(error))
+            switch result {
+            case .success(let documents):
+                guard let stories = GenericParser.parse(documents, of: Story.self) else {
+                    completion(.failure(.parsingError))
                     return
                 }
+                let entities = self.mapping(stories: stories)
+                completion(.success(entities))
+                
+            case .failure(let error):
+                completion(.failure(error))
             }
-            let entities = self.mapping(stories: stories)
-            completion(.success(entities))
         }
     }
     
-    func fetchStoryEntitiesFromUsers(uids: [String], completion: @escaping StoryEntitiesResult) {
+    func fetchStoryCollectionFrom(users uids: [String], completion: @escaping StoryCollectionsResult) {
         
-        let query = storiesCollection.whereField(Story.CodingKeys.authorId.rawValue, isEqualTo: uids)
+        let query = FirestoreService.stories.whereField(Story.CodingKeys.authorId.rawValue, in: uids)
         
-        query.getDocuments { (snapshot, error) in
+        dataFetcher.fetch(from: query) { result in
             
-            guard let snapshot = snapshot, error == nil else {
-                completion(.failure(error!))
-                return
-            }
-            var stories = [Story]()
-            snapshot.documents.forEach { (document) in
-                do {
-                    if let story = try document.data(as: Story.self, decoder: Firestore.Decoder()) {
-                        stories.append(story)
-                    }
-                } catch {
-                    completion(.failure(error))
+            switch result {
+            case .success(let documents):
+                guard let stories = GenericParser.parse(documents, of: Story.self) else {
+                    completion(.failure(.parsingError))
                     return
                 }
+                let entities = self.mapping(stories: stories)
+                completion(.success(entities))
+                
+            case .failure(let error):
+                completion(.failure(error))
             }
-            let entities = self.mapping(stories: stories)
-            completion(.success(entities))
         }
     }
     
@@ -121,7 +121,7 @@ class StoryManager {
         }
     }
     
-    private func mapping(stories: [Story]) -> [StoryEntity] {
+    private func mapping(stories: [Story]) -> [StoryCollection] {
         
         var buffer = [Author: [Story]]()
         for story in stories {
@@ -131,9 +131,9 @@ class StoryManager {
                 buffer[story.author]!.append(story)
             }
         }
-        var entities = [StoryEntity]()
+        var entities = [StoryCollection]()
         buffer.forEach { key, value in
-            entities.append(StoryEntity(stories: value, author: key))
+            entities.append(StoryCollection(stories: value, author: key))
         }
         return entities
     }

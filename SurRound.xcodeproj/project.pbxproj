@@ -80,6 +80,9 @@
 		D365E4E123E455C000480F11 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365E4E023E455C000480F11 /* ExploreView.swift */; };
 		D365E4E323E4720900480F11 /* SRColoredNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365E4E223E4720900480F11 /* SRColoredNavController.swift */; };
 		D36B694523F28A8800AAED0D /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B694423F28A8800AAED0D /* ProfileHeaderView.swift */; };
+		D36B695123F29F2300AAED0D /* GenericFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B695023F29F2300AAED0D /* GenericFetcher.swift */; };
+		D36B695323F29FA100AAED0D /* GenericParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B695223F29FA100AAED0D /* GenericParser.swift */; };
+		D36B695923F2A9D000AAED0D /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B695823F2A9D000AAED0D /* FirestoreService.swift */; };
 		D36D8F9223EC51F900E6348D /* PostListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36D8F9123EC51F900E6348D /* PostListCellViewModel.swift */; };
 		D36D8F9523EC602600E6348D /* TextPostListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36D8F9323EC602600E6348D /* TextPostListCell.swift */; };
 		D36D8F9623EC602600E6348D /* TextPostListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36D8F9423EC602600E6348D /* TextPostListCell.xib */; };
@@ -224,6 +227,9 @@
 		D365E4E023E455C000480F11 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
 		D365E4E223E4720900480F11 /* SRColoredNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRColoredNavController.swift; sourceTree = "<group>"; };
 		D36B694423F28A8800AAED0D /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		D36B695023F29F2300AAED0D /* GenericFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericFetcher.swift; sourceTree = "<group>"; };
+		D36B695223F29FA100AAED0D /* GenericParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericParser.swift; sourceTree = "<group>"; };
+		D36B695823F2A9D000AAED0D /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
 		D36D8F9123EC51F900E6348D /* PostListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListCellViewModel.swift; sourceTree = "<group>"; };
 		D36D8F9323EC602600E6348D /* TextPostListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPostListCell.swift; sourceTree = "<group>"; };
 		D36D8F9423EC602600E6348D /* TextPostListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextPostListCell.xib; sourceTree = "<group>"; };
@@ -522,6 +528,16 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		D36B694B23F29CFA00AAED0D /* FirestoreService */ = {
+			isa = PBXGroup;
+			children = (
+				D36B695823F2A9D000AAED0D /* FirestoreService.swift */,
+				D36B695023F29F2300AAED0D /* GenericFetcher.swift */,
+				D36B695223F29FA100AAED0D /* GenericParser.swift */,
+			);
+			path = FirestoreService;
+			sourceTree = "<group>";
+		};
 		D36D8F8F23EC514500E6348D /* PostListCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,6 +582,7 @@
 		D39997F023DB4F9F00595B2F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D36B694B23F29CFA00AAED0D /* FirestoreService */,
 				D36D8F9023EC51D700E6348D /* ViewModel */,
 				D3A3B5F523E31D12003201E1 /* Storage */,
 				D3A3B5F223E2A7CF003201E1 /* Location */,
@@ -1052,6 +1069,7 @@
 				D39997ED23DB487B00595B2F /* TextRelatable.swift in Sources */,
 				D3552B3323DF359500453FAA /* NewPostMediaCell.swift in Sources */,
 				D365E4DC23E4542A00480F11 /* TrendingListViewController.swift in Sources */,
+				D36B695923F2A9D000AAED0D /* FirestoreService.swift in Sources */,
 				D361071823F0FEB2007AFDC2 /* StoryCounterCell.swift in Sources */,
 				D365E4DE23E4546300480F11 /* NearestListViewController.swift in Sources */,
 				D3086B6E23DB57E80071F378 /* AuthManager.swift in Sources */,
@@ -1083,6 +1101,7 @@
 				D39A754223D5DACF00A20879 /* SRTabBarController.swift in Sources */,
 				D3A3B5FD23E3F5E6003201E1 /* PostManager.swift in Sources */,
 				D32F7F3623EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift in Sources */,
+				D36B695323F29FA100AAED0D /* GenericParser.swift in Sources */,
 				D3A4BB6323F15678005E8196 /* Numbers+Extension.swift in Sources */,
 				D35C488F23CF352B000951D2 /* AppDelegate.swift in Sources */,
 				D365E4D823E4536D00480F11 /* ExploreViewController.swift in Sources */,
@@ -1100,6 +1119,7 @@
 				D39A755623D5E85C00A20879 /* UIImage+Extension.swift in Sources */,
 				D39997F323DB4FD000595B2F /* AuthInputCategory.swift in Sources */,
 				D3A3B5F423E2A7E1003201E1 /* PlaceManager.swift in Sources */,
+				D36B695123F29F2300AAED0D /* GenericFetcher.swift in Sources */,
 				D3086B8C23DC8E7B0071F378 /* Constant.swift in Sources */,
 				D3086B8F23DC9D3A0071F378 /* LocationTableViewCell.swift in Sources */,
 				D3850D7E23DAD879008F1F7E /* UIWindow+Extension.swift in Sources */,
