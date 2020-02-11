@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16085" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yab-hb-Xqh">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16078.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Profile View Controller-->
+        <scene sceneID="CsU-D8-zs6">
+            <objects>
+                <viewController id="y53-h9-qyE" customClass="ProfileViewController" customModule="SurRound" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oxM-jv-uLL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AiL-xM-Yqn">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" id="vE3-qb-kVw" customClass="ProfileHeaderView" customModule="SurRound" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="414" height="275"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icons_Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="cqA-s0-QkO">
+                                        <rect key="frame" x="157" y="61" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="UtN-9E-inb"/>
+                                            <constraint firstAttribute="width" secondItem="cqA-s0-QkO" secondAttribute="height" multiplier="1:1" id="qm3-8c-BgY"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAW-eN-JLZ">
+                                        <rect key="frame" x="167.5" y="24" width="79" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Posts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tty-4b-mCI">
+                                        <rect key="frame" x="67.5" y="201" width="43" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Followers" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fjk-W9-YTp">
+                                        <rect key="frame" x="283.5" y="201" width="73" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Following" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5On-6h-oa1">
+                                        <rect key="frame" x="170.5" y="201" width="73" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="cqA-s0-QkO" firstAttribute="centerX" secondItem="vE3-qb-kVw" secondAttribute="centerX" id="BVk-RA-IUy"/>
+                                    <constraint firstItem="Fjk-W9-YTp" firstAttribute="centerY" secondItem="5On-6h-oa1" secondAttribute="centerY" id="Kt6-1N-hcg"/>
+                                    <constraint firstItem="5On-6h-oa1" firstAttribute="leading" secondItem="tty-4b-mCI" secondAttribute="trailing" constant="60" id="NfE-mm-CRI"/>
+                                    <constraint firstItem="cqA-s0-QkO" firstAttribute="top" secondItem="gAW-eN-JLZ" secondAttribute="bottom" constant="16" id="Swo-9q-jbu"/>
+                                    <constraint firstItem="gAW-eN-JLZ" firstAttribute="centerX" secondItem="cqA-s0-QkO" secondAttribute="centerX" id="WTo-Lv-c4B"/>
+                                    <constraint firstItem="tty-4b-mCI" firstAttribute="centerY" secondItem="5On-6h-oa1" secondAttribute="centerY" id="Z8v-Aq-c6f"/>
+                                    <constraint firstItem="gAW-eN-JLZ" firstAttribute="top" secondItem="vE3-qb-kVw" secondAttribute="top" constant="24" id="bpW-p5-Gja"/>
+                                    <constraint firstItem="Fjk-W9-YTp" firstAttribute="leading" secondItem="5On-6h-oa1" secondAttribute="trailing" constant="40" id="cZE-ZP-64Q"/>
+                                    <constraint firstItem="5On-6h-oa1" firstAttribute="top" secondItem="cqA-s0-QkO" secondAttribute="bottom" constant="40" id="nhM-qb-OjQ"/>
+                                    <constraint firstItem="5On-6h-oa1" firstAttribute="centerX" secondItem="cqA-s0-QkO" secondAttribute="centerX" id="rDn-bm-vbi"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="followerCountLabel" destination="Fjk-W9-YTp" id="7MK-Rj-aiC"/>
+                                    <outlet property="followingCountLabel" destination="5On-6h-oa1" id="sza-lN-imc"/>
+                                    <outlet property="postCountLabel" destination="tty-4b-mCI" id="hLy-82-1nD"/>
+                                    <outlet property="profileImageView" destination="cqA-s0-QkO" id="qBG-Hv-dAO"/>
+                                    <outlet property="usernameLabel" destination="gAW-eN-JLZ" id="djI-Sq-GMx"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="AiL-xM-Yqn" firstAttribute="top" secondItem="c7X-7G-7QB" secondAttribute="top" id="9gB-BK-765"/>
+                            <constraint firstItem="AiL-xM-Yqn" firstAttribute="leading" secondItem="c7X-7G-7QB" secondAttribute="leading" id="G8y-da-khR"/>
+                            <constraint firstItem="c7X-7G-7QB" firstAttribute="bottom" secondItem="AiL-xM-Yqn" secondAttribute="bottom" id="Tf4-8R-GDO"/>
+                            <constraint firstItem="c7X-7G-7QB" firstAttribute="trailing" secondItem="AiL-xM-Yqn" secondAttribute="trailing" id="U9j-N2-uKb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="c7X-7G-7QB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="EWQ-ts-iie">
+                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="FVr-ij-Co8">
+                            <connections>
+                                <action selector="signOut:" destination="y53-h9-qyE" id="m9f-7h-BTl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="profileHeaderView" destination="vE3-qb-kVw" id="cTy-fV-EBy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="45m-IU-ni7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1010.144927536232" y="-303.34821428571428"/>
+        </scene>
+        <!--Colored Nav Controller-->
+        <scene sceneID="i3I-rP-mpp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yab-hb-Xqh" customClass="SRColoredNavController" customModule="SurRound" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IeI-gq-420">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="y53-h9-qyE" kind="relationship" relationship="rootViewController" id="1Mv-8K-3RB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e8H-gi-0S1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="100.00000000000001" y="-303.34821428571428"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Icons_Avatar" width="32" height="32"/>
+    </resources>
+</document>

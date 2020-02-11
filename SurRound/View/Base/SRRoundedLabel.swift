@@ -27,7 +27,7 @@ class SRRoundedLabel: UILabel {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.roundToHeight()
+        self.roundToHalfHeight()
     }
     
     private func addInsets(to size: CGSize) -> CGSize {

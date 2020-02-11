@@ -62,7 +62,7 @@ class TextPostListCell: PostListCell {
         
         selectionStyle = .none
         
-        avatarImageView.roundToHeight()
+        avatarImageView.roundToHalfHeight()
                 
         substrateView.layer.cornerRadius = 8
         substrateView.layer.shadowColor = UIColor.lightGray.cgColor

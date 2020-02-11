@@ -79,6 +79,7 @@
 		D365E4DE23E4546300480F11 /* NearestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365E4DD23E4546300480F11 /* NearestListViewController.swift */; };
 		D365E4E123E455C000480F11 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365E4E023E455C000480F11 /* ExploreView.swift */; };
 		D365E4E323E4720900480F11 /* SRColoredNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365E4E223E4720900480F11 /* SRColoredNavController.swift */; };
+		D36B694523F28A8800AAED0D /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B694423F28A8800AAED0D /* ProfileHeaderView.swift */; };
 		D36D8F9223EC51F900E6348D /* PostListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36D8F9123EC51F900E6348D /* PostListCellViewModel.swift */; };
 		D36D8F9523EC602600E6348D /* TextPostListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36D8F9323EC602600E6348D /* TextPostListCell.swift */; };
 		D36D8F9623EC602600E6348D /* TextPostListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36D8F9423EC602600E6348D /* TextPostListCell.xib */; };
@@ -222,6 +223,7 @@
 		D365E4DD23E4546300480F11 /* NearestListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestListViewController.swift; sourceTree = "<group>"; };
 		D365E4E023E455C000480F11 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
 		D365E4E223E4720900480F11 /* SRColoredNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRColoredNavController.swift; sourceTree = "<group>"; };
+		D36B694423F28A8800AAED0D /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		D36D8F9123EC51F900E6348D /* PostListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListCellViewModel.swift; sourceTree = "<group>"; };
 		D36D8F9323EC602600E6348D /* TextPostListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPostListCell.swift; sourceTree = "<group>"; };
 		D36D8F9423EC602600E6348D /* TextPostListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextPostListCell.xib; sourceTree = "<group>"; };
@@ -511,6 +513,15 @@
 			path = Explore;
 			sourceTree = "<group>";
 		};
+		D36B693B23F25BB200AAED0D /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D39A754D23D5E44100A20879 /* Profile.storyboard */,
+				D36B694423F28A8800AAED0D /* ProfileHeaderView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		D36D8F8F23EC514500E6348D /* PostListCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,13 +599,13 @@
 		D39A754623D5E36F00A20879 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D36B693B23F25BB200AAED0D /* Profile */,
 				D365E4DF23E4559E00480F11 /* Explore */,
 				D3086B8423DC85320071F378 /* Post+Story */,
 				D3949AFC23D9AB28006DA9AA /* Home */,
 				D39997F423DB510800595B2F /* Auth */,
 				D35CA75723E523FB0055F84E /* Base */,
 				D39A754A23D5E3E700A20879 /* Message.storyboard */,
-				D39A754D23D5E44100A20879 /* Profile.storyboard */,
 				D35C489423CF352B000951D2 /* Main.storyboard */,
 				D35C489923CF352E000951D2 /* LaunchScreen.storyboard */,
 			);
@@ -1084,6 +1095,7 @@
 				D32022DD23DAA8310057EB24 /* SignUpViewController.swift in Sources */,
 				D363153E23E5CEF30000150B /* TrendingListGridCell.swift in Sources */,
 				D363154823E6132F0000150B /* PlaceItemListCell.swift in Sources */,
+				D36B694523F28A8800AAED0D /* ProfileHeaderView.swift in Sources */,
 				D365E4E123E455C000480F11 /* ExploreView.swift in Sources */,
 				D39A755623D5E85C00A20879 /* UIImage+Extension.swift in Sources */,
 				D39997F323DB4FD000595B2F /* AuthInputCategory.swift in Sources */,

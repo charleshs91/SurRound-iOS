@@ -10,12 +10,14 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var profileHeaderView: ProfileHeaderView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     // MARK: - User Actions
-    @IBAction func signOut(_ sender: UIButton) {
+    @IBAction func signOut(_ sender: UIBarButtonItem) {
         
         let isSuccessSignOut = AuthManager.shared.signOut()
         

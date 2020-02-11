@@ -72,7 +72,7 @@ class StoryViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        closeButton.roundToHeight()
+        closeButton.roundToHalfHeight()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

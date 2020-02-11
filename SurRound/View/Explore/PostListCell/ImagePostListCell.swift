@@ -63,7 +63,7 @@ class ImagePostListCell: PostListCell {
         
         selectionStyle = .none
         
-        avatarImageView.roundToHeight()
+        avatarImageView.roundToHalfHeight()
         
         postImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         postImageView.layer.cornerRadius = 8
