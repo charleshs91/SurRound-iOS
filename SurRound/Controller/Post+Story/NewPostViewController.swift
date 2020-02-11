@@ -135,6 +135,8 @@ class NewPostViewController: UIViewController {
     
     private func postSuccessHandler() {
         
+        NotificationCenter.default.post(name: Constant.NotificationId.newPost, object: nil)
+        
         SRProgressHUD.showSuccess(text: "New post created")
         dismiss(animated: true, completion: nil)
     }

@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var mapView: GMSMapView!
     
     private var postMarkers = [PostMarker]()
+    
     private var storyEntities = [StoryEntity]() {
         didSet {
             DispatchQueue.main.async {
@@ -43,17 +44,19 @@ class HomeViewController: UIViewController {
         updateLocation()
         
         configureMap()
+        
+        fetchPosts()
+        
+        fetchStories()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchPosts), name: Constant.NotificationId.newPost, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchStories), name: Constant.NotificationId.newStory, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if postMarkers.count == 0 {
-            fetchPosts()
-        }
-        if storyEntities.count == 0 {
-            fetchStories()
-        }
     }
     
     // MARK: - User Actions
@@ -62,12 +65,12 @@ class HomeViewController: UIViewController {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         
-        let imagePickerAlert = UIAlertController(title: "Create Story with Video",
+        let imagePickerAlert = UIAlertController(title: "Post Video Story",
                                                  message: "Select video source from",
                                                  preferredStyle: .actionSheet)
         
         imagePickerAlert.addAction(
-            UIAlertAction(title: "Video library", style: .default) { [weak self] _ in
+            UIAlertAction(title: "Library", style: .default) { [weak self] _ in
                 
                 if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
                     imagePicker.sourceType = .photoLibrary
@@ -97,16 +100,14 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Private Methods
-    private func fetchStories() {
+    @objc private func fetchStories() {
         
         storyEntities.removeAll()
         StoryManager().fetchAllStoryEntities { [weak self] result in
             
-            guard let strongSelf = self else { return }
-            
             switch result {
             case .success(let entities):
-                strongSelf.storyEntities.append(contentsOf: entities)
+                self?.storyEntities.append(contentsOf: entities)
                 
             case .failure(let error):
                 SRProgressHUD.showFailure(text: error.localizedDescription)
@@ -114,12 +115,10 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func fetchPosts() {
+    @objc private func fetchPosts() {
         
         postMarkers.removeAll()
         PostManager().fetchAllPosts { [weak self] result in
-            
-            guard let strongSelf = self else { return }
             
             switch result {
             case .success(let posts):
@@ -127,10 +126,10 @@ class HomeViewController: UIViewController {
                     let position = CLLocationCoordinate2D(latitude: post.place.coordinate.latitude,
                                                           longitude: post.place.coordinate.longitude)
                     let marker = GMSMarker(position: position)
-                    strongSelf.postMarkers.append(PostMarker(post: post, mapMarker: marker))
+                    self?.postMarkers.append(PostMarker(post: post, mapMarker: marker))
                 }
                 DispatchQueue.main.async {
-                    strongSelf.displayPostsOnMap()
+                    self?.displayPostsOnMap()
                 }
                 
             case .failure(let error):
@@ -140,6 +139,7 @@ class HomeViewController: UIViewController {
     }
     
     private func updateLocation() {
+        
         do {
             try PlaceManager.current.updateLocation()
             
@@ -170,19 +170,12 @@ class HomeViewController: UIViewController {
             mapView.camera = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 18.0)
         }
     }
-    
-    private func markerView() -> UIView {
         
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 12))
-        view.backgroundColor = .black
-        view.layer.cornerRadius = view.frame.size.width / 2
-        return view
-    }
-    
     private func displayPostsOnMap() {
         
         postMarkers.forEach { [weak self] postPin in
             postPin.mapMarker.icon = UIImage.asset(.Icons_16px_RestaurantMarker)
+            postPin.mapMarker.setIconSize(scaledToSize: CGSize(width: 24, height: 24))
             postPin.mapMarker.map = self?.mapView
         }
     }
@@ -297,4 +290,16 @@ extension HomeViewController: UIImagePickerControllerDelegate {
 // MARK: - UINavigationControllerDelegate
 extension HomeViewController: UINavigationControllerDelegate {
     
+}
+
+extension GMSMarker {
+    
+    func setIconSize(scaledToSize newSize: CGSize) {
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        icon?.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        icon = newImage
+    }
 }

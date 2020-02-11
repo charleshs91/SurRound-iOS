@@ -11,6 +11,7 @@ import UIKit
 class CategorySelectorViewController: UIViewController {
     
     static func storyboardInstance() -> CategorySelectorViewController? {
+        
         return UIStoryboard.newPost.instantiateViewController(
             identifier: String(describing: CategorySelectorViewController.self)
             ) as? CategorySelectorViewController
@@ -21,7 +22,7 @@ class CategorySelectorViewController: UIViewController {
     @IBOutlet var popUpView: UIView!
     
     // Private Constants
-    private let popUpViewHeight: CGFloat = 275
+    private let popUpViewHeight: CGFloat = 250
     
     private let categories: [PostCategory] = [.chat, .question, .food, .scenary, .shopping, .cancel]
     
@@ -65,12 +66,11 @@ class CategorySelectorViewController: UIViewController {
         
         btnsCollectionView.backgroundColor = .clear
         btnsCollectionView.registerCell(cellWithClass: CategoryButtonCell.self)
-        btnsCollectionView.stickToView(popUpView)
     }
     
     private func stylePopUpView() {
         
-        popUpView.backgroundColor = UIColor.hexStringToUIColor(hex: "FBFFE6")
+        popUpView.backgroundColor = UIColor.hexStringToUIColor(hex: "FBFFE6").withAlphaComponent(0.8)
         popUpView.layer.setShadow(radius: 3,
                                   offset: CGSize(width: 3, height: -3),
                                   color: .darkGray,
@@ -150,12 +150,15 @@ extension CategorySelectorViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsets(top: 10, left: 20, bottom: 0, right: 20)
+        let padding = UIScreen.width / 10
+        
+        return UIEdgeInsets(top: 20, left: padding, bottom: 0, right: padding)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = UIScreen.width / 4.5
-        return CGSize(width: width, height: width)
+        let width = UIScreen.width / 4
+        let height = popUpView.frame.height / 3
+        return CGSize(width: width, height: height)
     }
 }

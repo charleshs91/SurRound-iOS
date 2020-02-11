@@ -65,6 +65,8 @@ class NewStoryViewController: UIViewController {
                 SRProgressHUD.dismiss()
                 switch result {
                 case .success:
+                    NotificationCenter.default.post(name: Constant.NotificationId.newStory, object: nil)
+                    
                     self.presentingViewController?.dismiss(animated: true, completion: {
                         SRProgressHUD.showSuccess()
                     })
