@@ -21,13 +21,15 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileHeaderView: ProfileHeaderView!
     
+    var userToDisplay: SRUser?
+    
     private let tabTitle = ["My Posts", "Saved"]
     
-    private var posts = [Post]() {
+    private var posts = [Post]()
+    
+    private var viewModels = [PostListCellViewModel]() {
         didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+            self.tableView.reloadData()
         }
     }
     
@@ -35,6 +37,11 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         fetchUserPost()
+        
+        if userToDisplay == nil {
+            let user = AuthManager.shared.currentUser!
+            profileHeaderView.setupView(user: user)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -59,7 +66,9 @@ class ProfileViewController: UIViewController {
     // MARK: - Private Methods
     private func setupViews() {
         
-        tableView.registerCellWithNib(withCellClass: GeneralPostListCell.self)
+        tableView.registerCellWithNib(withCellClass: ImagePostListCell.self)
+        tableView.registerCellWithNib(withCellClass: TextPostListCell.self)
+        tableView.registerCellWithNib(withCellClass: VideoPostListCell.self)
         
         let guide = view.safeAreaLayoutGuide
         tableView.anchor(top: guide.topAnchor, left: guide.leftAnchor, bottom: guide.bottomAnchor, right: guide.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0)
@@ -69,11 +78,15 @@ class ProfileViewController: UIViewController {
     
     private func fetchUserPost() {
         
+        posts.removeAll()
+        viewModels.removeAll()
+        
         guard let user = AuthManager.shared.currentUser else { return }
-        PostManager().fetchPostOfUsers(uids: [user.uid]) { result in
+        PostManager().fetchPostOfUsers(uids: [user.uid]) { [weak self] result in
             switch result {
             case .success(let posts):
-                self.posts = posts
+                self?.posts.append(contentsOf: posts)
+                self?.viewModels.append(contentsOf: ViewModelFactory.viewModelFromPosts(posts))
             case .failure(let error):
                 print(error)
             }
@@ -85,24 +98,24 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return posts.count
+        return self.viewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: GeneralPostListCell.reuseIdentifier, for: indexPath)
+        let viewModel = viewModels[indexPath.row]
         
-        return cell
+        let cell = viewModel.cellType.makeCell(tableView, at: indexPath)
+        guard let postListCell = cell as? PostListCell else {
+            return cell
+        }
+        
+        postListCell.layoutCell(with: viewModel)
+        return postListCell
     }
 }
 
 extension ProfileViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 145
-    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         

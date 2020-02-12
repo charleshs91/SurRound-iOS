@@ -47,4 +47,9 @@ class ProfileHeaderView: UIView {
         editAvatarButton.layer.borderWidth = 2
         editAvatarButton.layer.borderColor = UIColor.white.cgColor
     }
+    
+    func setupView(user: SRUser) {
+        usernameLabel.text = user.username
+        profileImageView.loadImage(user.avatar, placeholder: UIImage.asset(.Icons_Avatar))
+    }
 }
