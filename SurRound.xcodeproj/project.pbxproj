@@ -18,8 +18,8 @@
 		D3086B8323DC83110071F378 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B8223DC83110071F378 /* NewPostViewController.swift */; };
 		D3086B8623DC85550071F378 /* PostContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B8523DC85550071F378 /* PostContentView.swift */; };
 		D3086B8C23DC8E7B0071F378 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B8B23DC8E7B0071F378 /* Constant.swift */; };
-		D3086B8F23DC9D3A0071F378 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B8D23DC9D3A0071F378 /* LocationTableViewCell.swift */; };
-		D3086B9023DC9D3A0071F378 /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3086B8E23DC9D3A0071F378 /* LocationTableViewCell.xib */; };
+		D3086B8F23DC9D3A0071F378 /* PostInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B8D23DC9D3A0071F378 /* PostInfoTableViewCell.swift */; };
+		D3086B9023DC9D3A0071F378 /* PostInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3086B8E23DC9D3A0071F378 /* PostInfoTableViewCell.xib */; };
 		D3086B9323DCA0940071F378 /* BodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B9123DCA0940071F378 /* BodyTableViewCell.swift */; };
 		D3086B9423DCA0940071F378 /* BodyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3086B9223DCA0940071F378 /* BodyTableViewCell.xib */; };
 		D3086B9623DCA2160071F378 /* ReusableCellRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B9523DCA2160071F378 /* ReusableCellRegister.swift */; };
@@ -120,6 +120,7 @@
 		D3C36E5623EBCCFE00E2BD1C /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5523EBCCFE00E2BD1C /* PlaceModel.swift */; };
 		D3C36E5823EBFC0E00E2BD1C /* PostCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5723EBFC0E00E2BD1C /* PostCategory.swift */; };
 		D3E6AF9223F4000000897AFF /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6AF9123F4000000897AFF /* ProfileManager.swift */; };
+		D3E6AF9D23F45CDA00897AFF /* SRMapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6AF9C23F45CDA00897AFF /* SRMapMarker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,8 +161,8 @@
 		D3086B8223DC83110071F378 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
 		D3086B8523DC85550071F378 /* PostContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentView.swift; sourceTree = "<group>"; };
 		D3086B8B23DC8E7B0071F378 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
-		D3086B8D23DC9D3A0071F378 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
-		D3086B8E23DC9D3A0071F378 /* LocationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationTableViewCell.xib; sourceTree = "<group>"; };
+		D3086B8D23DC9D3A0071F378 /* PostInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInfoTableViewCell.swift; sourceTree = "<group>"; };
+		D3086B8E23DC9D3A0071F378 /* PostInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostInfoTableViewCell.xib; sourceTree = "<group>"; };
 		D3086B9123DCA0940071F378 /* BodyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTableViewCell.swift; sourceTree = "<group>"; };
 		D3086B9223DCA0940071F378 /* BodyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyTableViewCell.xib; sourceTree = "<group>"; };
 		D3086B9523DCA2160071F378 /* ReusableCellRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCellRegister.swift; sourceTree = "<group>"; };
@@ -268,6 +269,7 @@
 		D3C36E5523EBCCFE00E2BD1C /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		D3C36E5723EBFC0E00E2BD1C /* PostCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategory.swift; sourceTree = "<group>"; };
 		D3E6AF9123F4000000897AFF /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
+		D3E6AF9C23F45CDA00897AFF /* SRMapMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRMapMarker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -409,10 +411,10 @@
 			children = (
 				D3086B7823DB89E90071F378 /* Post.storyboard */,
 				D3086B8523DC85550071F378 /* PostContentView.swift */,
-				D3086B8D23DC9D3A0071F378 /* LocationTableViewCell.swift */,
-				D3086B8E23DC9D3A0071F378 /* LocationTableViewCell.xib */,
 				D3086B9123DCA0940071F378 /* BodyTableViewCell.swift */,
 				D3086B9223DCA0940071F378 /* BodyTableViewCell.xib */,
+				D3086B8D23DC9D3A0071F378 /* PostInfoTableViewCell.swift */,
+				D3086B8E23DC9D3A0071F378 /* PostInfoTableViewCell.xib */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -566,6 +568,7 @@
 			children = (
 				D39A754323D5E30600A20879 /* Home.storyboard */,
 				D338FF3E23E8119700CAB8CB /* StoryPreviewCell.swift */,
+				D3E6AF9C23F45CDA00897AFF /* SRMapMarker.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -909,7 +912,7 @@
 				D3949AFB23D9A912006DA9AA /* NewPost.storyboard in Resources */,
 				D326796423E2940100F94BFD /* NewPostMapCell.xib in Resources */,
 				D363153F23E5CEF30000150B /* TrendingListGridCell.xib in Resources */,
-				D3086B9023DC9D3A0071F378 /* LocationTableViewCell.xib in Resources */,
+				D3086B9023DC9D3A0071F378 /* PostInfoTableViewCell.xib in Resources */,
 				D363154923E6132F0000150B /* PlaceItemListCell.xib in Resources */,
 				D35C489B23CF352E000951D2 /* LaunchScreen.storyboard in Resources */,
 				D36D8F9C23EC673600E6348D /* VideoPostListCell.xib in Resources */,
@@ -1133,7 +1136,7 @@
 				D3A3B5F423E2A7E1003201E1 /* PlaceManager.swift in Sources */,
 				D36B695123F29F2300AAED0D /* GenericFetcher.swift in Sources */,
 				D3086B8C23DC8E7B0071F378 /* Constant.swift in Sources */,
-				D3086B8F23DC9D3A0071F378 /* LocationTableViewCell.swift in Sources */,
+				D3086B8F23DC9D3A0071F378 /* PostInfoTableViewCell.swift in Sources */,
 				D3850D7E23DAD879008F1F7E /* UIWindow+Extension.swift in Sources */,
 				D335D5E123DEB4FF0021B461 /* WelcomeViewController.swift in Sources */,
 				D3086B7D23DB8A830071F378 /* PostContentViewController.swift in Sources */,
@@ -1142,6 +1145,7 @@
 				D364978223D816370078C4E0 /* HomeNavController.swift in Sources */,
 				D338FF4623E94EE000CAB8CB /* UIScreen+Extension.swift in Sources */,
 				D3949B0323D9AE12006DA9AA /* InvisibleNavController.swift in Sources */,
+				D3E6AF9D23F45CDA00897AFF /* SRMapMarker.swift in Sources */,
 				D36D8F9B23EC673600E6348D /* VideoPostListCell.swift in Sources */,
 				D3C36E5623EBCCFE00E2BD1C /* PlaceModel.swift in Sources */,
 				D32F7F3223E9C60800FBC0D3 /* ESPullToRefreshWrapper.swift in Sources */,

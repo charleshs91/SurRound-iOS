@@ -11,14 +11,18 @@ import GoogleMaps
 import MobileCoreServices
 
 struct PostMarker {
+    
     let post: Post
+    
     let mapMarker: GMSMarker
 }
 
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView! {
-        didSet { setupCollectionView() }
+        didSet {
+            setupCollectionView()
+        }
     }
     
     @IBOutlet weak var mapView: GMSMapView!
@@ -53,16 +57,12 @@ class HomeViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(fetchStories), name: Constant.NotificationId.newStory, object: nil)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
-    }
-    
     // MARK: - User Actions
     @IBAction func showVideoRecording(_ sender: UIBarButtonItem) {
         
         let imagePicker = UIImagePickerController()
+        
         imagePicker.delegate = self
         
         let imagePickerAlert = UIAlertController(title: "Post Video Story",
@@ -103,6 +103,7 @@ class HomeViewController: UIViewController {
     @objc private func fetchStories() {
         
         storyEntities.removeAll()
+        
         StoryManager().fetchStoryCollection { [weak self] result in
             
             switch result {
@@ -118,6 +119,7 @@ class HomeViewController: UIViewController {
     @objc private func fetchPosts() {
         
         postMarkers.removeAll()
+        
         PostManager().fetchAllPost { [weak self] result in
             
             switch result {
@@ -174,8 +176,15 @@ class HomeViewController: UIViewController {
     private func displayPostsOnMap() {
         
         postMarkers.forEach { [weak self] postPin in
-            postPin.mapMarker.icon = UIImage.asset(.Icons_16px_RestaurantMarker)
-            postPin.mapMarker.setIconSize(scaledToSize: CGSize(width: 24, height: 24))
+            
+            let imgView = SRMapMarker(avatar: postPin.post.author.avatar,
+                                      text: postPin.post.text,
+                                      category: nil,
+                                      placeholder: UIImage.asset(.Icons_Avatar))
+            
+            postPin.mapMarker.iconView = imgView
+            postPin.mapMarker.iconView?.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+            
             postPin.mapMarker.map = self?.mapView
         }
     }

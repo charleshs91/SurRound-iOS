@@ -10,27 +10,17 @@ import UIKit
 
 class PostContentViewController: UIViewController {
     
-    var post: Post? {
-        didSet {
-            guard let postView = self.postContentView else { return }
-            postView.layoutView(from: post)
-            
-            guard let tableView = postView.tableView else { return }
-            tableView.reloadData()
-        }
-    }
+    var post: Post!
     
-    @IBOutlet weak var postContentView: PostContentView! {
-        didSet {
-            self.postContentView.layoutView(from: post)
-        }
-    }
+    @IBOutlet weak var postContentView: PostContentView!
     
     let sections: [PostDetailSectionType] = [.content, .review]
     let cellItems: [PostBodyCellType] = [.location, .body]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        postContentView.layoutView(from: post)
         
         let panGesture = UISwipeGestureRecognizer(target: self, action: #selector(didTapClose(_:)))
         view.addGestureRecognizer(panGesture)
@@ -78,9 +68,9 @@ extension PostContentViewController: UITableViewDataSource {
             switch cellType {
             case .location:
                 
-                guard let locationCell = cell as? LocationTableViewCell else { break }
+                guard let locationCell = cell as? PostInfoTableViewCell else { break }
                 
-                locationCell.placeLabel.text = "Somewhere"
+                locationCell.setupCell(with: post!)
                 
             case .body:
                 
