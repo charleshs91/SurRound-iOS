@@ -23,10 +23,18 @@ class ProfileViewController: UIViewController {
     
     private let tabTitle = ["My Posts", "Saved"]
     
+    private var posts = [Post]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupViews()
+        fetchUserPost()
     }
     
     override func viewDidLayoutSubviews() {
@@ -51,25 +59,39 @@ class ProfileViewController: UIViewController {
     // MARK: - Private Methods
     private func setupViews() {
         
-        tableView.registerCellWithNib(withCellClass: ImagePostListCell.self)
-        tableView.registerCellWithNib(withCellClass: TextPostListCell.self)
-        tableView.registerCellWithNib(withCellClass: VideoPostListCell.self)
+        tableView.registerCellWithNib(withCellClass: GeneralPostListCell.self)
         
         let guide = view.safeAreaLayoutGuide
         tableView.anchor(top: guide.topAnchor, left: guide.leftAnchor, bottom: guide.bottomAnchor, right: guide.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0)
+        
+        tableView.tableFooterView = UIView()
+    }
+    
+    private func fetchUserPost() {
+        
+        guard let user = AuthManager.shared.currentUser else { return }
+        PostManager().fetchPostOfUsers(uids: [user.uid]) { result in
+            switch result {
+            case .success(let posts):
+                self.posts = posts
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 
 extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        
+        return posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: ImagePostListCell.reuseIdentifier, for: indexPath)
+            withIdentifier: GeneralPostListCell.reuseIdentifier, for: indexPath)
         
         return cell
     }
@@ -77,6 +99,15 @@ extension ProfileViewController: UITableViewDataSource {
 
 extension ProfileViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 145
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return UITableView.automaticDimension
+    }
 }
 
 extension ProfileViewController: SelectionViewDataSource {

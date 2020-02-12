@@ -119,6 +119,8 @@
 		D3C36E5423EBA05A00E2BD1C /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5323EBA05A00E2BD1C /* SelectLocationViewController.swift */; };
 		D3C36E5623EBCCFE00E2BD1C /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5523EBCCFE00E2BD1C /* PlaceModel.swift */; };
 		D3C36E5823EBFC0E00E2BD1C /* PostCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5723EBFC0E00E2BD1C /* PostCategory.swift */; };
+		D3E6AF8923F3C47400897AFF /* GeneralPostListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6AF8723F3C47400897AFF /* GeneralPostListCell.swift */; };
+		D3E6AF8A23F3C47400897AFF /* GeneralPostListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3E6AF8823F3C47400897AFF /* GeneralPostListCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -266,6 +268,8 @@
 		D3C36E5323EBA05A00E2BD1C /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		D3C36E5523EBCCFE00E2BD1C /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		D3C36E5723EBFC0E00E2BD1C /* PostCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategory.swift; sourceTree = "<group>"; };
+		D3E6AF8723F3C47400897AFF /* GeneralPostListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GeneralPostListCell.swift; path = SurRound/View/Base/GeneralPostListCell.swift; sourceTree = SOURCE_ROOT; };
+		D3E6AF8823F3C47400897AFF /* GeneralPostListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = GeneralPostListCell.xib; path = SurRound/View/Base/GeneralPostListCell.xib; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -473,6 +477,8 @@
 		D35CA75723E523FB0055F84E /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				D3E6AF8723F3C47400897AFF /* GeneralPostListCell.swift */,
+				D3E6AF8823F3C47400897AFF /* GeneralPostListCell.xib */,
 				D35CA75A23E524550055F84E /* SRRoundedTableViewCell.swift */,
 				D32F7F3D23EAB30300FBC0D3 /* SRRoundedLabel.swift */,
 				D32F7F3523EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift */,
@@ -898,6 +904,7 @@
 				D3949AFB23D9A912006DA9AA /* NewPost.storyboard in Resources */,
 				D326796423E2940100F94BFD /* NewPostMapCell.xib in Resources */,
 				D363153F23E5CEF30000150B /* TrendingListGridCell.xib in Resources */,
+				D3E6AF8A23F3C47400897AFF /* GeneralPostListCell.xib in Resources */,
 				D3086B9023DC9D3A0071F378 /* LocationTableViewCell.xib in Resources */,
 				D363154923E6132F0000150B /* PlaceItemListCell.xib in Resources */,
 				D35C489B23CF352E000951D2 /* LaunchScreen.storyboard in Resources */,
@@ -1134,6 +1141,7 @@
 				D3C36E5623EBCCFE00E2BD1C /* PlaceModel.swift in Sources */,
 				D32F7F3223E9C60800FBC0D3 /* ESPullToRefreshWrapper.swift in Sources */,
 				D3A3B5F123E29C35003201E1 /* NewPostCellType.swift in Sources */,
+				D3E6AF8923F3C47400897AFF /* GeneralPostListCell.swift in Sources */,
 				D3086B9623DCA2160071F378 /* ReusableCellRegister.swift in Sources */,
 				D3A3B5FB23E3D56E003201E1 /* Post+StoryModel.swift in Sources */,
 				D3949B0123D9ACBB006DA9AA /* SignInViewController.swift in Sources */,
