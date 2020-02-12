@@ -20,13 +20,31 @@ class ProfileHeaderView: UIView {
     
     @IBOutlet weak var postCountLabel: UILabel!
     
-    override class func awakeFromNib() {
+    @IBOutlet weak var editAvatarButton: UIButton!
+    
+    override func awakeFromNib() {
         super.awakeFromNib()
+        
+        followingCountLabel.lineBreakMode = .byCharWrapping
+        followingCountLabel.numberOfLines = 0
+        followingCountLabel.text = "99\nFollowing"
+        
+        followerCountLabel.lineBreakMode = .byCharWrapping
+        followerCountLabel.numberOfLines = 0
+        followerCountLabel.text = "99\nFollwers"
+        
+        postCountLabel.lineBreakMode = .byCharWrapping
+        postCountLabel.numberOfLines = 0
+        postCountLabel.text = "99\nPosts"
+        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
         profileImageView.roundToHalfHeight()
+        editAvatarButton.roundToHalfHeight()
+        editAvatarButton.layer.borderWidth = 2
+        editAvatarButton.layer.borderColor = UIColor.white.cgColor
     }
 }

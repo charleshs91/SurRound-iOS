@@ -38,20 +38,6 @@ extension DataFetching {
         }
     }
     
-    func fetch(from document: DocumentReference, completion: @escaping DocumentResult) {
-
-        document.getDocument { document, error in
-            
-            guard let document = document, error == nil else {
-                completion(.failure(.fetchingError))
-                print(error!)
-                return
-            }
-            
-            completion(.success(document))
-        }
-    }
-    
     func fetch(from query: Query, completion: @escaping DocumentCollectionResult) {
         
         query.getDocuments { snapshot, error in
@@ -63,6 +49,20 @@ extension DataFetching {
             }
             
             completion(.success(snapshot.documents))
+        }
+    }
+    
+    func fetch(from document: DocumentReference, completion: @escaping DocumentResult) {
+
+        document.getDocument { document, error in
+            
+            guard let document = document, error == nil else {
+                completion(.failure(.fetchingError))
+                print(error!)
+                return
+            }
+            
+            completion(.success(document))
         }
     }
 }

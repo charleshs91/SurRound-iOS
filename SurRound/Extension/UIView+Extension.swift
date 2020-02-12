@@ -10,15 +10,50 @@ import UIKit
 
 extension UIView {
     
-    func fixInView(_ container: UIView!) {
+    @discardableResult
+    func anchor(
+        top: NSLayoutYAxisAnchor? = nil,
+        left: NSLayoutXAxisAnchor? = nil,
+        bottom: NSLayoutYAxisAnchor? = nil,
+        right: NSLayoutXAxisAnchor? = nil,
+        topConstant: CGFloat = 0,
+        leftConstant: CGFloat = 0,
+        bottomConstant: CGFloat = 0,
+        rightConstant: CGFloat = 0,
+        widthConstant: CGFloat = 0,
+        heightConstant: CGFloat = 0) -> [NSLayoutConstraint] {
         
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.frame = container.frame
-        container.addSubview(self)
-        NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal, toItem: container, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: self, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: container, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        var anchors = [NSLayoutConstraint]()
+        
+        if let top = top {
+            anchors.append(topAnchor.constraint(equalTo: top, constant: topConstant))
+        }
+        
+        if let left = left {
+            anchors.append(leftAnchor.constraint(equalTo: left, constant: leftConstant))
+        }
+        
+        if let bottom = bottom {
+            anchors.append(bottomAnchor.constraint(equalTo: bottom, constant: -bottomConstant))
+        }
+        
+        if let right = right {
+            anchors.append(rightAnchor.constraint(equalTo: right, constant: -rightConstant))
+        }
+        
+        if widthConstant > 0 {
+            anchors.append(widthAnchor.constraint(equalToConstant: widthConstant))
+        }
+        
+        if heightConstant > 0 {
+            anchors.append(heightAnchor.constraint(equalToConstant: heightConstant))
+        }
+        
+        anchors.forEach({$0.isActive = true})
+        
+        return anchors
     }
     
     func setConstraints(to layoutGuide: UILayoutGuide,

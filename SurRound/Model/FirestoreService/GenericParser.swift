@@ -10,15 +10,6 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 
-protocol DataParsing {
-    
-    associatedtype ParsedType
-    
-    func parse(_ documents: [QueryDocumentSnapshot]) -> [ParsedType]?
-    
-    func parse(_ document: DocumentSnapshot) -> ParsedType
-}
-
 class GenericParser {
         
     class func parse<T: Decodable>(_ documents: [QueryDocumentSnapshot], of type: T.Type) -> [T]? {
