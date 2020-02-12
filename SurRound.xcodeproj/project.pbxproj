@@ -119,6 +119,7 @@
 		D3C36E5423EBA05A00E2BD1C /* SelectLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5323EBA05A00E2BD1C /* SelectLocationViewController.swift */; };
 		D3C36E5623EBCCFE00E2BD1C /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5523EBCCFE00E2BD1C /* PlaceModel.swift */; };
 		D3C36E5823EBFC0E00E2BD1C /* PostCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C36E5723EBFC0E00E2BD1C /* PostCategory.swift */; };
+		D3E6AF9223F4000000897AFF /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6AF9123F4000000897AFF /* ProfileManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -266,6 +267,7 @@
 		D3C36E5323EBA05A00E2BD1C /* SelectLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewController.swift; sourceTree = "<group>"; };
 		D3C36E5523EBCCFE00E2BD1C /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		D3C36E5723EBFC0E00E2BD1C /* PostCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategory.swift; sourceTree = "<group>"; };
+		D3E6AF9123F4000000897AFF /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -586,6 +588,7 @@
 				D3A3B5F523E31D12003201E1 /* Storage */,
 				D3A3B5F223E2A7CF003201E1 /* Location */,
 				D3A3B5F923E3D55F003201E1 /* Post+Story */,
+				D3E6AF9023F3FFD200897AFF /* Profile */,
 				D39997F123DB4FB600595B2F /* Auth */,
 			);
 			path = Model;
@@ -699,6 +702,14 @@
 				D36D8F9723EC639800E6348D /* PostListCell.swift */,
 			);
 			path = "Post+Story";
+			sourceTree = "<group>";
+		};
+		D3E6AF9023F3FFD200897AFF /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D3E6AF9123F4000000897AFF /* ProfileManager.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1091,6 +1102,7 @@
 				D3552B2B23DF34D700453FAA /* NewPostTextViewCell.swift in Sources */,
 				D32F7F3E23EAB30300FBC0D3 /* SRRoundedLabel.swift in Sources */,
 				D3A3B5F823E31E9B003201E1 /* StorageManager.swift in Sources */,
+				D3E6AF9223F4000000897AFF /* ProfileManager.swift in Sources */,
 				D365E4E323E4720900480F11 /* SRColoredNavController.swift in Sources */,
 				D36106D023EFC1C0007AFDC2 /* AnimatedCollectionViewLayoutWrapper.swift in Sources */,
 				D35CA75B23E524550055F84E /* SRRoundedTableViewCell.swift in Sources */,

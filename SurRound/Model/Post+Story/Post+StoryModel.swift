@@ -22,7 +22,7 @@ class StoryCollection {
     }
 }
 
-struct UserStories: Codable {
+struct UserStory: Codable {
     
     let storyId: String
     let storyRef: DocumentReference
@@ -75,7 +75,7 @@ class Story: Codable {
     }
 }
 
-struct UserPosts: Codable {
+struct UserPost: Codable {
     
     let postId: String
     let postRef: DocumentReference

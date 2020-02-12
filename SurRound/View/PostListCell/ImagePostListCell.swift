@@ -29,6 +29,8 @@ class ImagePostListCell: PostListCell {
     @IBOutlet weak var reviewButton: UIButton!
     @IBOutlet weak var reviewCountLabel: UILabel!
         
+    var viewModel: ImagePostListCellViewModel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -38,6 +40,7 @@ class ImagePostListCell: PostListCell {
     override func layoutCell(with viewModel: PostListCellViewModel) {
         
         guard let viewModel = viewModel as? ImagePostListCellViewModel else { return }
+        
         // Top Section
         avatarImageView.loadImage(viewModel.userImageUrlString,
                                   placeholder: UIImage.asset(.Icons_Avatar))
@@ -50,6 +53,8 @@ class ImagePostListCell: PostListCell {
         captionTextLabel.text = viewModel.text
         
         followButton.isHidden = isUserPostAuthor(viewModel.authorId)
+        
+        self.viewModel = viewModel
     }
     
     // MARK: - User Actions
@@ -62,8 +67,15 @@ class ImagePostListCell: PostListCell {
     }
     
     @IBAction func followUser(_ sender: UIButton) {
-        
-        print(123)
+        if let currentUser = AuthManager.shared.currentUser {
+        let manager = ProfileManager()
+            manager.followUser(receiverId: viewModel.authorId, current: currentUser) { error in
+                guard error == nil else {
+                    return
+                }
+                SRProgressHUD.showSuccess()
+            }
+        }
     }
     
     // MARK: - Private Methods

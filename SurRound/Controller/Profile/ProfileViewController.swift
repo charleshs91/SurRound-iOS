@@ -38,6 +38,8 @@ class ProfileViewController: UIViewController {
         setupViews()
         
         let currentUser = AuthManager.shared.currentUser!
+        
+        fetchUserProfile(userToDisplay?.uid ?? currentUser.uid)
         fetchUserPost(userToDisplay?.uid ?? currentUser.uid)
         profileHeaderView.setupView(user: userToDisplay ?? currentUser)
         
@@ -89,6 +91,16 @@ class ProfileViewController: UIViewController {
             case .failure(let error):
                 print(error)
             }
+        }
+    }
+    
+    private func fetchUserProfile(_ uid: String) {
+        let manager = ProfileManager()
+        
+        manager.fetchProfile(user: uid) { profile in
+            guard let profile = profile else { return }
+            
+            print(profile)
         }
     }
 }

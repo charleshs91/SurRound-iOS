@@ -17,6 +17,7 @@ class TextPostListCell: PostListCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var datetimeLabel: UILabel!
+    @IBOutlet weak var followButton: UIButton!
     
     // Middle Section
     @IBOutlet weak var largeTextLabel: UILabel!
@@ -26,6 +27,8 @@ class TextPostListCell: PostListCell {
     @IBOutlet weak var likedCountLabel: UILabel!
     @IBOutlet weak var reviewButton: UIButton!
     @IBOutlet weak var reviewCountLabel: UILabel!
+    
+    var viewModel: TextPostListCellViewModel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,6 +49,10 @@ class TextPostListCell: PostListCell {
         
         // Middle Section
         largeTextLabel.text = viewModel.text
+        
+        followButton.isHidden = isUserPostAuthor(viewModel.authorId)
+        
+        self.viewModel = viewModel
     }
     
     // MARK: - User Actions
@@ -55,6 +62,18 @@ class TextPostListCell: PostListCell {
     
     @IBAction func didTapReviewButton(_ sender: UIButton) {
         
+    }
+    
+    @IBAction func followUser(_ sender: UIButton) {
+        if let currentUser = AuthManager.shared.currentUser {
+        let manager = ProfileManager()
+            manager.followUser(receiverId: viewModel.authorId, current: currentUser) { error in
+                guard error == nil else {
+                    return
+                }
+                SRProgressHUD.showSuccess()
+            }
+        }
     }
     
     // MARK: - Private Methods
@@ -71,4 +90,11 @@ class TextPostListCell: PostListCell {
         substrateView.layer.shadowOffset = CGSize(width: 2, height: 2)
     }
     
+    private func isUserPostAuthor(_ authorId: String) -> Bool {
+        
+        guard let user = AuthManager.shared.currentUser else {
+            return false
+        }
+        return user.uid == authorId
+    }
 }

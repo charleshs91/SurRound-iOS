@@ -106,6 +106,9 @@
                             <constraint firstAttribute="width" constant="30" id="djL-pY-VnE"/>
                         </constraints>
                         <state key="normal" image="Icons_FollowUser"/>
+                        <connections>
+                            <action selector="followUser:" destination="DIU-rG-G7e" eventType="touchUpInside" id="VAa-kY-Bdc"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -129,6 +132,7 @@
             <connections>
                 <outlet property="avatarImageView" destination="AhG-kc-evu" id="MH3-Dt-2W5"/>
                 <outlet property="datetimeLabel" destination="Ae2-yF-DiD" id="S8Y-cL-zry"/>
+                <outlet property="followButton" destination="bHk-rg-1mF" id="qs9-J0-RdA"/>
                 <outlet property="largeTextLabel" destination="Q2b-kZ-sjI" id="bxy-o4-InU"/>
                 <outlet property="likedButton" destination="1fN-6O-NaZ" id="NZ1-Qq-Mcb"/>
                 <outlet property="likedCountLabel" destination="f1l-Vb-H5r" id="zyn-2f-Hzc"/>
