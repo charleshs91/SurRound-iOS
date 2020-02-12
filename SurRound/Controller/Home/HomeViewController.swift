@@ -259,7 +259,7 @@ extension HomeViewController: GMSMapViewDelegate {
                 as? PostContentViewController else { return false }
             
             postVC.post = first.post
-            navigationController?.show(postVC, sender: nil)
+            present(postVC, animated: true, completion: nil)
         }
         
         return true

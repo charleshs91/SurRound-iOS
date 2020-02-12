@@ -17,6 +17,7 @@ class ImagePostListCell: PostListCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var datetimeLabel: UILabel!
+    @IBOutlet weak var followButton: UIButton!
     
     // Middle Section
     @IBOutlet weak var postImageView: UIImageView!
@@ -47,6 +48,8 @@ class ImagePostListCell: PostListCell {
         postImageView.loadImage(viewModel.postImageUrlString,
                                 placeholder: UIImage.asset(.Image_Placeholder))
         captionTextLabel.text = viewModel.text
+        
+        followButton.isHidden = isUserPostAuthor(viewModel.authorId)
     }
     
     // MARK: - User Actions
@@ -56,6 +59,11 @@ class ImagePostListCell: PostListCell {
     
     @IBAction func didTapReviewButton(_ sender: UIButton) {
         
+    }
+    
+    @IBAction func followUser(_ sender: UIButton) {
+        
+        print(123)
     }
     
     // MARK: - Private Methods
@@ -73,5 +81,13 @@ class ImagePostListCell: PostListCell {
         substrateView.layer.shadowOpacity = 0.7
         substrateView.layer.shadowRadius = 2
         substrateView.layer.shadowOffset = CGSize(width: 2, height: 2)
+    }
+    
+    private func isUserPostAuthor(_ authorId: String) -> Bool {
+        
+        guard let user = AuthManager.shared.currentUser else {
+            return false
+        }
+        return user.uid == authorId
     }
 }

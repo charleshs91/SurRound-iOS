@@ -36,12 +36,11 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        fetchUserPost()
         
-        if userToDisplay == nil {
-            let user = AuthManager.shared.currentUser!
-            profileHeaderView.setupView(user: user)
-        }
+        let currentUser = AuthManager.shared.currentUser!
+        fetchUserPost(userToDisplay?.uid ?? currentUser.uid)
+        profileHeaderView.setupView(user: userToDisplay ?? currentUser)
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -76,7 +75,7 @@ class ProfileViewController: UIViewController {
         tableView.tableFooterView = UIView()
     }
     
-    private func fetchUserPost() {
+    private func fetchUserPost(_ uid: String) {
         
         posts.removeAll()
         viewModels.removeAll()

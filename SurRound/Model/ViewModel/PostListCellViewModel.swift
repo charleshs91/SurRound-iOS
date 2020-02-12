@@ -19,6 +19,7 @@ class ImagePostListCellViewModel: PostListCellViewModel {
         return PostListCellType.image
     }
     
+    var authorId: String
     var username: String
     var userImageUrlString: String?
     var placeName: String?
@@ -28,6 +29,7 @@ class ImagePostListCellViewModel: PostListCellViewModel {
     
     init(_ post: Post) {
         
+        self.authorId = post.authorId
         self.username = post.author.username
         self.userImageUrlString = post.author.avatar
         self.placeName = post.place.name
@@ -43,6 +45,7 @@ class TextPostListCellViewModel: PostListCellViewModel {
         return PostListCellType.text
     }
     
+    var authorId: String
     var username: String
     var userImageUrlString: String?
     var placeName: String?
@@ -51,6 +54,7 @@ class TextPostListCellViewModel: PostListCellViewModel {
     
     init(_ post: Post) {
         
+        self.authorId = post.authorId
         self.username = post.author.username
         self.userImageUrlString = post.author.avatar
         self.placeName = post.place.name
