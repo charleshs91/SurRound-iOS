@@ -27,15 +27,12 @@ class ProfileHeaderView: UIView {
         
         followingCountLabel.lineBreakMode = .byCharWrapping
         followingCountLabel.numberOfLines = 0
-        followingCountLabel.text = "99\nFollowing"
         
         followerCountLabel.lineBreakMode = .byCharWrapping
         followerCountLabel.numberOfLines = 0
-        followerCountLabel.text = "99\nFollwers"
         
         postCountLabel.lineBreakMode = .byCharWrapping
         postCountLabel.numberOfLines = 0
-        postCountLabel.text = "99\nPosts"
         
     }
     

@@ -40,7 +40,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21M-oF-47K" customClass="SelectionView" customModule="SurRound" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="167" width="350" height="40"/>
+                                        <rect key="frame" x="0.0" y="167" width="375" height="40"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="EeI-5o-HBx"/>
@@ -59,22 +59,22 @@
                                         </state>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ctW-9q-4S1">
-                                        <rect key="frame" x="112" y="82.666666666666671" width="230" height="19.333333333333329"/>
+                                        <rect key="frame" x="112" y="82.666666666666671" width="255" height="19.333333333333329"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Posts" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tty-4b-mCI">
-                                                <rect key="frame" x="0.0" y="0.0" width="68.666666666666671" height="19.333333333333332"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="77" height="19.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Following" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5On-6h-oa1">
-                                                <rect key="frame" x="80.666666666666657" y="0.0" width="68.666666666666657" height="19.333333333333332"/>
+                                                <rect key="frame" x="93.333333333333343" y="0.0" width="68.666666666666657" height="19.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Followers" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fjk-W9-YTp">
-                                                <rect key="frame" x="161.33333333333331" y="0.0" width="68.666666666666686" height="19.333333333333332"/>
+                                                <rect key="frame" x="178" y="0.0" width="77" height="19.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -110,10 +110,12 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="vE3-qb-kVw" firstAttribute="leading" secondItem="c7X-7G-7QB" secondAttribute="leading" id="5bD-jh-sg2"/>
                             <constraint firstItem="AiL-xM-Yqn" firstAttribute="leading" secondItem="c7X-7G-7QB" secondAttribute="leading" id="nbu-tK-y6v"/>
                             <constraint firstAttribute="trailing" secondItem="AiL-xM-Yqn" secondAttribute="trailing" id="nhu-9d-SgZ"/>
                             <constraint firstItem="c7X-7G-7QB" firstAttribute="bottom" secondItem="AiL-xM-Yqn" secondAttribute="bottom" id="o8r-oH-xVg"/>
                             <constraint firstItem="AiL-xM-Yqn" firstAttribute="top" secondItem="c7X-7G-7QB" secondAttribute="top" id="pDj-55-aF4"/>
+                            <constraint firstItem="vE3-qb-kVw" firstAttribute="trailing" secondItem="c7X-7G-7QB" secondAttribute="trailing" id="pj3-8v-uQF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c7X-7G-7QB"/>
                     </view>

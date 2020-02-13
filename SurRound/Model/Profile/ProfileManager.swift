@@ -22,19 +22,63 @@ class ProfileManager {
     
     func fetchProfile(user uid: String, completion: @escaping (SRUserProfile?) -> Void) {
         
+        let group = DispatchGroup()
+        
         let docRef = FirestoreService.users.document(uid)
         
+        group.enter()
         dataFetcher.fetch(from: docRef) { result in
+            
             switch result {
             case .success(let document):
                 let profile = GenericParser.parse(document, of: SRUserProfile.self)
                 self.userProfile = profile
-                completion(profile)
+                group.leave()
                 
             case .failure(let error):
                 print(error)
                 completion(nil)
             }
+        }
+        
+        let userPostRef = FirestoreService.users.document(uid).collection("user_posts")
+        
+        group.enter()
+        dataFetcher.fetch(from: userPostRef) { result in
+            
+            switch result {
+            case .success(let documents):
+                if let userPosts = GenericParser.parse(documents, of: UserPost.self) {
+                    self.userProfile?.posts = userPosts
+                    group.leave()
+                }
+                
+            case .failure(let error):
+                print(error)
+                completion(nil)
+            }
+        }
+        
+        let userStoryRef = FirestoreService.users.document(uid).collection("user_stories")
+        
+        group.enter()
+        dataFetcher.fetch(from: userStoryRef) { result in
+            
+            switch result {
+            case .success(let documents):
+                if let userStories = GenericParser.parse(documents, of: UserStory.self) {
+                    self.userProfile?.stories = userStories
+                    group.leave()
+                }
+                
+            case .failure(let error):
+                print(error)
+                completion(nil)
+            }
+        }
+        
+        group.notify(queue: .main) {
+            completion(self.userProfile)
         }
     }
     

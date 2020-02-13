@@ -60,8 +60,9 @@ class ProfileViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         let size = profileHeaderView.sizeThatFits(.zero)
-        profileHeaderView.frame = CGRect(x: 0, y: view.safeAreaInsets.top, width: UIScreen.width, height: size.height)
+        profileHeaderView.frame.origin = CGPoint(x: 0, y: view.safeAreaInsets.top)
         profileHeaderView.layoutIfNeeded()
+//        selectionView.frame.size = CGSize(width: UIScreen.width, height: 40)
         
         tableView.contentInset = UIEdgeInsets(top: size.height, left: 0, bottom: 0, right: 0)
     }
