@@ -61,7 +61,8 @@ class ProfileViewController: UIViewController {
         
         let size = profileHeaderView.sizeThatFits(.zero)
         profileHeaderView.frame = CGRect(x: 0, y: view.safeAreaInsets.top, width: UIScreen.width, height: size.height)
-        selectionView.layoutIfNeeded()
+        profileHeaderView.layoutIfNeeded()
+        
         tableView.contentInset = UIEdgeInsets(top: size.height, left: 0, bottom: 0, right: 0)
     }
     
@@ -75,6 +76,12 @@ class ProfileViewController: UIViewController {
             AppDelegate.shared.window?.rootViewController = authVC
         }
     }
+    @objc func showFollowingUsers(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: String(describing: UserTableViewController.self), sender: nil)
+    }
+    @objc func showFollowers(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: String(describing: UserTableViewController.self), sender: nil)
+    }
     
     // MARK: - Private Methods
     private func setupViews() {
@@ -87,6 +94,14 @@ class ProfileViewController: UIViewController {
         tableView.anchor(top: guide.topAnchor, left: guide.leftAnchor, bottom: guide.bottomAnchor, right: guide.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0)
         
         tableView.tableFooterView = UIView()
+        
+        profileHeaderView.followingCountLabel.isUserInteractionEnabled = true
+        profileHeaderView.followingCountLabel.addGestureRecognizer(UITapGestureRecognizer(
+            target: self, action: #selector(showFollowingUsers(_:))))
+        
+        profileHeaderView.followerCountLabel.isUserInteractionEnabled = true
+        profileHeaderView.followerCountLabel.addGestureRecognizer(UITapGestureRecognizer(
+        target: self, action: #selector(showFollowers(_:))))
     }
     
     private func fetchUserPost() {
