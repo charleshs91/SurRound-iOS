@@ -16,9 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ja2-Ho-mF0" userLabel="Map View" customClass="GMSMapView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ja2-Ho-mF0" userLabel="Map View" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </view>
                             <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="M8w-fz-HHO">
                                 <rect key="frame" x="0.0" y="88" width="414" height="72"/>
@@ -86,7 +85,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="M8w-fz-HHO" firstAttribute="trailing" secondItem="01r-1D-3Sn" secondAttribute="trailing" id="147-yw-d7Q"/>
+                            <constraint firstItem="Ja2-Ho-mF0" firstAttribute="trailing" secondItem="01r-1D-3Sn" secondAttribute="trailing" id="8In-lN-PbX"/>
+                            <constraint firstItem="Ja2-Ho-mF0" firstAttribute="top" secondItem="01r-1D-3Sn" secondAttribute="top" id="Bf3-d7-huJ"/>
                             <constraint firstItem="M8w-fz-HHO" firstAttribute="top" secondItem="01r-1D-3Sn" secondAttribute="top" id="H8t-RE-9hg"/>
+                            <constraint firstItem="Ja2-Ho-mF0" firstAttribute="bottom" secondItem="01r-1D-3Sn" secondAttribute="bottom" id="RIl-EC-3pR"/>
+                            <constraint firstItem="Ja2-Ho-mF0" firstAttribute="leading" secondItem="01r-1D-3Sn" secondAttribute="leading" id="XDQ-cG-z9i"/>
                             <constraint firstItem="M8w-fz-HHO" firstAttribute="leading" secondItem="01r-1D-3Sn" secondAttribute="leading" id="xJk-X8-pTD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="01r-1D-3Sn"/>

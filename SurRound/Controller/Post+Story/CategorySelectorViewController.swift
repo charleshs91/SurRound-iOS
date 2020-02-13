@@ -150,14 +150,14 @@ extension CategorySelectorViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        let padding = UIScreen.width / 10
+        let padding: CGFloat = 16.0
         
-        return UIEdgeInsets(top: 20, left: padding, bottom: 0, right: padding)
+        return UIEdgeInsets(top: 30, left: padding, bottom: 0, right: padding)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = collectionView.frame.width / 4
+        let width = popUpView.frame.width / 4.5
         let height = popUpView.frame.height / 3
         return CGSize(width: width, height: height)
     }

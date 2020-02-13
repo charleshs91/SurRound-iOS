@@ -12,7 +12,7 @@ import MaterialDesignWidgets
 class CategoryButtonCell: UICollectionViewCell {
     
     let button: MaterialVerticalButton = {
-        let btn = MaterialVerticalButton(icon: UIImage(), title: "", font: .systemFont(ofSize: 16, weight: .semibold), foregroundColor: .darkGray, useOriginalImg: true, bgColor: .clear, cornerRadius: 16)
+        let btn = MaterialVerticalButton(icon: UIImage(), title: "", font: .systemFont(ofSize: 14, weight: .semibold), foregroundColor: .darkGray, useOriginalImg: true, bgColor: .clear, cornerRadius: 16)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.layer.shadowColor = UIColor.gray.cgColor
         btn.layer.shadowOpacity = 0.7

@@ -30,7 +30,8 @@ class SRMapMarker: UIView {
     
     lazy var textLabel: UILabel = {
         
-        let label = UILabel()
+        let label = SRRoundedLabel()
+        label.contentInsets = UIEdgeInsets(top: 3, left: 6, bottom: 3, right: 6)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = self.text
         label.font = .systemFont(ofSize: 12, weight: .medium)
@@ -45,8 +46,7 @@ class SRMapMarker: UIView {
     private var categoryIcon: UIImage?
     private var placeholder: UIImage?
     
-    private let avatarSize = CGSize(width: 28, height: 28)
-    private let iconSize = CGSize(width: 28, height: 28)
+    private let iconSize = CGSize(width: 20, height: 20)
     
     // MARK: - Initializers
     required init?(coder: NSCoder) {
@@ -68,6 +68,13 @@ class SRMapMarker: UIView {
         setupViews()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        textLabel.center.x = center.x * 1.25
+        avatarImage.center.x = center.x
+        avatarImage.frame.origin.y =  textLabel.frame.height + 4
+    }
+    
     private func setupViews() {
         
         self.addSubview(textLabel)
@@ -84,16 +91,15 @@ class SRMapMarker: UIView {
     
     private func styleTextLabel() {
         
-        textLabel.frame = CGRect(x: 0, y: 0, width: 90, height: 20)
+        textLabel.frame.size = CGSize(width: 100, height: 20)
         textLabel.layer.cornerRadius = textLabel.frame.height / 2
         textLabel.layer.masksToBounds = true
     }
     
     private func styleAvatarImage() {
         
-        avatarImage.frame.size = avatarSize
-        avatarImage.center = CGPoint(x: textLabel.center.x / 2,
-                                     y: textLabel.frame.height + avatarImage.frame.height / 2)
+        avatarImage.frame.size = CGSize(width: 26, height: 26)
+        avatarImage.center = textLabel.center
         avatarImage.layer.cornerRadius = avatarImage.frame.height / 2
     }
     
