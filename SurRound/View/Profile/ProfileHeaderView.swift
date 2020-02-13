@@ -52,4 +52,10 @@ class ProfileHeaderView: UIView {
         usernameLabel.text = user.username
         profileImageView.loadImage(user.avatar, placeholder: UIImage.asset(.Icons_Avatar))
     }
+    
+    func updateProfile(profile: SRUserProfile) {
+        
+        followingCountLabel.text = "\(profile.following.count)\nFollowing"
+        followerCountLabel.text = "\(profile.follower.count)\nFollowers"
+    }
 }

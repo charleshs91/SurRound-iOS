@@ -22,6 +22,8 @@ enum ImageAsset: String {
     case TabBarIcon_42px_Message_Selected
     case TabBarIcon_42px_Profile_Selected
     
+    case Icons_Add02
+    
     case Icons_16px_RestaurantMarker
     case Icons_Avatar
     case Icons_Close

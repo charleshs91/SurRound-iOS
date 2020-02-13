@@ -21,7 +21,18 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileHeaderView: ProfileHeaderView!
     
-    var userToDisplay: SRUser?
+    var userToDisplay: SRUser!
+    
+    var profile: SRUserProfile? {
+        didSet {
+            guard profile != nil else {
+                return
+            }
+            DispatchQueue.main.async { [weak self] in
+                self?.profileHeaderView.updateProfile(profile: self!.profile!)
+            }
+        }
+    }
     
     private let tabTitle = ["My Posts", "Saved"]
     
@@ -35,14 +46,14 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupViews()
+                
+        updateUserProfile()
         
-        let currentUser = AuthManager.shared.currentUser!
+        fetchUserPost()
         
-        fetchUserProfile(userToDisplay?.uid ?? currentUser.uid)
-        fetchUserPost(userToDisplay?.uid ?? currentUser.uid)
-        profileHeaderView.setupView(user: userToDisplay ?? currentUser)
-        
+        profileHeaderView.setupView(user: userToDisplay)
     }
     
     override func viewDidLayoutSubviews() {
@@ -50,6 +61,7 @@ class ProfileViewController: UIViewController {
         
         let size = profileHeaderView.sizeThatFits(.zero)
         profileHeaderView.frame = CGRect(x: 0, y: view.safeAreaInsets.top, width: UIScreen.width, height: size.height)
+        selectionView.layoutIfNeeded()
         tableView.contentInset = UIEdgeInsets(top: size.height, left: 0, bottom: 0, right: 0)
     }
     
@@ -77,30 +89,38 @@ class ProfileViewController: UIViewController {
         tableView.tableFooterView = UIView()
     }
     
-    private func fetchUserPost(_ uid: String) {
+    private func fetchUserPost() {
+        
+        guard let user = userToDisplay else {
+            return
+        }
         
         posts.removeAll()
         viewModels.removeAll()
         
-        guard let user = AuthManager.shared.currentUser else { return }
         PostManager().fetchPostOfUsers(uids: [user.uid]) { [weak self] result in
+            
             switch result {
             case .success(let posts):
                 self?.posts.append(contentsOf: posts)
                 self?.viewModels.append(contentsOf: ViewModelFactory.viewModelFromPosts(posts))
+                
             case .failure(let error):
                 print(error)
             }
         }
     }
     
-    private func fetchUserProfile(_ uid: String) {
+    private func updateUserProfile() {
+        
         let manager = ProfileManager()
         
-        manager.fetchProfile(user: uid) { profile in
-            guard let profile = profile else { return }
+        manager.fetchProfile(user: userToDisplay.uid) { [weak self] profile in
             
-            print(profile)
+            guard let profile = profile else {
+                return
+            }
+            self?.profile = profile
         }
     }
 }
@@ -117,6 +137,7 @@ extension ProfileViewController: UITableViewDataSource {
         let viewModel = viewModels[indexPath.row]
         
         let cell = viewModel.cellType.makeCell(tableView, at: indexPath)
+        
         guard let postListCell = cell as? PostListCell else {
             return cell
         }

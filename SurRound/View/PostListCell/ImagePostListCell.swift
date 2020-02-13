@@ -52,7 +52,7 @@ class ImagePostListCell: PostListCell {
                                 placeholder: UIImage.asset(.Image_Placeholder))
         captionTextLabel.text = viewModel.text
         
-        followButton.isHidden = isUserPostAuthor(viewModel.authorId)
+        followButton.isHidden = isUserPostAuthor(viewModel.authorId) || viewModel.isFollowing
         
         self.viewModel = viewModel
     }

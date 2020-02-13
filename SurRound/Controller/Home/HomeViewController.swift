@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Private Constants
-    private let cellHeightInset: CGFloat = 12
+    private let cellHeightInset: CGFloat = 6
     private let cellLeadingInset: CGFloat = 8
     
     // MARK: - View Life Cycle
@@ -181,7 +181,7 @@ class HomeViewController: UIViewController {
                                       text: postPin.post.text,
                                       category: nil,
                                       placeholder: UIImage.asset(.Icons_Avatar))
-            
+//            print(imgView.subviews)
             postPin.mapMarker.iconView = imgView
             postPin.mapMarker.iconView?.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
             
@@ -191,15 +191,15 @@ class HomeViewController: UIViewController {
     
     private func setupCollectionView() {
         
-        collectionView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        collectionView.backgroundColor = UIColor.white.withAlphaComponent(0.9)
         
         collectionView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         collectionView.layer.cornerRadius = 12
         
-        collectionView.layer.shadowOffset = CGSize(width: 6, height: 6)
-        collectionView.layer.shadowOpacity = 0.7
+        collectionView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        collectionView.layer.shadowOpacity = 0.6
         collectionView.layer.shadowColor = UIColor.lightGray.cgColor
-        collectionView.layer.shadowRadius = 3
+        collectionView.layer.shadowRadius = 4
         
         collectionView.contentInset = UIEdgeInsets(top: cellHeightInset / 4,
                                                    left: cellLeadingInset,

@@ -36,7 +36,9 @@ class UserDBService {
         db.collection("users").document(user.uid).setData([
             "uid": user.uid,
             "email": user.email,
-            "username": user.username
+            "username": user.username,
+            "follower": [],
+            "following": []
         ]) { (error) in
             
             guard error == nil else {

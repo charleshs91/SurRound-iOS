@@ -11,6 +11,8 @@ import UIKit
 protocol PostListCellViewModel {
     
     var cellType: PostListCellType { get }
+    
+    var isFollowing: Bool { get }
 }
 
 class ImagePostListCellViewModel: PostListCellViewModel {
@@ -27,6 +29,14 @@ class ImagePostListCellViewModel: PostListCellViewModel {
     var postImageUrlString: String?
     var text: String
     
+    var isFollowing: Bool {
+        
+        guard let userProfile = AuthManager.shared.userProfile else {
+            return false
+        }
+        return userProfile.following.contains(authorId)
+    }
+    
     init(_ post: Post) {
         
         self.authorId = post.authorId
@@ -41,6 +51,14 @@ class ImagePostListCellViewModel: PostListCellViewModel {
 
 class TextPostListCellViewModel: PostListCellViewModel {
     
+    var isFollowing: Bool {
+        
+        guard let userProfile = AuthManager.shared.userProfile else {
+            return false
+        }
+        return userProfile.following.contains(authorId)
+    }
+
     var cellType: PostListCellType {
         return PostListCellType.text
     }
@@ -64,6 +82,8 @@ class TextPostListCellViewModel: PostListCellViewModel {
 }
 
 class VideoPostListCellViewModel: PostListCellViewModel {
+    
+    var isFollowing: Bool = false
     
     var cellType: PostListCellType {
         return PostListCellType.video

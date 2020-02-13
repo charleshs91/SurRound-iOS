@@ -17,6 +17,8 @@ class AuthManager {
     
     private init() { }
     
+    var userProfile: SRUserProfile?
+    
     var currentUser: SRUser? {
         get {
             guard
@@ -35,7 +37,26 @@ class AuthManager {
             UserDefaults.standard.setValue(user.username, forKey: Constant.Auth.username)
             UserDefaults.standard.setValue(user.email, forKey: Constant.Auth.email)
             UserDefaults.standard.setValue(user.avatar, forKey: Constant.Auth.avatar)
+            
+            updateProfile()
         }
+    }
+    
+    func updateProfile() {
+        
+        guard let user = currentUser else {
+            return
+        }
+        
+        let manager = ProfileManager()
+        manager.fetchProfile(user: user.uid, completion: { profile in
+            
+            guard let profile = profile else {
+                return
+            }
+            
+            self.userProfile = profile
+        })
     }
     
     func signIn(email: String, password: String,

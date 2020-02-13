@@ -80,33 +80,11 @@ class SRMapMarker: UIView {
         styleTextLabel()
         styleAvatarImage()
         styleCategoryImage()
-        
-//        setupConstraints()
-    }
-    
-    private func setupConstraints() {
-        
-//        NSLayoutConstraint.activate([
-//            textLabel.topAnchor.constraint(equalTo: topAnchor),
-//            textLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-//            textLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-//
-//            avatarImage.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -24),
-//            avatarImage.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 4),
-//            avatarImage.widthAnchor.constraint(equalToConstant: 20),
-//            avatarImage.heightAnchor.constraint(equalTo: avatarImage.widthAnchor),
-//            avatarImage.bottomAnchor.constraint(equalTo: bottomAnchor),
-//
-//            categoryImage.centerYAnchor.constraint(equalTo: textLabel.centerYAnchor),
-//            categoryImage.trailingAnchor.constraint(equalTo: textLabel.leadingAnchor, constant: 2),
-//            categoryImage.widthAnchor.constraint(equalToConstant: 16),
-//            categoryImage.heightAnchor.constraint(equalTo: categoryImage.widthAnchor)
-//        ])
     }
     
     private func styleTextLabel() {
         
-        textLabel.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
+        textLabel.frame = CGRect(x: 0, y: 0, width: 90, height: 20)
         textLabel.layer.cornerRadius = textLabel.frame.height / 2
         textLabel.layer.masksToBounds = true
     }

@@ -157,7 +157,7 @@ extension CategorySelectorViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = UIScreen.width / 4
+        let width = collectionView.frame.width / 4
         let height = popUpView.frame.height / 3
         return CGSize(width: width, height: height)
     }
