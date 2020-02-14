@@ -37,7 +37,8 @@ class SRMapMarker: UIView {
         label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textAlignment = .center
         label.textColor = .white
-        label.backgroundColor = UIColor.bluyGreen
+        label.backgroundColor = UIColor.themeColor
+        label.clipsToBounds = true
         return label
     }()
     
@@ -92,8 +93,8 @@ class SRMapMarker: UIView {
     private func styleTextLabel() {
         
         textLabel.frame.size = CGSize(width: 100, height: 20)
-        textLabel.layer.cornerRadius = textLabel.frame.height / 2
         textLabel.layer.masksToBounds = true
+        textLabel.layer.cornerRadius = textLabel.frame.height / 2
     }
     
     private func styleAvatarImage() {

@@ -35,7 +35,7 @@
                                     </imageView>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21M-oF-47K" customClass="SelectionView" customModule="SurRound" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="204" width="375" height="40"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="EeI-5o-HBx"/>
                                         </constraints>
@@ -82,7 +82,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="ctW-9q-4S1" firstAttribute="leading" secondItem="vE3-qb-kVw" secondAttribute="leading" id="569-R6-NUs"/>
                                     <constraint firstItem="21M-oF-47K" firstAttribute="top" secondItem="ctW-9q-4S1" secondAttribute="bottom" constant="8" id="Ec4-fb-etf"/>
@@ -162,20 +162,20 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWV-Im-97h" customClass="SRMediumTextLabel" customModule="SurRound" customModuleProvider="target">
-                                            <rect key="frame" x="80" y="16" width="179" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="80" y="16" width="179" height="20"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6L2-wp-lIf" customClass="ShadedButton" customModule="SurRound" customModuleProvider="target">
-                                            <rect key="frame" x="267" y="11.666666666666664" width="44" height="30"/>
+                                            <rect key="frame" x="267" y="11" width="44" height="30"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <state key="normal" title="Follow">
                                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5v-dV-jhi">
-                                            <rect key="frame" x="335" y="14.666666666666664" width="24" height="24"/>
+                                            <rect key="frame" x="335" y="14" width="24" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="24" id="a3M-8s-Ik3"/>
                                                 <constraint firstAttribute="width" secondItem="B5v-dV-jhi" secondAttribute="height" id="sLS-ge-fGV"/>

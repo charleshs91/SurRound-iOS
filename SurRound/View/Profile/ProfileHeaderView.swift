@@ -25,6 +25,11 @@ class ProfileHeaderView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        layer.cornerRadius = 16
+//        layer.masksToBounds = true
+        layer.setShadow(radius: 10, offset: CGSize(width: 4, height: 4), color: .lightGray, opacity: 0.7)
+        
         followingCountLabel.lineBreakMode = .byCharWrapping
         followingCountLabel.numberOfLines = 0
         

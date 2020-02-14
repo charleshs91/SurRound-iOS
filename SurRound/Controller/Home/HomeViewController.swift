@@ -45,6 +45,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        styleNagivationLeftTitle()
+        
         updateLocation()
         
         configureMap()
@@ -140,6 +142,15 @@ class HomeViewController: UIViewController {
         }
     }
     
+    private func styleNagivationLeftTitle() {
+        
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.text = "SurRound"
+        label.font = UIFont(name: "Marker Felt", size: 32)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: label)
+    }
+    
     private func updateLocation() {
         
         do {
@@ -162,7 +173,6 @@ class HomeViewController: UIViewController {
         mapView.delegate = self
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
-        mapView.settings.rotateGestures = false
         
         if let mapStyleURL = Bundle.main.url(forResource: "MapStyle", withExtension: "json") {
             mapView.mapStyle = try? GMSMapStyle(contentsOfFileURL: mapStyleURL)
@@ -181,9 +191,8 @@ class HomeViewController: UIViewController {
                                       text: postPin.post.text,
                                       category: nil,
                                       placeholder: UIImage.asset(.Icons_Avatar))
-//            print(imgView.subviews)
+            
             postPin.mapMarker.iconView = imgView
-//            imgView.backgroundColor = .cyan
             postPin.mapMarker.iconView?.frame = CGRect(x: 0, y: 0, width: 200, height: 60)
             
             postPin.mapMarker.map = self?.mapView
@@ -195,7 +204,7 @@ class HomeViewController: UIViewController {
         collectionView.backgroundColor = UIColor.white.withAlphaComponent(0.9)
         
         collectionView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        collectionView.layer.cornerRadius = 12
+        collectionView.layer.cornerRadius = 8
         
         collectionView.layer.shadowOffset = CGSize(width: 0, height: 2)
         collectionView.layer.shadowOpacity = 0.6

@@ -10,14 +10,14 @@ import UIKit
 
 enum SRColor: String {
     
-    case bluyGreen
+    case themeColor
     
     case blurViewColor
 }
 
 extension UIColor {
     
-    static let bluyGreen = SRColor(.bluyGreen)
+    static let themeColor = SRColor(.themeColor)
     
     static let blurViewColor = SRColor(.blurViewColor)
     
