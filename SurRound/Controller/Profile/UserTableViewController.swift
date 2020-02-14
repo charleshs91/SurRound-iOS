@@ -59,6 +59,7 @@ class UserTableViewController: UITableViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension UserTableViewController {
     
     override func tableView(_ tableView: UITableView,
@@ -81,5 +82,21 @@ extension UserTableViewController {
         userCell.setupCell(user: user)
         
         return userCell
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension UserTableViewController {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            
+        if let profileVC = ProfileViewController.storyInstance() {
+            
+            let selectedUser = userList[indexPath.row]
+            
+            profileVC.userToDisplay = selectedUser
+            
+            show(profileVC, sender: nil)
+        }
     }
 }

@@ -10,6 +10,11 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    static func storyInstance() -> ProfileViewController? {
+        return UIStoryboard.profile.instantiateViewController(
+            identifier: "\(ProfileViewController.self)") as? ProfileViewController
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var selectionView: SelectionView! {
