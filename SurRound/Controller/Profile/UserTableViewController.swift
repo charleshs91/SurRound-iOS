@@ -55,7 +55,30 @@ class UserTableViewController: UITableViewController {
             
             self?.userList = srUsers
         }
+    }
+    
+    private func onCellTapMoreButton(_ cell: UserListTableViewCell) {
         
+        let alertVC = UIAlertController(
+            title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let reportAction = UIAlertAction(title: "檢舉", style: .default) { _ in
+            print("檢舉你")
+        }
+        
+        let blockAction = UIAlertAction(title: "封鎖", style: .default) { _ in
+            print("封鎖你")
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { _ in
+            alertVC.dismiss(animated: true, completion: nil)
+        }
+        
+        [reportAction, blockAction, cancelAction].forEach {
+            alertVC.addAction($0)
+        }
+        
+        present(alertVC, animated: true, completion: nil)
     }
 }
 
@@ -79,7 +102,10 @@ extension UserTableViewController {
         
         let user = userList[indexPath.row]
         
-        userCell.setupCell(user: user)
+        userCell.setupCell(user: user, buttonHandler: { [weak self] cell in
+            
+            self?.onCellTapMoreButton(cell)
+        })
         
         return userCell
     }

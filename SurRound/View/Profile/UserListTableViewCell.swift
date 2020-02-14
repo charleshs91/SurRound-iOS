@@ -10,18 +10,37 @@ import UIKit
 
 class UserListTableViewCell: UITableViewCell {
 
+    typealias ButtonHandler = (UserListTableViewCell) -> Void
+    
     @IBOutlet weak var avatarImageView: UIImageView!
     
     @IBOutlet weak var usernameLabel: SRMediumTextLabel!
     
+    var handler: ButtonHandler?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        selectionStyle = .none
     }
     
-    func setupCell(user: SRUser) {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        handler = nil
+    }
+    
+    func setupCell(user: SRUser, buttonHandler: ButtonHandler? = nil) {
         
         avatarImageView.loadImage(user.avatar, placeholder: UIImage.asset(.Icons_Avatar))
         
         usernameLabel.text = user.username
+        
+        handler = buttonHandler
+    }
+    
+    @IBAction func didTapMoreButton(_ sender: UIButton) {
+        
+        handler?(self)
     }
 }

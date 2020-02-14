@@ -183,6 +183,9 @@
                                             <state key="normal">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="didTapMoreButton:" destination="ehb-hA-Aa7" eventType="touchUpInside" id="ndP-qI-ne5"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
