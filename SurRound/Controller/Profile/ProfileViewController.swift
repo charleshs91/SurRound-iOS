@@ -203,6 +203,17 @@ extension ProfileViewController: UITableViewDelegate {
         
         return UITableView.automaticDimension
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let maxYOffset = selectionView.frame.origin.y
+
+        let yOffset = scrollView.contentInset.top + scrollView.contentOffset.y
+        
+        let allowedOffset = min(maxYOffset, yOffset)
+        
+        profileHeaderView.transform = CGAffineTransform(translationX: 0, y: -allowedOffset)
+    }
 }
 
 extension ProfileViewController: SelectionViewDataSource {
