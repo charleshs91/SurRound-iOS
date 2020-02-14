@@ -34,10 +34,14 @@ class ProfileViewController: UIViewController {
                 return
             }
             DispatchQueue.main.async { [weak self] in
-                self?.profileHeaderView.updateProfile(profile: self!.profile!)
+                self?.headerUpdateSemaphore.wait()
+                self?.profileHeaderView.updateProfile(profile: self!.profile!,
+                                                      postCount: self!.viewModels.count)
             }
         }
     }
+    
+    private let headerUpdateSemaphore = DispatchSemaphore(value: 0)
     
     private let tabTitle = ["My Posts", "Saved"]
     
@@ -45,6 +49,7 @@ class ProfileViewController: UIViewController {
     
     private var viewModels = [PostListCellViewModel]() {
         didSet {
+            headerUpdateSemaphore.signal()
             self.tableView.reloadData()
         }
     }

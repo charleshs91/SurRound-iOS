@@ -34,6 +34,9 @@ class ProfileHeaderView: UIView {
         postCountLabel.lineBreakMode = .byCharWrapping
         postCountLabel.numberOfLines = 0
         
+        postCountLabel.text = "\nPosts"
+        followingCountLabel.text = "\nFollowing"
+        followerCountLabel.text = "\nFollowers"
     }
     
     override func layoutSubviews() {
@@ -50,8 +53,9 @@ class ProfileHeaderView: UIView {
         profileImageView.loadImage(user.avatar, placeholder: UIImage.asset(.Icons_Avatar))
     }
     
-    func updateProfile(profile: SRUserProfile) {
+    func updateProfile(profile: SRUserProfile, postCount: Int) {
         
+        postCountLabel.text = "\(postCount)\nPosts"
         followingCountLabel.text = "\(profile.following.count)\nFollowing"
         followerCountLabel.text = "\(profile.follower.count)\nFollowers"
     }
