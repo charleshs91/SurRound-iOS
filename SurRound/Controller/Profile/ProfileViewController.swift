@@ -67,6 +67,18 @@ class ProfileViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: size.height, left: 0, bottom: 0, right: 0)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "\(UserTableViewController.self)" {
+            
+            guard let destVC = segue.destination as? UserTableViewController,
+                let listType = sender as? UserListType else {
+                return
+            }
+            destVC.listType = listType
+        }
+    }
+    
     // MARK: - User Actions
     @IBAction func signOut(_ sender: UIBarButtonItem) {
         
@@ -78,10 +90,22 @@ class ProfileViewController: UIViewController {
         }
     }
     @objc func showFollowingUsers(_ sender: UITapGestureRecognizer) {
-        performSegue(withIdentifier: String(describing: UserTableViewController.self), sender: nil)
+        
+        guard let profile = profile else {
+            return
+        }
+        
+        performSegue(withIdentifier: "\(UserTableViewController.self)",
+            sender: UserListType.following(profile))
     }
     @objc func showFollowers(_ sender: UITapGestureRecognizer) {
-        performSegue(withIdentifier: String(describing: UserTableViewController.self), sender: nil)
+        
+        guard let profile = profile else {
+            return
+        }
+
+        performSegue(withIdentifier: "\(UserTableViewController.self)",
+            sender: UserListType.follower(profile))
     }
     
     // MARK: - Private Methods

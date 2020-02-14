@@ -20,6 +20,26 @@ class ProfileManager {
         self.dataFetcher = dataFetcher
     }
     
+    func fetchUserList(uids: [String], completion: @escaping ([SRUser]) -> Void) {
+        
+        let query = FirestoreService.users.whereField(SRUser.CodingKeys.uid.rawValue, in: uids)
+        
+        dataFetcher.fetch(from: query) { result in
+            switch result {
+            case .success(let documents):
+                guard let users = GenericParser.parse(documents, of: SRUser.self) else {
+                    completion([])
+                    return
+                }
+                completion(users)
+                
+            case .failure(let error):
+                print(error)
+                completion([])
+            }
+        }
+    }
+    
     func fetchProfile(user uid: String, completion: @escaping (SRUserProfile?) -> Void) {
         
         let group = DispatchGroup()

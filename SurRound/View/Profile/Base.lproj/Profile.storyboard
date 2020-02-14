@@ -198,6 +198,10 @@
                                         <constraint firstItem="B5v-dV-jhi" firstAttribute="centerY" secondItem="6L2-wp-lIf" secondAttribute="centerY" id="wZX-TD-LiD"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="avatarImageView" destination="97Q-SD-axk" id="Fuc-Ib-sWY"/>
+                                    <outlet property="usernameLabel" destination="dWV-Im-97h" id="P8J-92-K4B"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
