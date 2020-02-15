@@ -13,16 +13,26 @@ class PostContentView: UIView {
     @IBOutlet weak var postImageView: UIImageView!
     
     @IBOutlet weak var tableView: UITableView! {
-        didSet { setupTableView() }
+        didSet {
+            setupTableView()
+        }
     }
+    
+    @IBOutlet weak var closeButton: UIButton!
     
     override func awakeFromNib() {
         
         super.awakeFromNib()
         
         postImageView.frame = CGRect(x: 0, y: 0, width: UIScreen.width, height: 400)
+        
+        styleCloseButton()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+    }
     // MARK: - Public Methods
     func layoutView(from post: Post?) {
         
@@ -39,5 +49,11 @@ class PostContentView: UIView {
         
         tableView.contentInset = UIEdgeInsets(top: 400, left: 0, bottom: 0, right: 0)
         
+    }
+    
+    private func styleCloseButton() {
+        
+        closeButton.layer.cornerRadius = closeButton.frame.height / 2
+        closeButton.setDefaultShadow()
     }
 }

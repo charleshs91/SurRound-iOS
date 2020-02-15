@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import KMPlaceholderTextView
 
 class PostContentViewController: UIViewController {
     
     var post: Post!
     
+    @IBOutlet weak var replyButton: UIButton!
+
     @IBOutlet weak var postContentView: PostContentView!
+    
+    @IBOutlet weak var replyTextView: KMPlaceholderTextView! {
+        didSet {
+            replyTextView.placeholder = "輸入回覆內容"
+        }
+    }
     
     let sections: [PostDetailSectionType] = [.content, .review]
     let cellItems: [PostBodyCellType] = [.location, .body]
@@ -21,17 +30,18 @@ class PostContentViewController: UIViewController {
         super.viewDidLoad()
         
         postContentView.layoutView(from: post)
-        
-        let panGesture = UISwipeGestureRecognizer(target: self, action: #selector(didTapClose(_:)))
-        view.addGestureRecognizer(panGesture)
     }
     
     // MARK: - User Actions
-    @IBAction func didTapClose(_ sender: UISwipeGestureRecognizer) {
+    @IBAction func didTapClose(_ sender: UIButton) {
         
         presentingViewController?.dismiss(animated: true, completion: nil)
-        navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func didTapReply(_ sender: UIButton) {
+        
+    }
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -89,11 +99,6 @@ extension PostContentViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension PostContentViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return CGFloat.zero
-    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         

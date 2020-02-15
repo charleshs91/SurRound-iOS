@@ -102,6 +102,27 @@ class ProfileManager {
         }
     }
     
+    func blockUser(target: SRUser, completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        guard let currentUser = AuthManager.shared.currentUser else {
+            return
+        }
+        
+        let userRef = FirestoreService.users.document(currentUser.uid)
+        
+        userRef.setData(
+            ["blocking": FieldValue.arrayUnion([target.uid])],
+            merge: true,
+            completion: { error in
+                guard error == nil else {
+                    completion(.failure(error!))
+                    return
+                }
+                
+                completion(.success(()))
+        })
+    }
+    
     func followUser(receiverId: String, current user: SRUser, completion: @escaping (Error?) -> Void) {
         
         let group = DispatchGroup()

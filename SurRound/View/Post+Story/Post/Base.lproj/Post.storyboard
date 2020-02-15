@@ -30,15 +30,78 @@
                                             <outlet property="delegate" destination="OBa-9q-1b7" id="9pi-Sf-krH"/>
                                         </connections>
                                     </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnQ-UB-1DA">
+                                        <rect key="frame" x="354" y="68" width="36" height="36"/>
+                                        <color key="backgroundColor" red="0.62351284898477155" green="0.62351284898477155" blue="0.62351284898477155" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="jnQ-UB-1DA" secondAttribute="height" id="0j5-mY-BSg"/>
+                                            <constraint firstAttribute="width" constant="36" id="PjS-70-WXS"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" image="Icons_Cross"/>
+                                        <connections>
+                                            <action selector="didTapClose:" destination="OBa-9q-1b7" eventType="touchUpInside" id="92J-uE-rV9"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6CH-g8-dpM">
+                                        <rect key="frame" x="0.0" y="802" width="414" height="60"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bwv-uS-15P" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
+                                                <rect key="frame" x="56" y="10" width="287" height="30"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="w1n-YA-GN2"/>
+                                                </constraints>
+                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="text.bubble" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="I2s-sY-hFL">
+                                                <rect key="frame" x="20" y="16.5" width="24" height="23.5"/>
+                                                <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="dWr-kx-HUz"/>
+                                                    <constraint firstAttribute="width" secondItem="I2s-sY-hFL" secondAttribute="height" id="dzl-NM-dW3"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xe-jK-Wtz">
+                                                <rect key="frame" x="355" y="10" width="39" height="30"/>
+                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Reply"/>
+                                                <connections>
+                                                    <action selector="didTapReply:" destination="OBa-9q-1b7" eventType="touchUpInside" id="LMf-g1-f88"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="I2s-sY-hFL" secondAttribute="bottom" constant="20" id="5Wy-V1-CPM"/>
+                                            <constraint firstItem="2xe-jK-Wtz" firstAttribute="leading" secondItem="bwv-uS-15P" secondAttribute="trailing" constant="12" id="C14-Mk-bz3"/>
+                                            <constraint firstAttribute="bottom" secondItem="bwv-uS-15P" secondAttribute="bottom" constant="20" id="O1x-it-eAZ"/>
+                                            <constraint firstItem="bwv-uS-15P" firstAttribute="top" secondItem="6CH-g8-dpM" secondAttribute="top" constant="20" id="Oay-Y5-6Pt"/>
+                                            <constraint firstAttribute="trailing" secondItem="2xe-jK-Wtz" secondAttribute="trailing" constant="20" id="YO8-Vl-Mvi"/>
+                                            <constraint firstItem="bwv-uS-15P" firstAttribute="leading" secondItem="I2s-sY-hFL" secondAttribute="trailing" constant="12" id="Zp5-eE-DG7"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="ovg-gI-4zA"/>
+                                            <constraint firstItem="I2s-sY-hFL" firstAttribute="leading" secondItem="6CH-g8-dpM" secondAttribute="leading" constant="20" id="u6j-lx-A88"/>
+                                            <constraint firstAttribute="bottom" secondItem="2xe-jK-Wtz" secondAttribute="bottom" constant="20" id="vy5-qQ-nPT"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="riB-ak-1gk" secondAttribute="bottom" id="6Wk-T5-62a"/>
+                                    <constraint firstAttribute="bottom" secondItem="6CH-g8-dpM" secondAttribute="bottom" id="89c-ah-XuQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="6CH-g8-dpM" secondAttribute="trailing" id="BzI-J7-x4K"/>
                                     <constraint firstItem="riB-ak-1gk" firstAttribute="leading" secondItem="knG-Kx-7JG" secondAttribute="leading" id="bAr-64-pTi"/>
                                     <constraint firstItem="riB-ak-1gk" firstAttribute="top" secondItem="knG-Kx-7JG" secondAttribute="top" id="bp5-mX-mIy"/>
+                                    <constraint firstItem="6CH-g8-dpM" firstAttribute="leading" secondItem="knG-Kx-7JG" secondAttribute="leading" id="jm4-R8-DDg"/>
+                                    <constraint firstItem="jnQ-UB-1DA" firstAttribute="trailing" secondItem="knG-Kx-7JG" secondAttribute="trailingMargin" constant="-16" id="lmN-lc-4dd"/>
+                                    <constraint firstItem="jnQ-UB-1DA" firstAttribute="top" secondItem="knG-Kx-7JG" secondAttribute="topMargin" constant="16" id="oiG-iN-fnk"/>
                                     <constraint firstAttribute="trailing" secondItem="riB-ak-1gk" secondAttribute="trailing" id="wKx-ud-joM"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="closeButton" destination="jnQ-UB-1DA" id="boA-Hk-oTV"/>
                                     <outlet property="postImageView" destination="8tr-hX-8c6" id="n7K-A7-ReO"/>
                                     <outlet property="tableView" destination="riB-ak-1gk" id="gGo-fg-4n8"/>
                                 </connections>
@@ -56,6 +119,8 @@
                     <navigationItem key="navigationItem" id="4YX-Vg-ahO"/>
                     <connections>
                         <outlet property="postContentView" destination="knG-Kx-7JG" id="2d2-fA-0ta"/>
+                        <outlet property="replyButton" destination="2xe-jK-Wtz" id="9b1-Bu-jDg"/>
+                        <outlet property="replyTextView" destination="bwv-uS-15P" id="uHb-BL-vYX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ECu-5V-ReZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -64,6 +129,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Icons_Cross" width="32" height="32"/>
         <image name="Image_Placeholder" width="750" height="750"/>
+        <image name="text.bubble" catalog="system" width="128" height="110"/>
     </resources>
 </document>
