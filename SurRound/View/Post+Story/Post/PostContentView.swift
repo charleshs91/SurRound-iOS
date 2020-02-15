@@ -46,9 +46,9 @@ class PostContentView: UIView {
         
         tableView.registerCellWithNib(withCellClass: PostInfoTableViewCell.self)
         tableView.registerCellWithNib(withCellClass: BodyTableViewCell.self)
+        tableView.registerCellWithNib(withCellClass: PostReplyCell.self)
         
         tableView.contentInset = UIEdgeInsets(top: 400, left: 0, bottom: 0, right: 0)
-        
     }
     
     private func styleCloseButton() {

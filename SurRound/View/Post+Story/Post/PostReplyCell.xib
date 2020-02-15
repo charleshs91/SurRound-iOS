@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16085" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16078.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="266" id="KGk-i7-Jjw" customClass="PostReplyCell" customModule="SurRound" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="357" height="266"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="357" height="266"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nu5-KQ-5Nk">
+                        <rect key="frame" x="24" y="16" width="40" height="40"/>
+                        <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Nu5-KQ-5Nk" secondAttribute="height" multiplier="1:1" id="POo-GS-Gbz"/>
+                            <constraint firstAttribute="width" constant="40" id="hKE-cX-SmZ"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8wz-GU-O52">
+                        <rect key="frame" x="72" y="16" width="91" height="52"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reply text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpf-f3-be7">
+                                <rect key="frame" x="8" y="28" width="75" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecN-dQ-doX" userLabel="Username">
+                                <rect key="frame" x="8" y="4" width="75" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="gpf-f3-be7" firstAttribute="top" secondItem="ecN-dQ-doX" secondAttribute="bottom" constant="4" id="1CR-af-zZK"/>
+                            <constraint firstAttribute="trailing" secondItem="gpf-f3-be7" secondAttribute="trailing" constant="8" id="4WK-xf-Y3u"/>
+                            <constraint firstAttribute="trailing" secondItem="ecN-dQ-doX" secondAttribute="trailing" constant="8" id="BWH-A8-3Cf"/>
+                            <constraint firstItem="ecN-dQ-doX" firstAttribute="top" secondItem="8wz-GU-O52" secondAttribute="top" constant="4" id="Uou-e1-ODS"/>
+                            <constraint firstItem="ecN-dQ-doX" firstAttribute="leading" secondItem="8wz-GU-O52" secondAttribute="leading" constant="8" id="Z34-bc-Bdx"/>
+                            <constraint firstAttribute="bottom" secondItem="gpf-f3-be7" secondAttribute="bottom" constant="4" id="f7H-DW-bGC"/>
+                            <constraint firstItem="gpf-f3-be7" firstAttribute="top" secondItem="ecN-dQ-doX" secondAttribute="bottom" constant="4" id="wPF-u0-s29"/>
+                            <constraint firstItem="gpf-f3-be7" firstAttribute="leading" secondItem="8wz-GU-O52" secondAttribute="leading" constant="8" id="xb2-HX-nXf"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="12"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Datetime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UEm-fZ-NnW">
+                        <rect key="frame" x="72" y="72" width="59" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrg-03-Hf6">
+                        <rect key="frame" x="139" y="72.5" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="9SS-ee-8Me"/>
+                            <constraint firstAttribute="width" secondItem="qrg-03-Hf6" secondAttribute="height" id="Wkb-cq-0rL"/>
+                        </constraints>
+                        <state key="normal" title="Like" image="Icons_ThumbsUpStroke"/>
+                        <connections>
+                            <action selector="didTapLikeButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gME-jr-T7K"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="UEm-fZ-NnW" firstAttribute="leading" secondItem="8wz-GU-O52" secondAttribute="leading" id="0ui-fJ-y2Q"/>
+                    <constraint firstItem="UEm-fZ-NnW" firstAttribute="top" secondItem="8wz-GU-O52" secondAttribute="bottom" constant="4" id="6zk-a2-H8H"/>
+                    <constraint firstItem="8wz-GU-O52" firstAttribute="top" secondItem="Nu5-KQ-5Nk" secondAttribute="top" id="D6T-Qv-SGn"/>
+                    <constraint firstItem="Nu5-KQ-5Nk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="Gmu-UA-ZhW"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="UEm-fZ-NnW" secondAttribute="bottom" constant="4" id="Mpa-LC-xGL"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Nu5-KQ-5Nk" secondAttribute="bottom" id="Pkx-0F-Qyh"/>
+                    <constraint firstItem="Nu5-KQ-5Nk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="VD1-rk-PDt"/>
+                    <constraint firstItem="8wz-GU-O52" firstAttribute="leading" secondItem="Nu5-KQ-5Nk" secondAttribute="trailing" constant="8" id="XC0-5h-lGP"/>
+                    <constraint firstItem="qrg-03-Hf6" firstAttribute="centerY" secondItem="UEm-fZ-NnW" secondAttribute="centerY" id="psN-ye-Uis"/>
+                    <constraint firstItem="qrg-03-Hf6" firstAttribute="leading" secondItem="UEm-fZ-NnW" secondAttribute="trailing" constant="8" id="rHG-DY-PsF"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="datetimeLabel" destination="UEm-fZ-NnW" id="4wX-CE-dtz"/>
+                <outlet property="likeButton" destination="qrg-03-Hf6" id="rfb-Ti-CUO"/>
+                <outlet property="replyTextLabel" destination="gpf-f3-be7" id="41V-Y2-019"/>
+                <outlet property="userImageView" destination="Nu5-KQ-5Nk" id="TYQ-fJ-AOp"/>
+                <outlet property="usernameLabel" destination="ecN-dQ-doX" id="uQz-6H-A6D"/>
+            </connections>
+            <point key="canvasLocation" x="158.69565217391306" y="196.875"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Icons_ThumbsUpStroke" width="32" height="32"/>
+    </resources>
+</document>

@@ -13,13 +13,18 @@ class PostContentViewController: UIViewController {
     
     var post: Post!
     
-    @IBOutlet weak var replyButton: UIButton!
+    @IBOutlet weak var replyButton: UIButton! {
+        didSet {
+            replyButton.isEnabled = false
+        }
+    }
 
     @IBOutlet weak var postContentView: PostContentView!
     
     @IBOutlet weak var replyTextView: KMPlaceholderTextView! {
         didSet {
             replyTextView.placeholder = "輸入回覆內容"
+            replyTextView.delegate = self
         }
     }
     
@@ -61,7 +66,7 @@ extension PostContentViewController: UITableViewDataSource {
             return cellItems.count
             
         case .review:
-            return 0
+            return 10
         }
     }
     
@@ -77,22 +82,29 @@ extension PostContentViewController: UITableViewDataSource {
             
             switch cellType {
             case .location:
-                
-                guard let locationCell = cell as? PostInfoTableViewCell else { break }
-                
+                guard let locationCell = cell as? PostInfoTableViewCell else {
+                    break
+                }
                 locationCell.setupCell(with: post!)
                 
             case .body:
-                
-                guard let bodyCell = cell as? BodyTableViewCell else { break }
-                
+                guard let bodyCell = cell as? BodyTableViewCell else {
+                    break
+                }
                 bodyCell.descriptionLabel.text = post?.text
             }
             
             return cell
             
         case .review:
-            return UITableViewCell()
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: PostReplyCell.reuseIdentifier, for: indexPath) as? PostReplyCell else {
+                return UITableViewCell()
+            }
+            cell.usernameLabel.text = "Charles"
+            cell.replyTextLabel.text = "Why so serious????????"
+            cell.datetimeLabel.text = "\(indexPath.row) days ago"
+            return cell
         }
     }
 }
@@ -103,5 +115,13 @@ extension PostContentViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return UITableView.automaticDimension
+    }
+}
+
+extension PostContentViewController: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        
+        replyButton.isEnabled = !textView.isEmpty
     }
 }
