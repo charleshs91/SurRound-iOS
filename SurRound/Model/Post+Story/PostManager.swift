@@ -25,6 +25,27 @@ class PostManager: DataFetching {
         self.dataFetcher = dataFetcher
     }
     
+    func sendReview(postID: String, author: Author, text: String, completion: @escaping (Error?) -> Void) {
+        
+        let reviewRef = FirestoreService.posts.document(postID).collection("reviews").document()
+        
+        let reviewObject = Review(id: reviewRef.documentID,
+                                  postId: postID,
+                                  author: author,
+                                  text: text)
+        do {
+            try reviewRef.setData(from: reviewObject, merge: true, encoder: .init()) { (error) in
+                if let error = error {
+                    completion(error)
+                    return
+                }
+                completion(nil)
+            }
+        } catch {
+            completion(error)
+        }
+    }
+    
     func fetchPostOfUsers(uids: [String], completion: @escaping PostsResult) {
 
         let query = FirestoreService.posts

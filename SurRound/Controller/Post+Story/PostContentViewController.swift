@@ -24,7 +24,9 @@ class PostContentViewController: UIViewController {
     @IBOutlet weak var replyTextView: KMPlaceholderTextView! {
         didSet {
             replyTextView.placeholder = "輸入回覆內容"
+            replyTextView.isScrollEnabled = false
             replyTextView.delegate = self
+            replyTextView.layer.cornerRadius = 8
         }
     }
     
@@ -45,6 +47,20 @@ class PostContentViewController: UIViewController {
     
     @IBAction func didTapReply(_ sender: UIButton) {
         
+        guard let currentUser = AuthManager.shared.currentUser else {
+            return
+        }
+        
+        let author = Author(currentUser)
+        
+        SRProgressHUD.showLoading()
+        PostManager().sendReview(postID: post.id, author: author, text: replyTextView.text) { (error) in
+            SRProgressHUD.dismiss()
+            guard error == nil else {
+                return
+            }
+            SRProgressHUD.showSuccess(text: "留言成功")
+        }
     }
     
 }

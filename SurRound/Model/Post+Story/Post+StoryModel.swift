@@ -86,6 +86,34 @@ struct UserPost: Codable {
     }
 }
 
+struct Review: Codable {
+    
+    init(id: String, postId: String, author: Author, text: String) {
+        self.id = id
+        self.postId = postId
+        self.authorId = author.uid
+        self.author = author
+        self.text = text
+        self.createdTime = Date()
+    }
+    
+    let id: String
+    let postId: String
+    let authorId: String
+    let author: Author
+    let text: String
+    let createdTime: Date
+    var likes: Int = 0
+    
+    enum CodingKeys: String, CodingKey {
+        case postId = "post_id"
+        case authorId = "author_id"
+        case createdTime = "created_time"
+        case id, author, text, likes
+        
+    }
+}
+
 struct Post: Codable {
     
     init(id: String, category: String, author: Author, text: String, place: SRPlace) {
