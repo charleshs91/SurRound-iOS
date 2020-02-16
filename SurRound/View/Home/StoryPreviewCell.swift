@@ -15,6 +15,8 @@ class StoryPreviewCell: UICollectionViewCell {
     
     @IBOutlet weak var borderCircleView: UIView!
     
+    @IBOutlet weak var usernameLabel: UILabel!
+    
     @IBOutlet weak var avatarImageView: UIImageView!
     
     override func awakeFromNib() {
@@ -34,8 +36,8 @@ class StoryPreviewCell: UICollectionViewCell {
         borderCircleView.layer.borderColor = UIColor.red.cgColor
     }
     
-    func layoutCell(_ image: String) {
+    func layoutCell(image: String, text: String) {
         avatarImageView.loadImage(image, placeholder: UIImage.asset(.Icons_Avatar))
-        layoutIfNeeded()
+        usernameLabel.text = text
     }
 }

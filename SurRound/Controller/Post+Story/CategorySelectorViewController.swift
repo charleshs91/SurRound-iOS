@@ -22,7 +22,7 @@ class CategorySelectorViewController: UIViewController {
     @IBOutlet var popUpView: UIView!
     
     // Private Constants
-    private let popUpViewHeight: CGFloat = 250
+    private let popUpViewHeight: CGFloat = 300
     
     private let categories: [PostCategory] = [.chat, .question, .food, .scenary, .shopping, .cancel]
     
@@ -150,9 +150,9 @@ extension CategorySelectorViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        let padding: CGFloat = 16.0
+        let padding: CGFloat = 45
         
-        return UIEdgeInsets(top: 30, left: padding, bottom: 0, right: padding)
+        return UIEdgeInsets(top: 24, left: padding, bottom: 0, right: padding)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Private Constants
-    private let cellHeightInset: CGFloat = 6
+    private let cellHeightInset: CGFloat = 10
     private let cellLeadingInset: CGFloat = 8
     
     // MARK: - View Life Cycle
@@ -236,7 +236,8 @@ extension HomeViewController: UICollectionViewDataSource {
         
         let storyEntity = storyEntities[indexPath.item]
         
-        storyCell.layoutCell(storyEntity.author.avatar)
+        storyCell.layoutCell(image: storyEntity.author.avatar,
+                             text: storyEntity.author.username)
         
         return storyCell
     }
