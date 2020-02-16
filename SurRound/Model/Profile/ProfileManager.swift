@@ -61,7 +61,7 @@ class ProfileManager {
             }
         }
         
-        let userPostRef = FirestoreService.users.document(uid).collection("user_posts")
+        let userPostRef = FirestoreService.userPosts(of: uid)
         
         group.enter()
         dataFetcher.fetch(from: userPostRef) { result in
@@ -79,7 +79,7 @@ class ProfileManager {
             }
         }
         
-        let userStoryRef = FirestoreService.users.document(uid).collection("user_stories")
+        let userStoryRef = FirestoreService.userStories(of: uid)
         
         group.enter()
         dataFetcher.fetch(from: userStoryRef) { result in

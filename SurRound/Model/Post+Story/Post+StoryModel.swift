@@ -105,6 +105,13 @@ struct Review: Codable {
     let createdTime: Date
     var likes: Int = 0
     
+    var datetimeString: String {
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter.string(from: createdTime)
+    }
+    
     enum CodingKeys: String, CodingKey {
         case postId = "post_id"
         case authorId = "author_id"

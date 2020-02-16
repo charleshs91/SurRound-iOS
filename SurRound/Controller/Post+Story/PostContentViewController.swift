@@ -13,6 +13,14 @@ class PostContentViewController: UIViewController {
     
     var post: Post!
     
+    var reviews = [Review]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.postContentView.tableView.reloadData()
+            }
+        }
+    }
+    
     @IBOutlet weak var replyButton: UIButton! {
         didSet {
             replyButton.isEnabled = false
@@ -37,6 +45,16 @@ class PostContentViewController: UIViewController {
         super.viewDidLoad()
         
         postContentView.layoutView(from: post)
+        
+        ReviewManager().fetchAllReviews(postId: post.id) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                SRProgressHUD.showFailure(text: error.localizedDescription)
+                
+            case .success(let reviews):
+                self?.reviews = reviews
+            }
+        }
     }
     
     // MARK: - User Actions
@@ -54,7 +72,7 @@ class PostContentViewController: UIViewController {
         let author = Author(currentUser)
         
         SRProgressHUD.showLoading()
-        PostManager().sendReview(postID: post.id, author: author, text: replyTextView.text) { (error) in
+        ReviewManager().sendReview(postID: post.id, author: author, text: replyTextView.text) { (error) in
             SRProgressHUD.dismiss()
             guard error == nil else {
                 return
@@ -82,7 +100,7 @@ extension PostContentViewController: UITableViewDataSource {
             return cellItems.count
             
         case .review:
-            return 10
+            return reviews.count
         }
     }
     
@@ -117,9 +135,11 @@ extension PostContentViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: PostReplyCell.reuseIdentifier, for: indexPath) as? PostReplyCell else {
                 return UITableViewCell()
             }
-            cell.usernameLabel.text = "Charles"
-            cell.replyTextLabel.text = "Why so serious????????"
-            cell.datetimeLabel.text = "\(indexPath.row) days ago"
+            
+            let review = reviews[indexPath.row]
+            cell.usernameLabel.text = review.author.username
+            cell.replyTextLabel.text = review.text
+            cell.datetimeLabel.text = review.datetimeString
             return cell
         }
     }

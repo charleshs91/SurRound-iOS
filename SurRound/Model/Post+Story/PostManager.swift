@@ -16,34 +16,15 @@ class PostManager: DataFetching {
     
     // Ask database for an unique id.
     static func documentID() -> String {
-        return Firestore.firestore().collection("posts").document().documentID
+        
+        return FirestoreService.posts.document().documentID
     }
     
     private let dataFetcher: DataFetching
     
     init(dataFetcher: DataFetching = GenericFetcher()) {
+        
         self.dataFetcher = dataFetcher
-    }
-    
-    func sendReview(postID: String, author: Author, text: String, completion: @escaping (Error?) -> Void) {
-        
-        let reviewRef = FirestoreService.posts.document(postID).collection("reviews").document()
-        
-        let reviewObject = Review(id: reviewRef.documentID,
-                                  postId: postID,
-                                  author: author,
-                                  text: text)
-        do {
-            try reviewRef.setData(from: reviewObject, merge: true, encoder: .init()) { (error) in
-                if let error = error {
-                    completion(error)
-                    return
-                }
-                completion(nil)
-            }
-        } catch {
-            completion(error)
-        }
     }
     
     func fetchPostOfUsers(uids: [String], completion: @escaping PostsResult) {
@@ -52,45 +33,44 @@ class PostManager: DataFetching {
             .whereField(Post.CodingKeys.authorId.rawValue, in: uids)
             .order(by: Post.CodingKeys.createdTime.rawValue, descending: false)
         
-        dataFetcher.fetch(from: query) { result in
-            
-            switch result {
-            case .success(let documents):
-                guard let posts = GenericParser.parse(documents, of: Post.self) else {
-                    completion(.failure(.parsingError))
-                    return
-                }
-                completion(.success(posts))
-                
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        _fetch(from: query, completion: completion)
     }
     
     func fetchAllPost(completion: @escaping PostsResult) {
         
-        let query = FirestoreService.posts.order(by: "created_time", descending: true)
+        let query = FirestoreService.posts
+            .order(by: Post.CodingKeys.createdTime.rawValue, descending: true)
         
-        dataFetcher.fetch(from: query) { result in
+        _fetch(from: query, completion: completion)
+    }
+    
+    fileprivate func _fetch(from query: Query, completion: @escaping PostsResult) {
+        
+        dataFetcher.fetch(from: query) { (result) in
             
             switch result {
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            
             case .success(let documents):
                 guard let posts = GenericParser.parse(documents, of: Post.self) else {
-                    completion(.failure(.parsingError))
+                    DispatchQueue.main.async {
+                        completion(.failure(.parsingError))
+                    }
                     return
                 }
-                completion(.success(posts))
-                
-            case .failure(let error):
-                completion(.failure(error))
+                DispatchQueue.main.async {
+                    completion(.success(posts))
+                }
             }
         }
     }
     
     func createPost(_ post: Post, image: UIImage? = nil, completion: @escaping (Result<Void, Error>) -> Void) {
         
-        let documentRef = Firestore.firestore().collection("posts").document(post.id)
+        let documentRef = FirestoreService.posts.document(post.id)
         
         do {
             try documentRef.setData(from: post, merge: true, encoder: Firestore.Encoder()) { error in

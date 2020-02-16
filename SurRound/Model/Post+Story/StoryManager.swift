@@ -29,13 +29,12 @@ struct StoryManagerError: Error {
 class StoryManager {
     
     static func getDocId() -> String {
-        return Firestore.firestore().collection("stories").document().documentID
+        
+        return FirestoreService.stories.document().documentID
     }
     
     private let dataFetcher: DataFetching
-    
-    lazy var storiesCollection = Firestore.firestore().collection("stories")
-    
+        
     var buffer: [StoryCollection] = []
     
     init(dataFetcher: DataFetching = GenericFetcher()) {
@@ -88,7 +87,8 @@ class StoryManager {
         do {
             let videoData = try Data(contentsOf: videoFileURL)
             
-            let ref = storiesCollection.document()
+            let ref = FirestoreService.stories.document()
+            
             StorageManager().uploadVideo(videoData, filename: ref.documentID) { url in
                 
                 guard let url = url else {

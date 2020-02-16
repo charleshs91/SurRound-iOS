@@ -23,6 +23,7 @@
 		D3086B9323DCA0940071F378 /* BodyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B9123DCA0940071F378 /* BodyTableViewCell.swift */; };
 		D3086B9423DCA0940071F378 /* BodyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3086B9223DCA0940071F378 /* BodyTableViewCell.xib */; };
 		D3086B9623DCA2160071F378 /* ReusableCellRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B9523DCA2160071F378 /* ReusableCellRegister.swift */; };
+		D3137AAE23F918E900FD1772 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3137AAD23F918E900FD1772 /* ReviewManager.swift */; };
 		D32022DD23DAA8310057EB24 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32022DC23DAA8310057EB24 /* SignUpViewController.swift */; };
 		D326796323E2940100F94BFD /* NewPostMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D326796123E2940100F94BFD /* NewPostMapCell.swift */; };
 		D326796423E2940100F94BFD /* NewPostMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D326796223E2940100F94BFD /* NewPostMapCell.xib */; };
@@ -173,6 +174,7 @@
 		D3086B9123DCA0940071F378 /* BodyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTableViewCell.swift; sourceTree = "<group>"; };
 		D3086B9223DCA0940071F378 /* BodyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyTableViewCell.xib; sourceTree = "<group>"; };
 		D3086B9523DCA2160071F378 /* ReusableCellRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCellRegister.swift; sourceTree = "<group>"; };
+		D3137AAD23F918E900FD1772 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		D32022DC23DAA8310057EB24 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D326796123E2940100F94BFD /* NewPostMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostMapCell.swift; sourceTree = "<group>"; };
 		D326796223E2940100F94BFD /* NewPostMapCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewPostMapCell.xib; sourceTree = "<group>"; };
@@ -719,6 +721,7 @@
 			children = (
 				D34A5C0523EE912500F76172 /* StoryManager.swift */,
 				D3A3B5FC23E3F5E6003201E1 /* PostManager.swift */,
+				D3137AAD23F918E900FD1772 /* ReviewManager.swift */,
 				D3A3B5FA23E3D56E003201E1 /* Post+StoryModel.swift */,
 				D363154E23E6A97F0000150B /* PostContentModel.swift */,
 				D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */,
@@ -1145,6 +1148,7 @@
 				D35C488F23CF352B000951D2 /* AppDelegate.swift in Sources */,
 				D365E4D823E4536D00480F11 /* ExploreViewController.swift in Sources */,
 				D39A755223D5E57F00A20879 /* UIStoryboard+Extension.swift in Sources */,
+				D3137AAE23F918E900FD1772 /* ReviewManager.swift in Sources */,
 				D36D8F9523EC602600E6348D /* TextPostListCell.swift in Sources */,
 				D3552B3623DF362100453FAA /* UserInfoSectionHeader.swift in Sources */,
 				D3086B8623DC85550071F378 /* PostContentView.swift in Sources */,
