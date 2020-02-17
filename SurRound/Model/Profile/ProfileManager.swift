@@ -22,7 +22,7 @@ class ProfileManager {
     
     func fetchUserList(uids: [String], completion: @escaping ([SRUser]) -> Void) {
         
-        let query = FirestoreService.users.whereField(SRUser.CodingKeys.uid.rawValue, in: uids)
+        let query = FirestoreDB.users.whereField(SRUser.CodingKeys.uid.rawValue, in: uids)
         
         dataFetcher.fetch(from: query) { result in
             switch result {
@@ -44,7 +44,7 @@ class ProfileManager {
         
         let group = DispatchGroup()
         
-        let docRef = FirestoreService.users.document(uid)
+        let docRef = FirestoreDB.users.document(uid)
         
         group.enter()
         dataFetcher.fetch(from: docRef) { result in
@@ -61,7 +61,7 @@ class ProfileManager {
             }
         }
         
-        let userPostRef = FirestoreService.userPosts(of: uid)
+        let userPostRef = FirestoreDB.userPosts(of: uid)
         
         group.enter()
         dataFetcher.fetch(from: userPostRef) { result in
@@ -79,7 +79,7 @@ class ProfileManager {
             }
         }
         
-        let userStoryRef = FirestoreService.userStories(of: uid)
+        let userStoryRef = FirestoreDB.userStories(of: uid)
         
         group.enter()
         dataFetcher.fetch(from: userStoryRef) { result in
@@ -108,7 +108,7 @@ class ProfileManager {
             return
         }
         
-        let userRef = FirestoreService.users.document(currentUser.uid)
+        let userRef = FirestoreDB.users.document(currentUser.uid)
         
         userRef.setData(
             ["blocking": FieldValue.arrayUnion([target.uid])],
@@ -128,7 +128,7 @@ class ProfileManager {
         let group = DispatchGroup()
         
         group.enter()
-        FirestoreService.users.document(user.uid)
+        FirestoreDB.users.document(user.uid)
             .setData(["following": FieldValue.arrayUnion([receiverId])], merge: true) { error in
                 
                 guard error == nil else {
@@ -139,7 +139,7 @@ class ProfileManager {
         }
         
         group.enter()
-        FirestoreService.users.document(receiverId)
+        FirestoreDB.users.document(receiverId)
             .setData(["follower": FieldValue.arrayUnion([user.uid])], merge: true) { error in
                 
                 guard error == nil else {
@@ -150,7 +150,7 @@ class ProfileManager {
         }
         
         group.enter()
-        FirestoreService.users.document(receiverId).collection("notifications").document()
+        FirestoreDB.users.document(receiverId).collection("notifications").document()
             .setData([
                 "type": "follow",
                 "sender_name": user.username,

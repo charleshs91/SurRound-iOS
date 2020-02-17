@@ -20,7 +20,7 @@ class ReviewManager {
     
     func fetchAllReviews(postId: String, completion: @escaping ReviewsResult) {
         
-        let reviewRef = FirestoreService.reviews(of: postId)
+        let reviewRef = FirestoreDB.reviews(of: postId)
         
         dataFetcher.fetch(from: reviewRef) { (result) in
             switch result {
@@ -37,7 +37,7 @@ class ReviewManager {
     
     func sendReview(postID: String, author: Author, text: String, completion: @escaping (Error?) -> Void) {
         
-        let reviewRef = FirestoreService.reviews(of: postID).document()
+        let reviewRef = FirestoreDB.reviews(of: postID).document()
         
         let reviewObject = Review(id: reviewRef.documentID,
                                   postId: postID,

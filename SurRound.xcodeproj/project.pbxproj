@@ -39,6 +39,7 @@
 		D338FF3F23E8119700CAB8CB /* StoryPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D338FF3E23E8119700CAB8CB /* StoryPreviewCell.swift */; };
 		D338FF4423E945F500CAB8CB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D338FF4323E945F500CAB8CB /* ProfileViewController.swift */; };
 		D338FF4623E94EE000CAB8CB /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D338FF4523E94EE000CAB8CB /* UIScreen+Extension.swift */; };
+		D3431E8423FA904600680A79 /* IGImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3431E8323FA904600680A79 /* IGImagePickerController.swift */; };
 		D3433DD623F6A405009006BA /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3433DD523F6A405009006BA /* UIButton+Extension.swift */; };
 		D3433E2723F7EACC009006BA /* PostReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3433E2523F7EACC009006BA /* PostReplyCell.swift */; };
 		D3433E2823F7EACC009006BA /* PostReplyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3433E2623F7EACC009006BA /* PostReplyCell.xib */; };
@@ -88,7 +89,7 @@
 		D36B694523F28A8800AAED0D /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B694423F28A8800AAED0D /* ProfileHeaderView.swift */; };
 		D36B695123F29F2300AAED0D /* GenericFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B695023F29F2300AAED0D /* GenericFetcher.swift */; };
 		D36B695323F29FA100AAED0D /* GenericParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B695223F29FA100AAED0D /* GenericParser.swift */; };
-		D36B695923F2A9D000AAED0D /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B695823F2A9D000AAED0D /* FirestoreService.swift */; };
+		D36B695923F2A9D000AAED0D /* FirestoreDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B695823F2A9D000AAED0D /* FirestoreDB.swift */; };
 		D36D8F9223EC51F900E6348D /* PostListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36D8F9123EC51F900E6348D /* PostListCellViewModel.swift */; };
 		D36D8F9523EC602600E6348D /* TextPostListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36D8F9323EC602600E6348D /* TextPostListCell.swift */; };
 		D36D8F9623EC602600E6348D /* TextPostListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36D8F9423EC602600E6348D /* TextPostListCell.xib */; };
@@ -192,6 +193,7 @@
 		D338FF3E23E8119700CAB8CB /* StoryPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPreviewCell.swift; sourceTree = "<group>"; };
 		D338FF4323E945F500CAB8CB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D338FF4523E94EE000CAB8CB /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
+		D3431E8323FA904600680A79 /* IGImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGImagePickerController.swift; sourceTree = "<group>"; };
 		D3433DD523F6A405009006BA /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		D3433E2523F7EACC009006BA /* PostReplyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReplyCell.swift; sourceTree = "<group>"; };
 		D3433E2623F7EACC009006BA /* PostReplyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostReplyCell.xib; sourceTree = "<group>"; };
@@ -247,7 +249,7 @@
 		D36B694423F28A8800AAED0D /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		D36B695023F29F2300AAED0D /* GenericFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericFetcher.swift; sourceTree = "<group>"; };
 		D36B695223F29FA100AAED0D /* GenericParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericParser.swift; sourceTree = "<group>"; };
-		D36B695823F2A9D000AAED0D /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		D36B695823F2A9D000AAED0D /* FirestoreDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDB.swift; sourceTree = "<group>"; };
 		D36D8F9123EC51F900E6348D /* PostListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListCellViewModel.swift; sourceTree = "<group>"; };
 		D36D8F9323EC602600E6348D /* TextPostListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPostListCell.swift; sourceTree = "<group>"; };
 		D36D8F9423EC602600E6348D /* TextPostListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextPostListCell.xib; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 			isa = PBXGroup;
 			children = (
 				D338FF4323E945F500CAB8CB /* ProfileViewController.swift */,
+				D3431E8323FA904600680A79 /* IGImagePickerController.swift */,
 				D3A07CF823F54B1F00CE3F26 /* UserTableViewController.swift */,
 			);
 			path = Profile;
@@ -560,7 +563,7 @@
 		D36B694B23F29CFA00AAED0D /* FirestoreService */ = {
 			isa = PBXGroup;
 			children = (
-				D36B695823F2A9D000AAED0D /* FirestoreService.swift */,
+				D36B695823F2A9D000AAED0D /* FirestoreDB.swift */,
 				D36B695023F29F2300AAED0D /* GenericFetcher.swift */,
 				D36B695223F29FA100AAED0D /* GenericParser.swift */,
 			);
@@ -1114,7 +1117,8 @@
 				D39997ED23DB487B00595B2F /* TextRelatable.swift in Sources */,
 				D3552B3323DF359500453FAA /* NewPostMediaCell.swift in Sources */,
 				D365E4DC23E4542A00480F11 /* TrendingListViewController.swift in Sources */,
-				D36B695923F2A9D000AAED0D /* FirestoreService.swift in Sources */,
+				D3431E8423FA904600680A79 /* IGImagePickerController.swift in Sources */,
+				D36B695923F2A9D000AAED0D /* FirestoreDB.swift in Sources */,
 				D361071823F0FEB2007AFDC2 /* StoryCounterCell.swift in Sources */,
 				D3A07CF923F54B1F00CE3F26 /* UserTableViewController.swift in Sources */,
 				D365E4DE23E4546300480F11 /* NearestListViewController.swift in Sources */,

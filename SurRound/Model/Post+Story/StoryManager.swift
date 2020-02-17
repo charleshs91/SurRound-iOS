@@ -30,7 +30,7 @@ class StoryManager {
     
     static func getDocId() -> String {
         
-        return FirestoreService.stories.document().documentID
+        return FirestoreDB.stories.document().documentID
     }
     
     private let dataFetcher: DataFetching
@@ -43,7 +43,7 @@ class StoryManager {
     
     func fetchStoryCollection(completion: @escaping StoryCollectionsResult) {
         
-        let collection = FirestoreService.stories
+        let collection = FirestoreDB.stories
         
         dataFetcher.fetch(from: collection) { result in
             
@@ -64,7 +64,7 @@ class StoryManager {
     
     func fetchStoryCollectionFrom(users uids: [String], completion: @escaping StoryCollectionsResult) {
         
-        let query = FirestoreService.stories.whereField(Story.CodingKeys.authorId.rawValue, in: uids)
+        let query = FirestoreDB.stories.whereField(Story.CodingKeys.authorId.rawValue, in: uids)
         
         dataFetcher.fetch(from: query) { result in
             
@@ -87,7 +87,7 @@ class StoryManager {
         do {
             let videoData = try Data(contentsOf: videoFileURL)
             
-            let ref = FirestoreService.stories.document()
+            let ref = FirestoreDB.stories.document()
             
             StorageManager().uploadVideo(videoData, filename: ref.documentID) { url in
                 

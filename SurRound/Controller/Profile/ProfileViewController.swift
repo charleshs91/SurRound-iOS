@@ -118,6 +118,14 @@ class ProfileViewController: UIViewController {
             sender: UserListType.follower(profile))
     }
     
+    @objc func handleEditAvatar(_ sender: UIButton) {
+        
+        guard let pickerVC = IGImagePickerController.storyboardInstance() else {
+            return
+        }
+        navigationController?.show(pickerVC, sender: nil)
+    }
+    
     // MARK: - Private Methods
     private func setupViews() {
         
@@ -137,6 +145,8 @@ class ProfileViewController: UIViewController {
         profileHeaderView.followerCountLabel.isUserInteractionEnabled = true
         profileHeaderView.followerCountLabel.addGestureRecognizer(UITapGestureRecognizer(
         target: self, action: #selector(showFollowers(_:))))
+        
+        profileHeaderView.editAvatarButton.addTarget(self, action: #selector(handleEditAvatar(_:)), for: .touchUpInside)
     }
     
     private func fetchUserPost() {

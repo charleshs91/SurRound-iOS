@@ -17,7 +17,7 @@ class PostManager: DataFetching {
     // Ask database for an unique id.
     static func documentID() -> String {
         
-        return FirestoreService.posts.document().documentID
+        return FirestoreDB.posts.document().documentID
     }
     
     private let dataFetcher: DataFetching
@@ -29,7 +29,7 @@ class PostManager: DataFetching {
     
     func likePost(postId: String, uid: String, completion: @escaping () -> Void) {
         
-        let docRef = FirestoreService.posts.document(postId)
+        let docRef = FirestoreDB.posts.document(postId)
         docRef.setData(["likedBy": FieldValue.arrayUnion([uid])], merge: true) { (error) in
             guard error == nil else { return }
             completion()
@@ -38,7 +38,7 @@ class PostManager: DataFetching {
     
     func dislikePost(postId: String, uid: String, completion: @escaping () -> Void) {
         
-        let docRef = FirestoreService.posts.document(postId)
+        let docRef = FirestoreDB.posts.document(postId)
         docRef.setData(["likedBy": FieldValue.arrayRemove([uid])], merge: true) { (error) in
             guard error == nil else { return }
             completion()
@@ -47,7 +47,7 @@ class PostManager: DataFetching {
     
     func fetchPostOfUsers(uids: [String], completion: @escaping PostsResult) {
 
-        let query = FirestoreService.posts
+        let query = FirestoreDB.posts
             .whereField(Post.CodingKeys.authorId.rawValue, in: uids)
             .order(by: Post.CodingKeys.createdTime.rawValue, descending: false)
         
@@ -56,7 +56,7 @@ class PostManager: DataFetching {
     
     func fetchAllPost(completion: @escaping PostsResult) {
         
-        let query = FirestoreService.posts
+        let query = FirestoreDB.posts
             .order(by: Post.CodingKeys.createdTime.rawValue, descending: true)
         
         _fetch(from: query, completion: completion)
@@ -88,7 +88,7 @@ class PostManager: DataFetching {
     
     func createPost(_ post: Post, image: UIImage? = nil, completion: @escaping (Result<Void, Error>) -> Void) {
         
-        let documentRef = FirestoreService.posts.document(post.id)
+        let documentRef = FirestoreDB.posts.document(post.id)
         
         do {
             try documentRef.setData(from: post, merge: true, encoder: Firestore.Encoder()) { error in
