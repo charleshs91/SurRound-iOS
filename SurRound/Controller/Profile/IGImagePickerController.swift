@@ -14,6 +14,11 @@ class IGImageCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
 }
 
+protocol IGImagePickerControllerDelegate: AnyObject {
+    
+    func didSelectImage(_ controller: IGImagePickerController, with image: UIImage)
+}
+
 class IGImagePickerController: UIViewController {
     
     static func storyboardInstance() -> IGImagePickerController? {
@@ -21,14 +26,23 @@ class IGImagePickerController: UIViewController {
             identifier: String(describing: self)) as? IGImagePickerController
     }
     
+    weak var delegate: IGImagePickerControllerDelegate?
+    
+    @IBOutlet weak var selectedImageView: UIImageView!
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupCollectionView()
+        setupViews()
         
         grabPhotos()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        selectedImageView.image = imageArray.first
     }
     
     var imageArray = [UIImage]() {
@@ -37,9 +51,23 @@ class IGImagePickerController: UIViewController {
         }
     }
     
-    func setupCollectionView() {
+    func setupViews() {
+        let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
+        let navHeight = navigationController?.navigationBar.frame.height ?? 0.0
+        let safeAreaHeight = statusBarHeight + navHeight
         
+        selectedImageView.frame = CGRect(x: 0, y: safeAreaHeight, width: UIScreen.width, height: UIScreen.width)
+        selectedImageView.layer.borderWidth = 1
+        selectedImageView.layer.borderColor = UIColor.white.cgColor
+        
+        collectionView.contentInset = UIEdgeInsets(top: UIScreen.width, left: 1, bottom: 0, right: 1)
+        collectionView.contentOffset = CGPoint(x: 0, y: -UIScreen.width)
         collectionView.allowsSelection = true
+    }
+    
+    @IBAction func selectImage(_ sender: UIBarButtonItem) {
+        
+        delegate?.didSelectImage(self, with: selectedImageView.image!)
     }
     
     func grabPhotos() {
@@ -61,7 +89,7 @@ class IGImagePickerController: UIViewController {
                     for: fetchResult.object(at: index),
                     targetSize: CGSize(width: 256, height: 256),
                     contentMode: .aspectFill,
-                    options: requestOptions) { (image, error) in
+                    options: requestOptions) { (image, _) in
                         self.imageArray.append(image!)
                 }
             }
@@ -92,7 +120,7 @@ extension IGImagePickerController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = collectionView.frame.width / 3 - 1
+        let width = (collectionView.frame.width - 4) / 3
         return CGSize(width: width, height: width)
     }
     
@@ -108,6 +136,6 @@ extension IGImagePickerController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let image = imageArray[indexPath.item]
-        print(image.jpegData(compressionQuality: 0.9))
+        selectedImageView.image = image
     }
 }

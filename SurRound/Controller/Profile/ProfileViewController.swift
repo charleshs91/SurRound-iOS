@@ -123,6 +123,7 @@ class ProfileViewController: UIViewController {
         guard let pickerVC = IGImagePickerController.storyboardInstance() else {
             return
         }
+        pickerVC.delegate = self
         navigationController?.show(pickerVC, sender: nil)
     }
     
@@ -250,4 +251,13 @@ extension ProfileViewController: SelectionViewDataSource {
 
 extension ProfileViewController: SelectionViewDelegate {
     
+}
+
+extension ProfileViewController: IGImagePickerControllerDelegate {
+    
+    func didSelectImage(_ controller: IGImagePickerController, with image: UIImage) {
+        
+        profileHeaderView.profileImageView.image = image
+        navigationController?.popViewController(animated: true)
+    }
 }

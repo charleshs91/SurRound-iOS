@@ -27,7 +27,7 @@
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vE3-qb-kVw" customClass="ProfileHeaderView" customModule="SurRound" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="302" width="375" height="244"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icons_Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="cqA-s0-QkO">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icons_Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="cqA-s0-QkO">
                                         <rect key="frame" x="147.66666666666666" y="16" width="80" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="cqA-s0-QkO" secondAttribute="height" id="QEE-tO-HjH"/>
@@ -132,6 +132,7 @@
                         <outlet property="selectionView" destination="21M-oF-47K" id="vOF-Bq-p8p"/>
                         <outlet property="tableView" destination="AiL-xM-Yqn" id="bmG-04-Azw"/>
                         <segue destination="QyJ-Y9-H3x" kind="show" identifier="UserTableViewController" id="WCy-nB-F6N"/>
+                        <segue destination="c9y-kN-55j" kind="show" identifier="SegueImagePicker" id="S9o-cw-wIE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="45m-IU-ni7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -147,7 +148,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Eru-6x-76R">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="P2Y-B9-bxs">
                                     <size key="itemSize" width="128" height="128"/>
@@ -184,27 +185,31 @@
                                     <outlet property="delegate" destination="c9y-kN-55j" id="HbD-UY-sH1"/>
                                 </connections>
                             </collectionView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Ia-cc-ROM">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ia-cc-ROM">
                                 <rect key="frame" x="0.0" y="44" width="375" height="375"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="9Ia-cc-ROM" secondAttribute="height" id="KnG-si-rfS"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="9Ia-cc-ROM" firstAttribute="leading" secondItem="gQN-aQ-H8s" secondAttribute="leading" id="5DH-Oe-H3N"/>
-                            <constraint firstItem="9Ia-cc-ROM" firstAttribute="trailing" secondItem="gQN-aQ-H8s" secondAttribute="trailing" id="5eW-uA-kmG"/>
                             <constraint firstItem="gQN-aQ-H8s" firstAttribute="trailing" secondItem="Eru-6x-76R" secondAttribute="trailing" id="7bN-Fh-mSU"/>
                             <constraint firstItem="Eru-6x-76R" firstAttribute="top" secondItem="gQN-aQ-H8s" secondAttribute="top" id="CVl-DC-gjh"/>
                             <constraint firstItem="gQN-aQ-H8s" firstAttribute="bottom" secondItem="Eru-6x-76R" secondAttribute="bottom" id="YrF-uq-O7c"/>
                             <constraint firstItem="Eru-6x-76R" firstAttribute="leading" secondItem="gQN-aQ-H8s" secondAttribute="leading" id="ceL-G7-zMn"/>
-                            <constraint firstItem="9Ia-cc-ROM" firstAttribute="top" secondItem="gQN-aQ-H8s" secondAttribute="top" id="zKa-GC-fDr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gQN-aQ-H8s"/>
                     </view>
+                    <navigationItem key="navigationItem" id="8qY-e1-dKx">
+                        <barButtonItem key="rightBarButtonItem" title="選擇照片" id="EBr-hs-DFb">
+                            <connections>
+                                <action selector="selectImage:" destination="c9y-kN-55j" id="AC5-s5-hlu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="Eru-6x-76R" id="R38-Ee-vex"/>
+                        <outlet property="selectedImageView" destination="9Ia-cc-ROM" id="tme-f2-4nI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0jj-7Q-w3A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -290,7 +295,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xp9-wf-LM0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1815.2" y="-303.69458128078821"/>
+            <point key="canvasLocation" x="1895" y="-695"/>
         </scene>
         <!--Colored Nav Controller-->
         <scene sceneID="i3I-rP-mpp">
