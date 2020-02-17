@@ -28,7 +28,7 @@ enum PostBodyCellType {
             
         case .body:
             return tableView.dequeueReusableCell(
-                withIdentifier: PostDetailBodyCell.reuseIdentifier, for: indexPath)
+                withIdentifier: PostBodyCell.reuseIdentifier, for: indexPath)
         }
     }
 }

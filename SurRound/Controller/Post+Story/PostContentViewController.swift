@@ -11,7 +11,16 @@ import KMPlaceholderTextView
 
 class PostContentViewController: UIViewController {
     
-    var post: Post!
+    var post: Post! {
+        didSet {
+            postBodyViewModel = PostBodyViewModel(post: post, onReply: { [weak self] in
+                self?.replyTextView.becomeFirstResponder()
+                self?.postContentView.tableView.scrollToBottom(animated: true)
+            })
+        }
+    }
+    
+    var postBodyViewModel: PostBodyViewModel!
     
     var reviews = [Review]() {
         didSet {
@@ -39,6 +48,7 @@ class PostContentViewController: UIViewController {
     }
     
     let sections: [PostDetailSectionType] = [.content, .review]
+    
     let cellItems: [PostBodyCellType] = [.location, .body]
     
     override func viewDidLoad() {
@@ -133,10 +143,10 @@ extension PostContentViewController: UITableViewDataSource {
                 locationCell.setupCell(with: post!)
                 
             case .body:
-                guard let bodyCell = cell as? PostDetailBodyCell else {
+                guard let bodyCell = cell as? PostBodyCell else {
                     break
                 }
-                bodyCell.postTextLabel.text = post?.text
+                bodyCell.configure(with: postBodyViewModel)
             }
             
             return cell

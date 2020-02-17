@@ -8,15 +8,17 @@
 
 import UIKit
 
-class PostDetailBodyCellViewModel {
+class PostBodyViewModel {
     
+    var postId: String
     var postText: String
     var isLiked: Observable<Bool>
     var likeCount: Int
     
     var onReplyTapped: (() -> Void)?
     
-    init(post: Post, isLiked: Bool = false, likeCount: Int = 0, _ onReply: @escaping () -> Void) {
+    init(post: Post, isLiked: Bool = false, likeCount: Int = 0, onReply: @escaping () -> Void) {
+        self.postId = post.id
         self.postText = post.text
         self.isLiked = Observable(isLiked)
         self.likeCount = likeCount
@@ -24,13 +26,13 @@ class PostDetailBodyCellViewModel {
     }
 }
 
-class PostDetailBodyCell: UITableViewCell {
+class PostBodyCell: UITableViewCell {
     
     @IBOutlet weak var postTextLabel: UILabel!
     
     @IBOutlet weak var likeButton: UIButton!
     
-    private var viewModel: PostDetailBodyCellViewModel? {
+    private var viewModel: PostBodyViewModel? {
         didSet {
             guard let viewModel = viewModel else { return }
             postTextLabel.text = viewModel.postText
@@ -43,20 +45,39 @@ class PostDetailBodyCell: UITableViewCell {
         
     }
     
-    func configure(with viewModel: PostDetailBodyCellViewModel) {
+    func configure(with viewModel: PostBodyViewModel) {
+        
+        guard let user = AuthManager.shared.currentUser else { return }
+        
+        viewModel.isLiked.addObserver { (state) in
+            
+            let manager = PostManager()
+            if state {
+                manager.likePost(postId: viewModel.postId, uid: user.uid) { [weak self] in
+                    self?.updateLikeButton()
+                }
+            } else {
+                manager.dislikePost(postId: viewModel.postId, uid: user.uid) { [weak self] in
+                    self?.updateLikeButton()
+                }
+            }
+        }
         
         self.viewModel = viewModel
     }
     
     @IBAction func didTapLikeButton(_ sender: UIButton) {
         
-        likeButton.isSelected.toggle()
-        likeButton.tintColor = likeButton.isSelected ? .yellow : .darkGray
         viewModel?.isLiked.value.toggle()
     }
     
     @IBAction func didTapReplyButton(_ sender: UIButton) {
         
         viewModel?.onReplyTapped?()
+    }
+    
+    private func updateLikeButton() {
+        likeButton.isSelected.toggle()
+        likeButton.tintColor = likeButton.isSelected ? .yellow : .darkGray
     }
 }

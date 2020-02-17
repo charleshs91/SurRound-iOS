@@ -27,6 +27,24 @@ class PostManager: DataFetching {
         self.dataFetcher = dataFetcher
     }
     
+    func likePost(postId: String, uid: String, completion: @escaping () -> Void) {
+        
+        let docRef = FirestoreService.posts.document(postId)
+        docRef.setData(["likedBy": FieldValue.arrayUnion([uid])], merge: true) { (error) in
+            guard error == nil else { return }
+            completion()
+        }
+    }
+    
+    func dislikePost(postId: String, uid: String, completion: @escaping () -> Void) {
+        
+        let docRef = FirestoreService.posts.document(postId)
+        docRef.setData(["likedBy": FieldValue.arrayRemove([uid])], merge: true) { (error) in
+            guard error == nil else { return }
+            completion()
+        }
+    }
+    
     func fetchPostOfUsers(uids: [String], completion: @escaping PostsResult) {
 
         let query = FirestoreService.posts
@@ -44,7 +62,7 @@ class PostManager: DataFetching {
         _fetch(from: query, completion: completion)
     }
     
-    fileprivate func _fetch(from query: Query, completion: @escaping PostsResult) {
+    private func _fetch(from query: Query, completion: @escaping PostsResult) {
         
         dataFetcher.fetch(from: query) { (result) in
             

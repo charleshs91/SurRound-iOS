@@ -45,7 +45,7 @@ class PostContentView: UIView {
     private func setupTableView() {
         
         tableView.registerCellWithNib(withCellClass: PostInfoTableViewCell.self)
-        tableView.registerCellWithNib(withCellClass: PostDetailBodyCell.self)
+        tableView.registerCellWithNib(withCellClass: PostBodyCell.self)
         tableView.registerCellWithNib(withCellClass: PostReplyCell.self)
         
         tableView.contentInset = UIEdgeInsets(top: UIScreen.width * 1.2 - 24, left: 0, bottom: 24, right: 0)
