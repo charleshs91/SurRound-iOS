@@ -26,7 +26,7 @@ class PostContentViewController: UIViewController {
             replyButton.isEnabled = false
         }
     }
-
+    
     @IBOutlet weak var postContentView: PostContentView!
     
     @IBOutlet weak var replyTextView: KMPlaceholderTextView! {
@@ -46,15 +46,7 @@ class PostContentViewController: UIViewController {
         
         postContentView.layoutView(from: post)
         
-        ReviewManager().fetchAllReviews(postId: post.id) { [weak self] (result) in
-            switch result {
-            case .failure(let error):
-                SRProgressHUD.showFailure(text: error.localizedDescription)
-                
-            case .success(let reviews):
-                self?.reviews = reviews
-            }
-        }
+        updateReviews()
     }
     
     // MARK: - User Actions
@@ -70,17 +62,36 @@ class PostContentViewController: UIViewController {
         }
         
         let author = Author(currentUser)
+        let manager = ReviewManager()
         
         SRProgressHUD.showLoading()
-        ReviewManager().sendReview(postID: post.id, author: author, text: replyTextView.text) { (error) in
+        manager.sendReview(postID: post.id, author: author, text: replyTextView.text) { [weak self] (error) in
+            
             SRProgressHUD.dismiss()
-            guard error == nil else {
-                return
+            
+            if error == nil {
+                SRProgressHUD.showSuccess(text: "留言成功")
+                self?.replyTextView.clear()
+                self?.updateReviews {
+                    self?.postContentView.tableView.scrollToBottom(animated: true)
+                }
             }
-            SRProgressHUD.showSuccess(text: "留言成功")
         }
     }
     
+    private func updateReviews(completion: (() -> Void)? = nil) {
+        
+        ReviewManager().fetchAllReviews(postId: post.id) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                SRProgressHUD.showFailure(text: error.localizedDescription)
+                
+            case .success(let reviews):
+                self?.reviews = reviews
+                completion?()
+            }
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -122,10 +133,10 @@ extension PostContentViewController: UITableViewDataSource {
                 locationCell.setupCell(with: post!)
                 
             case .body:
-                guard let bodyCell = cell as? BodyTableViewCell else {
+                guard let bodyCell = cell as? PostDetailBodyCell else {
                     break
                 }
-                bodyCell.descriptionLabel.text = post?.text
+                bodyCell.postTextLabel.text = post?.text
             }
             
             return cell

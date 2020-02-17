@@ -36,6 +36,10 @@ class ExploreViewController: UIViewController {
         exploreView.selectionView.dataSource = self
         exploreView.selectionView.delegate = self
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
 }
 
 extension ExploreViewController: SelectionViewDataSource {

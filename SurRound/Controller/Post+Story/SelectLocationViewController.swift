@@ -17,14 +17,9 @@ protocol SelectLocationViewControllerDelegate: AnyObject {
 
 class SelectLocationViewController: UIViewController {
     
-    deinit {
-        debugPrint("$ deinit: SelectLocationViewController")
-    }
-    
     static func storyboardInstance() -> SelectLocationViewController? {
         return UIStoryboard.newPost.instantiateViewController(
-            identifier: String(describing: SelectLocationViewController.self)
-            ) as? SelectLocationViewController
+            identifier: String(describing: self)) as? SelectLocationViewController
     }
     
     @IBOutlet weak var mapView: GMSMapView!
@@ -63,19 +58,14 @@ class SelectLocationViewController: UIViewController {
         resultsViewController = GMSAutocompleteResultsViewController()
         resultsViewController?.delegate = self
         
-        //        searchController?.searchBar.barTintColor = .white
-        //        searchController?.searchBar.tintColor = .white
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController?.searchResultsUpdater = resultsViewController
         
         searchController?.searchBar.sizeToFit()
         navigationItem.titleView = searchController?.searchBar
         
-        // When UISearchController presents the results view, present it in
-        // this view controller, not one further up the chain.
         definesPresentationContext = true
         
-        // Prevent the navigation bar from being hidden when searching.
         searchController?.hidesNavigationBarDuringPresentation = false
     }
     

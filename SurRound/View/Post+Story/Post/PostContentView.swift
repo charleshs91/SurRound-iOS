@@ -24,7 +24,7 @@ class PostContentView: UIView {
         
         super.awakeFromNib()
         
-        postImageView.frame = CGRect(x: 0, y: 0, width: UIScreen.width, height: 400)
+        postImageView.frame = CGRect(x: 0, y: 0, width: UIScreen.width, height: UIScreen.width * 1.2)
         
         styleCloseButton()
     }
@@ -45,10 +45,11 @@ class PostContentView: UIView {
     private func setupTableView() {
         
         tableView.registerCellWithNib(withCellClass: PostInfoTableViewCell.self)
-        tableView.registerCellWithNib(withCellClass: BodyTableViewCell.self)
+        tableView.registerCellWithNib(withCellClass: PostDetailBodyCell.self)
         tableView.registerCellWithNib(withCellClass: PostReplyCell.self)
         
-        tableView.contentInset = UIEdgeInsets(top: 400, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: UIScreen.width * 1.2 - 24, left: 0, bottom: 24, right: 0)
+        tableView.contentOffset = CGPoint(x: 0, y: UIScreen.width)
     }
     
     private func styleCloseButton() {

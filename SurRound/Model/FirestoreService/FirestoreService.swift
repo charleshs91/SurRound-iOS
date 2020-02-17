@@ -27,35 +27,38 @@ class FirestoreService {
         static let userStories = "user_stories"
         static let notifications = "notifications"
     }
-    
-    class var users: CollectionReference {
+
+    static var users: CollectionReference {
+        
         return Firestore.firestore().collection(Collection.users)
     }
     
-    class var posts: CollectionReference {
+    static var posts: CollectionReference {
+        
         return Firestore.firestore().collection(Collection.posts)
     }
     
-    class var stories: CollectionReference {
+    static var stories: CollectionReference {
+        
         return Firestore.firestore().collection(Collection.stories)
     }
     
-    class func reviews(of postId: String) -> CollectionReference {
+    static func reviews(of postId: String) -> CollectionReference {
         
         return posts.document(postId).collection(Collection.reviews)
     }
     
-    class func userPosts(of userId: String) -> CollectionReference {
+    static func userPosts(of userId: String) -> CollectionReference {
         
         return users.document(userId).collection(Collection.userPosts)
     }
     
-    class func userStories(of userId: String) -> CollectionReference {
+    static func userStories(of userId: String) -> CollectionReference {
         
         return users.document(userId).collection(Collection.userStories)
     }
     
-    class func notifications(of userId: String) -> CollectionReference {
+    static func notifications(of userId: String) -> CollectionReference {
         
         return users.document(userId).collection(Collection.notifications)
     }

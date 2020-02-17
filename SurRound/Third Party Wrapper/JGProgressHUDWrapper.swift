@@ -49,7 +49,7 @@ class SRProgressHUD {
         show(type: .failure(text))
     }
     
-    static func show(type: HUDType, delay: TimeInterval = 1.0) {
+    static func show(type: HUDType, delay: TimeInterval = 1.2) {
         if !Thread.isMainThread {
             DispatchQueue.main.async {
                 show(type: type, delay: delay)

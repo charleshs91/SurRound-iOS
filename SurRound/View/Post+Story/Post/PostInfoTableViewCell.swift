@@ -22,6 +22,7 @@ class PostInfoTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        styleCell()
     }
     
     func setupCell(with post: Post) {
@@ -36,7 +37,8 @@ class PostInfoTableViewCell: UITableViewCell {
         
     }
     
-    @IBAction func didTapCloseBtn(_ sender: UIButton) {
-        
+    private func styleCell() {
+        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        layer.cornerRadius = 16
     }
 }
