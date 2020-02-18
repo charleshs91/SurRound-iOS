@@ -135,7 +135,11 @@ class ProfileViewController: UIViewController {
         tableView.registerCellWithNib(withCellClass: VideoPostListCell.self)
         
         let guide = view.safeAreaLayoutGuide
-        tableView.anchor(top: guide.topAnchor, left: guide.leftAnchor, bottom: guide.bottomAnchor, right: guide.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0)
+        tableView.anchor(top: guide.topAnchor,
+                         leading: guide.leadingAnchor,
+                         bottom: guide.bottomAnchor,
+                         trailing: guide.trailingAnchor,
+                         padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         
         tableView.tableFooterView = UIView()
         
