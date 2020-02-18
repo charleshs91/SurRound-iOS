@@ -144,8 +144,8 @@ extension StoryViewController: UICollectionViewDataSource {
             guard let storyCell = cell as? StoryPlayerCell else { return cell }
             
             storyCell.url = URL(string: storyEntities[indexPath.section].stories[indexPath.item].videoLink)!
+            storyCell.configurePlayer()
             storyCell.layoutIfNeeded()
-            
             return storyCell
             
         } else {
@@ -171,7 +171,8 @@ extension StoryViewController: UICollectionViewDelegateFlowLayout {
             return collectionView.frame.size
             
         } else {
-            let width = (collectionView.frame.size.width - 2) / storyEntities[currentSection].stories.count.cgFloat
+            let counts = storyEntities[currentSection].stories.count.cgFloat
+            let width = (collectionView.frame.size.width - 2) / counts
             return CGSize(width: width, height: 4)
         }
     }
@@ -191,17 +192,14 @@ extension StoryViewController: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        didEndDisplaying cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
 
     }
 }
 
 extension StoryViewController: StoryPlayerCellDelegate {
-    
-//    func didStartPlayingVideo(_ cell: StoryPlayerCell, duration: Double) {
-//        print("Start playing with duration: \(duration) seconds")
-//        self.videoDuration = duration
-//    }
     
     func updateCurrentTime(_ cell: StoryPlayerCell, current: Double, duration: Double) {
         guard
@@ -221,10 +219,10 @@ extension StoryViewController: StoryPlayerCellDelegate {
         let itemsInSection = storyCollectionView.numberOfItems(inSection: indexPath.section)
         let sections = numberOfSections(in: storyCollectionView)
         
-        let isEndOfSection = indexPath.item == (itemsInSection - 1)
-        let isEndOfColleciton = indexPath.section == (sections - 1)
+        let isLastItemInSection = indexPath.item == (itemsInSection - 1)
+        let isLastSection = indexPath.section == (sections - 1)
         
-        switch (isEndOfSection, isEndOfColleciton) {
+        switch (isLastItemInSection, isLastSection) {
             
         case (true, true):
             presentingViewController?.dismiss(animated: true, completion: nil)
@@ -233,12 +231,9 @@ extension StoryViewController: StoryPlayerCellDelegate {
             let nextIndexPath = IndexPath(item: 0, section: indexPath.section + 1)
             storyCollectionView.scrollToItem(at: nextIndexPath, at: .left, animated: true)
 
-        case (false, false):
+        case (false, false), (false, true):
             let nextIndexPath = IndexPath(item: indexPath.item + 1, section: indexPath.section)
             storyCollectionView.scrollToItem(at: nextIndexPath, at: .left, animated: true)
-
-        default:
-            break
         }
     }
 }

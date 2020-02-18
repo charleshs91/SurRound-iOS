@@ -193,7 +193,7 @@ class HomeViewController: UIViewController {
                                       placeholder: UIImage.asset(.Icons_Avatar))
             
             postPin.mapMarker.iconView = imgView
-            postPin.mapMarker.iconView?.frame = CGRect(x: 0, y: 0, width: 200, height: 60)
+            postPin.mapMarker.iconView?.frame = CGRect(x: 0, y: 0, width: 150, height: 60)
             
             postPin.mapMarker.map = self?.mapView
         }

@@ -11,8 +11,6 @@ import AVFoundation
 
 protocol StoryPlayerCellDelegate: AnyObject {
     
-//    func didStartPlayingVideo(_ cell: StoryPlayerCell, duration: Double)
-    
     func updateCurrentTime(_ cell: StoryPlayerCell, current: Double, duration: Double)
     
     func didEndPlayingVideo(_ cell: StoryPlayerCell)
@@ -48,8 +46,6 @@ class StoryPlayerCell: UICollectionViewCell {
     
     func startPlaying(updateFrequency: Double) {
         
-        configurePlayer()
-        
         player.play()
         
         timeObserverToken = player.addPeriodicTimeObserver(
@@ -67,7 +63,7 @@ class StoryPlayerCell: UICollectionViewCell {
         }
     }
         
-    private func configurePlayer() {
+    func configurePlayer() {
         
         playerItem = AVPlayerItem(url: url)
         player = AVPlayer(playerItem: self.playerItem)

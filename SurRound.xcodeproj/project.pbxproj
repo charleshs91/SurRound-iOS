@@ -22,7 +22,6 @@
 		D3086B9023DC9D3A0071F378 /* PostInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3086B8E23DC9D3A0071F378 /* PostInfoTableViewCell.xib */; };
 		D3086B9323DCA0940071F378 /* PostBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B9123DCA0940071F378 /* PostBodyCell.swift */; };
 		D3086B9423DCA0940071F378 /* PostBodyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3086B9223DCA0940071F378 /* PostBodyCell.xib */; };
-		D3086B9623DCA2160071F378 /* ReusableCellRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B9523DCA2160071F378 /* ReusableCellRegister.swift */; };
 		D3137AAE23F918E900FD1772 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3137AAD23F918E900FD1772 /* ReviewManager.swift */; };
 		D3137AB023F93BD000FD1772 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3137AAF23F93BD000FD1772 /* Observable.swift */; };
 		D3137AB223FA5DED00FD1772 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3137AB123FA5DED00FD1772 /* UITableView+Extension.swift */; };
@@ -62,7 +61,7 @@
 		D35CA75523E523710055F84E /* ImagePostListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35CA75323E523710055F84E /* ImagePostListCell.swift */; };
 		D35CA75623E523710055F84E /* ImagePostListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D35CA75423E523710055F84E /* ImagePostListCell.xib */; };
 		D35CA75B23E524550055F84E /* SRRoundedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35CA75A23E524550055F84E /* SRRoundedTableViewCell.swift */; };
-		D361066E23EF205B007AFDC2 /* CellConfigurer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361066D23EF205B007AFDC2 /* CellConfigurer.swift */; };
+		D361066E23EF205B007AFDC2 /* CellRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D361066D23EF205B007AFDC2 /* CellRegistrator.swift */; };
 		D36106D023EFC1C0007AFDC2 /* AnimatedCollectionViewLayoutWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36106CF23EFC1C0007AFDC2 /* AnimatedCollectionViewLayoutWrapper.swift */; };
 		D36106D323EFC954007AFDC2 /* StoryPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36106D123EFC954007AFDC2 /* StoryPlayerCell.swift */; };
 		D36106D423EFC954007AFDC2 /* StoryPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D36106D223EFC954007AFDC2 /* StoryPlayerCell.xib */; };
@@ -176,7 +175,6 @@
 		D3086B8E23DC9D3A0071F378 /* PostInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostInfoTableViewCell.xib; sourceTree = "<group>"; };
 		D3086B9123DCA0940071F378 /* PostBodyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBodyCell.swift; sourceTree = "<group>"; };
 		D3086B9223DCA0940071F378 /* PostBodyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostBodyCell.xib; sourceTree = "<group>"; };
-		D3086B9523DCA2160071F378 /* ReusableCellRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCellRegister.swift; sourceTree = "<group>"; };
 		D3137AAD23F918E900FD1772 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		D3137AAF23F93BD000FD1772 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		D3137AB123FA5DED00FD1772 /* UITableView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
@@ -222,7 +220,7 @@
 		D35CA75323E523710055F84E /* ImagePostListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePostListCell.swift; sourceTree = "<group>"; };
 		D35CA75423E523710055F84E /* ImagePostListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePostListCell.xib; sourceTree = "<group>"; };
 		D35CA75A23E524550055F84E /* SRRoundedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRRoundedTableViewCell.swift; sourceTree = "<group>"; };
-		D361066D23EF205B007AFDC2 /* CellConfigurer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellConfigurer.swift; sourceTree = "<group>"; };
+		D361066D23EF205B007AFDC2 /* CellRegistrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellRegistrator.swift; sourceTree = "<group>"; };
 		D36106CF23EFC1C0007AFDC2 /* AnimatedCollectionViewLayoutWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedCollectionViewLayoutWrapper.swift; sourceTree = "<group>"; };
 		D36106D123EFC954007AFDC2 /* StoryPlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPlayerCell.swift; sourceTree = "<group>"; };
 		D36106D223EFC954007AFDC2 /* StoryPlayerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoryPlayerCell.xib; sourceTree = "<group>"; };
@@ -678,8 +676,7 @@
 				D3433DD523F6A405009006BA /* UIButton+Extension.swift */,
 				D3A4BB6223F15678005E8196 /* Numbers+Extension.swift */,
 				D39997EC23DB487B00595B2F /* TextRelatable.swift */,
-				D3086B9523DCA2160071F378 /* ReusableCellRegister.swift */,
-				D361066D23EF205B007AFDC2 /* CellConfigurer.swift */,
+				D361066D23EF205B007AFDC2 /* CellRegistrator.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1126,7 +1123,7 @@
 				D3433E2723F7EACC009006BA /* PostReplyCell.swift in Sources */,
 				D35CA75523E523710055F84E /* ImagePostListCell.swift in Sources */,
 				D335D5DF23DEA9500021B461 /* SRAuthButton.swift in Sources */,
-				D361066E23EF205B007AFDC2 /* CellConfigurer.swift in Sources */,
+				D361066E23EF205B007AFDC2 /* CellRegistrator.swift in Sources */,
 				D363154C23E61FA00000150B /* PlacePostCollectionCell.swift in Sources */,
 				D361071323F00A98007AFDC2 /* VideoProvider.swift in Sources */,
 				D365E4DA23E4541A00480F11 /* FollowingListViewController.swift in Sources */,
@@ -1194,7 +1191,6 @@
 				D3A07CFC23F54C7200CE3F26 /* UserListTableViewCell.swift in Sources */,
 				D3137AB023F93BD000FD1772 /* Observable.swift in Sources */,
 				D3A3B5F123E29C35003201E1 /* NewPostCellType.swift in Sources */,
-				D3086B9623DCA2160071F378 /* ReusableCellRegister.swift in Sources */,
 				D3A3B5FB23E3D56E003201E1 /* Post+StoryModel.swift in Sources */,
 				D3949B0123D9ACBB006DA9AA /* SignInViewController.swift in Sources */,
 				D3086B7223DB5DD50071F378 /* UserModel.swift in Sources */,
@@ -1441,7 +1437,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HW9KY3R5BK;
 				INFOPLIST_FILE = SurRound/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1464,7 +1460,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HW9KY3R5BK;
 				INFOPLIST_FILE = SurRound/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

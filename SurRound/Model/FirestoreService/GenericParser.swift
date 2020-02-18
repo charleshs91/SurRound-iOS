@@ -17,7 +17,6 @@ class GenericParser {
         let decoder = Firestore.Decoder()
         
         let parseItems = documents.map { document in
-            
             return try? document.data(as: T.self, decoder: decoder)
         }
         

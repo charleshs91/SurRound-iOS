@@ -11,6 +11,7 @@ import Firebase
 import FirebaseFirestoreSwift
 
 typealias DocumentCollectionResult = (Result<[QueryDocumentSnapshot], FirestoreServiceError>) -> Void
+
 typealias DocumentResult = (Result<DocumentSnapshot, FirestoreServiceError>) -> Void
 
 protocol DataFetching: AnyObject {

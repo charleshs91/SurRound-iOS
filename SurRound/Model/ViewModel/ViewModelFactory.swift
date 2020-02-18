@@ -26,7 +26,6 @@ class ViewModelFactory {
                 return
             }
         }
-        
         return viewModels
     }
 }

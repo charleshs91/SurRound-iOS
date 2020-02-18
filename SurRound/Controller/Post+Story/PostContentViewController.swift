@@ -51,6 +51,7 @@ class PostContentViewController: UIViewController {
     
     let cellItems: [PostBodyCellType] = [.location, .body]
     
+    // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,9 +90,11 @@ class PostContentViewController: UIViewController {
         }
     }
     
+    // MARK: Private Methods
     private func updateReviews(completion: (() -> Void)? = nil) {
         
         ReviewManager().fetchAllReviews(postId: post.id) { [weak self] (result) in
+            
             switch result {
             case .failure(let error):
                 SRProgressHUD.showFailure(text: error.localizedDescription)
@@ -175,6 +178,7 @@ extension PostContentViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UITextViewDelegate
 extension PostContentViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {

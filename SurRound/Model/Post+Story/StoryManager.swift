@@ -12,8 +12,8 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 typealias StoryCollectionsResult = (Result<[StoryCollection], FirestoreServiceError>) -> Void
+
 typealias StoryResult = (Result<Story, Error>) -> Void
-//typealias StoriesResult = (Result<[Story], Error>) -> Void
 
 struct StoryManagerError: Error {
     
@@ -34,7 +34,7 @@ class StoryManager {
     }
     
     private let dataFetcher: DataFetching
-        
+    
     var buffer: [StoryCollection] = []
     
     init(dataFetcher: DataFetching = GenericFetcher()) {
@@ -43,44 +43,16 @@ class StoryManager {
     
     func fetchStoryCollection(completion: @escaping StoryCollectionsResult) {
         
-        let collection = FirestoreDB.stories
+        let query = FirestoreDB.stories.order(by: Story.CodingKeys.createdTime.rawValue, descending: false)
         
-        dataFetcher.fetch(from: collection) { result in
-            
-            switch result {
-            case .success(let documents):
-                guard let stories = GenericParser.parse(documents, of: Story.self) else {
-                    completion(.failure(.parsingError))
-                    return
-                }
-                let entities = self.mapping(stories: stories)
-                completion(.success(entities))
-                
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        _fetch(from: query, completion: completion)
     }
     
     func fetchStoryCollectionFrom(users uids: [String], completion: @escaping StoryCollectionsResult) {
         
         let query = FirestoreDB.stories.whereField(Story.CodingKeys.authorId.rawValue, in: uids)
         
-        dataFetcher.fetch(from: query) { result in
-            
-            switch result {
-            case .success(let documents):
-                guard let stories = GenericParser.parse(documents, of: Story.self) else {
-                    completion(.failure(.parsingError))
-                    return
-                }
-                let entities = self.mapping(stories: stories)
-                completion(.success(entities))
-                
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        _fetch(from: query, completion: completion)
     }
     
     func createStory(_ videoFileURL: URL, at place: SRPlace, completion: @escaping StoryResult) throws {
@@ -118,6 +90,24 @@ class StoryManager {
         } catch {
             // Fail to convert video file to Data
             throw error
+        }
+    }
+    
+    private func _fetch(from query: Query, completion: @escaping StoryCollectionsResult) {
+        
+        dataFetcher.fetch(from: query) { result in
+            switch result {
+            case .failure(let error):
+                completion(.failure(error))
+                
+            case .success(let documents):
+                guard let stories = GenericParser.parse(documents, of: Story.self) else {
+                    completion(.failure(.parsingError))
+                    return
+                }
+                let entities = self.mapping(stories: stories)
+                completion(.success(entities))
+            }
         }
     }
     
