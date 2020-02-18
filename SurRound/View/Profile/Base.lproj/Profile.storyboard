@@ -121,9 +121,10 @@
                         <viewLayoutGuide key="safeArea" id="c7X-7G-7QB"/>
                     </view>
                     <navigationItem key="navigationItem" id="EWQ-ts-iie">
-                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="FVr-ij-Co8">
+                        <barButtonItem key="rightBarButtonItem" image="ellipsis" catalog="system" id="FVr-ij-Co8">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="signOut:" destination="y53-h9-qyE" id="m9f-7h-BTl"/>
+                                <action selector="moreActionButton:" destination="y53-h9-qyE" id="SCQ-Vq-geu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -318,5 +319,6 @@
     </scenes>
     <resources>
         <image name="Icons_Avatar" width="32" height="32"/>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
     </resources>
 </document>

@@ -90,15 +90,15 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - User Actions
-    @IBAction func signOut(_ sender: UIBarButtonItem) {
+    @IBAction func moreActionButton(_ sender: UIBarButtonItem) {
         
-        let isSuccessSignOut = AuthManager.shared.signOut()
-        
-        if isSuccessSignOut {
-            let authVC = UIStoryboard.auth.instantiateInitialViewController()
-            AppDelegate.shared.window?.rootViewController = authVC
+        if userToDisplay.uid == AuthManager.shared.currentUser!.uid {
+            showAccountActions()
+        } else {
+            showUserActions()
         }
     }
+    
     @objc func showFollowingUsers(_ sender: UITapGestureRecognizer) {
         
         guard let profile = profile else {
@@ -128,6 +128,65 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Private Methods
+    
+    private func showAccountActions() {
+        
+        let alertVC = UIAlertController(
+            title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let reportListAction = UIAlertAction(title: "封鎖列表", style: .default) { [unowned self] _ in
+            print("Blocked user list")
+        }
+        
+        let signOutAction = UIAlertAction(title: "登出", style: .default) { [unowned self] _ in
+            self.signOut()
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { _ in
+            alertVC.dismiss(animated: true, completion: nil)
+        }
+        
+        [reportListAction, signOutAction, cancelAction].forEach {
+            alertVC.addAction($0)
+        }
+        
+        present(alertVC, animated: true, completion: nil)
+    }
+    
+    private func showUserActions() {
+        
+        let alertVC = UIAlertController(
+            title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let reportAction = UIAlertAction(title: "檢舉", style: .default) { _ in
+            print("檢舉你")
+        }
+        
+        let blockAction = UIAlertAction(title: "封鎖", style: .default) { _ in
+            print("封鎖你")
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { _ in
+            alertVC.dismiss(animated: true, completion: nil)
+        }
+        
+        [reportAction, blockAction, cancelAction].forEach {
+            alertVC.addAction($0)
+        }
+        
+        present(alertVC, animated: true, completion: nil)
+    }
+    
+    private func signOut() {
+        
+        let isSuccessSignOut = AuthManager.shared.signOut()
+        
+        if isSuccessSignOut {
+            let authVC = UIStoryboard.auth.instantiateInitialViewController()
+            AppDelegate.shared.window?.rootViewController = authVC
+        }
+    }
+    
     private func setupViews() {
         
         tableView.registerCellWithNib(withCellClass: ImagePostListCell.self)
