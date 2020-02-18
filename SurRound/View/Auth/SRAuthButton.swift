@@ -24,6 +24,7 @@ class SRAuthButton: UIButton {
         super.awakeFromNib()
         
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline).withSize(20)
+        titleLabel?.textColor = .white
     }
     
     override func layoutSubviews() {

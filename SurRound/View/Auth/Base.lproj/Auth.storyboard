@@ -286,5 +286,72 @@
             </objects>
             <point key="canvasLocation" x="243" y="-384"/>
         </scene>
+        <!--User Info Form View Controller-->
+        <scene sceneID="3sc-F7-Vfb">
+            <objects>
+                <viewController storyboardIdentifier="UserInfoFormViewController" id="Ozt-KY-o0P" customClass="UserInfoFormViewController" customModule="SurRound" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kNh-xK-Dig">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username (required)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h5o-vu-eWG" customClass="SRAuthTextField" customModule="SurRound" customModuleProvider="target">
+                                <rect key="frame" x="50" y="149" width="314" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Q1h-3Q-yCL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email (optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n10-wX-nCV" customClass="SRAuthTextField" customModule="SurRound" customModuleProvider="target">
+                                <rect key="frame" x="50" y="221" width="314" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Abj-fb-2Ef"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登入成功，請輸入個人資訊" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzn-Vh-2uK">
+                                <rect key="frame" x="50" y="104" width="208" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i1E-nn-wjK" customClass="SRAuthButton" customModule="SurRound" customModuleProvider="target">
+                                <rect key="frame" x="157" y="293" width="100" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Eh4-uf-l4w"/>
+                                    <constraint firstAttribute="height" constant="42" id="lP9-vu-PC4"/>
+                                </constraints>
+                                <state key="normal" title="Continue"/>
+                                <connections>
+                                    <action selector="didTapContinue:" destination="Ozt-KY-o0P" eventType="touchUpInside" id="5zh-6x-fKC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="DTa-ii-8Xq" firstAttribute="trailing" secondItem="n10-wX-nCV" secondAttribute="trailing" constant="50" id="4XU-Ld-IEN"/>
+                            <constraint firstItem="n10-wX-nCV" firstAttribute="top" secondItem="h5o-vu-eWG" secondAttribute="bottom" constant="24" id="5BC-5N-L7j"/>
+                            <constraint firstItem="n10-wX-nCV" firstAttribute="leading" secondItem="DTa-ii-8Xq" secondAttribute="leading" constant="50" id="Bo0-Eu-2Wv"/>
+                            <constraint firstItem="Dzn-Vh-2uK" firstAttribute="leading" secondItem="h5o-vu-eWG" secondAttribute="leading" id="DsZ-xA-wjE"/>
+                            <constraint firstItem="h5o-vu-eWG" firstAttribute="top" secondItem="Dzn-Vh-2uK" secondAttribute="bottom" constant="24" id="Ijh-D5-yWe"/>
+                            <constraint firstItem="Dzn-Vh-2uK" firstAttribute="top" secondItem="DTa-ii-8Xq" secondAttribute="top" constant="60" id="JAM-RV-4BI"/>
+                            <constraint firstItem="h5o-vu-eWG" firstAttribute="leading" secondItem="DTa-ii-8Xq" secondAttribute="leading" constant="50" id="Sec-dY-c66"/>
+                            <constraint firstItem="i1E-nn-wjK" firstAttribute="centerX" secondItem="n10-wX-nCV" secondAttribute="centerX" id="TVe-vQ-1rK"/>
+                            <constraint firstItem="DTa-ii-8Xq" firstAttribute="trailing" secondItem="h5o-vu-eWG" secondAttribute="trailing" constant="50" id="Tvg-XU-roM"/>
+                            <constraint firstItem="i1E-nn-wjK" firstAttribute="top" secondItem="n10-wX-nCV" secondAttribute="bottom" constant="24" id="gFT-rV-wVw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="DTa-ii-8Xq"/>
+                    </view>
+                    <connections>
+                        <outlet property="continueButton" destination="i1E-nn-wjK" id="vdb-a0-sRR"/>
+                        <outlet property="emailTextField" destination="n10-wX-nCV" id="q9u-Ua-6K9"/>
+                        <outlet property="usernameTextField" destination="h5o-vu-eWG" id="Ank-Pn-22h"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PGi-Da-9PZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1086.9565217391305" y="290.625"/>
+        </scene>
     </scenes>
 </document>

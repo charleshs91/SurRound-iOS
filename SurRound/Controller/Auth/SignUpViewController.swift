@@ -74,7 +74,7 @@ class SignUpViewController: UIViewController {
                 return
         }
         
-        if !validateEmail(email) {
+        if !email.isValidEmail {
             SRProgressHUD.showFailure(text: "Invalid email address")
             return
         }
@@ -112,20 +112,6 @@ class SignUpViewController: UIViewController {
     @objc func textFieldDidChange(_ sender: UITextField) {
         
         checkTextFieldsContent()
-    }
-    
-    private func validateEmail(_ candidate: String) -> Bool {
-        
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        
-        guard let regEx = try? NSRegularExpression(pattern: emailRegex, options: .caseInsensitive) else {
-            return false
-        }
-        
-        let matches = regEx.matches(in: candidate,
-                                    options: [],
-                                    range: NSRange(location: 0, length: candidate.count))
-        return matches.count > 0
     }
     
     private func displayMainView() {

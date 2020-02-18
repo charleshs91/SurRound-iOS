@@ -71,7 +71,25 @@ class AuthManager {
             
             UserDBService.queryUser(uid: user.uid) { srUser in
                 self?.currentUser = srUser
+                completion(.success(srUser!))
+            }
+        }
+    }
+    
+    func signUpWithApple(uid: String, email: String, username: String,
+                         completion: @escaping SRUserResult) {
+        
+        let newUser = SRUser(uid: uid, email: email, username: username, avatar: nil)
+        
+        UserDBService.createUser(user: newUser) { [weak self] (result) in
+            
+            switch result {
+            case .success(let srUser):
+                self?.currentUser = srUser
                 completion(.success(srUser))
+                
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }

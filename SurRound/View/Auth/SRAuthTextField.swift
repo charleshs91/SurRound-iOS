@@ -9,38 +9,47 @@
 import UIKit
 
 class SRAuthTextField: UITextField {
-
-  private let padding = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-  
-  override func textRect(forBounds bounds: CGRect) -> CGRect {
     
-    return bounds.inset(by: padding)
-  }
-  
-  override func editingRect(forBounds bounds: CGRect) -> CGRect {
+    private let padding = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     
-    return bounds.inset(by: padding)
-  }
-  
-  override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        
+        return bounds.inset(by: padding)
+    }
     
-    return bounds.inset(by: padding)
-  }
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        
+        return bounds.inset(by: padding)
+    }
     
-    clearButtonMode = .unlessEditing
-  }
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        
+        return bounds.inset(by: padding)
+    }
     
-    borderStyle = .none
-    layer.borderColor = UIColor.lightGray.cgColor
-    layer.borderWidth = 1
-    layer.cornerRadius = frame.height / 2
-    layer.masksToBounds = true
-  }
-  
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        layer.cornerRadius = frame.height / 2
+    }
+    
+    private func commonInit() {
+        
+        borderStyle = .none
+        clearButtonMode = .unlessEditing
+        
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.lightGray.cgColor
+        layer.masksToBounds = true
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
 }

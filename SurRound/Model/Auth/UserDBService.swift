@@ -11,13 +11,13 @@ import FirebaseFirestore
 
 class UserDBService {
     
-    static func queryUser(uid: String, completion: @escaping (SRUser) -> Void) {
+    static func queryUser(uid: String, completion: @escaping (SRUser?) -> Void) {
         
         let db = Firestore.firestore()
         db.collection("users").document(uid).getDocument { (snapshot, error) in
             
             guard let data = snapshot?.data(), error == nil else {
-                print(error!)
+                completion(nil)
                 return
             }
             

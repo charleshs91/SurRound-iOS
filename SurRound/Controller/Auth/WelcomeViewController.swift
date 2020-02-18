@@ -28,7 +28,7 @@ class WelcomeViewController: UIViewController {
         appleSignInButton.anchorCenterXToSuperview()
     }
     
-    @objc private func signInWithApple(_ sender: ASAuthorizationAppleIDButton) {
+    @objc func signInWithApple(_ sender: ASAuthorizationAppleIDButton) {
         
         let provider = ASAuthorizationAppleIDProvider()
         let request = provider.createRequest()
@@ -38,23 +38,56 @@ class WelcomeViewController: UIViewController {
         controller.presentationContextProvider = self
         controller.performRequests()
     }
+    
+    private func displayMainView() {
+        
+        if let window = AppDelegate.shared.window {
+            let tbc = UIStoryboard.main.instantiateInitialViewController()
+            window.rootViewController = tbc
+        }
+    }
 }
-
 extension WelcomeViewController: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController,
                                  didCompleteWithAuthorization authorization: ASAuthorization) {
         
-        guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else {
-            return
+        guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
+        let userId = credential.user
+        let uid = String(userId.split(separator: ".")[1])
+        
+        let provider = ASAuthorizationAppleIDProvider()
+        provider.getCredentialState(forUserID: userId) { [weak self] (credentialState, _) in
+            
+            switch credentialState {
+            case .authorized:
+                
+                UserDBService.queryUser(uid: uid) { (srUser) in
+                    
+                    guard let user = srUser else {
+                        DispatchQueue.main.async {
+                            let newVC = UIStoryboard.auth.instantiateViewController(identifier: "UserInfoFormViewController")
+                            guard let userInfoVC = newVC as? UserInfoFormViewController else { return }
+                            userInfoVC.uid = uid
+                            self?.navigationController?.show(userInfoVC, sender: nil)
+                        }
+                        return
+                    }
+                    
+                    AuthManager.shared.currentUser = user
+                    DispatchQueue.main.async {
+                        self?.displayMainView()
+                    }
+                }
+                
+            default:
+                break
+            }
         }
-        print("Success")
     }
     
-    func authorizationController(controller: ASAuthorizationController,
-                                 didCompleteWithError error: Error) {
-        
-        print("Fail to Sign in to Apple")
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print(error)
     }
 }
 
