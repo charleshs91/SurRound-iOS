@@ -51,6 +51,25 @@ class PostManager: DataFetching {
         }
     }
     
+    func fetchTrendingPost(completion: @escaping PostsResult) {
+        
+        let query = FirestoreDB.posts
+            .order(by: Post.CodingKeys.likeCount.rawValue, descending: true)
+        
+        _fetch(from: query) { (result) in
+            switch result {
+            case .success(let posts):
+                let filteredPosts = posts.filter { (post) -> Bool in
+                    return post.mediaLink != nil
+                }
+                completion(.success(filteredPosts))
+                
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func fetchPostOfUsers(uids: [String], completion: @escaping PostsResult) {
 
         let query = FirestoreDB.posts

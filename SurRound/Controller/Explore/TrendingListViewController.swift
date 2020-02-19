@@ -12,23 +12,26 @@ import collection_view_layouts
 class TrendingListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView! {
-        didSet { setupCollectionView() }
+        didSet {
+            collectionView.registerCellWithNib(cellWithClass: TrendingListGridCell.self)
+            collectionView.collectionViewLayout = getLayout()
+        }
     }
     
+    private var posts: [Post] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
+    // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .cyan
+        fetchData()
     }
     
-    private func setupCollectionView() {
-        
-        collectionView.registerCellWithNib(cellWithClass: TrendingListGridCell.self)
-        
-        collectionView.collectionViewLayout = getLayout()
-        collectionView.reloadData()
-    }
-    
+    // MARK: - Private Methods
     private func getLayout() -> UICollectionViewLayout {
         
         let layout = InstagramLayout()
@@ -38,6 +41,21 @@ class TrendingListViewController: UIViewController {
         layout.gridType = .regularPreviewCell
         return layout
     }
+    
+    private func fetchData() {
+        
+        let manager = PostManager()
+        manager.fetchTrendingPost { (result) in
+            
+            switch result {
+            case .success(let posts):
+                self.posts = posts
+                
+            case .failure(let error):
+                SRProgressHUD.showFailure(text: error.localizedDescription)
+            }
+        }
+    }
 }
 
 extension TrendingListViewController: UICollectionViewDataSource {
@@ -45,7 +63,7 @@ extension TrendingListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         
-        return 30
+        return posts.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -54,11 +72,26 @@ extension TrendingListViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: TrendingListGridCell.reuseIdentifier, for: indexPath)
         
-        return cell
+        guard let gridCell = cell as? TrendingListGridCell else {
+            return cell
+        
+        }
+        gridCell.postImageView.loadImage(posts[indexPath.item].mediaLink)
+        
+        return gridCell
     }
 }
 
 extension TrendingListViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let postDetailVC = UIStoryboard.post.instantiateInitialViewController() as? PostContentViewController else { return }
+        
+        postDetailVC.post = posts[indexPath.item]
+        
+        present(postDetailVC, animated: true, completion: nil)
+    }
     
 }
 

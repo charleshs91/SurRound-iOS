@@ -21,6 +21,7 @@ class ReviewManager {
     func fetchAllReviews(postId: String, completion: @escaping ReviewsResult) {
         
         let reviewRef = FirestoreDB.reviews(of: postId)
+            .order(by: Review.CodingKeys.createdTime.rawValue, descending: false)
         
         dataFetcher.fetch(from: reviewRef) { (result) in
             switch result {
