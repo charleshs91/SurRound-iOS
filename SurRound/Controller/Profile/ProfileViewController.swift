@@ -57,7 +57,7 @@ class ProfileViewController: UIViewController {
     // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.navigationBar.isHidden = true
         setupViews()
         
         updateUserProfile()
@@ -71,10 +71,14 @@ class ProfileViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         let size = profileHeaderView.sizeThatFits(.zero)
-        profileHeaderView.frame.origin = CGPoint(x: 0, y: view.safeAreaInsets.top)
+        
+        profileHeaderView.frame = CGRect(x: 0,
+                                         y: 0,
+                                         width: UIScreen.width,
+                                         height: size.height)
         profileHeaderView.layoutIfNeeded()
         
-        tableView.contentInset = UIEdgeInsets(top: size.height, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: size.height - view.safeAreaInsets.top, left: 0, bottom: 0, right: 0)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -287,14 +291,14 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+
         let maxYOffset = selectionView.frame.origin.y
-        
+
         let yOffset = scrollView.contentInset.top + scrollView.contentOffset.y
-        
+
         let allowedOffset = min(maxYOffset, yOffset)
-        
-        profileHeaderView.transform = CGAffineTransform(translationX: 0, y: -allowedOffset)
+
+        profileHeaderView.transform = CGAffineTransform(translationX: 0, y: -yOffset)
     }
 }
 

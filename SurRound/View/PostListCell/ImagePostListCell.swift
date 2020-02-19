@@ -91,8 +91,8 @@ class ImagePostListCell: PostListCell {
         substrateView.layer.cornerRadius = 8
         substrateView.layer.shadowColor = UIColor.lightGray.cgColor
         substrateView.layer.shadowOpacity = 0.7
-        substrateView.layer.shadowRadius = 2
-        substrateView.layer.shadowOffset = CGSize(width: 2, height: 2)
+        substrateView.layer.shadowRadius = 4
+        substrateView.layer.shadowOffset = CGSize(width: 0, height: 0)
     }
     
     private func isUserPostAuthor(_ authorId: String) -> Bool {
