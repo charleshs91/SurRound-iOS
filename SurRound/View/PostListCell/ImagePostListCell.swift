@@ -51,8 +51,8 @@ class ImagePostListCell: PostListCell {
         postImageView.loadImage(viewModel.postImageUrlString,
                                 placeholder: UIImage.asset(.Image_Placeholder))
         captionTextLabel.text = viewModel.text
-        
-        followButton.isHidden = isUserPostAuthor(viewModel.authorId) || viewModel.isFollowing
+        likedCountLabel.text = String(viewModel.likeCount)
+        reviewCountLabel.text = String(viewModel.replyCount)
         
         self.viewModel = viewModel
     }

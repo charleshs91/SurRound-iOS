@@ -49,8 +49,8 @@ class TextPostListCell: PostListCell {
         
         // Middle Section
         largeTextLabel.text = viewModel.text
-        
-        followButton.isHidden = isUserPostAuthor(viewModel.authorId)
+        likedCountLabel.text = String(viewModel.likeCount)
+        reviewCountLabel.text = String(viewModel.replyCount)
         
         self.viewModel = viewModel
     }
@@ -62,18 +62,6 @@ class TextPostListCell: PostListCell {
     
     @IBAction func didTapReviewButton(_ sender: UIButton) {
         
-    }
-    
-    @IBAction func followUser(_ sender: UIButton) {
-        if let currentUser = AuthManager.shared.currentUser {
-        let manager = ProfileManager()
-            manager.followUser(receiverId: viewModel.authorId, current: currentUser) { error in
-                guard error == nil else {
-                    return
-                }
-                SRProgressHUD.showSuccess()
-            }
-        }
     }
     
     // MARK: - Private Methods

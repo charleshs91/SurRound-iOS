@@ -28,6 +28,8 @@ class ImagePostListCellViewModel: PostListCellViewModel {
     var datetime: String
     var postImageUrlString: String?
     var text: String
+    var likeCount: Int
+    var replyCount: Int
     
     var isFollowing: Bool {
         
@@ -46,6 +48,8 @@ class ImagePostListCellViewModel: PostListCellViewModel {
         self.datetime = post.datetimeString
         self.postImageUrlString = post.mediaLink
         self.text = post.text
+        self.likeCount = post.likeCount
+        self.replyCount = post.replyCount
     }
 }
 
@@ -69,6 +73,8 @@ class TextPostListCellViewModel: PostListCellViewModel {
     var placeName: String?
     var datetime: String
     var text: String
+    var likeCount: Int
+    var replyCount: Int
     
     init(_ post: Post) {
         
@@ -78,6 +84,8 @@ class TextPostListCellViewModel: PostListCellViewModel {
         self.placeName = post.place.name
         self.datetime = post.datetimeString
         self.text = post.text
+        self.likeCount = post.likeCount
+        self.replyCount = post.replyCount
     }
 }
 

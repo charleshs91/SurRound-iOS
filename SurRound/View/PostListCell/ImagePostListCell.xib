@@ -101,17 +101,6 @@
                         <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1V-sI-YXx">
-                        <rect key="frame" x="274" y="16" width="30" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="30" id="CZS-cG-aRC"/>
-                            <constraint firstAttribute="width" secondItem="e1V-sI-YXx" secondAttribute="height" id="dAz-ew-8UZ"/>
-                        </constraints>
-                        <state key="normal" image="Icons_FollowUser"/>
-                        <connections>
-                            <action selector="followUser:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ech-FA-2w5"/>
-                        </connections>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Datetime" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHb-HK-rez">
                         <rect key="frame" x="160.5" y="18.5" width="58.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -127,9 +116,7 @@
                     <constraint firstAttribute="trailing" secondItem="F5l-ND-4mn" secondAttribute="trailing" constant="16" id="MXk-KN-b2I"/>
                     <constraint firstItem="ipN-Sx-1e9" firstAttribute="leading" secondItem="nsO-dp-4ip" secondAttribute="trailing" constant="8" id="OFO-k5-hh0"/>
                     <constraint firstItem="rPz-n3-VPR" firstAttribute="top" secondItem="ipN-Sx-1e9" secondAttribute="bottom" constant="4" id="Pu3-SJ-awH"/>
-                    <constraint firstItem="e1V-sI-YXx" firstAttribute="top" secondItem="nsO-dp-4ip" secondAttribute="top" id="WHg-My-Z3U"/>
                     <constraint firstItem="rPz-n3-VPR" firstAttribute="leading" secondItem="nsO-dp-4ip" secondAttribute="trailing" constant="8" id="Yrn-XH-x46"/>
-                    <constraint firstItem="e1V-sI-YXx" firstAttribute="trailing" secondItem="m4J-cq-nCo" secondAttribute="trailing" id="cKJ-0c-elL"/>
                     <constraint firstItem="nsO-dp-4ip" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="gV0-2q-sHX"/>
                     <constraint firstItem="ipN-Sx-1e9" firstAttribute="top" secondItem="nsO-dp-4ip" secondAttribute="top" id="nZH-nD-JzG"/>
                     <constraint firstItem="xHb-HK-rez" firstAttribute="leading" secondItem="ipN-Sx-1e9" secondAttribute="trailing" constant="12" id="p6G-Ye-gh1"/>
@@ -141,7 +128,6 @@
                 <outlet property="avatarImageView" destination="nsO-dp-4ip" id="iMn-mC-q3v"/>
                 <outlet property="captionTextLabel" destination="INJ-1W-6qw" id="T2F-M1-wJ5"/>
                 <outlet property="datetimeLabel" destination="xHb-HK-rez" id="TD6-vw-AI4"/>
-                <outlet property="followButton" destination="e1V-sI-YXx" id="6jz-eK-IJd"/>
                 <outlet property="likedButton" destination="aRi-7v-o1t" id="CwV-LH-3aw"/>
                 <outlet property="likedCountLabel" destination="te6-VX-ddV" id="cSF-1j-VlR"/>
                 <outlet property="placeNameLabel" destination="rPz-n3-VPR" id="nOW-2v-2ZS"/>
@@ -156,7 +142,6 @@
     </objects>
     <resources>
         <image name="Icons_Avatar" width="32" height="32"/>
-        <image name="Icons_FollowUser" width="32" height="32"/>
         <image name="Image_Placeholder" width="750" height="750"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="message.fill" catalog="system" width="128" height="113"/>

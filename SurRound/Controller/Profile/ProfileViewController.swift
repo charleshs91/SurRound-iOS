@@ -106,6 +106,24 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - User Actions
+    @IBAction func followUser(_ sender: UIButton) {
+        
+        if let currentUser = AuthManager.shared.currentUser {
+            
+            let manager = ProfileManager()
+            
+            SRProgressHUD.showLoading()
+            manager.followUser(receiverId: userToDisplay.uid, current: currentUser) { error in
+                
+                SRProgressHUD.dismiss()
+                guard error == nil else {
+                    return
+                }
+                SRProgressHUD.showSuccess()
+            }
+        }
+    }
+    
     @IBAction func moreActionButton(_ sender: UIButton) {
         
         if userToDisplay.uid == AuthManager.shared.currentUser!.uid {

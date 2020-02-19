@@ -55,6 +55,9 @@
                                                 </constraints>
                                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="Icons_FollowUser"/>
+                                                <connections>
+                                                    <action selector="followUser:" destination="y53-h9-qyE" eventType="touchUpInside" id="0x2-1n-ZKL"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRt-gd-ZUn">
                                                 <rect key="frame" x="40" y="1" width="18.333333333333329" height="22"/>
