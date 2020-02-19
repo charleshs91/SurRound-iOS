@@ -32,6 +32,7 @@ class UserInfoSectionHeader: UITableViewHeaderFooterView {
         super.layoutSubviews()
         
         layoutCategoryLabel()
+        userImgView.roundToHalfHeight()
     }
     
     private func layoutCategoryLabel() {

@@ -14,8 +14,8 @@ class SRColoredNavController: UINavigationController {
         super.viewDidLoad()
 
         navigationBar.shadowImage = UIImage()
-        navigationBar.barStyle = .black
-        navigationBar.tintColor = .white
-        navigationBar.barTintColor = .themeColor
+        navigationBar.barStyle = .default
+        navigationBar.tintColor = UIColor.themeColor
+        navigationBar.barTintColor = .white
     }
 }

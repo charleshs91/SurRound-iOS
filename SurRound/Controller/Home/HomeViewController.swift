@@ -21,7 +21,7 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
-            collectionView.backgroundColor = UIColor.white.withAlphaComponent(0.9)
+            collectionView.backgroundColor = .white
             
             collectionView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
             collectionView.layer.cornerRadius = 8
@@ -163,7 +163,7 @@ class HomeViewController: UIViewController {
     private func styleNagivationLeftTitle() {
         
         let label = UILabel()
-        label.textColor = UIColor.white
+        label.textColor = UIColor.themeColor
         label.text = "SurRound"
         label.font = UIFont(name: "Marker Felt", size: 32)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: label)

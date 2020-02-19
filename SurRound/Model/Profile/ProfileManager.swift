@@ -28,6 +28,8 @@ class ProfileManager {
             
             guard let url = url else { return }
             
+            UIImageView.clearCache()
+            
             let dict: [String: Any] = [SRUser.CodingKeys.avatar.rawValue: url.absoluteString]
             FirestoreDB.users.document(uid).setData(dict, merge: true) { (error) in
                 guard error == nil else {
