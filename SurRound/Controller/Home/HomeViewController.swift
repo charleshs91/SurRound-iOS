@@ -212,8 +212,11 @@ class HomeViewController: UIViewController {
                                       category: nil,
                                       placeholder: UIImage.asset(.Icons_Avatar))
             
+            let sizeFit = imgView.sizeThatFits(CGSize(width: 200, height: 200))
+            print(sizeFit)
+            
             postPin.mapMarker.iconView = imgView
-            postPin.mapMarker.iconView?.frame = CGRect(x: 0, y: 0, width: 150, height: 60)
+            postPin.mapMarker.iconView?.frame = CGRect(x: 0, y: 0, width: 120, height: 48)
             
             postPin.mapMarker.map = self?.mapView
         }
