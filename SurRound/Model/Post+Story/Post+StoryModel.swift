@@ -146,6 +146,8 @@ struct Post: Codable {
     let longitude: Double
     var mediaType: String?
     var mediaLink: String?
+    var likeCount: Int = 0
+    var replyCount: Int = 0
     
     var datetimeString: String {
         
@@ -167,6 +169,8 @@ struct Post: Codable {
         case longitude
         case mediaType = "media_type"
         case mediaLink = "media_link"
+        case likeCount = "like_count"
+        case replyCount = "reply_count"
     }
 }
 

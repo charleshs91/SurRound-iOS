@@ -15,17 +15,20 @@ class UserDBService {
         
         FirestoreDB.users.document(uid).getDocument { (snapshot, error) in
             
-            guard let data = snapshot?.data(), error == nil else {
+            guard let snapshot = snapshot, error == nil else {
                 completion(nil)
                 return
             }
             
-            do {
-                let srUser = try data.decode(SRUser.self)
-                completion(srUser)
-            } catch {
-                print(error)
-            }
+            let srUser = GenericParser.parse(snapshot, of: SRUser.self)
+            
+            completion(srUser)
+//            do {
+//                let srUser = try data.decode(SRUser.self)
+//                completion(srUser)
+//            } catch {
+//                print(error)
+//            }
         }
     }
     
