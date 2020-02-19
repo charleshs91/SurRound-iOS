@@ -49,6 +49,10 @@ class UserTableViewController: UITableViewController {
     
     func fetchUserList() {
         
+        guard listType.uids.count > 0 else {
+            return
+        }
+        
         let manager = ProfileManager()
         
         manager.fetchUserList(uids: listType.uids) { [weak self] srUsers in

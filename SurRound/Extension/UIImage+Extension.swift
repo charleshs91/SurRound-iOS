@@ -27,7 +27,9 @@ enum ImageAsset: String {
     case Icons_16px_RestaurantMarker
     case Icons_Avatar
     case Icons_Close
+    
     case Image_Placeholder
+    case Image_Avatar_Placeholder
     
     case Icons_Category_Ask
     case Icons_Category_Chat

@@ -38,7 +38,7 @@ class UserInfoFormViewController: UIViewController {
             
             SRProgressHUD.dismiss()
             switch result {
-            case .success(let user):
+            case .success:
                 SRProgressHUD.showSuccess(text: "登入成功")
                 self?.displayMainView()
                 

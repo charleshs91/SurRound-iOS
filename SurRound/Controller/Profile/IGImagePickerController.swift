@@ -40,6 +40,11 @@ class IGImagePickerController: UIViewController {
         grabPhotos()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         selectedImageView.image = imageArray.first

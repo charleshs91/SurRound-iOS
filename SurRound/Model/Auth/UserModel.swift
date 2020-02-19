@@ -36,6 +36,7 @@ class SRUserProfile: Codable {
     
     var following: [String] = []
     var follower: [String] = []
+    var blocking: [String] = []
     
     var posts: [UserPost] = []
     var stories: [UserStory] = []
@@ -50,6 +51,7 @@ class SRUserProfile: Codable {
         case avatar
         case following
         case follower
+        case blocking
     }
     
     init(user: SRUser) {

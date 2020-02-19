@@ -57,7 +57,7 @@ class ProfileViewController: UIViewController {
     // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
+        
         setupViews()
         
         updateUserProfile()
@@ -65,6 +65,18 @@ class ProfileViewController: UIViewController {
         fetchUserPost()
         
         profileHeaderView.setupView(user: userToDisplay)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.navigationBar.isHidden = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -94,7 +106,7 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - User Actions
-    @IBAction func moreActionButton(_ sender: UIBarButtonItem) {
+    @IBAction func moreActionButton(_ sender: UIButton) {
         
         if userToDisplay.uid == AuthManager.shared.currentUser!.uid {
             showAccountActions()
@@ -201,6 +213,8 @@ class ProfileViewController: UIViewController {
     
     private func setupViews() {
         
+        navigationController?.navigationBar.isHidden = true
+        
         tableView.registerCellWithNib(withCellClass: ImagePostListCell.self)
         tableView.registerCellWithNib(withCellClass: TextPostListCell.self)
         tableView.registerCellWithNib(withCellClass: VideoPostListCell.self)
@@ -292,11 +306,11 @@ extension ProfileViewController: UITableViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
-        let maxYOffset = selectionView.frame.origin.y
+//        let maxYOffset = selectionView.frame.origin.y
 
         let yOffset = scrollView.contentInset.top + scrollView.contentOffset.y
 
-        let allowedOffset = min(maxYOffset, yOffset)
+//        let allowedOffset = min(maxYOffset, yOffset)
 
         profileHeaderView.transform = CGAffineTransform(translationX: 0, y: -yOffset)
     }

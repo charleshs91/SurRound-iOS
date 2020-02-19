@@ -13,8 +13,7 @@ class UserDBService {
     
     static func queryUser(uid: String, completion: @escaping (SRUser?) -> Void) {
         
-        let db = Firestore.firestore()
-        db.collection("users").document(uid).getDocument { (snapshot, error) in
+        FirestoreDB.users.document(uid).getDocument { (snapshot, error) in
             
             guard let data = snapshot?.data(), error == nil else {
                 completion(nil)
@@ -32,12 +31,12 @@ class UserDBService {
     
     static func createUser(user: SRUser, completion: @escaping SRUserResult) {
         
-        let db = Firestore.firestore()
-        db.collection("users").document(user.uid).setData([
+        FirestoreDB.users.document(user.uid).setData([
             "uid": user.uid,
             "email": user.email,
             "username": user.username,
-            "created": Date(),
+            "avatar": user.avatar ?? "",
+            "created": Timestamp(date: Date()),
             "follower": [],
             "following": [],
             "blocking": []
@@ -47,16 +46,15 @@ class UserDBService {
                 completion(.failure(error!))
                 return
             }
-            
             completion(.success(user))
         }
     }
     
     static func attachPost(user: SRUser, postRef: DocumentReference) {
         
-        Firestore.firestore()
-            .collection("users").document(user.uid)
-            .collection("user_posts").document(postRef.documentID).setData([
+        let postId = postRef.documentID
+        
+        FirestoreDB.userPosts(of: user.uid).document(postId).setData([
                 "post_ref": postRef,
                 "post_id": postRef.documentID
             ], merge: true, completion: nil)
@@ -64,9 +62,9 @@ class UserDBService {
     
     static func attachStory(user: SRUser, storyRef: DocumentReference) {
         
-        Firestore.firestore()
-        .collection("users").document(user.uid)
-        .collection("user_stories").document(storyRef.documentID).setData([
+        let storyId = storyRef.documentID
+        
+        FirestoreDB.userStories(of: user.uid).document(storyId).setData([
             "story_ref": storyRef,
             "story_id": storyRef.documentID
         ], merge: true, completion: nil)
