@@ -54,11 +54,12 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupViews()
-                
+        
         updateUserProfile()
         
         fetchUserPost()
@@ -72,7 +73,6 @@ class ProfileViewController: UIViewController {
         let size = profileHeaderView.sizeThatFits(.zero)
         profileHeaderView.frame.origin = CGPoint(x: 0, y: view.safeAreaInsets.top)
         profileHeaderView.layoutIfNeeded()
-//        selectionView.frame.size = CGSize(width: UIScreen.width, height: 40)
         
         tableView.contentInset = UIEdgeInsets(top: size.height, left: 0, bottom: 0, right: 0)
     }
@@ -83,7 +83,7 @@ class ProfileViewController: UIViewController {
             
             guard let destVC = segue.destination as? UserTableViewController,
                 let listType = sender as? UserListType else {
-                return
+                    return
             }
             destVC.listType = listType
         }
@@ -113,7 +113,7 @@ class ProfileViewController: UIViewController {
         guard let profile = profile else {
             return
         }
-
+        
         performSegue(withIdentifier: "\(UserTableViewController.self)",
             sender: UserListType.follower(profile))
     }
@@ -134,7 +134,7 @@ class ProfileViewController: UIViewController {
         let alertVC = UIAlertController(
             title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let reportListAction = UIAlertAction(title: "封鎖列表", style: .default) { [unowned self] _ in
+        let reportListAction = UIAlertAction(title: "封鎖列表", style: .default) { _ in
             print("Blocked user list")
         }
         
@@ -159,11 +159,19 @@ class ProfileViewController: UIViewController {
             title: nil, message: nil, preferredStyle: .actionSheet)
         
         let reportAction = UIAlertAction(title: "檢舉", style: .default) { _ in
-            print("檢舉你")
+            SRProgressHUD.showSuccess(text: "我們已收到您的檢舉")
         }
         
-        let blockAction = UIAlertAction(title: "封鎖", style: .default) { _ in
-            print("封鎖你")
+        let blockAction = UIAlertAction(title: "封鎖", style: .default) { [unowned self] _ in
+            let manager = ProfileManager()
+            manager.blockUser(target: self.userToDisplay) { (result) in
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .success:
+                    SRProgressHUD.showSuccess(text: "封鎖成功")
+                }
+            }
         }
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel) { _ in
@@ -208,7 +216,7 @@ class ProfileViewController: UIViewController {
         
         profileHeaderView.followerCountLabel.isUserInteractionEnabled = true
         profileHeaderView.followerCountLabel.addGestureRecognizer(UITapGestureRecognizer(
-        target: self, action: #selector(showFollowers(_:))))
+            target: self, action: #selector(showFollowers(_:))))
         
         profileHeaderView.editAvatarButton.addTarget(self, action: #selector(handleEditAvatar(_:)), for: .touchUpInside)
     }
@@ -281,7 +289,7 @@ extension ProfileViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let maxYOffset = selectionView.frame.origin.y
-
+        
         let yOffset = scrollView.contentInset.top + scrollView.contentOffset.y
         
         let allowedOffset = min(maxYOffset, yOffset)
@@ -319,8 +327,21 @@ extension ProfileViewController: SelectionViewDelegate {
 extension ProfileViewController: IGImagePickerControllerDelegate {
     
     func didSelectImage(_ controller: IGImagePickerController, with image: UIImage) {
+         
+        let profileManager = ProfileManager()
         
-        profileHeaderView.profileImageView.image = image
-        navigationController?.popViewController(animated: true)
+        SRProgressHUD.showLoading()
+        
+        profileManager.updateAvatar(image, uid: userToDisplay.uid) { [weak self] (error) in
+            
+            SRProgressHUD.dismiss()
+            
+            guard error == nil else {
+                SRProgressHUD.showFailure(text: error!.localizedDescription)
+                return
+            }
+            self?.profileHeaderView.profileImageView.image = image
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
 }

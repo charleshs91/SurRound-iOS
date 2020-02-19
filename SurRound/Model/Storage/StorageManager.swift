@@ -15,6 +15,15 @@ class StorageManager {
         debugPrint("$ deinit: StorageManager")
     }
     
+    func uploadAvatar(_ image: UIImage, userId: String, completion: @escaping (URL?) -> Void) {
+        
+        guard let imageData = image.jpegData(compressionQuality: 0.9) else { return }
+        
+        let imageRef = Storage.storage().reference().child("avatars").child("\(userId).jpg")
+        
+        uploadData(imageData, ref: imageRef, completion: completion)
+    }
+    
     func uploadImage(_ image: UIImage,
                      filename: String,
                      completion: @escaping (URL?) -> Void) {
@@ -35,6 +44,7 @@ class StorageManager {
         uploadData(videoData, ref: videoRef, completion: completion)
     }
     
+    // MARK: - Private Methods
     private func uploadData(_ data: Data,
                             ref: StorageReference,
                             completion: @escaping (URL?) -> Void) {
@@ -44,7 +54,6 @@ class StorageManager {
                 print(error!)
                 return
             }
-            
             self.getDownloadURL(ref, completion: completion)
         }
     }
@@ -53,12 +62,10 @@ class StorageManager {
                                 completion: @escaping (URL?) -> Void) {
         
         ref.downloadURL { (url, error) in
-            
             guard error == nil else {
                 print(error!)
                 return
             }
-            
             completion(url)
         }
     }

@@ -14,7 +14,12 @@ class UserInfoSectionHeader: UITableViewHeaderFooterView {
     
     @IBOutlet weak var userLabel: UILabel!
     
-    @IBOutlet weak var categoryLabel: SRRoundedLabel!
+    @IBOutlet weak var categoryLabel: SRRoundedLabel! {
+        didSet {
+            categoryLabel.backgroundColor = .systemGray5
+            categoryLabel.textColor = .darkGray
+        }
+    }
     
     func updateView(category: PostCategory, user: SRUser?) {
         

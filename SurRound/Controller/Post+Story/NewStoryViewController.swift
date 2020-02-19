@@ -13,8 +13,9 @@ class NewStoryViewController: UIViewController {
     
     // MARK: - Type Functions
     static func storyboardInstance() -> NewStoryViewController? {
-        return UIStoryboard.story.instantiateViewController(identifier:
-            String(describing: NewStoryViewController.self)) as? NewStoryViewController
+        
+        return UIStoryboard.story.instantiateViewController(
+            identifier: String(describing: self)) as? NewStoryViewController
     }
     
     // MARK: - Public Properties

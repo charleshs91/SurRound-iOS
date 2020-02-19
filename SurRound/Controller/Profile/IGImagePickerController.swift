@@ -52,6 +52,7 @@ class IGImagePickerController: UIViewController {
     }
     
     func setupViews() {
+        
         let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
         let navHeight = navigationController?.navigationBar.frame.height ?? 0.0
         let safeAreaHeight = statusBarHeight + navHeight

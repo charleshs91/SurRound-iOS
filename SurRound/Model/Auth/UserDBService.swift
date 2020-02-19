@@ -37,8 +37,10 @@ class UserDBService {
             "uid": user.uid,
             "email": user.email,
             "username": user.username,
+            "created": Date(),
             "follower": [],
-            "following": []
+            "following": [],
+            "blocking": []
         ]) { (error) in
             
             guard error == nil else {

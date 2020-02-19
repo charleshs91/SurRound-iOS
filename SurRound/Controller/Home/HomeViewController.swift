@@ -21,18 +21,37 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
-            setupCollectionView()
+            collectionView.backgroundColor = UIColor.white.withAlphaComponent(0.9)
+            
+            collectionView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+            collectionView.layer.cornerRadius = 8
+            
+            collectionView.layer.shadowOffset = CGSize(width: 0, height: 2)
+            collectionView.layer.shadowOpacity = 0.6
+            collectionView.layer.shadowColor = UIColor.lightGray.cgColor
+            collectionView.layer.shadowRadius = 4
+            
+            collectionView.contentInset = UIEdgeInsets(top: cellHeightInset / 4,
+                                                       left: cellLeadingInset,
+                                                       bottom: 0,
+                                                       right: 0)
         }
     }
     
     @IBOutlet weak var mapView: GMSMapView!
     
-    private var postMarkers = [PostMarker]()
+    private var postMarkers: [PostMarker] = [] {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.displayPostsOnMap()
+            }
+        }
+    }
     
     private var storyEntities = [StoryCollection]() {
         didSet {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
             }
         }
     }
@@ -55,11 +74,13 @@ class HomeViewController: UIViewController {
         
         fetchStories()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(fetchPosts), name: Constant.NotificationId.newPost, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchPosts),
+                                               name: Constant.NotificationId.newPost, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(fetchStories), name: Constant.NotificationId.newStory, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchStories),
+                                               name: Constant.NotificationId.newStory, object: nil)
     }
-        
+    
     // MARK: - User Actions
     @IBAction func showVideoRecording(_ sender: UIBarButtonItem) {
         
@@ -132,9 +153,6 @@ class HomeViewController: UIViewController {
                     let marker = GMSMarker(position: position)
                     self?.postMarkers.append(PostMarker(post: post, mapMarker: marker))
                 }
-                DispatchQueue.main.async {
-                    self?.displayPostsOnMap()
-                }
                 
             case .failure(let error):
                 SRProgressHUD.showFailure(text: error.localizedDescription)
@@ -165,7 +183,9 @@ class HomeViewController: UIViewController {
             present(alert, animated: true, completion: nil)
             return
             
-        } catch { }
+        } catch {
+            print(error)
+        }
     }
     
     private func configureMap() {
@@ -182,7 +202,7 @@ class HomeViewController: UIViewController {
             mapView.camera = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 18.0)
         }
     }
-        
+    
     private func displayPostsOnMap() {
         
         postMarkers.forEach { [weak self] postPin in
@@ -197,24 +217,6 @@ class HomeViewController: UIViewController {
             
             postPin.mapMarker.map = self?.mapView
         }
-    }
-    
-    private func setupCollectionView() {
-        
-        collectionView.backgroundColor = UIColor.white.withAlphaComponent(0.9)
-        
-        collectionView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        collectionView.layer.cornerRadius = 8
-        
-        collectionView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        collectionView.layer.shadowOpacity = 0.6
-        collectionView.layer.shadowColor = UIColor.lightGray.cgColor
-        collectionView.layer.shadowRadius = 4
-        
-        collectionView.contentInset = UIEdgeInsets(top: cellHeightInset / 4,
-                                                   left: cellLeadingInset,
-                                                   bottom: 0,
-                                                   right: 0)
     }
 }
 
@@ -232,13 +234,14 @@ extension HomeViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: StoryPreviewCell.reuseIdentifier, for: indexPath)
-        guard let storyCell = cell as? StoryPreviewCell else { return cell }
+        
+        guard let storyCell = cell as? StoryPreviewCell else {
+            return cell
+        }
         
         let storyEntity = storyEntities[indexPath.item]
-        
         storyCell.layoutCell(image: storyEntity.author.avatar,
                              text: storyEntity.author.username)
-        
         return storyCell
     }
 }
@@ -257,7 +260,10 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        guard let storyVC = UIStoryboard.story.instantiateInitialViewController() as? StoryViewController else { return }
+        guard let storyVC = UIStoryboard.story.instantiateInitialViewController()
+            as? StoryViewController else {
+                return
+        }
         storyVC.modalPresentationStyle = .overCurrentContext
         storyVC.storyEntities = storyEntities
         storyVC.indexPath = IndexPath(item: 0, section: indexPath.item)
@@ -273,14 +279,14 @@ extension HomeViewController: GMSMapViewDelegate {
         let matches = postMarkers.filter { (postMarker) -> Bool in
             return postMarker.mapMarker == marker
         }
-        
-        if let first = matches.first {
-            guard let postVC = UIStoryboard.post.instantiateInitialViewController()
-                as? PostContentViewController else { return false }
-            
-            postVC.post = first.post
-            present(postVC, animated: true, completion: nil)
+        guard
+            let first = matches.first,
+            let postVC = UIStoryboard.post.instantiateInitialViewController()
+                as? PostContentViewController else {
+                    return false
         }
+        postVC.post = first.post
+        present(postVC, animated: true, completion: nil)
         
         return true
     }
@@ -294,13 +300,14 @@ extension HomeViewController: UIImagePickerControllerDelegate {
         
         dismiss(animated: true, completion: nil)
         
-        guard let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String,
+        guard
+            let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String,
             mediaType == (kUTTypeMovie as String),
             let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL,
-            UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(url.path)
-            else { return }
-
-        guard let newStoryVC = NewStoryViewController.storyboardInstance() else { return }
+            let newStoryVC = NewStoryViewController.storyboardInstance() else {
+                return
+        }
+        
         newStoryVC.videoURL = url
         self.present(newStoryVC, animated: true, completion: nil)
     }
@@ -310,16 +317,4 @@ extension HomeViewController: UIImagePickerControllerDelegate {
 // MARK: - UINavigationControllerDelegate
 extension HomeViewController: UINavigationControllerDelegate {
     
-}
-
-extension GMSMarker {
-    
-    func setIconSize(scaledToSize newSize: CGSize) {
-        
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-        icon?.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        icon = newImage
-    }
 }

@@ -36,7 +36,15 @@ class NewPostMapCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var mkMapView: MKMapView!
+    @IBOutlet weak var mkMapView: MKMapView! {
+        didSet {
+            mkMapView.mapType = .mutedStandard
+            mkMapView.isUserInteractionEnabled = false
+            mkMapView.layer.borderColor = UIColor.lightGray.cgColor
+            mkMapView.layer.borderWidth = 1
+            mkMapView.layer.cornerRadius = 10
+        }
+    }
     
     @IBOutlet weak var chooseLocationBtn: UIButton!
     
@@ -50,16 +58,6 @@ class NewPostMapCell: UITableViewCell {
         super.awakeFromNib()
         
         setVisibleForLocationInfo(false)
-        
-        mkMapView.mapType = .mutedStandard
-        
-        mkMapView.isUserInteractionEnabled = false
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        mkMapView.layer.cornerRadius = 10
     }
     
     // MARK: - User Actions

@@ -20,6 +20,25 @@ class ProfileManager {
         self.dataFetcher = dataFetcher
     }
     
+    func updateAvatar(_ image: UIImage, uid: String, completion: @escaping (Error?) -> Void) {
+        
+        let storageManager = StorageManager()
+        
+        storageManager.uploadAvatar(image, userId: uid) { (url) in
+            
+            guard let url = url else { return }
+            
+            let dict: [String: Any] = [SRUser.CodingKeys.avatar.rawValue: url.absoluteString]
+            FirestoreDB.users.document(uid).setData(dict, merge: true) { (error) in
+                guard error == nil else {
+                    completion(error!)
+                    return
+                }
+                completion(nil)
+            }
+        }
+    }
+    
     func fetchUserList(uids: [String], completion: @escaping ([SRUser]) -> Void) {
         
         let query = FirestoreDB.users.whereField(SRUser.CodingKeys.uid.rawValue, in: uids)

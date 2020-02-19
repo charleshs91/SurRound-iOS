@@ -10,15 +10,17 @@ import UIKit
 import GooglePlaces
 
 class NewPostViewController: UIViewController {
-    
-    deinit {
-        debugPrint("$ deinit: NewPostViewController")
-    }
-    
+
     @IBOutlet weak var postButton: UIBarButtonItem!
     
     @IBOutlet weak var newPostTableView: UITableView! {
-        didSet { setupTableView() }
+        didSet {
+            newPostTableView.registerHeaderFooterWithNib(
+                withHeaderFooterViewClass: UserInfoSectionHeader.self)
+            newPostTableView.registerCellWithNib(withCellClass: NewPostTextViewCell.self)
+            newPostTableView.registerCellWithNib(withCellClass: NewPostMediaCell.self)
+            newPostTableView.registerCellWithNib(withCellClass: NewPostMapCell.self)
+        }
     }
     
     var postCategory: PostCategory!
@@ -31,7 +33,7 @@ class NewPostViewController: UIViewController {
     
     private let cellFields: [NewPostCellType] = [.text, .media, .map]
     
-    // MARK: - View Life Cycle
+    // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,15 +85,6 @@ class NewPostViewController: UIViewController {
     }
     
     // MARK: - Private Methods
-    private func setupTableView() {
-        
-        newPostTableView.registerHeaderFooterWithNib(withHeaderFooterViewClass: UserInfoSectionHeader.self)
-        
-        newPostTableView.registerCellWithNib(withCellClass: NewPostTextViewCell.self)
-        newPostTableView.registerCellWithNib(withCellClass: NewPostMediaCell.self)
-        newPostTableView.registerCellWithNib(withCellClass: NewPostMapCell.self)
-    }
-    
     private func displayImagePicker() {
         
         let imagePicker = UIImagePickerController()
@@ -129,7 +122,7 @@ class NewPostViewController: UIViewController {
     }
     
     private func handleDeletingImage() {
-        // To-Do: UIAlertController
+        
         self.mediaCell?.pickedImage = nil
     }
     
@@ -150,12 +143,8 @@ class NewPostViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension NewPostViewController: UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView,
+                   viewForHeaderInSection section: Int) -> UIView? {
         
         guard let view = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: UserInfoSectionHeader.reuseIdentifier
@@ -167,12 +156,14 @@ extension NewPostViewController: UITableViewDataSource {
         return view
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
         
         return cellFields.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellType = cellFields[indexPath.row]
         let cell = cellType.makeCell(tableView, at: indexPath)
@@ -221,19 +212,16 @@ extension NewPostViewController: UITextViewDelegate {
 // MARK: - UITableViewDelegate
 extension NewPostViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   heightForHeaderInSection section: Int) -> CGFloat {
         
         return 66
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section == 0 {
-//            return cellFields[indexPath.row].cellHeight
-            return UITableView.automaticDimension
-        }
-        
-        return 0
+        return UITableView.automaticDimension
     }
 }
 

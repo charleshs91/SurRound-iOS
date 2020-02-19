@@ -17,24 +17,33 @@ class CategorySelectorViewController: UIViewController {
             ) as? CategorySelectorViewController
     }
     
-    @IBOutlet weak var btnsCollectionView: UICollectionView!
+    @IBOutlet weak var btnsCollectionView: UICollectionView! {
+        didSet {
+            btnsCollectionView.backgroundColor = .clear
+            btnsCollectionView.registerCell(cellWithClass: CategoryButtonCell.self)
+        }
+    }
     
-    @IBOutlet var popUpView: UIView!
+    @IBOutlet var popUpView: UIView! {
+        didSet {
+            popUpView.backgroundColor = UIColor.hexStringToUIColor(hex: "FBFFE6").withAlphaComponent(0.8)
+            popUpView.layer.setShadow(radius: 3,
+                                      offset: CGSize(width: 3, height: -3),
+                                      color: .darkGray,
+                                      opacity: 0.7)
+        }
+    }
     
     // Private Constants
     private let popUpViewHeight: CGFloat = 300
     
     private let categories: [PostCategory] = [.chat, .question, .food, .scenary, .shopping, .cancel]
     
-    // MARK: - View Life Cycle
+    // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .blurViewColor
-        
-        setupCollectionView()
-        
-        stylePopUpView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -51,7 +60,8 @@ class CategorySelectorViewController: UIViewController {
     
     @objc func didTapCategoryBtn(_ sender: UIControl) {
         
-        guard let nav = UIStoryboard.newPost.instantiateInitialViewController() as? UINavigationController,
+        guard
+            let nav = UIStoryboard.newPost.instantiateInitialViewController() as? UINavigationController,
             let newPostVC = nav.viewControllers.first as? NewPostViewController else { return }
         
         let category = categories[sender.tag]
@@ -62,21 +72,6 @@ class CategorySelectorViewController: UIViewController {
     }
     
     // MARK: - Private Methods
-    private func setupCollectionView() {
-        
-        btnsCollectionView.backgroundColor = .clear
-        btnsCollectionView.registerCell(cellWithClass: CategoryButtonCell.self)
-    }
-    
-    private func stylePopUpView() {
-        
-        popUpView.backgroundColor = UIColor.hexStringToUIColor(hex: "FBFFE6").withAlphaComponent(0.8)
-        popUpView.layer.setShadow(radius: 3,
-                                  offset: CGSize(width: 3, height: -3),
-                                  color: .darkGray,
-                                  opacity: 0.7)
-    }
-    
     private func presentPopUpView() {
         
         popUpView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -122,12 +117,14 @@ class CategorySelectorViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 extension CategorySelectorViewController: UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         
         return categories.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryButtonCell.reuseIdentifier, for: indexPath)
         guard let btnCell = cell as? CategoryButtonCell else { return cell }
@@ -148,14 +145,18 @@ extension CategorySelectorViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension CategorySelectorViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
         
         let padding: CGFloat = 45
         
         return UIEdgeInsets(top: 24, left: padding, bottom: 0, right: padding)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = popUpView.frame.width / 4.5
         let height = popUpView.frame.height / 3
