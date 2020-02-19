@@ -49,7 +49,7 @@ class PostBodyCell: UITableViewCell {
         
         guard let user = AuthManager.shared.currentUser else { return }
         
-        viewModel.isLiked.addObserver { (state) in
+        viewModel.isLiked.addObserver(fireNow: false) { (state) in
             
             let manager = PostManager()
             if state {

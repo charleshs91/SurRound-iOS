@@ -30,7 +30,10 @@ class PostManager: DataFetching {
     func likePost(postId: String, uid: String, completion: @escaping () -> Void) {
         
         let docRef = FirestoreDB.posts.document(postId)
-        docRef.setData(["likedBy": FieldValue.arrayUnion([uid])], merge: true) { (error) in
+        docRef.setData([
+            "likedBy": FieldValue.arrayUnion([uid]),
+            Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(1))
+        ], merge: true) { (error) in
             guard error == nil else { return }
             completion()
         }
@@ -39,7 +42,10 @@ class PostManager: DataFetching {
     func dislikePost(postId: String, uid: String, completion: @escaping () -> Void) {
         
         let docRef = FirestoreDB.posts.document(postId)
-        docRef.setData(["likedBy": FieldValue.arrayRemove([uid])], merge: true) { (error) in
+        docRef.setData([
+            "likedBy": FieldValue.arrayRemove([uid]),
+            Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(-1))
+        ], merge: true) { (error) in
             guard error == nil else { return }
             completion()
         }
