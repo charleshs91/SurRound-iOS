@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PostInfoTableViewCell: UITableViewCell {
+class PostInfoTableViewCell: SRBaseTableViewCell {
     
     @IBOutlet weak var userImageView: UIImageView!
     
@@ -22,7 +22,14 @@ class PostInfoTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         styleCell()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        userImageView.roundToHalfHeight()
     }
     
     func setupCell(with post: Post) {
@@ -38,6 +45,7 @@ class PostInfoTableViewCell: UITableViewCell {
     }
     
     private func styleCell() {
+        
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         layer.cornerRadius = 16
     }

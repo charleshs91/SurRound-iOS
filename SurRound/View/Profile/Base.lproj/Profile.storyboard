@@ -137,6 +137,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="editAvatarButton" destination="qIV-Bi-l7l" id="gxR-nG-ckF"/>
+                                    <outlet property="followButton" destination="NBO-fl-fRU" id="c1X-he-3uI"/>
                                     <outlet property="followerCountLabel" destination="Fjk-W9-YTp" id="ZEC-9C-rne"/>
                                     <outlet property="followingCountLabel" destination="5On-6h-oa1" id="JqP-xw-4Qt"/>
                                     <outlet property="postCountLabel" destination="tty-4b-mCI" id="15D-R6-9gD"/>

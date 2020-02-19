@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PostReplyCell: UITableViewCell {
+class PostReplyCell: SRBaseTableViewCell {
 
     @IBOutlet weak var userImageView: UIImageView!
     
@@ -22,11 +22,23 @@ class PostReplyCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        userImageView.roundToHalfHeight()
+        
     }
 
     @IBAction func didTapLikeButton(_ sender: UIButton) {
         
+    }
+    
+    func updateCell(_ review: Review) {
+        userImageView.loadImage(review.author.avatar)
+        usernameLabel.text = review.author.username
+        replyTextLabel.text = review.text
+        datetimeLabel.text = review.datetimeString
     }
     
 }

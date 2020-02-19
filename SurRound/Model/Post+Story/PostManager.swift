@@ -30,10 +30,12 @@ class PostManager: DataFetching {
     func likePost(postId: String, uid: String, completion: @escaping () -> Void) {
         
         let docRef = FirestoreDB.posts.document(postId)
+        
         docRef.setData([
             "likedBy": FieldValue.arrayUnion([uid]),
             Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(1))
         ], merge: true) { (error) in
+            
             guard error == nil else { return }
             completion()
         }
@@ -42,10 +44,12 @@ class PostManager: DataFetching {
     func dislikePost(postId: String, uid: String, completion: @escaping () -> Void) {
         
         let docRef = FirestoreDB.posts.document(postId)
+        
         docRef.setData([
             "likedBy": FieldValue.arrayRemove([uid]),
             Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(-1))
         ], merge: true) { (error) in
+            
             guard error == nil else { return }
             completion()
         }
@@ -57,6 +61,7 @@ class PostManager: DataFetching {
             .order(by: Post.CodingKeys.likeCount.rawValue, descending: true)
         
         _fetch(from: query) { (result) in
+            
             switch result {
             case .success(let posts):
                 let filteredPosts = posts.filter { (post) -> Bool in
@@ -74,7 +79,7 @@ class PostManager: DataFetching {
 
         let query = FirestoreDB.posts
             .whereField(Post.CodingKeys.authorId.rawValue, in: uids)
-            .order(by: Post.CodingKeys.createdTime.rawValue, descending: false)
+            .order(by: Post.CodingKeys.createdTime.rawValue, descending: true)
         
         _fetch(from: query, completion: completion)
     }
@@ -85,30 +90,6 @@ class PostManager: DataFetching {
             .order(by: Post.CodingKeys.createdTime.rawValue, descending: true)
         
         _fetch(from: query, completion: completion)
-    }
-    
-    private func _fetch(from query: Query, completion: @escaping PostsResult) {
-        
-        dataFetcher.fetch(from: query) { (result) in
-            
-            switch result {
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    completion(.failure(error))
-                }
-            
-            case .success(let documents):
-                guard let posts = GenericParser.parse(documents, of: Post.self) else {
-                    DispatchQueue.main.async {
-                        completion(.failure(.parsingError))
-                    }
-                    return
-                }
-                DispatchQueue.main.async {
-                    completion(.success(posts))
-                }
-            }
-        }
     }
     
     func createPost(_ post: Post, image: UIImage? = nil, completion: @escaping (Result<Void, Error>) -> Void) {
@@ -135,6 +116,31 @@ class PostManager: DataFetching {
             completion(.failure(error))
         }
     }
+    
+    private func _fetch(from query: Query, completion: @escaping PostsResult) {
+        
+        dataFetcher.fetch(from: query) { (result) in
+            
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+                
+            case .success(let documents):
+                guard let posts = GenericParser.parse(documents, of: Post.self) else {
+                    DispatchQueue.main.async {
+                        completion(.failure(.parsingError))
+                    }
+                    return
+                }
+                DispatchQueue.main.async {
+                    completion(.success(posts))
+                }
+            }
+        }
+    }
+
     
     private func attachImage(to documentRef: DocumentReference, image: UIImage) {
         

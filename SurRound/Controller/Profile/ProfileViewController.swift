@@ -108,18 +108,15 @@ class ProfileViewController: UIViewController {
     // MARK: - User Actions
     @IBAction func followUser(_ sender: UIButton) {
         
-        if let currentUser = AuthManager.shared.currentUser {
-            
+        if !sender.isSelected {
+            guard let currentUser = AuthManager.shared.currentUser else { return }
+            profileHeaderView.followButtonStartAnimating()
             let manager = ProfileManager()
-            
-            SRProgressHUD.showLoading()
-            manager.followUser(receiverId: userToDisplay.uid, current: currentUser) { error in
-                
-                SRProgressHUD.dismiss()
+            manager.followUser(receiverId: userToDisplay.uid, current: currentUser) { [weak self] error in
                 guard error == nil else {
                     return
                 }
-                SRProgressHUD.showSuccess()
+                self?.profileHeaderView.followButtonStopAnimating()
             }
         }
     }
@@ -162,7 +159,6 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Private Methods
-    
     private func showAccountActions() {
         
         let alertVC = UIAlertController(

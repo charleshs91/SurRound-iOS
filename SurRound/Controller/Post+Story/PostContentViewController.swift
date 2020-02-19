@@ -76,7 +76,7 @@ class PostContentViewController: UIViewController {
         let manager = ReviewManager()
         
         SRProgressHUD.showLoading()
-        manager.sendReview(postID: post.id, author: author, text: replyTextView.text) { [weak self] (error) in
+        manager.sendReview(postId: post.id, author: author, text: replyTextView.text) { [weak self] (error) in
             
             SRProgressHUD.dismiss()
             
@@ -160,10 +160,8 @@ extension PostContentViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             
-            let review = reviews[indexPath.row]
-            cell.usernameLabel.text = review.author.username
-            cell.replyTextLabel.text = review.text
-            cell.datetimeLabel.text = review.datetimeString
+            cell.updateCell(reviews[indexPath.row])
+            
             return cell
         }
     }

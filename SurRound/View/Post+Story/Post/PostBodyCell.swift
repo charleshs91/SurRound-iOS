@@ -26,7 +26,7 @@ class PostBodyViewModel {
     }
 }
 
-class PostBodyCell: UITableViewCell {
+class PostBodyCell: SRBaseTableViewCell {
     
     @IBOutlet weak var postTextLabel: UILabel!
     

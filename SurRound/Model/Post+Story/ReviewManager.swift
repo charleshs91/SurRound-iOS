@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 typealias ReviewsResult = (Result<[Review], Error>) -> Void
 
@@ -36,24 +37,34 @@ class ReviewManager {
         }
     }
     
-    func sendReview(postID: String, author: Author, text: String, completion: @escaping (Error?) -> Void) {
+    func sendReview(postId: String, author: Author, text: String,
+                    completion: @escaping (Error?) -> Void) {
         
-        let reviewRef = FirestoreDB.reviews(of: postID).document()
+        let reviewRef = FirestoreDB.reviews(of: postId).document()
         
-        let reviewObject = Review(id: reviewRef.documentID,
-                                  postId: postID,
-                                  author: author,
-                                  text: text)
+        let review = Review(id: reviewRef.documentID,
+                            postId: postId,
+                            author: author,
+                            text: text)
         do {
-            try reviewRef.setData(from: reviewObject, merge: true, encoder: .init()) { (error) in
+            try reviewRef.setData(from: review, merge: true, encoder: .init()) { (error) in
                 if let error = error {
                     completion(error)
                     return
                 }
+                
+                self.incrementReplyCount(postId: postId)
                 completion(nil)
             }
         } catch {
             completion(error)
         }
+    }
+    
+    private func incrementReplyCount(postId: String) {
+        
+        let docRef = FirestoreDB.posts.document(postId)
+        
+        docRef.setData([Post.CodingKeys.replyCount.rawValue: FieldValue.increment(Int64(1))], merge: true)
     }
 }

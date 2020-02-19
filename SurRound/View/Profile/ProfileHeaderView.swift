@@ -10,6 +10,17 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicatorView = UIActivityIndicatorView(style: .medium)
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorView.hidesWhenStopped = true
+        indicatorView.stopAnimating()
+        self.addSubview(indicatorView)
+        return indicatorView
+    }()
+    
+    @IBOutlet weak var followButton: UIButton!
+    
     @IBOutlet weak var profileImageView: UIImageView!
     
     @IBOutlet weak var usernameLabel: UILabel!
@@ -27,7 +38,6 @@ class ProfileHeaderView: UIView {
         
         layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         layer.cornerRadius = 16
-//        layer.masksToBounds = true
         layer.setShadow(radius: 10, offset: CGSize(width: 4, height: 4), color: .lightGray, opacity: 0.7)
         
         followingCountLabel.lineBreakMode = .byCharWrapping
@@ -53,7 +63,28 @@ class ProfileHeaderView: UIView {
         editAvatarButton.layer.borderColor = UIColor.white.cgColor
     }
     
+    // MARK: - User Actions
+    func followButtonStartAnimating() {
+        
+        activityIndicator.frame = followButton.frame
+        followButton.isHidden = true
+        activityIndicator.startAnimating()
+    }
+    
+    func followButtonStopAnimating(_ toggle: Bool = true) {
+        
+        activityIndicator.stopAnimating()
+        followButton.isHidden = false
+        if toggle {
+            followButton.isEnabled.toggle()
+        }
+    }
+    
     func setupView(user: SRUser) {
+        
+        if user.uid == AuthManager.shared.currentUser!.uid {
+            followButton.isHidden = true
+        }
         usernameLabel.text = user.username
         profileImageView.loadImage(user.avatar, placeholder: UIImage.asset(.Icons_Avatar))
     }
