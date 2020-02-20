@@ -36,10 +36,36 @@ class ExploreViewController: UIViewController {
         exploreView.selectionView.dataSource = self
         exploreView.selectionView.delegate = self
         exploreView.arrangeViews()
+        setupGestureRecognizers()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    func setupGestureRecognizers() {
+        
+        guard let exploreView = view as? ExploreView else { return }
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeGestureHandler(_:)))
+        swipeLeft.direction = .left
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeGestureHandler(_:)))
+        swipeRight.direction = .right
+        exploreView.addGestureRecognizer(swipeLeft)
+        exploreView.addGestureRecognizer(swipeRight)
+    }
+    
+    @objc func swipeGestureHandler(_ sender: UISwipeGestureRecognizer) {
+        
+        guard let exploreView = view as? ExploreView else { return }
+        
+        switch sender.direction {
+        case .left:
+            exploreView.selectionView.selectNext()
+        case .right:
+            exploreView.selectionView.selectPrevious()
+        default:
+            return
+        }
     }
 }
 

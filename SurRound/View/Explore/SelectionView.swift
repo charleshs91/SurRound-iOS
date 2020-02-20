@@ -86,35 +86,58 @@ class SelectionView: UIView {
         return stack
     }()
     
+    func selectNext() {
+        
+        selectItemAt(index: indexSelected + 1)
+    }
+    
+    func selectPrevious() {
+        
+        selectItemAt(index: indexSelected - 1)
+    }
+    
     // MARK: - UIControl Actions
-      @objc private func didSelectItem(_ sender: UIButton) {
-          
-          guard let index = buttons.firstIndex(of: sender) else { return }
-          
-          let isSelectable = delegate?.selectionView?(self, shouldSelectItemAt: index) ?? true
-          
-          if isSelectable {
-              indexSelected = index
-              moveIndicator(sender)
-              delegate?.selectionView?(self, didSelectItemAt: index)
-          }
-      }
-      
-      private func moveIndicator(_ reference: UIButton) {
-          
-          UIViewPropertyAnimator.runningPropertyAnimator(
-              withDuration: 0.3,
-              delay: 0,
-              options: .curveLinear,
-              animations: { [weak self] in
-                  
-                  self?.indicatorCenterX?.isActive = false
-                  self?.indicatorCenterX = self?.indicator.centerXAnchor.constraint(equalTo: reference.centerXAnchor)
-                  self?.indicatorCenterX?.isActive = true
-                  self?.layoutIfNeeded()
-              },
-              completion: nil)
-      }
+    private func selectItemAt(index: Int) {
+        
+        guard index >= 0 && index < buttons.count else { return }
+        
+        let isSelectable = delegate?.selectionView?(self, shouldSelectItemAt: index) ?? true
+        
+        if isSelectable {
+            indexSelected = index
+            moveIndicator(buttons[index])
+            delegate?.selectionView?(self, didSelectItemAt: index)
+        }
+    }
+    
+    @objc private func didSelectItem(_ sender: UIButton) {
+        
+        guard let index = buttons.firstIndex(of: sender) else { return }
+        
+        let isSelectable = delegate?.selectionView?(self, shouldSelectItemAt: index) ?? true
+        
+        if isSelectable {
+            indexSelected = index
+            moveIndicator(sender)
+            delegate?.selectionView?(self, didSelectItemAt: index)
+        }
+    }
+    
+    private func moveIndicator(_ reference: UIButton) {
+        
+        UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: 0.3,
+            delay: 0,
+            options: .curveLinear,
+            animations: { [weak self] in
+                
+                self?.indicatorCenterX?.isActive = false
+                self?.indicatorCenterX = self?.indicator.centerXAnchor.constraint(equalTo: reference.centerXAnchor)
+                self?.indicatorCenterX?.isActive = true
+                self?.layoutIfNeeded()
+            },
+            completion: nil)
+    }
     
     // MARK: - Private Methods
     private func setupView() {
