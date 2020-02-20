@@ -12,9 +12,8 @@ import FirebaseFirestoreSwift
 
 typealias PostsResult = (Result<[Post], FirestoreServiceError>) -> Void
 
-class PostManager: DataFetching {
+class PostManager {
     
-    // Ask database for an unique id.
     static func documentID() -> String {
         
         return FirestoreDB.posts.document().documentID
@@ -26,6 +25,9 @@ class PostManager: DataFetching {
         
         self.dataFetcher = dataFetcher
     }
+}
+
+extension PostManager {
     
     func likePost(postId: String, uid: String, completion: @escaping () -> Void) {
         
@@ -76,7 +78,7 @@ class PostManager: DataFetching {
     }
     
     func fetchPostOfUsers(uids: [String], completion: @escaping PostsResult) {
-
+        
         let query = FirestoreDB.posts
             .whereField(Post.CodingKeys.authorId.rawValue, in: uids)
             .order(by: Post.CodingKeys.createdTime.rawValue, descending: true)
@@ -90,31 +92,6 @@ class PostManager: DataFetching {
             .order(by: Post.CodingKeys.createdTime.rawValue, descending: true)
         
         _fetch(from: query, completion: completion)
-    }
-    
-    func createPost(_ post: Post, image: UIImage? = nil, completion: @escaping (Result<Void, Error>) -> Void) {
-        
-        let documentRef = FirestoreDB.posts.document(post.id)
-        
-        do {
-            try documentRef.setData(from: post, merge: true, encoder: Firestore.Encoder()) { error in
-                
-                guard error == nil else {
-                    completion(.failure(error!))
-                    return
-                }
-                if let user = AuthManager.shared.currentUser {
-                    UserDBService.attachPost(user: user, postRef: documentRef)
-                }
-                if let imageToAttach = image {
-                    self.attachImage(to: documentRef, image: imageToAttach)
-                }
-                
-                completion(.success(()))
-            }
-        } catch {
-            completion(.failure(error))
-        }
     }
     
     private func _fetch(from query: Query, completion: @escaping PostsResult) {
@@ -140,9 +117,8 @@ class PostManager: DataFetching {
             }
         }
     }
-
     
-    private func attachImage(to documentRef: DocumentReference, image: UIImage) {
+    private func attachImage(to documentRef: DocumentReference, image: UIImage, completion: @escaping () -> Void) {
         
         StorageManager().uploadImage(image, filename: NSUUID().uuidString) { url in
             guard let url = url else { return }
@@ -150,7 +126,44 @@ class PostManager: DataFetching {
             documentRef.setData([
                 "media_type": "image",
                 "media_link": url.absoluteString
-            ], merge: true)
+            ], merge: true) { (_) in
+                completion()
+            }
+        }
+    }
+}
+
+// MARK: - Create
+extension PostManager {
+    
+    func createPost(_ post: Post, image: UIImage? = nil, completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        guard let user = AuthManager.shared.currentUser else { return }
+        
+        let documentRef = FirestoreDB.posts.document(post.id)
+        let group = DispatchGroup()
+        
+        do {
+            try documentRef.setData(from: post, merge: true, encoder: Firestore.Encoder()) { error in
+                
+                guard error == nil else {
+                    completion(.failure(error!))
+                    return
+                }
+                
+                UserDBService.attachPost(user: user, postRef: documentRef)
+                
+                if let imageToAttach = image {
+                    group.enter()
+                    self.attachImage(to: documentRef, image: imageToAttach) {
+                        group.leave()
+                    }
+                }
+                group.wait()
+                completion(.success(()))
+            }
+        } catch {
+            completion(.failure(error))
         }
     }
 }

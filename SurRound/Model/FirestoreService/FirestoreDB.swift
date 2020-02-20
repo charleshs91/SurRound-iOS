@@ -43,22 +43,22 @@ class FirestoreDB {
         return Firestore.firestore().collection(CollectionId.stories)
     }
     
-    static func reviews(of postId: String) -> CollectionReference {
+    static func reviews(postId: String) -> CollectionReference {
         
         return posts.document(postId).collection(CollectionId.reviews)
     }
     
-    static func userPosts(of userId: String) -> CollectionReference {
+    static func userPosts(userId: String) -> CollectionReference {
         
         return users.document(userId).collection(CollectionId.userPosts)
     }
     
-    static func userStories(of userId: String) -> CollectionReference {
+    static func userStories(userId: String) -> CollectionReference {
         
         return users.document(userId).collection(CollectionId.userStories)
     }
     
-    static func notifications(of userId: String) -> CollectionReference {
+    static func notifications(userId: String) -> CollectionReference {
         
         return users.document(userId).collection(CollectionId.notifications)
     }

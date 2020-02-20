@@ -27,12 +27,13 @@ struct SRNotification: Codable {
     
 }
 
-class SRUserProfile: Codable {
+struct SRUserProfile: Codable {
     
     let uid: String
     let email: String
     var username: String
     var avatar: String?
+    let created: Date
     
     var following: [String] = []
     var follower: [String] = []
@@ -49,6 +50,7 @@ class SRUserProfile: Codable {
         case email
         case username
         case avatar
+        case created
         case following
         case follower
         case blocking
@@ -60,6 +62,7 @@ class SRUserProfile: Codable {
         self.email = user.email
         self.username = user.username
         self.avatar = user.avatar
+        self.created = Date()
     }
 }
 

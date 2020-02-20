@@ -34,32 +34,46 @@ class UserDBService {
     
     static func createUser(user: SRUser, completion: @escaping SRUserResult) {
         
-        FirestoreDB.users.document(user.uid).setData([
-            "uid": user.uid,
-            "email": user.email,
-            "username": user.username,
-            "avatar": user.avatar ?? "",
-            "created": Timestamp(date: Date()),
-            "follower": [],
-            "following": [],
-            "blocking": []
-        ]) { (error) in
-            
-            guard error == nil else {
-                completion(.failure(error!))
-                return
+        let userProfile = SRUserProfile(user: user)
+        do {
+            try FirestoreDB.users.document(user.uid).setData(
+            from: userProfile, merge: true, encoder: .init()) { (error) in
+                guard error == nil else {
+                    completion(.failure(error!))
+                    return
+                }
+                completion(.success(user))
             }
-            completion(.success(user))
+        } catch {
+            completion(.failure(error))
         }
+//
+//        FirestoreDB.users.document(user.uid).setData([
+//            "uid": user.uid,
+//            "email": user.email,
+//            "username": user.username,
+//            "avatar": user.avatar ?? "",
+//            "created": Timestamp(date: Date()),
+//            "follower": [],
+//            "following": [],
+//            "blocking": []
+//        ]) { (error) in
+//
+//            guard error == nil else {
+//                completion(.failure(error!))
+//                return
+//            }
+//            completion(.success(user))
+//        }
     }
     
     static func attachPost(user: SRUser, postRef: DocumentReference) {
         
         let postId = postRef.documentID
         
-        FirestoreDB.userPosts(of: user.uid).document(postId).setData([
-                "post_ref": postRef,
-                "post_id": postRef.documentID
+        FirestoreDB.userPosts(userId: user.uid).document(postId).setData([
+                UserPost.CodingKeys.postRef.rawValue: postRef,
+                UserPost.CodingKeys.postId.rawValue: postRef.documentID
             ], merge: true, completion: nil)
     }
     
@@ -67,23 +81,9 @@ class UserDBService {
         
         let storyId = storyRef.documentID
         
-        FirestoreDB.userStories(of: user.uid).document(storyId).setData([
-            "story_ref": storyRef,
-            "story_id": storyRef.documentID
+        FirestoreDB.userStories(userId: user.uid).document(storyId).setData([
+            UserStory.CodingKeys.storyRef.rawValue: storyRef,
+            UserStory.CodingKeys.storyId.rawValue: storyRef.documentID
         ], merge: true, completion: nil)
-    }
-}
-
-extension Dictionary {
-    
-    func decode<T: Codable>(_ type: T.Type) throws -> T {
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
-            let result = try JSONDecoder().decode(T.self, from: jsonData)
-            return result
-            
-        } catch {
-            throw error
-        }
     }
 }
