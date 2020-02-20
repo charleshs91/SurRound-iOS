@@ -145,7 +145,6 @@ extension StoryViewController: UICollectionViewDataSource {
             
             storyCell.url = URL(string: storyEntities[indexPath.section].stories[indexPath.item].videoLink)!
             storyCell.configurePlayer()
-            storyCell.layoutIfNeeded()
             return storyCell
             
         } else {

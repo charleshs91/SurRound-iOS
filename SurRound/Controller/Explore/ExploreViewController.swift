@@ -8,11 +8,11 @@
 
 import UIKit
 
-enum ExplorePageType {
+enum ExplorePageType: Int {
     
-    case following
-    case trending
-    case nearest
+    case following = 0
+    case trending = 1
+    case nearest = 2
     
     var title: String {
         switch self {
@@ -35,6 +35,7 @@ class ExploreViewController: UIViewController {
         guard let exploreView = view as? ExploreView else { return }
         exploreView.selectionView.dataSource = self
         exploreView.selectionView.delegate = self
+        exploreView.arrangeViews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,6 +77,6 @@ extension ExploreViewController: SelectionViewDelegate {
         
         guard let exploreView = view as? ExploreView else { return }
         
-        exploreView.displayPage(with: pages[index])
+        exploreView.animateToPage(type: pages[index])
     }
 }

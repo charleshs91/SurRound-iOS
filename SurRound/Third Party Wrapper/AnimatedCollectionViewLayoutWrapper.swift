@@ -17,6 +17,7 @@ class CubeAnimatedCollectionView: UICollectionView {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         return layout
     }
     

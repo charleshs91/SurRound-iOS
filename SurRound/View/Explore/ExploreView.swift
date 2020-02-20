@@ -12,51 +12,73 @@ class ExploreView: UIView {
 
     @IBOutlet weak var selectionView: SelectionView!
     
-    @IBOutlet weak var followingListView: UIView!
+    @IBOutlet var followingListView: UIView!
     
-    @IBOutlet weak var trendingListView: UIView!
+    @IBOutlet var trendingListView: UIView!
     
-    @IBOutlet weak var nearestListView: UIView!
+    @IBOutlet var nearestListView: UIView!
     
     var currentPageType: ExplorePageType = .following
     
     // MARK: - Overrides
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        displayPage(with: currentPageType)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        arrangeViews()
     }
     
-    // MARK: - Actions    
-    func displayPage(with type: ExplorePageType) {
+    // MARK: - Actions
+    func animateToPage(type: ExplorePageType) {
         
-        let views: [UIView] = [followingListView, trendingListView, nearestListView]
+        if type == currentPageType { return }
+        
+        let direction: CGFloat = type.rawValue > currentPageType.rawValue ? 1 : -1
+        
+        let currentView = convertToView(from: currentPageType)
         let viewToDisplay = convertToView(from: type)
         
-        views.forEach { view in
-            view.isHidden = view != viewToDisplay
-        }
+        viewToDisplay.transform = CGAffineTransform(translationX: direction * viewToDisplay.frame.width, y: 0)
+        bringSubviewToFront(viewToDisplay)
+        self.currentPageType = type
+
+        UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: 0.3,
+            delay: 0,
+            options: .curveEaseInOut,
+            animations: {
+                viewToDisplay.transform = .identity
+                currentView.transform = CGAffineTransform(translationX: -direction * currentView.frame.width, y: 0)
+        }, completion: { _ in
+            currentView.transform = .identity
+        })
+    }
+    
+    func displayPage(with type: ExplorePageType) {
+        
+        let viewToDisplay = convertToView(from: type)
+        
+        bringSubviewToFront(viewToDisplay)
+        
+        self.currentPageType = type
     }
     
     // MARK: - Private Methods
-    private func arrangeViews() {
+    func arrangeViews() {
         
         let views: [UIView] = [followingListView, trendingListView, nearestListView]
         let height = safeAreaLayoutGuide.layoutFrame.height - selectionView.frame.height
         
         views.forEach { view in
             view.frame = CGRect(x: 0,
-                                y: selectionView.frame.maxY,
+                                y: selectionView.frame.maxY - selectionView.frame.height,
                                 width: UIScreen.width,
                                 height: height)
-            view.isHidden = true
         }
-        
-        displayPage(with: currentPageType)
     }
     
     private func convertToView(from type: ExplorePageType) -> UIView {

@@ -65,12 +65,8 @@ class StoryPlayerCell: UICollectionViewCell {
         
     func configurePlayer() {
         
-        playerItem = AVPlayerItem(url: url)
-        player = AVPlayer(playerItem: self.playerItem)
-        playerLayer = AVPlayerLayer(player: self.player)
-        playerLayer.videoGravity = .resizeAspectFill
-        playerLayer.frame = contentView.bounds
-        contentView.layer.addSublayer(playerLayer)
+        prepareToPlay()
+        setupPlayerLayer()
     }
     
     private func removeTimeObserver() {
@@ -79,6 +75,22 @@ class StoryPlayerCell: UICollectionViewCell {
             player.removeTimeObserver(timeObserverToken)
             self.timeObserverToken = nil
         }
+    }
+    
+    private func prepareToPlay() {
+        
+        let asset = AVAsset(url: url)
+        let assetKeys = ["playable", "hasProtectedContent"]
+        playerItem =  AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: assetKeys)
+        player = AVPlayer(playerItem: playerItem)
+    }
+    
+    private func setupPlayerLayer() {
+        print(contentView.bounds)
+        playerLayer = AVPlayerLayer(player: self.player)
+        playerLayer.videoGravity = .resizeAspectFill
+        playerLayer.frame = contentView.bounds
+        contentView.layer.addSublayer(playerLayer)
     }
     
     private func styleCell() {
