@@ -15,6 +15,9 @@ class TrendingListViewController: UIViewController {
         didSet {
             collectionView.registerCellWithNib(cellWithClass: TrendingListGridCell.self)
             collectionView.collectionViewLayout = getLayout()
+            collectionView.addHeaderRefreshing { [weak self] in
+                self?.fetchData()
+            }
         }
     }
     
@@ -45,11 +48,13 @@ class TrendingListViewController: UIViewController {
     private func fetchData() {
         
         let manager = PostManager()
-        manager.fetchTrendingPost { (result) in
+        manager.fetchTrendingPost { [weak self] (result) in
+            
+            self?.collectionView.endHeaderRefreshing()
             
             switch result {
             case .success(let posts):
-                self.posts = posts
+                self?.posts = posts
                 
             case .failure(let error):
                 SRProgressHUD.showFailure(text: error.localizedDescription)
@@ -58,6 +63,7 @@ class TrendingListViewController: UIViewController {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension TrendingListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
@@ -74,7 +80,7 @@ extension TrendingListViewController: UICollectionViewDataSource {
         
         guard let gridCell = cell as? TrendingListGridCell else {
             return cell
-        
+            
         }
         gridCell.postImageView.loadImage(posts[indexPath.item].mediaLink)
         
@@ -82,6 +88,7 @@ extension TrendingListViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension TrendingListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -95,6 +102,7 @@ extension TrendingListViewController: UICollectionViewDelegate {
     
 }
 
+// MARK: - LayoutDelegate
 extension TrendingListViewController: LayoutDelegate {
     
     func cellSize(indexPath: IndexPath) -> CGSize {

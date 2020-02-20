@@ -11,55 +11,48 @@ import UIKit
 class FollowingListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView! {
-        didSet { setupTableView() }
+        didSet {
+            tableView.registerCellWithNib(withCellClass: TextPostListCell.self)
+            tableView.registerCellWithNib(withCellClass: ImagePostListCell.self)
+            tableView.registerCellWithNib(withCellClass: VideoPostListCell.self)
+            
+            tableView.separatorStyle = .none
+            
+            tableView.addHeaderRefreshing { [weak self] in
+                self?.refreshPosts()
+            }
+        }
     }
     
-    private var posts = [Post]()
-    private var viewModels = [PostListCellViewModel]()
+    private var posts: [Post] = []
+    
+    private var viewModels: [PostListCellViewModel] = [] {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
-        tableView.beginHeaderRefreshing()
+        refreshPosts()
     }
     
     // MARK: - Private Methods
-    private func setupTableView() {
-        
-        tableView.registerCellWithNib(withCellClass: ImagePostListCell.self)
-        tableView.registerCellWithNib(withCellClass: TextPostListCell.self)
-        tableView.registerCellWithNib(withCellClass: VideoPostListCell.self)
-        
-        tableView.addHeaderRefreshing { [weak self] in
-            
-            self?.refreshPosts {
-                self?.tableView.reloadData()
-                self?.tableView.endHeaderRefreshing()
-            }
-        }
-        
-        tableView.separatorStyle = .none
-    }
-    
-    private func refreshPosts(callback: @escaping () -> Void) {
+    private func refreshPosts() {
         
         posts.removeAll()
         viewModels.removeAll()
         
         PostManager().fetchAllPost { [weak self] result in
             
+            self?.tableView.endHeaderRefreshing()
+            
             switch result {
             case .success(let posts):
                 self?.posts.append(contentsOf: posts)
                 self?.viewModels.append(contentsOf: ViewModelFactory.viewModelFromPosts(posts))
-                DispatchQueue.main.async {
-                    callback()
-                }
                 
             case .failure(let error):
                 print(error)

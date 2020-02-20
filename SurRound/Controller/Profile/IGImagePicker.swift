@@ -61,7 +61,7 @@ class IGImagePickerController: UIViewController {
                     for: fetchResult.object(at: index),
                     targetSize: CGSize(width: 256, height: 256),
                     contentMode: .aspectFill,
-                    options: requestOptions) { (image, error) in
+                    options: requestOptions) { (image, _) in
                         self.imageArray.append(image!)
                 }
             }
