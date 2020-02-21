@@ -49,7 +49,7 @@ class PostContentViewController: UIViewController {
     
     let sections: [PostDetailSectionType] = [.content, .review]
     
-    let cellItems: [PostBodyCellType] = [.location, .body]
+    let cellItems: [PostBodyCellType] = [.info, .body]
     
     // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
@@ -105,6 +105,19 @@ class PostContentViewController: UIViewController {
             }
         }
     }
+    
+    @objc func tapOnUser(_ sender: UITapGestureRecognizer) {
+        
+        if let profileVC = ProfileViewController.storyInstance() {
+            let userId = post!.authorId
+            UserDBService.queryUser(uid: userId) { [weak self] (srUser) in
+                if let user = srUser {
+                    profileVC.userToDisplay = user
+                    self?.show(profileVC, sender: nil)
+                }
+            }
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -139,11 +152,14 @@ extension PostContentViewController: UITableViewDataSource {
             let cell = cellType.makeCell(tableView, at: indexPath)
             
             switch cellType {
-            case .location:
-                guard let locationCell = cell as? PostInfoTableViewCell else {
+            case .info:
+                guard let infoCell = cell as? PostInfoTableViewCell else {
                     break
                 }
-                locationCell.setupCell(with: post!)
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnUser(_:)))
+                infoCell.userImageView.addGestureRecognizer(tapGesture)
+                infoCell.usernameLabel.addGestureRecognizer(tapGesture)
+                infoCell.setupCell(with: post!)
                 
             case .body:
                 guard let bodyCell = cell as? PostBodyCell else {

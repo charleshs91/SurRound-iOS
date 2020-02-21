@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController {
     
     private let headerUpdateSemaphore = DispatchSemaphore(value: 0)
     
-    private let tabTitle = ["My Posts", "Saved"]
+    private let tabTitle = ["All posts", "Saved"]
     
     private var posts = [Post]()
     
@@ -289,6 +289,7 @@ class ProfileViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -311,6 +312,7 @@ extension ProfileViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -318,18 +320,24 @@ extension ProfileViewController: UITableViewDelegate {
         return UITableView.automaticDimension
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let postDetailVC = UIStoryboard.post.instantiateInitialViewController() as? PostContentViewController else { return }
+        
+        postDetailVC.post = posts[indexPath.row]
+        
+        present(postDetailVC, animated: true, completion: nil)
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
-//        let maxYOffset = selectionView.frame.origin.y
-
+        
         let yOffset = scrollView.contentInset.top + scrollView.contentOffset.y
-
-//        let allowedOffset = min(maxYOffset, yOffset)
-
+        
         profileHeaderView.transform = CGAffineTransform(translationX: 0, y: -yOffset)
     }
 }
 
+// MARK: - SelectionViewDataSource
 extension ProfileViewController: SelectionViewDataSource {
     
     func numberOfSelectionItems(_ selectionView: SelectionView) -> Int {
@@ -356,10 +364,11 @@ extension ProfileViewController: SelectionViewDelegate {
     
 }
 
+// MARK: - IGImagePickerControllerDelegate
 extension ProfileViewController: IGImagePickerControllerDelegate {
     
     func didSelectImage(_ controller: IGImagePickerController, with image: UIImage) {
-         
+        
         let profileManager = ProfileManager()
         
         SRProgressHUD.showLoading()

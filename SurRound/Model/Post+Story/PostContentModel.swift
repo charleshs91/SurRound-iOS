@@ -16,13 +16,13 @@ enum PostDetailSectionType {
 
 enum PostBodyCellType {
     
-    case location
+    case info
     case body
     
     func makeCell(_ tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
         
         switch self {
-        case .location:
+        case .info:
             return tableView.dequeueReusableCell(
                 withIdentifier: PostInfoTableViewCell.reuseIdentifier, for: indexPath)
             

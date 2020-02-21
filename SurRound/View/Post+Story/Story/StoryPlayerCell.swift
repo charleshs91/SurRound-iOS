@@ -22,10 +22,12 @@ class StoryPlayerCell: UICollectionViewCell {
     
     weak var delegate: StoryPlayerCellDelegate?
     
-    private var player: AVPlayer!
-    private var playerItem: AVPlayerItem!
-    private var playerLayer: AVPlayerLayer!
+    private var player: AVPlayer?
+    private var playerItem: AVPlayerItem?
+    private var playerLayer = AVPlayerLayer()
     private var timeObserverToken: Any?
+    
+    private let padding = UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24)
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,18 +35,24 @@ class StoryPlayerCell: UICollectionViewCell {
         styleCell()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+//        contentView.frame = contentView.frame.inset(by: padding)
+        playerLayer.frame = contentView.bounds
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
         removeTimeObserver()
-        
-        player = nil
-        playerItem = nil
-        playerLayer.removeFromSuperlayer()
-        playerLayer = nil
     }
     
     func startPlaying(updateFrequency: Double) {
+        
+        guard let player = self.player, let playerItem = self.playerItem else {
+            return
+        }
         
         player.play()
         
@@ -55,9 +63,9 @@ class StoryPlayerCell: UICollectionViewCell {
             
             guard let self = self else { return }
             
-            self.delegate?.updateCurrentTime(self, current: time.seconds, duration: self.playerItem.duration.seconds)
+            self.delegate?.updateCurrentTime(self, current: time.seconds, duration: playerItem.duration.seconds)
             
-            if time >= self.playerItem.duration {
+            if time >= playerItem.duration {
                 self.delegate?.didEndPlayingVideo(self)
             }
         }
@@ -72,7 +80,7 @@ class StoryPlayerCell: UICollectionViewCell {
     private func removeTimeObserver() {
         
         if let timeObserverToken = timeObserverToken {
-            player.removeTimeObserver(timeObserverToken)
+            player?.removeTimeObserver(timeObserverToken)
             self.timeObserverToken = nil
         }
     }
@@ -86,15 +94,16 @@ class StoryPlayerCell: UICollectionViewCell {
     }
     
     private func setupPlayerLayer() {
-        print(contentView.bounds)
+        
         playerLayer = AVPlayerLayer(player: self.player)
         playerLayer.videoGravity = .resizeAspectFill
-        playerLayer.frame = contentView.bounds
         contentView.layer.addSublayer(playerLayer)
     }
     
     private func styleCell() {
         
+        contentView.clipsToBounds = true
+        contentView.layer.cornerRadius = 16
         contentView.backgroundColor = .black
     }
 }

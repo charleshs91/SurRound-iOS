@@ -25,8 +25,8 @@
                                     <constraint firstAttribute="width" secondItem="m4J-cq-nCo" secondAttribute="height" multiplier="1:1" id="Nlm-fU-CjN"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="IbJ-8b-DfJ">
-                                <rect key="frame" x="4" y="327.5" width="103.5" height="34.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="IbJ-8b-DfJ">
+                                <rect key="frame" x="8" y="327.5" width="117.5" height="34.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRi-7v-o1t">
                                         <rect key="frame" x="0.0" y="5.5" width="24" height="24"/>
@@ -41,13 +41,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="666" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="te6-VX-ddV" userLabel="Liked Count Label">
-                                        <rect key="frame" x="24" y="8.5" width="33" height="18"/>
+                                        <rect key="frame" x="28" y="8.5" width="33" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OCf-iv-O9u" userLabel="Review Button">
-                                        <rect key="frame" x="57" y="6.5" width="25.5" height="22"/>
+                                        <rect key="frame" x="65" y="6.5" width="25.5" height="22"/>
                                         <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="message.fill" catalog="system"/>
                                         <connections>
@@ -55,7 +55,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="87" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgZ-3T-tOb">
-                                        <rect key="frame" x="82.5" y="8.5" width="21" height="18"/>
+                                        <rect key="frame" x="94.5" y="8.5" width="23" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                         <nil key="highlightedColor"/>
@@ -63,7 +63,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caption Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INJ-1W-6qw">
-                                <rect key="frame" x="8" y="300" width="280" height="19.5"/>
+                                <rect key="frame" x="10" y="300" width="278" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -77,9 +77,9 @@
                             <constraint firstItem="m4J-cq-nCo" firstAttribute="leading" secondItem="F5l-ND-4mn" secondAttribute="leading" id="Vhp-Hl-ze8"/>
                             <constraint firstAttribute="trailing" secondItem="m4J-cq-nCo" secondAttribute="trailing" id="cnv-5a-GOU"/>
                             <constraint firstAttribute="bottom" secondItem="IbJ-8b-DfJ" secondAttribute="bottom" constant="8" id="ed3-zx-SRY"/>
-                            <constraint firstItem="INJ-1W-6qw" firstAttribute="leading" secondItem="F5l-ND-4mn" secondAttribute="leading" constant="8" id="raq-Q3-bvq"/>
+                            <constraint firstItem="INJ-1W-6qw" firstAttribute="leading" secondItem="F5l-ND-4mn" secondAttribute="leading" constant="10" id="raq-Q3-bvq"/>
                             <constraint firstAttribute="trailing" secondItem="INJ-1W-6qw" secondAttribute="trailing" id="skN-7Q-PRB"/>
-                            <constraint firstItem="IbJ-8b-DfJ" firstAttribute="leading" secondItem="F5l-ND-4mn" secondAttribute="leading" constant="4" id="xqy-fV-ink"/>
+                            <constraint firstItem="IbJ-8b-DfJ" firstAttribute="leading" secondItem="F5l-ND-4mn" secondAttribute="leading" constant="8" id="xqy-fV-ink"/>
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icons_Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="nsO-dp-4ip">

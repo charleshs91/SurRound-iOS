@@ -16,8 +16,6 @@ class NearestListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .green
     }
     
     private func setupTableView() {
@@ -48,7 +46,7 @@ extension NearestListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 500
+        return UITableView.automaticDimension
     }
     
 }

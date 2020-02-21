@@ -88,6 +88,11 @@ class ImagePostListCell: PostListCell {
         postImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         postImageView.layer.cornerRadius = 8
         
+        styleSubstrateView()
+    }
+    
+    private func styleSubstrateView() {
+        
         substrateView.layer.cornerRadius = 8
         substrateView.layer.shadowColor = UIColor.lightGray.cgColor
         substrateView.layer.shadowOpacity = 0.7

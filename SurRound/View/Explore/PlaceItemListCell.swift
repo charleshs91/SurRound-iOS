@@ -10,70 +10,18 @@ import UIKit
 
 class PlaceItemListCell: UITableViewCell {
     
-    @IBOutlet weak var collectionView: UICollectionView! {
-        didSet { setupCollectionView() }
-    }
+    @IBOutlet weak var placeNameLabel: UILabel!
     
-    @IBOutlet weak var pageControl: UIPageControl! {
-        didSet { setupPageControl() }
-    }
+    @IBOutlet weak var addressLabel: UILabel!
+    
+    @IBOutlet weak var categoryLabel: UILabel!
+    
+    @IBOutlet weak var distanceLabel: UILabel!
+    
+    @IBOutlet weak var postImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
-    private func setupCollectionView() {
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        
-        collectionView.registerCellWithNib(cellWithClass: PlacePostCollectionCell.self)
-        
-        collectionView.isPagingEnabled = true
-        
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-            layout.minimumLineSpacing = 0
-            layout.minimumInteritemSpacing = 0
-        }
-    }
-    
-    private func setupPageControl() {
-        
-        pageControl.numberOfPages = 5
-    }
-}
 
-extension PlaceItemListCell: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return 5
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: PlacePostCollectionCell.reuseIdentifier, for: indexPath)
-        
-        return cell
-    }
-}
-
-extension PlaceItemListCell: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        pageControl.currentPage = indexPath.item
-    }
-}
-
-extension PlaceItemListCell: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let width = contentView.frame.width - layoutMargins.left - layoutMargins.right
-        
-        return CGSize(width: width, height: width)
-    }
 }

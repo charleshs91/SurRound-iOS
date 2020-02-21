@@ -20,58 +20,57 @@
                         <rect key="frame" x="16" y="72" width="372" height="226"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Large text section without image. Large text section without image. Large text section without image." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2b-kZ-sjI">
-                                <rect key="frame" x="8" y="16" width="348" height="170"/>
+                                <rect key="frame" x="10" y="16" width="352" height="170"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="666" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1l-Vb-H5r" userLabel="Liked Count Label">
-                                <rect key="frame" x="40" y="197" width="28" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9h-da-yZU" userLabel="Review Button">
-                                <rect key="frame" x="76" y="195" width="22" height="22"/>
-                                <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" image="message.fill" catalog="system"/>
-                                <connections>
-                                    <action selector="didTapReviewButton:" destination="DIU-rG-G7e" eventType="touchUpInside" id="sfq-41-fED"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="87" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tb4-Vs-zSQ">
-                                <rect key="frame" x="106" y="197" width="18" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fN-6O-NaZ">
-                                <rect key="frame" x="8" y="194" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="ZdM-99-2ug"/>
-                                    <constraint firstAttribute="width" secondItem="1fN-6O-NaZ" secondAttribute="height" multiplier="1:1" id="ta1-PD-y6j"/>
-                                </constraints>
-                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="heart" catalog="system"/>
-                                <connections>
-                                    <action selector="didTapLikedButton:" destination="DIU-rG-G7e" eventType="touchUpInside" id="c3s-My-hiB"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="pTJ-DE-QJx">
+                                <rect key="frame" x="8" y="194" width="104" height="24"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fN-6O-NaZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="ZdM-99-2ug"/>
+                                            <constraint firstAttribute="width" secondItem="1fN-6O-NaZ" secondAttribute="height" multiplier="1:1" id="ta1-PD-y6j"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="heart" catalog="system"/>
+                                        <connections>
+                                            <action selector="didTapLikedButton:" destination="DIU-rG-G7e" eventType="touchUpInside" id="c3s-My-hiB"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="666" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1l-Vb-H5r" userLabel="Liked Count Label">
+                                        <rect key="frame" x="28" y="0.0" width="28" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9h-da-yZU" userLabel="Review Button">
+                                        <rect key="frame" x="60" y="0.0" width="22" height="24"/>
+                                        <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="message.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="didTapReviewButton:" destination="DIU-rG-G7e" eventType="touchUpInside" id="sfq-41-fED"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="87" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tb4-Vs-zSQ">
+                                        <rect key="frame" x="86" y="0.0" width="18" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Q2b-kZ-sjI" firstAttribute="leading" secondItem="1fN-6O-NaZ" secondAttribute="leading" id="AR7-oP-t5U"/>
+                            <constraint firstItem="pTJ-DE-QJx" firstAttribute="top" secondItem="Q2b-kZ-sjI" secondAttribute="bottom" constant="8" id="7qS-JY-yh1"/>
+                            <constraint firstAttribute="bottom" secondItem="pTJ-DE-QJx" secondAttribute="bottom" constant="8" id="CHi-Il-WlM"/>
                             <constraint firstItem="Q2b-kZ-sjI" firstAttribute="top" secondItem="kpn-hn-kSA" secondAttribute="top" constant="16" id="EAB-Ff-cKO"/>
-                            <constraint firstItem="Tb4-Vs-zSQ" firstAttribute="leading" secondItem="O9h-da-yZU" secondAttribute="trailing" constant="8" id="GGC-89-8HE"/>
-                            <constraint firstAttribute="bottom" secondItem="1fN-6O-NaZ" secondAttribute="bottom" constant="8" id="Hp3-i0-VwW"/>
-                            <constraint firstItem="O9h-da-yZU" firstAttribute="leading" secondItem="f1l-Vb-H5r" secondAttribute="trailing" constant="8" id="I0F-GX-MDo"/>
-                            <constraint firstItem="O9h-da-yZU" firstAttribute="centerY" secondItem="f1l-Vb-H5r" secondAttribute="centerY" id="KhR-QH-j1m"/>
-                            <constraint firstItem="1fN-6O-NaZ" firstAttribute="top" secondItem="Q2b-kZ-sjI" secondAttribute="bottom" constant="8" id="P1Y-6K-ySv"/>
-                            <constraint firstItem="f1l-Vb-H5r" firstAttribute="centerY" secondItem="1fN-6O-NaZ" secondAttribute="centerY" id="RRM-0B-If4"/>
-                            <constraint firstAttribute="trailing" secondItem="Q2b-kZ-sjI" secondAttribute="trailing" constant="16" id="RTD-IR-cYZ"/>
-                            <constraint firstItem="Tb4-Vs-zSQ" firstAttribute="centerY" secondItem="O9h-da-yZU" secondAttribute="centerY" id="d8N-kx-xFH"/>
-                            <constraint firstItem="1fN-6O-NaZ" firstAttribute="leading" secondItem="kpn-hn-kSA" secondAttribute="leading" constant="8" id="lDO-iw-1Le"/>
-                            <constraint firstItem="f1l-Vb-H5r" firstAttribute="leading" secondItem="1fN-6O-NaZ" secondAttribute="trailing" constant="8" id="o1v-4T-IzR"/>
+                            <constraint firstAttribute="trailing" secondItem="Q2b-kZ-sjI" secondAttribute="trailing" constant="10" id="RTD-IR-cYZ"/>
+                            <constraint firstItem="Q2b-kZ-sjI" firstAttribute="leading" secondItem="kpn-hn-kSA" secondAttribute="leading" constant="10" id="ZJJ-e1-fST"/>
+                            <constraint firstItem="pTJ-DE-QJx" firstAttribute="leading" secondItem="kpn-hn-kSA" secondAttribute="leading" constant="8" id="bEV-sa-8L3"/>
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icons_Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="AhG-kc-evu">
