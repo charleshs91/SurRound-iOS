@@ -65,6 +65,11 @@ class PlaceManager: NSObject {
         
         manager.startUpdatingLocation()
     }
+    
+    static func calculateDistance(_ target: Coordinate, reference: Coordinate) -> Double {
+        
+        return target.location.distance(from: reference.location)
+    }
 }
 
 extension PlaceManager: CLLocationManagerDelegate {

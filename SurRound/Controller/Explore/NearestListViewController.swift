@@ -8,21 +8,56 @@
 
 import UIKit
 
-class NearestListViewController: UIViewController {
+struct PostWithDistance {
+    
+    let post: Post
+    let distance: Double
+    
+    init(post: Post, currentCoordinate: Coordinate) {
+        self.post = post
+        self.distance = PlaceManager.calculateDistance(post.place.coordinate, reference: currentCoordinate)
+    }
+}
 
+class NearestListViewController: UIViewController {
+    
     @IBOutlet weak var tableView: UITableView! {
-        didSet { setupTableView() }
+        didSet {
+            tableView.registerCellWithNib(withCellClass: PlaceItemListCell.self)
+            tableView.separatorStyle = .none
+        }
+    }
+    
+    private var data: [PostWithDistance] = [] {
+        didSet {
+            tableView.reloadData()
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchData()
     }
     
-    private func setupTableView() {
+    private func fetchData() {
         
-        tableView.registerCellWithNib(withCellClass: PlaceItemListCell.self)
+        guard let currentCoordinate = PlaceManager.current.coordinate else {
+            SRProgressHUD.showFailure(text: "無法取得所在位置")
+            return
+        }
         
-        tableView.separatorStyle = .none
+        let manager = PostManager()
+        manager.fetchNearestPost(coordinate: currentCoordinate) { [weak self] (result) in
+            do {
+                let posts = try result.get()
+                posts.forEach { post in
+                    self?.data.append(.init(post: post, currentCoordinate: currentCoordinate))
+                }
+            } catch {
+                print(error)
+            }
+        }
     }
 }
 
@@ -30,13 +65,17 @@ extension NearestListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(
             withIdentifier: PlaceItemListCell.reuseIdentifier, for: indexPath)
+        guard let placeCell = cell as? PlaceItemListCell else { return cell }
+        
+        let item = data[indexPath.row]
+        placeCell.setupCell(item.post, distance: item.distance)
         
         return cell
     }

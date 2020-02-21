@@ -35,7 +35,8 @@ class ExploreViewController: UIViewController {
         guard let exploreView = view as? ExploreView else { return }
         exploreView.selectionView.dataSource = self
         exploreView.selectionView.delegate = self
-        exploreView.arrangeViews()
+        let tabBarHeight = tabBarController?.tabBar.frame.height
+        exploreView.arrangeViews(tabBarHeight: tabBarHeight ?? 0)
         setupGestureRecognizers()
     }
     

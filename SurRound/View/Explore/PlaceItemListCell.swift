@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlaceItemListCell: UITableViewCell {
+class PlaceItemListCell: SRBaseTableViewCell {
     
     @IBOutlet weak var placeNameLabel: UILabel!
     
@@ -23,5 +23,22 @@ class PlaceItemListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
+    func setupCell(_ post: Post, distance: Double) {
+        placeNameLabel.text = post.place.name
+        addressLabel.text = post.place.address
+        categoryLabel.text = post.category
+        distanceLabel.text = textForDistance(distance: distance)
+        postImageView.loadImage(post.mediaLink)
+    }
+    
+    private func textForDistance(distance: Double) -> String {
+        
+        if distance < 1000 {
+            return "\(Int(distance))m"
+        }
+        
+        let kilometer = String(format: "%.1f", distance / 1000)
+        return "\(kilometer)km"
+    }
 }

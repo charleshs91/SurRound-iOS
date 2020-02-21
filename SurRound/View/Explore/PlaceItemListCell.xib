@@ -9,11 +9,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="420" id="KGk-i7-Jjw" customClass="PlaceItemListCell" customModule="SurRound" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="420"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="401" id="KGk-i7-Jjw" customClass="PlaceItemListCell" customModule="SurRound" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="401"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="420"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="401"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Taipei 101" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z6f-fy-X1Q">
@@ -23,7 +23,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EBb-rD-VuB">
-                        <rect key="frame" x="0.0" y="84" width="320" height="320"/>
+                        <rect key="frame" x="0.0" y="65" width="320" height="320"/>
                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="EBb-rD-VuB" secondAttribute="height" id="cIc-Ju-97I"/>
@@ -36,13 +36,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSk-xl-dmw">
-                        <rect key="frame" x="16" y="45" width="59.5" height="31"/>
+                        <rect key="frame" x="16" y="45" width="59.5" height="12"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzs-q7-PHg">
-                        <rect key="frame" x="242" y="51" width="62" height="19.5"/>
+                        <rect key="frame" x="242" y="45" width="62" height="12"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -50,14 +50,15 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="ZSk-xl-dmw" firstAttribute="top" secondItem="Z6f-fy-X1Q" secondAttribute="bottom" constant="8" id="4Bd-oJ-re6"/>
+                    <constraint firstItem="EBb-rD-VuB" firstAttribute="top" secondItem="rzs-q7-PHg" secondAttribute="bottom" constant="8" id="8bX-hv-Rin"/>
                     <constraint firstItem="EBb-rD-VuB" firstAttribute="top" secondItem="ZSk-xl-dmw" secondAttribute="bottom" constant="8" id="B4i-EI-3Sp"/>
                     <constraint firstItem="Z6f-fy-X1Q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="G9q-zV-z6V"/>
+                    <constraint firstItem="rzs-q7-PHg" firstAttribute="top" secondItem="2fm-Ta-Jus" secondAttribute="bottom" constant="8" id="J7r-Gx-IQx"/>
                     <constraint firstItem="ZSk-xl-dmw" firstAttribute="leading" secondItem="Z6f-fy-X1Q" secondAttribute="leading" id="QkZ-Bq-uah"/>
                     <constraint firstItem="EBb-rD-VuB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="SbZ-wN-3fk"/>
                     <constraint firstItem="rzs-q7-PHg" firstAttribute="trailing" secondItem="2fm-Ta-Jus" secondAttribute="trailing" id="YlC-ui-1uY"/>
                     <constraint firstAttribute="bottom" secondItem="EBb-rD-VuB" secondAttribute="bottom" constant="16" id="ZJ3-Bw-ynl"/>
                     <constraint firstAttribute="trailing" secondItem="2fm-Ta-Jus" secondAttribute="trailing" constant="16" id="b0a-Z3-yJK"/>
-                    <constraint firstItem="rzs-q7-PHg" firstAttribute="centerY" secondItem="ZSk-xl-dmw" secondAttribute="centerY" id="bGa-6m-g6D"/>
                     <constraint firstItem="2fm-Ta-Jus" firstAttribute="centerY" secondItem="Z6f-fy-X1Q" secondAttribute="centerY" id="dga-30-LzC"/>
                     <constraint firstAttribute="trailing" secondItem="EBb-rD-VuB" secondAttribute="trailing" id="qF8-q9-n9f"/>
                     <constraint firstItem="Z6f-fy-X1Q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="wXt-Qc-nR9"/>
@@ -71,7 +72,7 @@
                 <outlet property="placeNameLabel" destination="Z6f-fy-X1Q" id="Ltc-bo-Jtu"/>
                 <outlet property="postImageView" destination="EBb-rD-VuB" id="9x5-OU-Hes"/>
             </connections>
-            <point key="canvasLocation" x="131.8840579710145" y="27.455357142857142"/>
+            <point key="canvasLocation" x="131.8840579710145" y="21.09375"/>
         </tableViewCell>
     </objects>
 </document>

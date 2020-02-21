@@ -14,20 +14,12 @@ typealias PostsResult = (Result<[Post], FirestoreServiceError>) -> Void
 
 class PostManager {
     
-    static func documentID() -> String {
-        
-        return FirestoreDB.posts.document().documentID
-    }
-    
     private let dataFetcher: DataFetching
     
     init(dataFetcher: DataFetching = GenericFetcher()) {
         
         self.dataFetcher = dataFetcher
     }
-}
-
-extension PostManager {
     
     func likePost(postId: String, uid: String, completion: @escaping () -> Void) {
         
@@ -54,6 +46,24 @@ extension PostManager {
             
             guard error == nil else { return }
             completion()
+        }
+    }
+    
+    func fetchNearestPost(coordinate: Coordinate, completion: @escaping PostsResult) {
+        
+        let query = FirestoreDB.posts
+            .whereField(Post.CodingKeys.latitude.rawValue, isGreaterThanOrEqualTo: coordinate.latitude - 1)
+            .whereField(Post.CodingKeys.latitude.rawValue, isLessThanOrEqualTo: coordinate.latitude + 1)
+        
+        _fetch(from: query) { (result) in
+            switch result {
+            case .success(let posts):
+                let sortedPosts = PostManager.sortByDistance(reference: coordinate, posts: posts)
+                completion(.success(sortedPosts))
+                
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
     
@@ -94,6 +104,7 @@ extension PostManager {
         _fetch(from: query, completion: completion)
     }
     
+    // MARK: - Private Methods
     private func _fetch(from query: Query, completion: @escaping PostsResult) {
         
         dataFetcher.fetch(from: query) { (result) in
@@ -165,5 +176,29 @@ extension PostManager {
         } catch {
             completion(.failure(error))
         }
+    }
+}
+
+// MARK: - Static Functions
+extension PostManager {
+    
+    static func documentID() -> String {
+        
+        return FirestoreDB.posts.document().documentID
+    }
+    
+    static func sortByDistance(reference: Coordinate, posts: [Post]) -> [Post] {
+        
+        var distanceMap: [Post: Double] = [:]
+        posts.forEach { post in
+            let distance = PlaceManager.calculateDistance(post.place.coordinate, reference: reference)
+            distanceMap[post] = distance
+        }
+        let sortedMap = distanceMap.sorted { (lhs, rls) -> Bool in
+            return lhs.value <= rls.value
+        }
+        let sortedPosts = sortedMap.map { $0.key }
+        
+        return sortedPosts
     }
 }

@@ -68,10 +68,10 @@ class ExploreView: UIView {
     }
     
     // MARK: - Private Methods
-    func arrangeViews() {
+    func arrangeViews(tabBarHeight: CGFloat) {
         
         let views: [UIView] = [followingListView, trendingListView, nearestListView]
-        let height = safeAreaLayoutGuide.layoutFrame.height - selectionView.frame.height
+        let height = safeAreaLayoutGuide.layoutFrame.height - tabBarHeight - selectionView.frame.height
         
         views.forEach { view in
             view.frame = CGRect(x: 0,

@@ -121,7 +121,7 @@ struct Review: Codable {
     }
 }
 
-struct Post: Codable {
+struct Post: Codable, Hashable, Equatable {
     
     init(id: String, category: String, author: Author, text: String, place: SRPlace) {
         self.id = id
@@ -133,6 +133,14 @@ struct Post: Codable {
         self.place = place
         self.latitude = place.coordinate.latitude
         self.longitude = place.coordinate.longitude
+    }
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
     
     let id: String
