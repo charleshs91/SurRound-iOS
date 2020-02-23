@@ -10,4 +10,9 @@ import UIKit
 
 extension UIView {
     
+    func roundToHeight() {
+        
+        layer.masksToBounds = true
+        layer.cornerRadius = frame.size.height / 2
+    }
 }

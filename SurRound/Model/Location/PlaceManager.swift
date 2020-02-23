@@ -9,31 +9,71 @@
 import Foundation
 import CoreLocation
 
-struct Coordinate: Codable {
+enum PlaceManagerError: Error {
     
-    var latitude: Double
-    var longitude: Double
-    
-    var location: CLLocation {
-        get {
-            return CLLocation(latitude: self.latitude, longitude: self.longitude)
-        }
-        set {
-            self.latitude = newValue.coordinate.latitude
-            self.longitude = newValue.coordinate.longitude
-        }
-    }
-    
-    init(_ location: CLLocation) {
-        
-        self.latitude = location.coordinate.latitude
-        self.longitude = location.coordinate.longitude
-    }
+    case accessDenied
 }
 
-class PlaceManager {
+class PlaceManager: NSObject {
+    
+    struct Default {
+        
+        static let taipei: SRPlace = SRPlace(Coordinate(lat: 25.0475847, long: 121.5162492),
+                                             name: nil,
+                                             address: nil)
+    }
     
     static let current = PlaceManager()
     
+    let manager = CLLocationManager()
+    
     var coordinate: Coordinate?
+    
+    var location: CLLocation? {
+        return manager.location
+    }
+    
+    override init() {
+        super.init()
+        
+        manager.delegate = self
+    }
+    
+    func updateLocation() throws {
+        
+        let status = CLLocationManager.authorizationStatus()
+        
+        switch status {
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+            
+        case .denied, .restricted:
+            throw PlaceManagerError.accessDenied
+            
+        case .authorizedAlways, .authorizedWhenInUse:
+            break
+            
+        @unknown default:
+            return
+        }
+        
+        manager.startUpdatingLocation()
+    }
+}
+
+extension PlaceManager: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        if let location = locations.last {
+            coordinate = Coordinate(location)
+            manager.stopUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
+        SRProgressHUD.showFailure(text: error.localizedDescription)
+        manager.stopUpdatingLocation()
+    }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeNavController: UINavigationController {
+class HomeNavController: SRColoredNavController {
   
   override func viewDidLoad() {
     super.viewDidLoad()

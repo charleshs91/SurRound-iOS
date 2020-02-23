@@ -17,7 +17,6 @@ class PostCreator {
     }
     
     static func documentID() -> String {
-        
         return Firestore.firestore().collection("posts").document().documentID
     }
     
@@ -26,15 +25,15 @@ class PostCreator {
         let documentRef = Firestore.firestore().collection("posts").document(post.id)
         
         do {
-            try documentRef.setData(from: post,
-                                    merge: true,
-                                    encoder: Firestore.Encoder()) { error in
+            try documentRef.setData(from: post, merge: true, encoder: Firestore.Encoder()) { error in
                 
                 guard error == nil else {
                     completion(.failure(error!))
                     return
                 }
-                
+                if let user = AuthManager.shared.currentUser {
+                    UserDBService.attachPost(user: user, postRef: documentRef)
+                }
                 if let imageToAttach = image {
                     self.attachImage(to: documentRef, image: imageToAttach)
                 }
@@ -48,10 +47,7 @@ class PostCreator {
     
     private func attachImage(to documentRef: DocumentReference, image: UIImage) {
         
-        let manager = StorageManager()
-        
-        manager.uploadImage(image, filename: NSUUID().uuidString) { url in
-            
+        StorageManager().uploadImage(image, filename: NSUUID().uuidString) { url in
             guard let url = url else { return }
             
             documentRef.setData([

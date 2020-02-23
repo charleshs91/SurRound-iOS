@@ -29,7 +29,6 @@ class SRAuthButton: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        layer.cornerRadius = 10
+        layer.cornerRadius = frame.size.height / 2
     }
-    
 }

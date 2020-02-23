@@ -27,6 +27,7 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         setupTextField()
+        checkTextFieldsContent()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,7 +43,7 @@ class SignUpViewController: UIViewController {
             
             switch result {
             case .success:
-                self?.dismiss(animated: true, completion: nil)
+                self?.displayMainView()
                 
             case .failure(let error):
                 SRProgressHUD.showFailure(text: error.localizedDescription)
@@ -60,6 +61,7 @@ class SignUpViewController: UIViewController {
         for (textField, category) in zip(textFields, categories) {
             textField?.delegate = self
             textField?.placeholder = category.placeholder
+            textField?.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         }
     }
     
@@ -107,6 +109,11 @@ class SignUpViewController: UIViewController {
             passwordTextField.text == confirmPwdTextField.text
     }
     
+    @objc func textFieldDidChange(_ sender: UITextField) {
+        
+        checkTextFieldsContent()
+    }
+    
     private func validateEmail(_ candidate: String) -> Bool {
         
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -119,6 +126,14 @@ class SignUpViewController: UIViewController {
                                     options: [],
                                     range: NSRange(location: 0, length: candidate.count))
         return matches.count > 0
+    }
+    
+    private func displayMainView() {
+        
+        if let window = AppDelegate.shared.window {
+            let tbc = UIStoryboard.main.instantiateInitialViewController()
+            window.rootViewController = tbc
+        }
     }
 }
 
