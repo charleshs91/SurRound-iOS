@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
   
   let locationManager = CLLocationManager()
   
-  var currentLocation: Location?
+  var currentLocation: Coordinate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -57,7 +57,7 @@ extension HomeViewController: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     if let current = locations.last {
-      LocationProvider.current.location = current
+        PlaceManager.current.coordinate = Coordinate(current)
     }
   }
   

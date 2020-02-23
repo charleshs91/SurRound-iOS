@@ -1,24 +1,24 @@
 //
-//  BodyTableViewCell.swift
+//  PlacePostCollectionCell.swift
 //  SurRound
 //
-//  Created by Kai-Ta Hsieh on 2020/1/26.
+//  Created by Kai-Ta Hsieh on 2020/2/2.
 //  Copyright © 2020 Kai-Ta Hsieh. All rights reserved.
 //
 
 import UIKit
 
-class BodyTableViewCell: UITableViewCell {
-    
+class PlacePostCollectionCell: UICollectionViewCell {
+
     static var identifier: String {
-        return String(describing: BodyTableViewCell.self)
+        return String(describing: PlacePostCollectionCell.self)
     }
     
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var postImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
+
 }

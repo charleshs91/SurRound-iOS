@@ -23,6 +23,7 @@ enum ImageAsset: String {
     case TabBarIcon_42px_Profile_Selected
     
     case Image_Placeholder
+    case Icons_Avatar
     // swiftlint:enable identifier_name
 }
 

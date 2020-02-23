@@ -47,9 +47,11 @@ extension SelectionViewDataSource {
 
 @objc protocol SelectionViewDelegate: AnyObject {
     
-    @objc optional func selectionView(_ selectionView: SelectionView, didSelectItemAt index: Int)
+    @objc optional func selectionView(_ selectionView: SelectionView,
+                                      didSelectItemAt index: Int)
     
-    @objc optional func selectionView(_ selectionView: SelectionView, shouldSelectItemAt index: Int) -> Bool
+    @objc optional func selectionView(_ selectionView: SelectionView,
+                                      shouldSelectItemAt index: Int) -> Bool
 }
 
 class SelectionView: UIView {
@@ -124,10 +126,12 @@ class SelectionView: UIView {
         self.addSubview(stackView)
         self.addSubview(indicator)
         
+        let edgePadding = stackView.spacing / 2
+        
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: edgePadding),
             stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -edgePadding),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             indicator.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),

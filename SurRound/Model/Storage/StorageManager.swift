@@ -12,7 +12,7 @@ import FirebaseStorage
 class StorageManager {
   
   deinit {
-    print("StorageManager deinit")
+    debugPrint("$ deinit: StorageManager")
   }
   
   func uploadImage(_ image: UIImage, filename: String, completion: ((URL?) -> Void)?) {

@@ -8,7 +8,18 @@
 
 import UIKit
 
+enum SRColor: String {
+    
+    case bluyGreen
+}
+
 extension UIColor {
+    
+    static let bluyGreen = SRColor(.bluyGreen)
+    
+    static func SRColor(_ color: SRColor) -> UIColor? {
+        return UIColor(named: color.rawValue)
+    }
     
     static func hexStringToUIColor(hex: String) -> UIColor {
         

@@ -8,54 +8,56 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class PostCreator {
-  
-  static func documentID() -> String {
-    return Firestore.firestore().collection("posts").document().documentID
-  }
-  
-  func createPost(_ post: Post, completion: @escaping (Result<Void, Error>) -> Void) {
     
-    let ref = Firestore.firestore().collection("posts").document(post.id)
-    // Create post in DB
-    do {
-      try ref.setData(from: post, merge: true, encoder: Firestore.Encoder()) { (error) in
-        guard error == nil else {
-          completion(.failure(error!))
-          return
-        }
-        completion(.success(()))
-      }
-    } catch {
-      completion(.failure(error))
+    deinit {
+        debugPrint("$ deinit: PostCreator")
     }
-  }
-  
-  func createPostWithImage(post: Post, image: UIImage, completion: @escaping (Result<Void, Error>) -> Void) {
     
-    let ref = Firestore.firestore().collection("posts").document(post.id)
-    // Upload image
-    let manager = StorageManager()
-    manager.uploadImage(image, filename: NSUUID().uuidString) { (url) in
-      guard let url = url else { return }
-      ref.setData([
-        "media_type": "image",
-        "media_link": url.absoluteString
-      ], merge: true)
+    static func documentID() -> String {
+        
+        return Firestore.firestore().collection("posts").document().documentID
     }
-    // Create post in DB
-    do {
-      try ref.setData(from: post, merge: true, encoder: Firestore.Encoder()) { (error) in
-        guard error == nil else {
-          completion(.failure(error!))
-          return
+    
+    func createPost(_ post: Post, image: UIImage? = nil, completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        let documentRef = Firestore.firestore().collection("posts").document(post.id)
+        
+        do {
+            try documentRef.setData(from: post,
+                                    merge: true,
+                                    encoder: Firestore.Encoder()) { error in
+                
+                guard error == nil else {
+                    completion(.failure(error!))
+                    return
+                }
+                
+                if let imageToAttach = image {
+                    self.attachImage(to: documentRef, image: imageToAttach)
+                }
+                
+                completion(.success(()))
+            }
+        } catch {
+            completion(.failure(error))
         }
-        completion(.success(()))
-      }
-    } catch {
-      completion(.failure(error))
     }
-  }
-  
+    
+    private func attachImage(to documentRef: DocumentReference, image: UIImage) {
+        
+        let manager = StorageManager()
+        
+        manager.uploadImage(image, filename: NSUUID().uuidString) { url in
+            
+            guard let url = url else { return }
+            
+            documentRef.setData([
+                "media_type": "image",
+                "media_link": url.absoluteString
+            ], merge: true)
+        }
+    }
 }

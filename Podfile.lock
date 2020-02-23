@@ -164,6 +164,30 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
+  - collection-view-layouts (0.2.2):
+    - collection-view-layouts/Core (= 0.2.2)
+    - collection-view-layouts/FacebookLayout (= 0.2.2)
+    - collection-view-layouts/FlickrLayout (= 0.2.2)
+    - collection-view-layouts/FlipboardLayout (= 0.2.2)
+    - collection-view-layouts/InstagramLayout (= 0.2.2)
+    - collection-view-layouts/PinterestLayout (= 0.2.2)
+    - collection-view-layouts/Px500Layout (= 0.2.2)
+    - collection-view-layouts/TagsLayout (= 0.2.2)
+  - collection-view-layouts/Core (0.2.2)
+  - collection-view-layouts/FacebookLayout (0.2.2):
+    - collection-view-layouts/Core
+  - collection-view-layouts/FlickrLayout (0.2.2):
+    - collection-view-layouts/Core
+  - collection-view-layouts/FlipboardLayout (0.2.2):
+    - collection-view-layouts/Core
+  - collection-view-layouts/InstagramLayout (0.2.2):
+    - collection-view-layouts/Core
+  - collection-view-layouts/PinterestLayout (0.2.2):
+    - collection-view-layouts/Core
+  - collection-view-layouts/Px500Layout (0.2.2):
+    - collection-view-layouts/Core
+  - collection-view-layouts/TagsLayout (0.2.2):
+    - collection-view-layouts/Core
   - Firebase/Auth (6.14.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.4.1)
@@ -289,6 +313,7 @@ PODS:
   - SwiftLint (0.38.2)
 
 DEPENDENCIES:
+  - collection-view-layouts
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
@@ -304,6 +329,7 @@ SPEC REPOS:
   trunk:
     - abseil
     - BoringSSL-GRPC
+    - collection-view-layouts
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -333,6 +359,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  collection-view-layouts: 474ec4cce601a26247737227a97fa6a4eb30213f
   Firebase: 0219bb4782eb1406f1b9b0628a2e625484ce910d
   FirebaseAnalytics: f68b9f3f1241385129ae0a83b63627fc420c05e5
   FirebaseAuth: 831577b184ecaba38bc886768c1c22a450cc44e3
@@ -359,6 +386,6 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   SwiftLint: 8f5d2f903e1c9bcbc832fd16771e80a263ac6cbb
 
-PODFILE CHECKSUM: 584708eb06c7f49d9a3f8090fe2e7762ea69346d
+PODFILE CHECKSUM: 0b651ba0240844045465c716d64bee310395ab06
 
 COCOAPODS: 1.8.4

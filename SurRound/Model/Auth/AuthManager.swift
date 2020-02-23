@@ -47,6 +47,7 @@ class AuthManager {
             
             UserDBService.queryUser(uid: user.uid) { srUser in
                 self?.currentUser = srUser
+                completion(.success(srUser))
             }
         }
     }
