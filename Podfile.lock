@@ -158,6 +158,8 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - Alamofire (5.0.0-rc.3)
+  - AnimatedCollectionViewLayout (1.0.1)
   - BoringSSL-GRPC (0.0.3):
     - BoringSSL-GRPC/Implementation (= 0.0.3)
     - BoringSSL-GRPC/Interface (= 0.0.3)
@@ -318,6 +320,7 @@ PODS:
   - Kingfisher/Core (5.13.0)
   - KMPlaceholderTextView (1.4.0)
   - leveldb-library (1.22)
+  - MaterialDesignWidgets (0.0.10)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
@@ -327,6 +330,8 @@ PODS:
   - SwiftLint (0.38.2)
 
 DEPENDENCIES:
+  - Alamofire (~> 5.0.0-rc.3)
+  - AnimatedCollectionViewLayout
   - collection-view-layouts
   - ESPullToRefresh
   - Firebase/Auth
@@ -340,11 +345,14 @@ DEPENDENCIES:
   - JGProgressHUD
   - Kingfisher (~> 5.0)
   - KMPlaceholderTextView (~> 1.4.0)
+  - MaterialDesignWidgets
   - SwiftLint
 
 SPEC REPOS:
   trunk:
     - abseil
+    - Alamofire
+    - AnimatedCollectionViewLayout
     - BoringSSL-GRPC
     - collection-view-layouts
     - ESPullToRefresh
@@ -374,12 +382,15 @@ SPEC REPOS:
     - Kingfisher
     - KMPlaceholderTextView
     - leveldb-library
+    - MaterialDesignWidgets
     - nanopb
     - PromisesObjC
     - SwiftLint
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
+  Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
+  AnimatedCollectionViewLayout: 00f0997fd26f0fd02d8b99765023b95570b5d826
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   collection-view-layouts: 474ec4cce601a26247737227a97fa6a4eb30213f
   ESPullToRefresh: efed00d52597065e9a84e1e52fa444fdb1a1dee0
@@ -409,10 +420,11 @@ SPEC CHECKSUMS:
   Kingfisher: 0d334cada987fcddbe9b5cec516406e1ee9d4748
   KMPlaceholderTextView: 2206c3df39979e9396e2d96fa9f427a8951121b0
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  MaterialDesignWidgets: 902d573fef47e2b1deb480b5134ee481781b722c
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SwiftLint: 8f5d2f903e1c9bcbc832fd16771e80a263ac6cbb
 
-PODFILE CHECKSUM: a287315acec88e48e82ad53a21a4f0c208bcaea1
+PODFILE CHECKSUM: 7ab351fc1518e3b7f3bc113ed3ba34981b1475f0
 
 COCOAPODS: 1.8.4

@@ -9,11 +9,14 @@ target 'SurRound' do
   # Pods for SurRound
   pod 'SwiftLint'
   pod 'JGProgressHUD'
+  pod 'ESPullToRefresh'
   pod 'Kingfisher', '~> 5.0'
   pod 'IQKeyboardManagerSwift'
   pod 'KMPlaceholderTextView', '~> 1.4.0'
   pod 'collection-view-layouts'
-  pod 'ESPullToRefresh'
+  pod 'AnimatedCollectionViewLayout'
+  pod 'Alamofire', '~> 5.0.0-rc.3'
+  pod 'MaterialDesignWidgets'
   
   # Firebase
   pod 'Firebase/Core'

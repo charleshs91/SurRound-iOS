@@ -6,11 +6,13 @@
 //  Copyright © 2020 Kai-Ta Hsieh. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol PostListCellViewModel {
     
     var cellType: PostListCellType { get }
+    
+    var isFollowing: Bool { get }
 }
 
 class ImagePostListCellViewModel: PostListCellViewModel {
@@ -19,6 +21,7 @@ class ImagePostListCellViewModel: PostListCellViewModel {
         return PostListCellType.image
     }
     
+    var authorId: String
     var username: String
     var userImageUrlString: String?
     var placeName: String?
@@ -26,8 +29,17 @@ class ImagePostListCellViewModel: PostListCellViewModel {
     var postImageUrlString: String?
     var text: String
     
+    var isFollowing: Bool {
+        
+        guard let userProfile = AuthManager.shared.userProfile else {
+            return false
+        }
+        return userProfile.following.contains(authorId)
+    }
+    
     init(_ post: Post) {
         
+        self.authorId = post.authorId
         self.username = post.author.username
         self.userImageUrlString = post.author.avatar
         self.placeName = post.place.name
@@ -39,10 +51,19 @@ class ImagePostListCellViewModel: PostListCellViewModel {
 
 class TextPostListCellViewModel: PostListCellViewModel {
     
+    var isFollowing: Bool {
+        
+        guard let userProfile = AuthManager.shared.userProfile else {
+            return false
+        }
+        return userProfile.following.contains(authorId)
+    }
+
     var cellType: PostListCellType {
         return PostListCellType.text
     }
     
+    var authorId: String
     var username: String
     var userImageUrlString: String?
     var placeName: String?
@@ -51,6 +72,7 @@ class TextPostListCellViewModel: PostListCellViewModel {
     
     init(_ post: Post) {
         
+        self.authorId = post.authorId
         self.username = post.author.username
         self.userImageUrlString = post.author.avatar
         self.placeName = post.place.name
@@ -60,6 +82,8 @@ class TextPostListCellViewModel: PostListCellViewModel {
 }
 
 class VideoPostListCellViewModel: PostListCellViewModel {
+    
+    var isFollowing: Bool = false
     
     var cellType: PostListCellType {
         return PostListCellType.video

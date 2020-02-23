@@ -29,7 +29,13 @@ private enum Tab {
         }
         
         controller.tabBarItem = tabBarItem()
-        controller.tabBarItem.imageInsets = UIEdgeInsets(top: 12, left: 6, bottom: 0, right: 6)
+        
+        switch self {
+        case .create:
+            controller.tabBarItem.imageInsets = UIEdgeInsets(top: 8, left: 0, bottom: -8, right: 0)
+        default:
+            controller.tabBarItem.imageInsets = UIEdgeInsets(top: 12, left: 6, bottom: 0, right: 6)
+        }
         
         return controller
     }
@@ -64,8 +70,8 @@ private enum Tab {
         case .create:
             return UITabBarItem(
                 title: nil,
-                image: UIImage.asset(ImageAsset.TabBarIcon_42px_Add),
-                selectedImage: UIImage.asset(.TabBarIcon_42px_Add))
+                image: UIImage.asset(ImageAsset.Icons_Add02),
+                selectedImage: UIImage.asset(.Icons_Add02))
         }
     }
 }
@@ -76,57 +82,15 @@ class SRTabBarController: UITabBarController {
     
     private let tabs: [Tab] = [.home, .explore, .create, .message, .profile]
     
-    lazy var blurView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.width, height: UIScreen.height))
-        view.backgroundColor = UIColor.darkGray.withAlphaComponent(0.7)
-        return view
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewControllers = tabs.map {
             $0.controller()
         }
-        tabBar.tintColor = UIColor.bluyGreen
+        tabBar.tintColor = UIColor.themeColor
         
         delegate = self
-    }
-    
-    @IBAction func didTapCloseCategorySelectorView(_ sender: UIButton) {
-        
-        UIViewPropertyAnimator.runningPropertyAnimator(
-            withDuration: 0.3,
-            delay: 0,
-            options: .curveEaseIn,
-            animations: {
-                self.newPostSelectorView.frame.origin = CGPoint(x: 0, y: UIScreen.height)
-                self.blurView.alpha = 0
-        }, completion: { _ in
-            self.newPostSelectorView.removeFromSuperview()
-            self.blurView.removeFromSuperview()
-        })
-    }
-    
-    private func displayNewPostView() {
-        
-        blurView.alpha = 0
-        view.addSubview(blurView)
-        
-        newPostSelectorView.frame = CGRect(x: 0, y: UIScreen.height, width: UIScreen.width, height: 200)
-        view.addSubview(newPostSelectorView)
-        
-        UIViewPropertyAnimator.runningPropertyAnimator(
-            withDuration: 0.3,
-            delay: 0,
-            options: .curveEaseIn,
-            animations: {
-                
-                self.newPostSelectorView.frame.origin = CGPoint(
-                    x: 0, y: UIScreen.height - self.newPostSelectorView.frame.height)
-                
-                self.blurView.alpha = 1
-        })
     }
 }
 
@@ -142,11 +106,21 @@ extension SRTabBarController: UITabBarControllerDelegate {
             let newVC = CategorySelectorViewController.storyboardInstance()!
             newVC.modalPresentationStyle = .overCurrentContext
             self.present(newVC, animated: false, completion: nil)
-//            let newPostVC = UIStoryboard.newPost.instantiateInitialViewController()!
-//            newPostVC.modalPresentationStyle = .currentContext
-//            present(newPostVC, animated: false, completion: nil)
             
             return false
+        }
+        
+        if let nav = viewController as? UINavigationController,
+            let profileVC = nav.viewControllers.first as? ProfileViewController {
+            
+            guard let currentUser = AuthManager.shared.currentUser else {
+                let welcomeVC = UIStoryboard.auth.instantiateInitialViewController()!
+                self.present(welcomeVC, animated: true, completion: nil)
+                return false
+            }
+            
+            profileVC.userToDisplay = currentUser
+            return true
         }
         
         return true

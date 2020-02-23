@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16085" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OBa-9q-1b7">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16078.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Post Content View Controller-->
+        <scene sceneID="UCV-fE-w01">
+            <objects>
+                <viewController id="OBa-9q-1b7" customClass="PostContentViewController" customModule="SurRound" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jbf-ib-xDs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="knG-Kx-7JG" customClass="PostContentView" customModule="SurRound" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Placeholder" id="8tr-hX-8c6">
+                                        <rect key="frame" x="0.0" y="100" width="414" height="428"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="riB-ak-1gk">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="OBa-9q-1b7" id="e9Q-vA-g8w"/>
+                                            <outlet property="delegate" destination="OBa-9q-1b7" id="9pi-Sf-krH"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="riB-ak-1gk" secondAttribute="bottom" id="6Wk-T5-62a"/>
+                                    <constraint firstItem="riB-ak-1gk" firstAttribute="leading" secondItem="knG-Kx-7JG" secondAttribute="leading" id="bAr-64-pTi"/>
+                                    <constraint firstItem="riB-ak-1gk" firstAttribute="top" secondItem="knG-Kx-7JG" secondAttribute="top" id="bp5-mX-mIy"/>
+                                    <constraint firstAttribute="trailing" secondItem="riB-ak-1gk" secondAttribute="trailing" id="wKx-ud-joM"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="postImageView" destination="8tr-hX-8c6" id="n7K-A7-ReO"/>
+                                    <outlet property="tableView" destination="riB-ak-1gk" id="gGo-fg-4n8"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="xjv-eo-h5p" firstAttribute="bottom" secondItem="knG-Kx-7JG" secondAttribute="bottom" id="S7z-b2-yWE"/>
+                            <constraint firstItem="xjv-eo-h5p" firstAttribute="trailing" secondItem="knG-Kx-7JG" secondAttribute="trailing" id="ZnS-ur-o3O"/>
+                            <constraint firstItem="knG-Kx-7JG" firstAttribute="top" secondItem="Jbf-ib-xDs" secondAttribute="top" id="b8e-YB-8FP"/>
+                            <constraint firstItem="knG-Kx-7JG" firstAttribute="leading" secondItem="xjv-eo-h5p" secondAttribute="leading" id="bxS-bY-fv5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xjv-eo-h5p"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4YX-Vg-ahO"/>
+                    <connections>
+                        <outlet property="postContentView" destination="knG-Kx-7JG" id="2d2-fA-0ta"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ECu-5V-ReZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="366.66666666666669" y="63.616071428571423"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Image_Placeholder" width="750" height="750"/>
+    </resources>
+</document>

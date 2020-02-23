@@ -15,18 +15,14 @@ class SRPlace: Codable {
     var name: String?
     var address: String?
     
-    init(_ coordinate: CLLocationCoordinate2D) {
+    convenience init(_ coordinate: CLLocationCoordinate2D) {
         
-        self.coordinate = Coordinate(coordinate)
-        self.name = nil
-        self.address = nil
+        self.init(Coordinate(coordinate), name: nil, address: nil)
     }
     
-    init(place: GMSPlace) {
+    convenience init(place: GMSPlace) {
         
-        self.coordinate = Coordinate(place.coordinate)
-        self.name = place.name
-        self.address = place.formattedAddress
+        self.init(Coordinate(place.coordinate), name: place.name, address: place.formattedAddress)
     }
     
     init(_ coordinate: Coordinate, name: String?, address: String?) {

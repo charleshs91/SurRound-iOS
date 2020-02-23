@@ -15,32 +15,51 @@ class StorageManager {
         debugPrint("$ deinit: StorageManager")
     }
     
-    func uploadImage(_ image: UIImage, filename: String, completion: @escaping (URL?) -> Void) {
+    func uploadImage(_ image: UIImage,
+                     filename: String,
+                     completion: @escaping (URL?) -> Void) {
         
-        guard let uploadData = image.jpegData(compressionQuality: 0.9) else { return }
+        guard let imageData = image.jpegData(compressionQuality: 0.9) else { return }
         
         let imageRef = Storage.storage().reference().child("images").child("\(filename).jpg")
         
-        imageRef.putData(uploadData, metadata: nil) { (_, error) in
-            
+        uploadData(imageData, ref: imageRef, completion: completion)
+    }
+    
+    func uploadVideo(_ videoData: Data,
+                     filename: String,
+                     completion: @escaping (URL?) -> Void) {
+        
+        let videoRef = Storage.storage().reference().child("videos").child("\(filename).mov")
+        
+        uploadData(videoData, ref: videoRef, completion: completion)
+    }
+    
+    private func uploadData(_ data: Data,
+                            ref: StorageReference,
+                            completion: @escaping (URL?) -> Void) {
+        
+        ref.putData(data, metadata: nil) { (_, error) in
             guard error == nil else {
                 print(error!)
                 return
             }
             
-            self.getDownloadURL(imageRef, completion: completion)
-            
+            self.getDownloadURL(ref, completion: completion)
         }
     }
     
-    func getDownloadURL(_ ref: StorageReference, completion: @escaping (URL?) -> Void) {
+    private func getDownloadURL(_ ref: StorageReference,
+                                completion: @escaping (URL?) -> Void) {
+        
         ref.downloadURL { (url, error) in
+            
             guard error == nil else {
                 print(error!)
                 return
             }
+            
             completion(url)
         }
     }
-    
 }

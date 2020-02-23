@@ -24,4 +24,10 @@ struct Constant {
         static let email = "email"
         static let avatar = "avatar"
     }
+    
+    struct NotificationId {
+        
+        static let newPost = Notification.Name(rawValue: "SurRound.NewPost")
+        static let newStory = Notification.Name(rawValue: "SurRound.NewStory")
+    }
 }

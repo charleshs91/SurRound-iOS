@@ -29,6 +29,12 @@ class PlaceManager: NSObject {
     
     var coordinate: Coordinate?
     
+    var place: SRPlace? {
+        guard let location = self.location else { return nil }
+        
+        return SRPlace(location.coordinate)
+    }
+    
     var location: CLLocation? {
         return manager.location
     }

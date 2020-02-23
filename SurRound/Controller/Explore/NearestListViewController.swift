@@ -38,7 +38,7 @@ extension NearestListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: PlaceItemListCell.identifier, for: indexPath)
+            withIdentifier: PlaceItemListCell.reuseIdentifier, for: indexPath)
         
         return cell
     }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16085" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9mf-Ls-rK4">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16078.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--New Story View Controller-->
+        <scene sceneID="TPR-L2-Er1">
+            <objects>
+                <viewController storyboardIdentifier="NewStoryViewController" id="kbE-Y1-WdQ" customClass="NewStoryViewController" customModule="SurRound" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="E2a-Ri-Qvg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="roL-ut-pcd">
+                                <rect key="frame" x="301" y="68" width="89" height="33"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <state key="normal" title="Send Story"/>
+                                <connections>
+                                    <action selector="sendStory:" destination="kbE-Y1-WdQ" eventType="touchUpInside" id="b4U-li-4in"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="bon-1C-XHs" firstAttribute="trailing" secondItem="roL-ut-pcd" secondAttribute="trailing" constant="24" id="oeC-nk-xu5"/>
+                            <constraint firstItem="roL-ut-pcd" firstAttribute="top" secondItem="bon-1C-XHs" secondAttribute="top" constant="24" id="ubE-A2-hV4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bon-1C-XHs"/>
+                    </view>
+                    <connections>
+                        <outlet property="sendButton" destination="roL-ut-pcd" id="7KE-eQ-mJA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZMw-9L-k0M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="37.681159420289859" y="376.33928571428572"/>
+        </scene>
+        <!--Story View Controller-->
+        <scene sceneID="aAG-2H-6uj">
+            <objects>
+                <viewController id="9mf-Ls-rK4" customClass="StoryViewController" customModule="SurRound" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fZH-W2-2Dc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="aWG-Jb-eis"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dlg-NH-Ax6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="38" y="-302"/>
+        </scene>
+    </scenes>
+</document>

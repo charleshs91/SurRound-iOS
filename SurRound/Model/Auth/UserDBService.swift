@@ -30,13 +30,15 @@ class UserDBService {
         }
     }
     
-    static func createUser(user: SRUser, completion: @escaping (Result<SRUser, Error>) -> Void) {
+    static func createUser(user: SRUser, completion: @escaping SRUserResult) {
         
         let db = Firestore.firestore()
         db.collection("users").document(user.uid).setData([
             "uid": user.uid,
             "email": user.email,
-            "username": user.username
+            "username": user.username,
+            "follower": [],
+            "following": []
         ]) { (error) in
             
             guard error == nil else {
@@ -56,6 +58,16 @@ class UserDBService {
                 "post_ref": postRef,
                 "post_id": postRef.documentID
             ], merge: true, completion: nil)
+    }
+    
+    static func attachStory(user: SRUser, storyRef: DocumentReference) {
+        
+        Firestore.firestore()
+        .collection("users").document(user.uid)
+        .collection("user_stories").document(storyRef.documentID).setData([
+            "story_ref": storyRef,
+            "story_id": storyRef.documentID
+        ], merge: true, completion: nil)
     }
 }
 

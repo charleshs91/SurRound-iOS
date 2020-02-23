@@ -9,10 +9,6 @@
 import UIKit
 
 class TrendingListGridCell: UICollectionViewCell {
-
-    static var identifier: String {
-        return String(describing: TrendingListGridCell.self)
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

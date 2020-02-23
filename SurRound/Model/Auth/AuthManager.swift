@@ -17,6 +17,8 @@ class AuthManager {
     
     private init() { }
     
+    var userProfile: SRUserProfile?
+    
     var currentUser: SRUser? {
         get {
             guard
@@ -35,10 +37,30 @@ class AuthManager {
             UserDefaults.standard.setValue(user.username, forKey: Constant.Auth.username)
             UserDefaults.standard.setValue(user.email, forKey: Constant.Auth.email)
             UserDefaults.standard.setValue(user.avatar, forKey: Constant.Auth.avatar)
+            
+            updateProfile()
         }
     }
     
-    func signIn(email: String, password: String, completion: @escaping SRUserResult) {
+    func updateProfile() {
+        
+        guard let user = currentUser else {
+            return
+        }
+        
+        let manager = ProfileManager()
+        manager.fetchProfile(user: user.uid, completion: { profile in
+            
+            guard let profile = profile else {
+                return
+            }
+            
+            self.userProfile = profile
+        })
+    }
+    
+    func signIn(email: String, password: String,
+                completion: @escaping SRUserResult) {
         
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] (authResult, error) in
             
@@ -54,7 +76,8 @@ class AuthManager {
         }
     }
     
-    func signUp(email: String, password: String, username: String, completion: @escaping SRUserResult) {
+    func signUp(email: String, password: String, username: String,
+                completion: @escaping SRUserResult) {
         
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             
@@ -68,7 +91,9 @@ class AuthManager {
                                  username: username,
                                  avatar: nil)
             
-            UserDBService.createUser(user: newUser, completion: completion)
+            UserDBService.createUser(user: newUser, completion: { _ in
+                self.signIn(email: email, password: password, completion: completion)
+            })
         }
     }
     
