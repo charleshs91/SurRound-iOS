@@ -13,7 +13,7 @@ private struct StoryboardCategory {
     static let main = "Main"
     static let home = "Home"
     static let explore = "Explore"
-    static let message = "Message"
+    static let notification = "Notification"
     static let profile = "Profile"
     static let newPost = "NewPost"
     static let auth = "Auth"
@@ -29,7 +29,7 @@ extension UIStoryboard {
     
     static var explore: UIStoryboard { return getStoryboard(name: StoryboardCategory.explore) }
     
-    static var message: UIStoryboard { return getStoryboard(name: StoryboardCategory.message) }
+    static var notification: UIStoryboard { return getStoryboard(name: StoryboardCategory.notification) }
     
     static var profile: UIStoryboard { return getStoryboard(name: StoryboardCategory.profile) }
     

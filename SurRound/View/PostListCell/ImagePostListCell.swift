@@ -37,6 +37,11 @@ class ImagePostListCell: PostListCell {
         setupViews()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        viewModel.onRequestUserProfile = nil
+    }
+    
     override func layoutCell(with viewModel: PostListCellViewModel) {
         
         guard let viewModel = viewModel as? ImagePostListCellViewModel else { return }
@@ -88,6 +93,10 @@ class ImagePostListCell: PostListCell {
         postImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         postImageView.layer.cornerRadius = 8
         
+        let tapOnUser = UITapGestureRecognizer(target: self, action: #selector(onTappingUser(_:)))
+        avatarImageView.addGestureRecognizer(tapOnUser)
+        usernameLabel.addGestureRecognizer(tapOnUser)
+        
         styleSubstrateView()
     }
     
@@ -106,5 +115,11 @@ class ImagePostListCell: PostListCell {
             return false
         }
         return user.uid == authorId
+    }
+    
+    @objc private func onTappingUser(_ sender: UITapGestureRecognizer) {
+        
+        let srUser = SRUser(uid: viewModel.authorId, email: "", username: viewModel.username, avatar: viewModel.userImageUrlString)
+        viewModel.onRequestUserProfile?(srUser)
     }
 }

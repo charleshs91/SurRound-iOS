@@ -77,7 +77,12 @@ extension FollowingListViewController: UITableViewDataSource {
         guard let postListCell = cell as? PostListCell else {
             return cell
         }
-        
+        viewModel.onRequestUserProfile = { [weak self] user in
+            if let profileVC = ProfileViewController.storyInstance() {
+                profileVC.userToDisplay = user
+                self?.show(profileVC, sender: nil)
+            }
+        }
         postListCell.layoutCell(with: viewModel)
         return postListCell
     }
@@ -93,9 +98,7 @@ extension FollowingListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let postDetailVC = UIStoryboard.post.instantiateInitialViewController() as? PostContentViewController else { return }
-        
         postDetailVC.post = posts[indexPath.row]
-        
         present(postDetailVC, animated: true, completion: nil)
     }
 }

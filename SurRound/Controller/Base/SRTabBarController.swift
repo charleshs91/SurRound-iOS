@@ -23,7 +23,7 @@ private enum Tab {
         switch self {
         case .home: controller = UIStoryboard.home.instantiateInitialViewController()!
         case .explore: controller = UIStoryboard.explore.instantiateInitialViewController()!
-        case .message: controller = UIStoryboard.message.instantiateInitialViewController()!
+        case .message: controller = UIStoryboard.notification.instantiateInitialViewController()!
         case .profile: controller = UIStoryboard.profile.instantiateInitialViewController()!
         case .create: controller = UIStoryboard.newPost.instantiateInitialViewController()!
         }

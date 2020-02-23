@@ -11,18 +11,16 @@ import UIKit
 class PostInfoTableViewCell: SRBaseTableViewCell {
     
     @IBOutlet weak var userImageView: UIImageView!
-    
     @IBOutlet weak var usernameLabel: UILabel!
-    
     @IBOutlet weak var datetimeLabel: UILabel!
-    
     @IBOutlet weak var placeLabel: UILabel!
-    
     @IBOutlet weak var followBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        let tapOnUser = UITapGestureRecognizer(target: self, action: #selector(tapOnUser(_:)))
+        userImageView.addGestureRecognizer(tapOnUser)
+        usernameLabel.addGestureRecognizer(tapOnUser)
         styleCell()
     }
     
@@ -40,13 +38,13 @@ class PostInfoTableViewCell: SRBaseTableViewCell {
         placeLabel.text = post.place.name
     }
     
-    @IBAction func didTapFollowBtn(_ sender: UIButton) {
-        
-    }
-    
     private func styleCell() {
         
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         layer.cornerRadius = 16
+    }
+    
+    @objc func tapOnUser(_ sender: UITapGestureRecognizer) {
+        print(123)
     }
 }

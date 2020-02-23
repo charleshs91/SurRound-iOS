@@ -8,11 +8,13 @@
 
 import UIKit
 
-protocol PostListCellViewModel {
+protocol PostListCellViewModel: AnyObject {
     
     var cellType: PostListCellType { get }
     
     var isFollowing: Bool { get }
+    
+    var onRequestUserProfile: ((SRUser) -> Void)? { get set }
 }
 
 class ImagePostListCellViewModel: PostListCellViewModel {
@@ -51,6 +53,9 @@ class ImagePostListCellViewModel: PostListCellViewModel {
         self.likeCount = post.likeCount
         self.replyCount = post.replyCount
     }
+    
+    var onRequestUserProfile: ((SRUser) -> Void)?
+    
 }
 
 class TextPostListCellViewModel: PostListCellViewModel {
@@ -87,6 +92,8 @@ class TextPostListCellViewModel: PostListCellViewModel {
         self.likeCount = post.likeCount
         self.replyCount = post.replyCount
     }
+    
+    var onRequestUserProfile: ((SRUser) -> Void)?
 }
 
 class VideoPostListCellViewModel: PostListCellViewModel {
@@ -100,4 +107,5 @@ class VideoPostListCellViewModel: PostListCellViewModel {
     init(_ post: Post) {
         
     }
+    var onRequestUserProfile: ((SRUser) -> Void)?
 }
