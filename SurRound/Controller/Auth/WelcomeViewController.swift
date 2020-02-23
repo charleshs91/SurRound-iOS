@@ -9,15 +9,8 @@
 import UIKit
 
 class WelcomeViewController: UIViewController {
-  
-  private struct Segue {
-    static let loginWithEmail = "SegueLoginWithEmail"
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
     
-    // Do any additional setup after loading the view.
-  }
-  
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }

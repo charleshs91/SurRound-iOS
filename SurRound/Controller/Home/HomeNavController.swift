@@ -1,5 +1,5 @@
 //
-//  SRHomeNavController.swift
+//  HomeNavController.swift
 //  SurRound
 //
 //  Created by Kai-Ta Hsieh on 2020/1/22.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SRHomeNavController: UINavigationController {
+class HomeNavController: UINavigationController {
   
   override func viewDidLoad() {
     super.viewDidLoad()

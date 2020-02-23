@@ -9,8 +9,9 @@
 import UIKit
 
 extension UITextField {
-  
-  var isEmpty: Bool {
-    return self.text == "" || self.text == nil
-  }
+    
+    var isEmpty: Bool {
+        
+        return self.text == "" || self.text == nil
+    }
 }

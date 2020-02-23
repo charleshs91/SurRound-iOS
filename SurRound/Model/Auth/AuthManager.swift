@@ -9,41 +9,63 @@
 import Foundation
 import FirebaseAuth
 
-typealias UserIDResult = (Result<String, Error>) -> Void
+typealias SRUserResult = (Result<SRUser, Error>) -> Void
 
 class AuthManager {
-  
-  static let shared = AuthManager()
-  
-  var currentUserID: String? {
-    get {
-      UserDefaults.standard.string(forKey: "SRUserID")
+    
+    static let shared = AuthManager()
+    
+    private init() { }
+    
+    var currentUser: SRUser? {
+        get {
+            guard let uid = UserDefaults.standard.object(forKey: "uid") as? String,
+                let username = UserDefaults.standard.object(forKey: "username") as? String,
+                let email = UserDefaults.standard.object(forKey: "email") as? String else { return nil }
+            
+            let avatar = UserDefaults.standard.object(forKey: "avatar") as? String
+            
+            return SRUser(uid: uid, email: email, username: username, avatar: avatar)
+        }
+        set {
+            guard let user = newValue else { return }
+            UserDefaults.standard.setValue(user.uid, forKey: "uid")
+            UserDefaults.standard.setValue(user.username, forKey: "username")
+            UserDefaults.standard.setValue(user.email, forKey: "email")
+            UserDefaults.standard.setValue(user.avatar, forKey: "avatar")
+        }
     }
-    set {
-      UserDefaults.standard.set(newValue, forKey: "SRUserID")
+    
+    func signIn(email: String, password: String, completion: @escaping SRUserResult) {
+        
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] (authResult, error) in
+            
+            guard let user = authResult?.user, error == nil else {
+                completion(.failure(error!))
+                return
+            }
+            
+            UserDBService.queryUser(uid: user.uid) { srUser in
+                self?.currentUser = srUser
+            }
+        }
     }
-  }
-  
-  private init() { }
-  
-  func signIn(email: String, password: String, completion: @escaping UserIDResult) {
-    Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
-      guard let user = authResult?.user, error == nil else {
-        completion(.failure(error!))
-        return
-      }
-      self.currentUserID = user.uid
-      completion(.success(user.uid))
+    
+    func signUp(email: String, password: String, username: String, completion: @escaping SRUserResult) {
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+            
+            guard let user = authResult?.user, error == nil else {
+                completion(.failure(error!))
+                return
+            }
+            
+            let newUser = SRUser(uid: user.uid,
+                                 email: user.email!,
+                                 username: username,
+                                 avatar: nil)
+            
+            UserDBService.createUser(user: newUser, completion: completion)
+        }
     }
-  }
-  
-  func signUp(email: String, password: String, completion: @escaping UserIDResult) {
-    Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
-      guard let user = authResult?.user, error == nil else {
-        completion(.failure(error!))
-        return
-      }
-      completion(.success(user.uid))
-    }
-  }
 }

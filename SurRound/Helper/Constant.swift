@@ -9,7 +9,7 @@
 import UIKit
 
 struct Constant {
-  
-  static let maxWidth = UIScreen.main.bounds.width
-  static let maxHeight = UIScreen.main.bounds.height
+    
+    static let maxWidth = UIScreen.main.bounds.width
+    static let maxHeight = UIScreen.main.bounds.height
 }

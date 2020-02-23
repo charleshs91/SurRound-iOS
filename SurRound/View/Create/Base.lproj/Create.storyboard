@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wCm-bQ-T5q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Oq9-h5-PCl">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -14,12 +14,60 @@
                     <view key="view" contentMode="scaleToFill" id="vYv-f5-MhV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KyO-VT-ypW">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="wCm-bQ-T5q" id="ggk-bL-z3Z"/>
+                                    <outlet property="delegate" destination="wCm-bQ-T5q" id="vbO-Z0-ecb"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="KyO-VT-ypW" firstAttribute="top" secondItem="JJg-oO-L5O" secondAttribute="top" id="Aq4-gJ-MFD"/>
+                            <constraint firstItem="KyO-VT-ypW" firstAttribute="trailing" secondItem="JJg-oO-L5O" secondAttribute="trailing" id="QTv-VV-9qs"/>
+                            <constraint firstItem="KyO-VT-ypW" firstAttribute="leading" secondItem="JJg-oO-L5O" secondAttribute="leading" id="V1k-1f-bqh"/>
+                            <constraint firstItem="JJg-oO-L5O" firstAttribute="bottom" secondItem="KyO-VT-ypW" secondAttribute="bottom" id="gj4-96-Hwo"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="JJg-oO-L5O"/>
                     </view>
-                    <navigationItem key="navigationItem" id="PW6-YQ-wRK"/>
+                    <navigationItem key="navigationItem" id="PW6-YQ-wRK">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="8fk-iE-1bI">
+                            <connections>
+                                <action selector="cancel:" destination="wCm-bQ-T5q" id="1Sc-dV-cjQ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="rBw-Kk-CRf">
+                            <connections>
+                                <action selector="post:" destination="wCm-bQ-T5q" id="zmn-0m-GXd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="newPostTableView" destination="KyO-VT-ypW" id="d3R-Pw-mVf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="poA-ix-wpV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1952.1739130434785" y="123.88392857142857"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Af2-eS-2J3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Oq9-h5-PCl" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RCU-YW-wIi">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wCm-bQ-T5q" kind="relationship" relationship="rootViewController" id="WT7-vs-qsM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CPq-KH-KVX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="123.88392857142857"/>
         </scene>

@@ -9,8 +9,9 @@
 import UIKit
 
 extension UILabel {
-  
-  func clear() {
-    self.text = ""
-  }
+    
+    func clear() {
+        
+        self.text = ""
+    }
 }

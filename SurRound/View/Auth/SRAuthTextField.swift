@@ -27,8 +27,15 @@ class SRAuthTextField: UITextField {
     return bounds.inset(by: padding)
   }
   
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    
+    clearButtonMode = .unlessEditing
+  }
+  
   override func layoutSubviews() {
     super.layoutSubviews()
+    
     borderStyle = .none
     layer.borderColor = UIColor.lightGray.cgColor
     layer.borderWidth = 1

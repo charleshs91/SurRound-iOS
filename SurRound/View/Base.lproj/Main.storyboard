@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,81 +20,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7UX-Cn-sL9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="177" y="127"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="6FM-YG-7a9">
-            <objects>
-                <viewController id="5Vw-8c-zsK" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mRx-OI-vf2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="IYN-ol-aDp">
-                                <rect key="frame" x="40" y="453" width="334" height="192"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xdv-oA-4hB" customClass="SRAuthButton" customModule="SurRound" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="48"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="DKO-ae-a8X"/>
-                                        </constraints>
-                                        <state key="normal" title="Email">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwb-XF-U15" customClass="SRAuthButton" customModule="SurRound" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="334" height="48"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="U51-2P-CR6"/>
-                                        </constraints>
-                                        <state key="normal" title="Apple ID">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bhz-TG-Vz4" customClass="SRAuthButton" customModule="SurRound" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="144" width="334" height="48"/>
-                                        <color key="backgroundColor" red="0.22352941179999999" green="0.2156862745" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="o0K-ha-BNe"/>
-                                        </constraints>
-                                        <state key="normal" title="Guest">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SurRound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfD-N5-8xp">
-                                <rect key="frame" x="40" y="215.5" width="334" height="42"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="36"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Surf Around Things Surrounding You" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNW-dO-JiY">
-                                <rect key="frame" x="40" y="273.5" width="334" height="22.5"/>
-                                <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="18"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="tt5-uE-IJo" firstAttribute="trailing" secondItem="SNW-dO-JiY" secondAttribute="trailing" constant="40" id="1qF-NB-6tZ"/>
-                            <constraint firstItem="cfD-N5-8xp" firstAttribute="leading" secondItem="tt5-uE-IJo" secondAttribute="leading" constant="40" id="7aH-jb-4sD"/>
-                            <constraint firstItem="SNW-dO-JiY" firstAttribute="leading" secondItem="tt5-uE-IJo" secondAttribute="leading" constant="40" id="DN1-XA-cAm"/>
-                            <constraint firstItem="SNW-dO-JiY" firstAttribute="top" secondItem="cfD-N5-8xp" secondAttribute="bottom" constant="16" id="DsL-NT-FDy"/>
-                            <constraint firstItem="IYN-ol-aDp" firstAttribute="top" secondItem="tt5-uE-IJo" secondAttribute="centerY" id="Ldh-Dp-9VW"/>
-                            <constraint firstItem="tt5-uE-IJo" firstAttribute="trailing" secondItem="cfD-N5-8xp" secondAttribute="trailing" constant="40" id="NID-l7-Kat"/>
-                            <constraint firstItem="IYN-ol-aDp" firstAttribute="leading" secondItem="tt5-uE-IJo" secondAttribute="leading" constant="40" id="NlD-Jc-D32"/>
-                            <constraint firstItem="cfD-N5-8xp" firstAttribute="top" secondItem="tt5-uE-IJo" secondAttribute="bottom" multiplier="0.25" id="g2b-FZ-xWk"/>
-                            <constraint firstItem="tt5-uE-IJo" firstAttribute="trailing" secondItem="IYN-ol-aDp" secondAttribute="trailing" constant="40" id="wBb-Bb-EVv"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="tt5-uE-IJo"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gjQ-xd-KqB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-616" y="127"/>
         </scene>
     </scenes>
 </document>
