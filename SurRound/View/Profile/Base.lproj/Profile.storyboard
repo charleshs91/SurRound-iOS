@@ -287,7 +287,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icons_Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="97Q-SD-axk">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icons_Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="97Q-SD-axk">
                                             <rect key="frame" x="16" y="0.0" width="48" height="48"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="48" id="4N6-wb-w57"/>
@@ -295,43 +295,18 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWV-Im-97h" customClass="SRMediumTextLabel" customModule="SurRound" customModuleProvider="target">
-                                            <rect key="frame" x="80" y="16" width="179" height="20"/>
+                                            <rect key="frame" x="80" y="16" width="41.666666666666657" height="20"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6L2-wp-lIf" customClass="ShadedButton" customModule="SurRound" customModuleProvider="target">
-                                            <rect key="frame" x="267" y="11" width="44" height="30"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" title="Follow">
-                                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5v-dV-jhi">
-                                            <rect key="frame" x="335" y="14" width="24" height="24"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="24" id="a3M-8s-Ik3"/>
-                                                <constraint firstAttribute="width" secondItem="B5v-dV-jhi" secondAttribute="height" id="sLS-ge-fGV"/>
-                                            </constraints>
-                                            <state key="normal">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="didTapMoreButton:" destination="ehb-hA-Aa7" eventType="touchUpInside" id="ndP-qI-ne5"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="B5v-dV-jhi" secondAttribute="trailing" constant="16" id="6IZ-In-5IR"/>
-                                        <constraint firstItem="B5v-dV-jhi" firstAttribute="leading" secondItem="6L2-wp-lIf" secondAttribute="trailing" constant="24" id="I9k-dc-8PM"/>
-                                        <constraint firstItem="6L2-wp-lIf" firstAttribute="centerY" secondItem="dWV-Im-97h" secondAttribute="centerY" id="J3C-q7-Nnz"/>
                                         <constraint firstItem="97Q-SD-axk" firstAttribute="leading" secondItem="Vmb-b1-BWc" secondAttribute="leading" constant="16" id="OJz-fi-u8z"/>
                                         <constraint firstItem="dWV-Im-97h" firstAttribute="leading" secondItem="97Q-SD-axk" secondAttribute="trailing" constant="16" id="S74-n3-vSW"/>
                                         <constraint firstItem="97Q-SD-axk" firstAttribute="top" secondItem="Vmb-b1-BWc" secondAttribute="top" id="ScS-eO-4nP"/>
-                                        <constraint firstItem="6L2-wp-lIf" firstAttribute="leading" secondItem="dWV-Im-97h" secondAttribute="trailing" constant="8" id="Wub-cO-x7b"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="97Q-SD-axk" secondAttribute="bottom" constant="16" id="qlc-cO-zR7"/>
                                         <constraint firstItem="dWV-Im-97h" firstAttribute="top" secondItem="97Q-SD-axk" secondAttribute="top" constant="16" id="rj5-jz-s7N"/>
-                                        <constraint firstItem="B5v-dV-jhi" firstAttribute="centerY" secondItem="6L2-wp-lIf" secondAttribute="centerY" id="wZX-TD-LiD"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

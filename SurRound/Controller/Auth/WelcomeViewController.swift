@@ -11,6 +11,10 @@ import AuthenticationServices
 
 class WelcomeViewController: UIViewController {
     
+    @IBOutlet weak var emailSignInBtn: SRAuthButton!
+    
+    @IBOutlet weak var guestSignInBtn: SRAuthButton!
+    
     private let appleSignInButton: ASAuthorizationAppleIDButton = {
         let btn = ASAuthorizationAppleIDButton(authorizationButtonType: .default,
                                                authorizationButtonStyle: .black)
@@ -24,8 +28,13 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
         
         view.addSubview(appleSignInButton)
-        appleSignInButton.anchor(top: nil, leading: nil, bottom: view.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0), widthConstant: 300, heightConstant: 50)
-        appleSignInButton.anchorCenterXToSuperview()
+        appleSignInButton.anchor(top: emailSignInBtn.bottomAnchor,
+                                 leading: emailSignInBtn.leadingAnchor,
+                                 bottom: nil,
+                                 trailing: emailSignInBtn.trailingAnchor,
+                                 padding: UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0),
+                                 widthConstant: 0,
+                                 heightConstant: 48)
     }
     
     @objc func signInWithApple(_ sender: ASAuthorizationAppleIDButton) {

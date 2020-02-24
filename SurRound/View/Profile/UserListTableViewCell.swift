@@ -30,12 +30,16 @@ class UserListTableViewCell: UITableViewCell {
         handler = nil
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        avatarImageView.roundToHalfHeight()
+    }
+    
     func setupCell(user: SRUser, buttonHandler: ButtonHandler? = nil) {
         
         avatarImageView.loadImage(user.avatar, placeholder: UIImage.asset(.Icons_Avatar))
-        
         usernameLabel.text = user.username
-        
         handler = buttonHandler
     }
     

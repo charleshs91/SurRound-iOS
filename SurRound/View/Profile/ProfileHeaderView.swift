@@ -12,6 +12,7 @@ class ProfileHeaderView: UIView {
     
     lazy var activityIndicator: UIActivityIndicatorView = {
         let indicatorView = UIActivityIndicatorView(style: .medium)
+        indicatorView.color = .white
         indicatorView.translatesAutoresizingMaskIntoConstraints = false
         indicatorView.hidesWhenStopped = true
         indicatorView.stopAnimating()

@@ -33,7 +33,6 @@
 		D32F7F3623EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F7F3523EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift */; };
 		D32F7F3E23EAB30300FBC0D3 /* SRRoundedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F7F3D23EAB30300FBC0D3 /* SRRoundedLabel.swift */; };
 		D331D2FDEAEFBF00E03645ED /* Pods_SurRoundUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E3D9FDE9141C0D31127148A /* Pods_SurRoundUITests.framework */; };
-		D3341A732403B94D006A2B2B /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3341A722403B94D006A2B2B /* UIViewController+Extension.swift */; };
 		D335D5DF23DEA9500021B461 /* SRAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D335D5DE23DEA9500021B461 /* SRAuthButton.swift */; };
 		D335D5E123DEB4FF0021B461 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D335D5E023DEB4FF0021B461 /* WelcomeViewController.swift */; };
 		D338FF3F23E8119700CAB8CB /* StoryPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D338FF3E23E8119700CAB8CB /* StoryPreviewCell.swift */; };
@@ -120,7 +119,6 @@
 		D39A755623D5E85C00A20879 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A755523D5E85C00A20879 /* UIImage+Extension.swift */; };
 		D39A755823D5FFD000A20879 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A755723D5FFD000A20879 /* UIColor+Extension.swift */; };
 		D3A07CF323F547FF00CE3F26 /* SRMediumTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A07CF223F547FF00CE3F26 /* SRMediumTextLabel.swift */; };
-		D3A07CF723F5492800CE3F26 /* ShadedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A07CF623F5492800CE3F26 /* ShadedButton.swift */; };
 		D3A07CF923F54B1F00CE3F26 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A07CF823F54B1F00CE3F26 /* UserTableViewController.swift */; };
 		D3A07CFC23F54C7200CE3F26 /* UserListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A07CFA23F54C7200CE3F26 /* UserListTableViewCell.swift */; };
 		D3A3B5F123E29C35003201E1 /* NewPostCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */; };
@@ -189,7 +187,6 @@
 		D32F7F3523EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRVerticalAlignedButton.swift; sourceTree = "<group>"; };
 		D32F7F3A23EAB0C700FBC0D3 /* SurRound.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SurRound.entitlements; sourceTree = "<group>"; };
 		D32F7F3D23EAB30300FBC0D3 /* SRRoundedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRRoundedLabel.swift; sourceTree = "<group>"; };
-		D3341A722403B94D006A2B2B /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		D335D5DE23DEA9500021B461 /* SRAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRAuthButton.swift; sourceTree = "<group>"; };
 		D335D5E023DEB4FF0021B461 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		D338FF3E23E8119700CAB8CB /* StoryPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPreviewCell.swift; sourceTree = "<group>"; };
@@ -282,7 +279,6 @@
 		D39A755523D5E85C00A20879 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		D39A755723D5FFD000A20879 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		D3A07CF223F547FF00CE3F26 /* SRMediumTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRMediumTextLabel.swift; sourceTree = "<group>"; };
-		D3A07CF623F5492800CE3F26 /* ShadedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadedButton.swift; sourceTree = "<group>"; };
 		D3A07CF823F54B1F00CE3F26 /* UserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
 		D3A07CFA23F54C7200CE3F26 /* UserListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListTableViewCell.swift; sourceTree = "<group>"; };
 		D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostCellType.swift; sourceTree = "<group>"; };
@@ -556,7 +552,6 @@
 			isa = PBXGroup;
 			children = (
 				D39A754D23D5E44100A20879 /* Profile.storyboard */,
-				D3A07CF623F5492800CE3F26 /* ShadedButton.swift */,
 				D36B694423F28A8800AAED0D /* ProfileHeaderView.swift */,
 				D3A07CFA23F54C7200CE3F26 /* UserListTableViewCell.swift */,
 			);
@@ -684,7 +679,6 @@
 				D39997EC23DB487B00595B2F /* TextRelatable.swift */,
 				D361066D23EF205B007AFDC2 /* CellRegistrator.swift */,
 				D3431E8D23FBDF0700680A79 /* String+Extension.swift */,
-				D3341A722403B94D006A2B2B /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1127,7 +1121,6 @@
 				D36B695923F2A9D000AAED0D /* FirestoreDB.swift in Sources */,
 				D361071823F0FEB2007AFDC2 /* StoryCounterCell.swift in Sources */,
 				D3A07CF923F54B1F00CE3F26 /* UserTableViewController.swift in Sources */,
-				D3341A732403B94D006A2B2B /* UIViewController+Extension.swift in Sources */,
 				D3431E8E23FBDF0700680A79 /* String+Extension.swift in Sources */,
 				D365E4DE23E4546300480F11 /* NearestListViewController.swift in Sources */,
 				D3086B6E23DB57E80071F378 /* AuthManager.swift in Sources */,
@@ -1179,7 +1172,6 @@
 				D39A755623D5E85C00A20879 /* UIImage+Extension.swift in Sources */,
 				D39997F323DB4FD000595B2F /* AuthInputCategory.swift in Sources */,
 				D3A3B5F423E2A7E1003201E1 /* PlaceManager.swift in Sources */,
-				D3A07CF723F5492800CE3F26 /* ShadedButton.swift in Sources */,
 				D36B695123F29F2300AAED0D /* GenericFetcher.swift in Sources */,
 				D3086B8C23DC8E7B0071F378 /* Constant.swift in Sources */,
 				D3086B8F23DC9D3A0071F378 /* PostInfoTableViewCell.swift in Sources */,
