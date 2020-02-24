@@ -281,13 +281,13 @@ extension HomeViewController: GMSMapViewDelegate {
         }
         guard
             let first = matches.first,
-            let postVC = UIStoryboard.post.instantiateInitialViewController()
-                as? PostContentViewController else {
+            let nav = UIStoryboard.post.instantiateInitialViewController() as? UINavigationController,
+            let postVC = nav.topViewController as? PostContentViewController else {
                     return false
         }
         postVC.post = first.post
-        postVC.modalPresentationStyle = .overCurrentContext
-        present(postVC, animated: true, completion: nil)
+        nav.modalPresentationStyle = .overCurrentContext
+        present(nav, animated: true, completion: nil)
         return true
     }
 }

@@ -56,8 +56,13 @@ class PostContentViewController: UIViewController {
         super.viewDidLoad()
         
         postContentView.layoutView(from: post)
-        
+        navigationController?.navigationBar.isHidden = true
         updateReviews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setToolbarHidden(true, animated: false)
     }
     
     // MARK: - User Actions
