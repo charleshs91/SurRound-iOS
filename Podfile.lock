@@ -158,7 +158,6 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
-  - Alamofire (5.0.0-rc.3)
   - AnimatedCollectionViewLayout (1.0.1)
   - BoringSSL-GRPC (0.0.3):
     - BoringSSL-GRPC/Implementation (= 0.0.3)
@@ -330,7 +329,6 @@ PODS:
   - SwiftLint (0.38.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 5.0.0-rc.3)
   - AnimatedCollectionViewLayout
   - collection-view-layouts
   - ESPullToRefresh
@@ -351,7 +349,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
-    - Alamofire
     - AnimatedCollectionViewLayout
     - BoringSSL-GRPC
     - collection-view-layouts
@@ -389,7 +386,6 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
-  Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
   AnimatedCollectionViewLayout: 00f0997fd26f0fd02d8b99765023b95570b5d826
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   collection-view-layouts: 474ec4cce601a26247737227a97fa6a4eb30213f
@@ -425,6 +421,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SwiftLint: 8f5d2f903e1c9bcbc832fd16771e80a263ac6cbb
 
-PODFILE CHECKSUM: 7ab351fc1518e3b7f3bc113ed3ba34981b1475f0
+PODFILE CHECKSUM: 97b99dd23bc0372211c9fd2fc2a16b619632c3c2
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.0.beta.3

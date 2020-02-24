@@ -15,7 +15,6 @@ target 'SurRound' do
   pod 'KMPlaceholderTextView', '~> 1.4.0'
   pod 'collection-view-layouts'
   pod 'AnimatedCollectionViewLayout'
-  pod 'Alamofire', '~> 5.0.0-rc.3'
   pod 'MaterialDesignWidgets'
   
   # Firebase

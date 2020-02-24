@@ -470,12 +470,12 @@
 			children = (
 				D3AD564E2403F11C0051A58D /* FirebaseUtilites */,
 				D3AD564F2403F1520051A58D /* Managers */,
-				D39997F123DB4FB600595B2F /* PresenterModels */,
+				D39997F123DB4FB600595B2F /* PresentationModels */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		D39997F123DB4FB600595B2F /* PresenterModels */ = {
+		D39997F123DB4FB600595B2F /* PresentationModels */ = {
 			isa = PBXGroup;
 			children = (
 				D36D8F9723EC639800E6348D /* PostListCellType.swift */,
@@ -484,7 +484,7 @@
 				D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */,
 				D39997F223DB4FD000595B2F /* AuthInputCategory.swift */,
 			);
-			path = PresenterModels;
+			path = PresentationModels;
 			sourceTree = "<group>";
 		};
 		D39A755023D5E50400A20879 /* Extension */ = {
