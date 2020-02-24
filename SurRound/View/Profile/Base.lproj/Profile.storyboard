@@ -36,12 +36,35 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w0W-lq-Z9T" userLabel="Color View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="132"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_ProfileBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Kgj-3X-b36">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="132"/>
+                                            </imageView>
+                                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5gL-YM-1pU">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="132"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="iI6-cP-ewE">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="132"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </view>
+                                                <blurEffect style="systemUltraThinMaterialDark"/>
+                                            </visualEffectView>
+                                        </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="Kgj-3X-b36" secondAttribute="bottom" id="K87-7q-LSU"/>
+                                            <constraint firstAttribute="trailing" secondItem="Kgj-3X-b36" secondAttribute="trailing" id="O0q-IK-hJo"/>
+                                            <constraint firstItem="5gL-YM-1pU" firstAttribute="bottom" secondItem="Kgj-3X-b36" secondAttribute="bottom" id="Tdu-cW-VDn"/>
+                                            <constraint firstItem="Kgj-3X-b36" firstAttribute="leading" secondItem="w0W-lq-Z9T" secondAttribute="leading" id="V9n-PI-egJ"/>
+                                            <constraint firstItem="5gL-YM-1pU" firstAttribute="leading" secondItem="Kgj-3X-b36" secondAttribute="leading" id="VVt-C5-tj3"/>
+                                            <constraint firstItem="Kgj-3X-b36" firstAttribute="top" secondItem="w0W-lq-Z9T" secondAttribute="top" id="bMf-f8-JCg"/>
+                                            <constraint firstItem="5gL-YM-1pU" firstAttribute="top" secondItem="Kgj-3X-b36" secondAttribute="top" id="cCZ-sc-ZTr"/>
+                                            <constraint firstItem="5gL-YM-1pU" firstAttribute="trailing" secondItem="Kgj-3X-b36" secondAttribute="trailing" id="cYO-v9-KG1"/>
+                                        </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAW-eN-JLZ">
                                         <rect key="frame" x="149.33333333333334" y="96.666666666666671" width="76.333333333333343" height="19.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="COB-Iu-hIM" userLabel="Stack-Username+Buttons">
@@ -53,7 +76,7 @@
                                                     <constraint firstAttribute="width" secondItem="NBO-fl-fRU" secondAttribute="height" id="aNY-JU-U16"/>
                                                     <constraint firstAttribute="width" constant="24" id="fRd-So-Jme"/>
                                                 </constraints>
-                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="Icons_FollowUser"/>
                                                 <connections>
                                                     <action selector="followUser:" destination="y53-h9-qyE" eventType="touchUpInside" id="0x2-1n-ZKL"/>
@@ -61,7 +84,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRt-gd-ZUn">
                                                 <rect key="frame" x="40" y="1" width="18.333333333333329" height="22"/>
-                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="ellipsis" catalog="system"/>
                                                 <connections>
                                                     <action selector="moreActionButton:" destination="y53-h9-qyE" eventType="touchUpInside" id="LlL-Im-TGq"/>
@@ -350,6 +373,7 @@
     <resources>
         <image name="Icons_Avatar" width="32" height="32"/>
         <image name="Icons_FollowUser" width="32" height="32"/>
+        <image name="Image_ProfileBackground" width="2816" height="3699"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
     </resources>
 </document>

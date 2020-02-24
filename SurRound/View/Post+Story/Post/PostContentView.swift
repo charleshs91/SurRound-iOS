@@ -54,7 +54,7 @@ class PostContentView: UIView {
     
     private func styleCloseButton() {
         
-        closeButton.layer.cornerRadius = closeButton.frame.height / 2
+        closeButton.layer.cornerRadius = 18
         closeButton.setDefaultShadow()
     }
 }

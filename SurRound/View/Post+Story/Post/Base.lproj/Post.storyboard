@@ -30,7 +30,7 @@
                                             <outlet property="delegate" destination="OBa-9q-1b7" id="9pi-Sf-krH"/>
                                         </connections>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnQ-UB-1DA">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnQ-UB-1DA">
                                         <rect key="frame" x="354" y="68" width="36" height="36"/>
                                         <color key="backgroundColor" red="0.62351284898477155" green="0.62351284898477155" blue="0.62351284898477155" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>

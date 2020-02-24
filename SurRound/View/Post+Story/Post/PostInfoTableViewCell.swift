@@ -14,15 +14,15 @@ class PostInfoTableViewCell: SRBaseTableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var datetimeLabel: UILabel!
     @IBOutlet weak var placeLabel: UILabel!
-    @IBOutlet weak var followBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let tapOnUser = UITapGestureRecognizer(target: self, action: #selector(tapOnUser(_:)))
-        userImageView.addGestureRecognizer(tapOnUser)
-        usernameLabel.addGestureRecognizer(tapOnUser)
+        
         styleCell()
     }
+    
+    private var onTappingUserInfo: ((SRUser) -> Void)?
+    private var post: Post!
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -30,12 +30,14 @@ class PostInfoTableViewCell: SRBaseTableViewCell {
         userImageView.roundToHalfHeight()
     }
     
-    func setupCell(with post: Post) {
+    func setupCell(with post: Post, userProfileHandler: ((SRUser) -> Void)? = nil) {
         
         userImageView.loadImage(post.author.avatar, placeholder: UIImage.asset(.Icons_Avatar))
         usernameLabel.text = post.author.username
         datetimeLabel.text = post.datetimeString
         placeLabel.text = post.place.name
+        onTappingUserInfo = userProfileHandler
+        self.post = post
     }
     
     private func styleCell() {
@@ -44,7 +46,9 @@ class PostInfoTableViewCell: SRBaseTableViewCell {
         layer.cornerRadius = 16
     }
     
-    @objc func tapOnUser(_ sender: UITapGestureRecognizer) {
-        print(123)
+    @IBAction func didTapOnUserInfo(_ sender: UIButton) {
+        
+        let user = SRUser(uid: post.authorId, email: "", username: post.author.username, avatar: post.author.avatar)
+        onTappingUserInfo?(user)
     }
 }

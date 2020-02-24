@@ -99,6 +99,7 @@ extension FollowingListViewController: UITableViewDelegate {
         
         guard let postDetailVC = UIStoryboard.post.instantiateInitialViewController() as? PostContentViewController else { return }
         postDetailVC.post = posts[indexPath.row]
+        postDetailVC.modalPresentationStyle = .overCurrentContext
         present(postDetailVC, animated: true, completion: nil)
     }
 }

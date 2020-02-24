@@ -147,7 +147,6 @@ extension PostContentViewController: UITableViewDataSource {
         
         switch sectionType {
         case .content:
-            
             let cellType = cellItems[indexPath.row]
             let cell = cellType.makeCell(tableView, at: indexPath)
             
@@ -156,10 +155,13 @@ extension PostContentViewController: UITableViewDataSource {
                 guard let infoCell = cell as? PostInfoTableViewCell else {
                     break
                 }
-                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnUser(_:)))
-                infoCell.userImageView.addGestureRecognizer(tapGesture)
-                infoCell.usernameLabel.addGestureRecognizer(tapGesture)
-                infoCell.setupCell(with: post!)
+                infoCell.setupCell(with: post!, userProfileHandler: { user in
+                    guard let nav = UIStoryboard.profile.instantiateInitialViewController() as? UINavigationController,
+                        let profileVC = nav.topViewController as? ProfileViewController else { return }
+                    profileVC.userToDisplay = user
+                    profileVC.modalPresentationStyle = .overCurrentContext
+                    self.present(nav, animated: true, completion: nil)
+                })
                 
             case .body:
                 guard let bodyCell = cell as? PostBodyCell else {
@@ -167,17 +169,13 @@ extension PostContentViewController: UITableViewDataSource {
                 }
                 bodyCell.configure(with: postBodyViewModel)
             }
-            
             return cell
             
         case .review:
-            
             guard let cell = tableView.dequeueReusableCell(withIdentifier: PostReplyCell.reuseIdentifier, for: indexPath) as? PostReplyCell else {
                 return UITableViewCell()
             }
-            
             cell.updateCell(reviews[indexPath.row])
-            
             return cell
         }
     }

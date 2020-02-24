@@ -165,7 +165,7 @@ class HomeViewController: UIViewController {
         let label = UILabel()
         label.textColor = UIColor.themeColor
         label.text = "SurRound"
-        label.font = UIFont(name: "Marker Felt", size: 32)
+        label.font = UIFont(name: "HelveticaNeue-CondensedBlack", size: 32)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: label)
     }
     
@@ -286,8 +286,8 @@ extension HomeViewController: GMSMapViewDelegate {
                     return false
         }
         postVC.post = first.post
+        postVC.modalPresentationStyle = .overCurrentContext
         present(postVC, animated: true, completion: nil)
-        
         return true
     }
 }

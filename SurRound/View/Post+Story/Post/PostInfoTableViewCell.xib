@@ -48,14 +48,6 @@
                             <constraint firstAttribute="width" secondItem="H52-ym-eo5" secondAttribute="height" multiplier="1:1" id="G9c-nQ-5Px"/>
                         </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ov-TV-rgi">
-                        <rect key="frame" x="320" y="76.5" width="38" height="27"/>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
-                        <state key="normal" title="Follow"/>
-                        <connections>
-                            <action selector="didTapFollowBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OMU-cC-wcl"/>
-                        </connections>
-                    </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pQI-Bg-O3C" userLabel="Separator">
                         <rect key="frame" x="8" y="70" width="358" height="1"/>
                         <color key="backgroundColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -63,30 +55,37 @@
                             <constraint firstAttribute="height" constant="1" id="5Hj-HC-ZGZ"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zHa-ql-IfI">
+                        <rect key="frame" x="16" y="16" width="342" height="42"/>
+                        <connections>
+                            <action selector="didTapOnUserInfo:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="RUK-Yu-Kk2"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="pQI-Bg-O3C" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="0l0-Jw-aot"/>
-                    <constraint firstAttribute="trailing" secondItem="9ov-TV-rgi" secondAttribute="trailing" constant="16" id="6dj-ai-wRd"/>
                     <constraint firstItem="rWc-2X-aEB" firstAttribute="top" secondItem="H52-ym-eo5" secondAttribute="top" id="76T-iL-iTO"/>
                     <constraint firstAttribute="trailing" secondItem="pQI-Bg-O3C" secondAttribute="trailing" constant="8" id="Cyc-Dk-TAH"/>
                     <constraint firstItem="0jW-go-PVv" firstAttribute="leading" secondItem="iXr-KW-38X" secondAttribute="trailing" constant="8" id="KeY-N9-yjx"/>
-                    <constraint firstItem="9ov-TV-rgi" firstAttribute="centerY" secondItem="0jW-go-PVv" secondAttribute="centerY" id="PVx-p2-GRH"/>
                     <constraint firstItem="0jW-go-PVv" firstAttribute="centerY" secondItem="iXr-KW-38X" secondAttribute="centerY" id="Pco-hp-lF6"/>
                     <constraint firstItem="iXr-KW-38X" firstAttribute="leading" secondItem="H52-ym-eo5" secondAttribute="leading" id="Qd2-5t-i88"/>
+                    <constraint firstItem="zHa-ql-IfI" firstAttribute="top" secondItem="H52-ym-eo5" secondAttribute="top" id="Qsa-1Y-MxL"/>
                     <constraint firstItem="pQI-Bg-O3C" firstAttribute="top" secondItem="QPf-S1-rvX" secondAttribute="bottom" constant="12" id="RRy-n9-b9Z"/>
                     <constraint firstItem="H52-ym-eo5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Rxw-X1-zEE"/>
                     <constraint firstItem="rWc-2X-aEB" firstAttribute="leading" secondItem="H52-ym-eo5" secondAttribute="trailing" constant="12" id="WDS-Ue-a3s"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="iXr-KW-38X" secondAttribute="bottom" constant="16" id="cM4-J0-LtT"/>
                     <constraint firstItem="iXr-KW-38X" firstAttribute="top" secondItem="H52-ym-eo5" secondAttribute="bottom" constant="24" id="hZE-za-RRP"/>
+                    <constraint firstAttribute="trailing" secondItem="zHa-ql-IfI" secondAttribute="trailing" constant="16" id="jRJ-6i-UYA"/>
                     <constraint firstItem="QPf-S1-rvX" firstAttribute="bottom" secondItem="H52-ym-eo5" secondAttribute="bottom" id="jXZ-BS-n8j"/>
                     <constraint firstItem="QPf-S1-rvX" firstAttribute="leading" secondItem="H52-ym-eo5" secondAttribute="trailing" constant="12" id="l0C-bs-eve"/>
+                    <constraint firstItem="zHa-ql-IfI" firstAttribute="leading" secondItem="H52-ym-eo5" secondAttribute="leading" id="pgW-ZD-g9I"/>
+                    <constraint firstItem="zHa-ql-IfI" firstAttribute="bottom" secondItem="H52-ym-eo5" secondAttribute="bottom" id="qGK-Xc-39f"/>
                     <constraint firstItem="H52-ym-eo5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="zQH-87-Mc5"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="datetimeLabel" destination="QPf-S1-rvX" id="o4O-jg-d7S"/>
-                <outlet property="followBtn" destination="9ov-TV-rgi" id="Xuj-qD-A19"/>
                 <outlet property="placeLabel" destination="0jW-go-PVv" id="XUT-XB-aOh"/>
                 <outlet property="userImageView" destination="H52-ym-eo5" id="n8v-bn-yIx"/>
                 <outlet property="usernameLabel" destination="rWc-2X-aEB" id="oic-Cn-4p4"/>
