@@ -61,6 +61,26 @@ extension PostManager {
 // MARK: - `Fetch` functions
 extension PostManager {
     
+    func fetchSinglePost(_ postId: String, completion: @escaping (Result<Post, Error>) -> Void) {
+        
+        let docRef = FirestoreDB.posts.document(postId)
+        
+        dataFetcher.fetch(from: docRef) { (result) in
+            
+            switch result {
+            case .success(let document):
+                guard let post = GenericParser.parse(document, of: Post.self) else {
+                    completion(.failure(DataFetchingError.parsingError))
+                    return
+                }
+                completion(.success(post))
+                
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func fetchNearestPost(coordinate: Coordinate, completion: @escaping PostsResult) {
         
         let query = FirestoreDB.posts

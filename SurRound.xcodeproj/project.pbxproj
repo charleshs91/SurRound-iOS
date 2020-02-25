@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2EF1CEBADE690ED00BC543CF /* Pods_SurRound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090114F8BBA92ECF2E1DD7CD /* Pods_SurRound.framework */; };
 		6B104B6DE82318AB35B2993A /* Pods_SurRoundTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 341633E2C017048820A8225D /* Pods_SurRoundTests.framework */; };
+		7C27B20724058296008EEA1B /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C27B20624058296008EEA1B /* NotificationViewModel.swift */; };
 		D3086B6E23DB57E80071F378 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B6D23DB57E80071F378 /* AuthManager.swift */; };
 		D3086B7023DB59950071F378 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B6F23DB59950071F378 /* UserService.swift */; };
 		D3086B7523DB763A0071F378 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B7423DB763A0071F378 /* HomeViewController.swift */; };
@@ -168,6 +169,7 @@
 		5906DA275732D6F210B1BE9C /* Pods-SurRound.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRound.release.xcconfig"; path = "Target Support Files/Pods-SurRound/Pods-SurRound.release.xcconfig"; sourceTree = "<group>"; };
 		6947236A34D429003EC74666 /* Pods-SurRoundUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRoundUITests.release.xcconfig"; path = "Target Support Files/Pods-SurRoundUITests/Pods-SurRoundUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6E3D9FDE9141C0D31127148A /* Pods_SurRoundUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurRoundUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C27B20624058296008EEA1B /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		8EEF37FDB33146FC6FC83E90 /* Pods-SurRoundTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRoundTests.debug.xcconfig"; path = "Target Support Files/Pods-SurRoundTests/Pods-SurRoundTests.debug.xcconfig"; sourceTree = "<group>"; };
 		934CDAF51DE8A38F689F9CA3 /* Pods-SurRound-SurRoundUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRound-SurRoundUITests.debug.xcconfig"; path = "Target Support Files/Pods-SurRound-SurRoundUITests/Pods-SurRound-SurRoundUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D3086B6D23DB57E80071F378 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -344,6 +346,14 @@
 				6E3D9FDE9141C0D31127148A /* Pods_SurRoundUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7C27B20524058274008EEA1B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7C27B20624058296008EEA1B /* NotificationViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		B6AEF570355B0B7E8A70D414 /* Pods */ = {
@@ -799,6 +809,7 @@
 		D3AD56482403EE7F0051A58D /* Notification */ = {
 			isa = PBXGroup;
 			children = (
+				7C27B20524058274008EEA1B /* ViewModels */,
 				D3768B6A2403FD7400BD0651 /* Controllers */,
 				D3768B6B2403FD7900BD0651 /* Views */,
 			);
@@ -1241,6 +1252,7 @@
 				D3A3B5F823E31E9B003201E1 /* StorageManager.swift in Sources */,
 				D3E6AF9223F4000000897AFF /* ProfileManager.swift in Sources */,
 				D365E4E323E4720900480F11 /* SRColoredNavController.swift in Sources */,
+				7C27B20724058296008EEA1B /* NotificationViewModel.swift in Sources */,
 				D34DCA862404FB3900ABC0FA /* DateManager.swift in Sources */,
 				D36106D023EFC1C0007AFDC2 /* AnimatedCollectionViewLayoutWrapper.swift in Sources */,
 				D3086B7523DB763A0071F378 /* HomeViewController.swift in Sources */,

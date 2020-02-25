@@ -19,7 +19,7 @@ class NotificationViewController: UIViewController {
     
     private let manager = NotificationManager()
     
-    private var data: [SRNotification] = [] {
+    var viewModels: [NotificationViewModel] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -38,7 +38,7 @@ class NotificationViewController: UIViewController {
         
         guard let userId = AuthManager.shared.currentUser?.uid else { return }
         
-        data.removeAll()
+        viewModels.removeAll()
         
         manager.fetchNotifications(userId: userId) { [weak self] (result) in
             
@@ -47,7 +47,11 @@ class NotificationViewController: UIViewController {
                 SRProgressHUD.showFailure(text: error.localizedDescription)
                 
             case .success(let notifications):
-                self?.data.append(contentsOf: notifications)
+                var viewModels: [NotificationViewModel] = []
+                notifications.forEach {
+                    viewModels.append(NotificationViewModel(notification: $0))
+                }
+                self?.viewModels.append(contentsOf: viewModels)
             }
         }
     }
@@ -58,7 +62,7 @@ extension NotificationViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return viewModels.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -67,9 +71,22 @@ extension NotificationViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier:
             NotificationCell.reuseIdentifier, for: indexPath)
         guard let notificationCell = cell as? NotificationCell else { return cell }
-        if indexPath.row % 2 == 0 {
-            notificationCell.postImageView.isHidden = true
+        
+        let viewModel = viewModels[indexPath.row]
+        
+        viewModel.postImage == nil
+            ? notificationCell.hidePostImage()
+            : notificationCell.showPostImage()
+        
+        notificationCell.setupCell(viewModel)
+        
+        viewModel.updateAvatarImage { (urlString) in
+            notificationCell.avatarImageView.loadImage(urlString)
         }
+        viewModel.updatePostImage { (urlString) in
+            notificationCell.postImageView.loadImage(urlString)
+        }
+        
         return notificationCell
     }
 }
