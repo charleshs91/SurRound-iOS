@@ -112,11 +112,14 @@ class ProfileViewController: UIViewController {
             guard let currentUser = AuthManager.shared.currentUser else { return }
             profileHeaderView.followButtonStartAnimating()
             let manager = ProfileManager()
-            manager.followUser(receiverId: userToDisplay.uid, current: currentUser) { [weak self] error in
-                guard error == nil else {
-                    return
-                }
+            manager.followUser(receiverId: userToDisplay.uid, current: currentUser) { [weak self] result in
                 self?.profileHeaderView.followButtonStopAnimating()
+                switch result {
+                case .success:
+                    SRProgressHUD.showSuccess(text: "追蹤成功")
+                case .failure(let error):
+                    SRProgressHUD.showFailure(text: error.localizedDescription)
+                }
             }
         }
     }

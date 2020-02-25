@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-typealias PostsResult = (Result<[Post], FirestoreServiceError>) -> Void
+typealias PostsResult = (Result<[Post], DataFetchingError>) -> Void
 
 class PostManager {
     
@@ -56,8 +56,11 @@ extension PostManager {
             completion()
         }
     }
+}
+
+// MARK: - `Fetch` functions
+extension PostManager {
     
-    // MARK: - `Fetch` functions
     func fetchNearestPost(coordinate: Coordinate, completion: @escaping PostsResult) {
         
         let query = FirestoreDB.posts

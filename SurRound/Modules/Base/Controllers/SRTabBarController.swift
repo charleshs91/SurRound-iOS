@@ -32,7 +32,7 @@ private enum Tab {
         
         switch self {
         case .create:
-            controller.tabBarItem.imageInsets = UIEdgeInsets(top: 8, left: 0, bottom: -8, right: 0)
+            controller.tabBarItem.imageInsets = UIEdgeInsets(top: 8, left: 2, bottom: -4, right: 2)
         default:
             controller.tabBarItem.imageInsets = UIEdgeInsets(top: 12, left: 6, bottom: 0, right: 6)
         }

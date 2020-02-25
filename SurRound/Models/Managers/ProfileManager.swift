@@ -12,12 +12,12 @@ import FirebaseFirestoreSwift
 
 class ProfileManager {
     
-    var userProfile: SRUserProfile?
-    
     private var dataFetcher: DataFetching
+    private var notificationManager: NotificationManager
     
     init(dataFetcher: DataFetching = GenericFetcher()) {
         self.dataFetcher = dataFetcher
+        self.notificationManager = NotificationManager()
     }
     
     // MARK: - Public Methods
@@ -65,16 +65,16 @@ class ProfileManager {
     func fetchProfile(user uid: String, completion: @escaping (SRUserProfile?) -> Void) {
         
         let group = DispatchGroup()
-        
         let docRef = FirestoreDB.users.document(uid)
+        var userProfile: SRUserProfile?
         
         group.enter()
-        dataFetcher.fetch(from: docRef) { result in
+        dataFetcher.fetch(from: docRef) {result in
             
             switch result {
             case .success(let document):
                 let profile = GenericParser.parse(document, of: SRUserProfile.self)
-                self.userProfile = profile
+                userProfile = profile
                 group.leave()
                 
             case .failure(let error):
@@ -91,7 +91,7 @@ class ProfileManager {
             switch result {
             case .success(let documents):
                 if let userPosts = GenericParser.parse(documents, of: UserPost.self) {
-                    self.userProfile?.posts = userPosts
+                    userProfile?.posts = userPosts
                     group.leave()
                 }
                 
@@ -109,7 +109,7 @@ class ProfileManager {
             switch result {
             case .success(let documents):
                 if let userStories = GenericParser.parse(documents, of: UserStory.self) {
-                    self.userProfile?.stories = userStories
+                    userProfile?.stories = userStories
                     group.leave()
                 }
                 
@@ -120,7 +120,7 @@ class ProfileManager {
         }
         
         group.notify(queue: .main) {
-            completion(self.userProfile)
+            completion(userProfile)
         }
     }
     
@@ -145,16 +145,16 @@ class ProfileManager {
         })
     }
     
-    func followUser(receiverId: String, current user: SRUser, completion: @escaping (Error?) -> Void) {
+    func followUser(receiverId: String, current user: SRUser,
+                    completion: @escaping (Result<Void, Error>) -> Void) {
         
         let group = DispatchGroup()
         
         group.enter()
         FirestoreDB.users.document(user.uid)
             .setData(["following": FieldValue.arrayUnion([receiverId])], merge: true) { error in
-                
                 guard error == nil else {
-                    completion(error!)
+                    completion(.failure(error!))
                     return
                 }
                 group.leave()
@@ -163,32 +163,26 @@ class ProfileManager {
         group.enter()
         FirestoreDB.users.document(receiverId)
             .setData(["follower": FieldValue.arrayUnion([user.uid])], merge: true) { error in
-                
                 guard error == nil else {
-                    completion(error!)
+                    completion(.failure(error!))
                     return
                 }
                 group.leave()
         }
         
+        let notification = SRNotification(type: "follow", senderName: user.username,
+                                          senderId: user.uid, created: Date())
         group.enter()
-        FirestoreDB.users.document(receiverId).collection("notifications").document()
-            .setData([
-                "type": "follow",
-                "sender_name": user.username,
-                "sender_id": user.uid,
-                "created": Date()
-            ], merge: true) { error in
-                
-                guard error == nil else {
-                    completion(error!)
-                    return
-                }
-                group.leave()
+        notificationManager.sendNotification(notification, receiverId: receiverId) { (error) in
+            guard error == nil else {
+                completion(.failure(error!))
+                return
+            }
+            group.leave()
         }
         
         group.notify(queue: .main) {
-            completion(nil)
+            completion(.success(()))
         }
     }
 }

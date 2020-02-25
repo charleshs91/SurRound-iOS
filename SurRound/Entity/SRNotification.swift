@@ -11,14 +11,17 @@ import Foundation
 struct SRNotification: Codable {
     
     enum CodingKeys: String, CodingKey {
+        
         case type
         case senderName = "sender_name"
         case senderId = "sender_id"
         case created = "created"
+        case postId = "post_id"
     }
     
     let type: String
     let senderName: String
     let senderId: String
     let created: Date
+    var postId: String?
 }

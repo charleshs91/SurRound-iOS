@@ -71,18 +71,6 @@ class ImagePostListCell: PostListCell {
         
     }
     
-    @IBAction func followUser(_ sender: UIButton) {
-        if let currentUser = AuthManager.shared.currentUser {
-        let manager = ProfileManager()
-            manager.followUser(receiverId: viewModel.authorId, current: currentUser) { error in
-                guard error == nil else {
-                    return
-                }
-                SRProgressHUD.showSuccess()
-            }
-        }
-    }
-    
     // MARK: - Private Methods
     private func setupViews() {
         

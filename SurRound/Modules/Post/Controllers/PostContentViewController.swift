@@ -73,18 +73,13 @@ class PostContentViewController: UIViewController {
     
     @IBAction func didTapReply(_ sender: UIButton) {
         
-        guard let currentUser = AuthManager.shared.currentUser else {
-            return
-        }
-        
+        guard let currentUser = AuthManager.shared.currentUser else { return }
         let author = Author(currentUser)
-        let manager = ReviewManager()
         
         SRProgressHUD.showLoading()
-        manager.sendReview(postId: post.id, author: author, text: replyTextView.text) { [weak self] (error) in
+        ReviewManager.shared.sendReview(postAuthorId: post.author.uid, postId: post.id, replyAuthor: author, text: replyTextView.text) { [weak self] (error) in
             
             SRProgressHUD.dismiss()
-            
             if error == nil {
                 SRProgressHUD.showSuccess(text: "留言成功")
                 self?.replyTextView.clear()

@@ -10,12 +10,6 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-enum FirestoreServiceError: Error {
-    
-    case fetchingError
-    case parsingError
-}
-
 class FirestoreDB {
     
     struct CollectionId {

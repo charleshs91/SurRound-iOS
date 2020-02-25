@@ -10,7 +10,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-typealias StoryCollectionsResult = (Result<[StoryCollection], FirestoreServiceError>) -> Void
+typealias StoryCollectionsResult = (Result<[StoryCollection], DataFetchingError>) -> Void
 
 typealias StoryResult = (Result<Story, Error>) -> Void
 

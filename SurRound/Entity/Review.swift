@@ -17,12 +17,12 @@ struct Review: Codable {
     }()
     
     enum CodingKeys: String, CodingKey {
+        case id
         case postId = "post_id"
         case authorId = "author_id"
-        case createdTime = "created_time"
-        case id
         case author
         case text
+        case createdTime = "created_time"
         case likes
     }
     

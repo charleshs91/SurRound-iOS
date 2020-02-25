@@ -10,9 +10,15 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-typealias DocumentCollectionResult = (Result<[QueryDocumentSnapshot], FirestoreServiceError>) -> Void
+enum DataFetchingError: Error {
+    
+    case fetchingError
+    case parsingError
+}
 
-typealias DocumentResult = (Result<DocumentSnapshot, FirestoreServiceError>) -> Void
+typealias DocumentCollectionResult = (Result<[QueryDocumentSnapshot], DataFetchingError>) -> Void
+
+typealias DocumentResult = (Result<DocumentSnapshot, DataFetchingError>) -> Void
 
 protocol DataFetching: AnyObject {
         

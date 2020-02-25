@@ -14,10 +14,14 @@ typealias ReviewsResult = (Result<[Review], Error>) -> Void
 
 class ReviewManager {
     
-    private var dataFetcher: DataFetching
+    static let shared = ReviewManager()
+    
+    private let dataFetcher: DataFetching
+    private let notificationManager: NotificationManager
     
     init(dataFetcher: DataFetching = GenericFetcher()) {
         self.dataFetcher = dataFetcher
+        self.notificationManager = NotificationManager()
     }
     
     func fetchAllReviews(postId: String, completion: @escaping ReviewsResult) {
@@ -38,24 +42,32 @@ class ReviewManager {
         }
     }
     
-    func sendReview(postId: String, author: Author, text: String,
+    func sendReview(postAuthorId: String, postId: String, replyAuthor: Author, text: String,
                     completion: @escaping (Error?) -> Void) {
         
         let reviewRef = FirestoreDB.reviews(postId: postId).document()
-        
-        let review = Review(id: reviewRef.documentID,
-                            postId: postId,
-                            author: author,
-                            text: text)
+        let review = Review(id: reviewRef.documentID, postId: postId, author: replyAuthor, text: text)
         do {
-            try reviewRef.setData(from: review, merge: true, encoder: .init()) { (error) in
+            try reviewRef.setData(from: review, merge: true, encoder: .init()) { [weak self] (error) in
                 if let error = error {
                     completion(error)
                     return
                 }
+                self?.incrementReplyCount(postId: postId)
                 
-                self.incrementReplyCount(postId: postId)
-                completion(nil)
+                let notification = SRNotification(type: "reply",
+                                                  senderName: replyAuthor.username,
+                                                  senderId: replyAuthor.uid,
+                                                  created: Date(),
+                                                  postId: postId)
+                
+                self?.notificationManager.sendNotification(notification, receiverId: postAuthorId) { (error) in
+                    guard error == nil else {
+                        completion(error!)
+                        return
+                    }
+                    completion(nil)
+                }
             }
         } catch {
             completion(error)
@@ -65,7 +77,6 @@ class ReviewManager {
     private func incrementReplyCount(postId: String) {
         
         let docRef = FirestoreDB.posts.document(postId)
-        
         docRef.setData([Post.CodingKeys.replyCount.rawValue: FieldValue.increment(Int64(1))], merge: true)
     }
 }
