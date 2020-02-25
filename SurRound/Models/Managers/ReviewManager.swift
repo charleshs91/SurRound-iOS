@@ -55,12 +55,17 @@ class ReviewManager {
                 }
                 self?.incrementReplyCount(postId: postId)
                 
+                // Assert that post's author and reply's author are different
+                guard postAuthorId != replyAuthor.uid else {
+                    completion(nil)
+                    return
+                }
+                
                 let notification = SRNotification(type: "reply",
                                                   senderName: replyAuthor.username,
                                                   senderId: replyAuthor.uid,
                                                   created: Date(),
                                                   postId: postId)
-                
                 self?.notificationManager.sendNotification(notification, receiverId: postAuthorId) { (error) in
                     guard error == nil else {
                         completion(error!)

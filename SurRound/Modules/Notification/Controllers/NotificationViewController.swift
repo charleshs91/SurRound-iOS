@@ -17,6 +17,8 @@ class NotificationViewController: UIViewController {
         }
     }
     
+    private let manager = NotificationManager()
+    
     private var data: [SRNotification] = [] {
         didSet {
             tableView.reloadData()
@@ -26,16 +28,20 @@ class NotificationViewController: UIViewController {
     // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationController?.navigationBar.prefersLargeTitles = true
+        
         fetchData()
     }
     
     private func fetchData() {
         
         guard let userId = AuthManager.shared.currentUser?.uid else { return }
+        
         data.removeAll()
-        let manager = NotificationManager()
+        
         manager.fetchNotifications(userId: userId) { [weak self] (result) in
+            
             switch result {
             case .failure(let error):
                 SRProgressHUD.showFailure(text: error.localizedDescription)
@@ -49,14 +55,22 @@ class NotificationViewController: UIViewController {
 
 extension NotificationViewController: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
         
         return 10
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        return .init()
+        let cell = tableView.dequeueReusableCell(withIdentifier:
+            NotificationCell.reuseIdentifier, for: indexPath)
+        guard let notificationCell = cell as? NotificationCell else { return cell }
+        if indexPath.row % 2 == 0 {
+            notificationCell.postImageView.isHidden = true
+        }
+        return notificationCell
     }
 }
 
