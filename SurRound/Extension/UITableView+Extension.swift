@@ -52,16 +52,6 @@ extension UITableView {
             completion()
         })
     }
-    
-    /// Remove TableHeaderView.
-    func removeTableHeaderView() {
-        tableHeaderView = nil
-    }
-    
-    /// Remove TableFooterView.
-    func removeTableFooterView() {
-        tableFooterView = nil
-    }
 
     /// Scroll to bottom of TableView.
     ///

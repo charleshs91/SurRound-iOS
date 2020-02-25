@@ -48,7 +48,8 @@ class NewPostViewController: UIViewController {
     // MARK: - User Actions
     @IBAction func post(_ sender: UIBarButtonItem) {
         
-        guard let text = self.textCell?.textView.text,
+        guard
+            let text = self.textCell?.textView.text,
             let srUser = AuthManager.shared.currentUser,
             let place = self.postPlace else { return }
         
@@ -59,7 +60,8 @@ class NewPostViewController: UIViewController {
                         place: place)
         
         SRProgressHUD.showLoading(text: "Creating post")
-        PostManager().createPost(post, image: mediaCell?.pickedImage) { [weak self] result in
+        
+        PostManager.shared.createPost(post, image: mediaCell?.pickedImage) { [weak self] result in
             SRProgressHUD.dismiss()
             
             switch result {
@@ -131,6 +133,7 @@ class NewPostViewController: UIViewController {
         NotificationCenter.default.post(name: Constant.NotificationId.newPost, object: nil)
         
         SRProgressHUD.showSuccess(text: "New post created")
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -178,11 +181,9 @@ extension NewPostViewController: UITableViewDataSource {
             guard let mediaCell = cell as? NewPostMediaCell else { return cell }
             
             mediaCell.attachHandler = { [weak self] in
-                
                 self?.displayImagePicker()
             }
             mediaCell.deleteHandler = { [weak self] in
-                
                 self?.handleDeletingImage()
             }
             self.mediaCell = mediaCell
@@ -192,11 +193,10 @@ extension NewPostViewController: UITableViewDataSource {
             
             mapCell.coordinate = PlaceManager.current.coordinate
             mapCell.canChangeLocation = postCategory.placeSelectionAllowed
-            mapCell.chooseLocationBtn.addTarget(self, action: #selector(handleLocationSelection(_:)), for: .touchUpInside)
-            
+            mapCell.chooseLocationBtn.addTarget(self, action: #selector(handleLocationSelection(_:)),
+                                                for: .touchUpInside)
             self.mapCell = mapCell
         }
-        
         return cell
     }
 }
@@ -214,13 +214,11 @@ extension NewPostViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
-        
         return 66
     }
     
     func tableView(_ tableView: UITableView,
                    heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return UITableView.automaticDimension
     }
 }

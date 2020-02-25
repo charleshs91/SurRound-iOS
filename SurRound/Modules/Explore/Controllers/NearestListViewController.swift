@@ -47,8 +47,7 @@ class NearestListViewController: UIViewController {
             return
         }
         
-        let manager = PostManager()
-        manager.fetchNearestPost(coordinate: currentCoordinate) { [weak self] (result) in
+        PostManager.shared.fetchNearestPost(coordinate: currentCoordinate) { [weak self] (result) in
             do {
                 let posts = try result.get()
                 posts.forEach { post in

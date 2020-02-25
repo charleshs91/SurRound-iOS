@@ -14,12 +14,20 @@ typealias PostsResult = (Result<[Post], FirestoreServiceError>) -> Void
 
 class PostManager {
     
-    private let dataFetcher: DataFetching
+    static let shared = PostManager()
     
-    init(dataFetcher: DataFetching = GenericFetcher()) {
+    private let dataFetcher: DataFetching
+    private let storageManager: StorageManager
+    
+    private init(dataFetcher: DataFetching = GenericFetcher()) {
         
         self.dataFetcher = dataFetcher
+        self.storageManager = StorageManager()
     }
+}
+
+// MARK: - `Like` Functions
+extension PostManager {
     
     func likePost(postId: String, uid: String, completion: @escaping () -> Void) {
         
@@ -49,6 +57,7 @@ class PostManager {
         }
     }
     
+    // MARK: - `Fetch` functions
     func fetchNearestPost(coordinate: Coordinate, completion: @escaping PostsResult) {
         
         let query = FirestoreDB.posts
@@ -104,7 +113,6 @@ class PostManager {
         _fetch(from: query, completion: completion)
     }
     
-    // MARK: - Private Methods
     private func _fetch(from query: Query, completion: @escaping PostsResult) {
         
         dataFetcher.fetch(from: query) { (result) in
@@ -129,48 +137,52 @@ class PostManager {
         }
     }
     
-    private func attachImage(to documentRef: DocumentReference, image: UIImage, completion: @escaping () -> Void) {
-        
-        StorageManager().uploadImage(image, filename: NSUUID().uuidString) { url in
-            guard let url = url else { return }
-            
-            documentRef.setData([
-                "media_type": "image",
-                "media_link": url.absoluteString
-            ], merge: true) { (_) in
-                completion()
-            }
-        }
-    }
+//    private func attachImage(to documentRef: DocumentReference, image: UIImage) {
+//
+//        StorageManager().uploadImage(image, filename: NSUUID().uuidString) { url in
+//            guard let url = url else {
+//                return
+//            }
+//            documentRef.setData([
+//                "media_type": "image",
+//                "media_link": url.absoluteString
+//            ], merge: true)
+//        }
+//    }
 }
 
-// MARK: - Create
+// MARK: - `Create` Functions
 extension PostManager {
     
-    func createPost(_ post: Post, image: UIImage? = nil, completion: @escaping (Result<Void, Error>) -> Void) {
+    func createPost(_ post: Post,
+                    image: UIImage? = nil,
+                    completion: @escaping (Result<Void, Error>) -> Void) {
         
+        guard AuthManager.shared.currentUser != nil else { return }
+        var post = post
+        if image != nil {
+            storageManager.uploadImage(image!, filename: post.id) { [weak self] (url) in
+                guard let url = url else { return }
+                post.mediaType = "image"
+                post.mediaLink = url.absoluteString
+                self?._create(post, completion: completion)
+            }
+        } else {
+            _create(post, completion: completion)
+        }
+    }
+    
+    private func _create(_ post: Post, completion: @escaping (Result<Void, Error>) -> Void) {
+
         guard let user = AuthManager.shared.currentUser else { return }
-        
         let documentRef = FirestoreDB.posts.document(post.id)
-        let group = DispatchGroup()
-        
         do {
             try documentRef.setData(from: post, merge: true, encoder: Firestore.Encoder()) { error in
-                
                 guard error == nil else {
                     completion(.failure(error!))
                     return
                 }
-                
                 UserService.attachPost(user: user, postRef: documentRef)
-                
-                if let imageToAttach = image {
-                    group.enter()
-                    self.attachImage(to: documentRef, image: imageToAttach) {
-                        group.leave()
-                    }
-                }
-                group.wait()
                 completion(.success(()))
             }
         } catch {

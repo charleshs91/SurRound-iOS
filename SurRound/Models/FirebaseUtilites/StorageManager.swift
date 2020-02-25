@@ -13,7 +13,10 @@ class StorageManager {
     
     func uploadAvatar(_ image: UIImage, userId: String, completion: @escaping (URL?) -> Void) {
         
-        guard let imageData = image.jpegData(compressionQuality: 0.9) else { return }
+        guard let imageData = image.jpegData(compressionQuality: 0.9) else {
+            completion(nil)
+            return
+        }
         
         let imageRef = Storage.storage().reference().child("avatars").child("\(userId).jpg")
         
@@ -24,7 +27,11 @@ class StorageManager {
                      filename: String,
                      completion: @escaping (URL?) -> Void) {
         
-        guard let imageData = image.jpegData(compressionQuality: 0.9) else { return }
+        guard let imageData = image.jpegData(compressionQuality: 0.9) else {
+            
+            completion(nil)
+            return
+        }
         
         let imageRef = Storage.storage().reference().child("images").child("\(filename).jpg")
         
@@ -44,7 +51,6 @@ class StorageManager {
     private func uploadData(_ data: Data,
                             ref: StorageReference,
                             completion: @escaping (URL?) -> Void) {
-        
         ref.putData(data, metadata: nil) { (_, error) in
             guard error == nil else {
                 print(error!)

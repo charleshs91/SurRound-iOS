@@ -45,7 +45,7 @@ class FollowingListViewController: UIViewController {
         posts.removeAll()
         viewModels.removeAll()
         
-        PostManager().fetchAllPost { [weak self] result in
+        PostManager.shared.fetchAllPost { [weak self] result in
             
             self?.tableView.endHeaderRefreshing()
             

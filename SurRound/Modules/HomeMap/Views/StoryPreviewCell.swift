@@ -14,9 +14,7 @@ class StoryPreviewCell: UICollectionViewCell {
     private let kReadColor = UIColor.lightGray
     
     @IBOutlet weak var borderCircleView: UIView!
-    
     @IBOutlet weak var usernameLabel: UILabel!
-    
     @IBOutlet weak var avatarImageView: UIImageView!
     
     override func awakeFromNib() {

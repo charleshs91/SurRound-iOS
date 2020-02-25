@@ -47,8 +47,7 @@ class TrendingListViewController: UIViewController {
     
     private func fetchData() {
         
-        let manager = PostManager()
-        manager.fetchTrendingPost { [weak self] (result) in
+        PostManager.shared.fetchTrendingPost { [weak self] (result) in
             
             self?.collectionView.endHeaderRefreshing()
             

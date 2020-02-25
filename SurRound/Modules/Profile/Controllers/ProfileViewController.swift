@@ -262,7 +262,7 @@ class ProfileViewController: UIViewController {
         posts.removeAll()
         viewModels.removeAll()
         
-        PostManager().fetchPostOfUsers(uids: [user.uid]) { [weak self] result in
+        PostManager.shared.fetchPostOfUsers(uids: [user.uid]) { [weak self] result in
             
             switch result {
             case .success(let posts):

@@ -143,7 +143,7 @@ class HomeViewController: UIViewController {
         
         postMarkers.removeAll()
         
-        PostManager().fetchAllPost { [weak self] result in
+        PostManager.shared.fetchAllPost { [weak self] result in
             
             switch result {
             case .success(let posts):

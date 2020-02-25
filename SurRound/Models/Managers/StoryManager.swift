@@ -27,18 +27,21 @@ struct StoryManagerError: Error {
 
 class StoryManager {
     
-    static func getDocId() -> String {
-        
-        return FirestoreDB.stories.document().documentID
-    }
+    static let shared = StoryManager()
     
     private let dataFetcher: DataFetching
+    private let storageManager: StorageManager
     
     var buffer: [StoryCollection] = []
     
     init(dataFetcher: DataFetching = GenericFetcher()) {
         self.dataFetcher = dataFetcher
+        self.storageManager = StorageManager()
     }
+}
+
+// MARK: - `Fetch` Functions
+extension StoryManager {
     
     func fetchStoryCollection(completion: @escaping StoryCollectionsResult) {
         
@@ -52,44 +55,6 @@ class StoryManager {
         let query = FirestoreDB.stories.whereField(Story.CodingKeys.authorId.rawValue, in: uids)
         
         _fetch(from: query, completion: completion)
-    }
-    
-    func createStory(_ videoFileURL: URL, at place: SRPlace, completion: @escaping StoryResult) throws {
-        do {
-            let videoData = try Data(contentsOf: videoFileURL)
-            
-            let ref = FirestoreDB.stories.document()
-            
-            StorageManager().uploadVideo(videoData, filename: ref.documentID) { url in
-                
-                guard let url = url else {
-                    completion(.failure(StoryManagerError.failUploadingVideo))
-                    return
-                }
-                let story = Story(id: ref.documentID,
-                                  author: Author(AuthManager.shared.currentUser!),
-                                  place: place,
-                                  link: url.absoluteString)
-                do {
-                    try ref.setData(from: story, merge: true, encoder: Firestore.Encoder()) { error in
-                        
-                        guard error == nil else {
-                            completion(.failure(error!))
-                            return
-                        }
-                        UserService.attachStory(user: AuthManager.shared.currentUser!,
-                                                  storyRef: ref)
-                        completion(.success(story))
-                    }
-                } catch {
-                    // Encoding Error
-                    completion(.failure(error))
-                }
-            }
-        } catch {
-            // Fail to convert video file to Data
-            throw error
-        }
     }
     
     private func _fetch(from query: Query, completion: @escaping StoryCollectionsResult) {
@@ -125,5 +90,57 @@ class StoryManager {
             entities.append(StoryCollection(stories: value, author: key))
         }
         return entities
+    }
+    
+}
+
+// MARK: - `Create` Functions
+extension StoryManager {
+    
+    func createStory(_ videoFileURL: URL, at place: SRPlace, completion: @escaping StoryResult) throws {
+        do {
+            let videoData = try Data(contentsOf: videoFileURL)
+            
+            let ref = FirestoreDB.stories.document()
+            
+            storageManager.uploadVideo(videoData, filename: ref.documentID) { url in
+                
+                guard let url = url else {
+                    completion(.failure(StoryManagerError.failUploadingVideo))
+                    return
+                }
+                let story = Story(id: ref.documentID,
+                                  author: Author(AuthManager.shared.currentUser!),
+                                  place: place,
+                                  link: url.absoluteString)
+                do {
+                    try ref.setData(from: story, merge: true, encoder: Firestore.Encoder()) { error in
+                        
+                        guard error == nil else {
+                            completion(.failure(error!))
+                            return
+                        }
+                        UserService.attachStory(user: AuthManager.shared.currentUser!,
+                                                  storyRef: ref)
+                        completion(.success(story))
+                    }
+                } catch {
+                    // Encoding Error
+                    completion(.failure(error))
+                }
+            }
+        } catch {
+            // Fail to convert video file to Data
+            throw error
+        }
+    }
+}
+
+// MARK: - Static Functions
+extension StoryManager {
+    
+    static func getDocId() -> String {
+        
+        return FirestoreDB.stories.document().documentID
     }
 }

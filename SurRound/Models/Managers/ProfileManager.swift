@@ -20,6 +20,7 @@ class ProfileManager {
         self.dataFetcher = dataFetcher
     }
     
+    // MARK: - Public Methods
     func updateAvatar(_ image: UIImage, uid: String, completion: @escaping (Error?) -> Void) {
         
         let storageManager = StorageManager()
@@ -175,7 +176,8 @@ class ProfileManager {
             .setData([
                 "type": "follow",
                 "sender_name": user.username,
-                "sender_id": user.uid
+                "sender_id": user.uid,
+                "created": Date()
             ], merge: true) { error in
                 
                 guard error == nil else {

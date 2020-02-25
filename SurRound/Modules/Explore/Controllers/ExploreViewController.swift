@@ -8,25 +8,11 @@
 
 import UIKit
 
-enum ExplorePageType: Int {
-    
-    case following = 0
-    case trending = 1
-    case nearest = 2
-    
-    var title: String {
-        switch self {
-        case .following: return "Following"
-        case .trending: return "Trending"
-        case .nearest: return "Nearest"
-        }
-    }
-}
-
 class ExploreViewController: UIViewController {
     
-    let pages: [ExplorePageType] = [.following, .trending, .nearest]
+    private let pages: [ExplorePageType] = [.following, .trending, .nearest]
     
+    // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,7 +30,8 @@ class ExploreViewController: UIViewController {
         super.viewDidAppear(animated)
     }
     
-    func setupGestureRecognizers() {
+    // MARK: - Private Methods
+    private func setupGestureRecognizers() {
         
         guard let exploreView = view as? ExploreView else { return }
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeGestureHandler(_:)))
@@ -70,6 +57,7 @@ class ExploreViewController: UIViewController {
     }
 }
 
+// MARK: - SelectionViewDataSource
 extension ExploreViewController: SelectionViewDataSource {
     
     func selectionItemTitle(_ selectionView: SelectionView, for index: Int) -> String {
@@ -98,6 +86,7 @@ extension ExploreViewController: SelectionViewDataSource {
     }
 }
 
+// MARK: - SelectionViewDelegate
 extension ExploreViewController: SelectionViewDelegate {
     
     func selectionView(_ selectionView: SelectionView, didSelectItemAt index: Int) {

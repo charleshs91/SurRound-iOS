@@ -51,13 +51,12 @@ class PostBodyCell: SRBaseTableViewCell {
         
         viewModel.isLiked.addObserver(fireNow: false) { (state) in
             
-            let manager = PostManager()
             if state {
-                manager.likePost(postId: viewModel.postId, uid: user.uid) { [weak self] in
+                PostManager.shared.likePost(postId: viewModel.postId, uid: user.uid) { [weak self] in
                     self?.updateLikeButton()
                 }
             } else {
-                manager.dislikePost(postId: viewModel.postId, uid: user.uid) { [weak self] in
+                PostManager.shared.dislikePost(postId: viewModel.postId, uid: user.uid) { [weak self] in
                     self?.updateLikeButton()
                 }
             }

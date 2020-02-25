@@ -12,6 +12,7 @@ import Firebase
 struct Post: Codable, Hashable, Equatable {
     
     enum CodingKeys: String, CodingKey {
+        
         case id = "post_id"
         case category
         case authorId = "author_id"
@@ -27,13 +28,8 @@ struct Post: Codable, Hashable, Equatable {
         case replyCount = "reply_count"
     }
     
-    static var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        return dateFormatter
-    }()
-    
     static func == (lhs: Self, rhs: Self) -> Bool {
+        
         return lhs.id == rhs.id
     }
     
@@ -65,10 +61,12 @@ struct Post: Codable, Hashable, Equatable {
     var replyCount: Int = 0
     
     var datetimeString: String {
-        return Post.dateFormatter.string(from: createdTime)
+        
+        return DateManager.shared.postDateFormatter().string(from: createdTime)
     }
     
     func hash(into hasher: inout Hasher) {
+        
         hasher.combine(id)
     }
 }
@@ -79,6 +77,7 @@ struct UserPost: Codable {
     let postRef: DocumentReference
     
     enum CodingKeys: String, CodingKey {
+        
         case postId = "post_id"
         case postRef = "post_ref"
     }

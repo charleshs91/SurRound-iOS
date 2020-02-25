@@ -10,6 +10,7 @@ import UIKit
 
 class SRMapMarker: UIView {
     
+    // MARK: - UIViews
     lazy var avatarImage: UIImageView = {
         
         let imageView = UIImageView(frame: .zero)
@@ -42,6 +43,7 @@ class SRMapMarker: UIView {
         return label
     }()
     
+    // MARK: - Private Properties
     private var avatarUrlString: String?
     private var text: String?
     private var categoryIcon: UIImage?
@@ -79,6 +81,7 @@ class SRMapMarker: UIView {
         avatarImage.layer.cornerRadius = avatarImage.frame.height / 2
     }
     
+    // MARK: - Private Methods
     private func setupViews() {
         
         self.addSubview(textLabel)

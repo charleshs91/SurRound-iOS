@@ -17,9 +17,33 @@ class NotificationViewController: UIViewController {
         }
     }
     
+    private var data: [SRNotification] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
+        fetchData()
+    }
+    
+    private func fetchData() {
+        
+        guard let userId = AuthManager.shared.currentUser?.uid else { return }
+        data.removeAll()
+        let manager = NotificationManager()
+        manager.fetchNotifications(userId: userId) { [weak self] (result) in
+            switch result {
+            case .failure(let error):
+                SRProgressHUD.showFailure(text: error.localizedDescription)
+                
+            case .success(let notifications):
+                self?.data.append(contentsOf: notifications)
+            }
+        }
     }
 }
 
