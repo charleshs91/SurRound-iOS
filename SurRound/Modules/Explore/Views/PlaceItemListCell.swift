@@ -21,6 +21,12 @@ class PlaceItemListCell: SRBaseTableViewCell {
         super.awakeFromNib()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        avatarImageView.roundToHalfHeight()
+    }
+    
     func setupCell(_ post: Post, distance: Double) {
         placeNameLabel.text = post.place.name
         

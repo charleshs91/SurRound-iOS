@@ -25,16 +25,16 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8wz-GU-O52">
-                        <rect key="frame" x="72" y="16" width="91" height="52"/>
+                        <rect key="frame" x="72" y="16" width="90.5" height="52"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reply text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpf-f3-be7">
-                                <rect key="frame" x="8" y="28" width="75" height="20"/>
+                                <rect key="frame" x="8" y="28" width="74.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecN-dQ-doX" userLabel="Username">
-                                <rect key="frame" x="8" y="4" width="75" height="20"/>
+                                <rect key="frame" x="8" y="4" width="74.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -67,6 +67,7 @@
                 <constraints>
                     <constraint firstItem="UEm-fZ-NnW" firstAttribute="leading" secondItem="8wz-GU-O52" secondAttribute="leading" constant="8" id="0ui-fJ-y2Q"/>
                     <constraint firstItem="UEm-fZ-NnW" firstAttribute="top" secondItem="8wz-GU-O52" secondAttribute="bottom" constant="4" id="6zk-a2-H8H"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8wz-GU-O52" secondAttribute="trailing" constant="16" id="ATw-kA-xJN"/>
                     <constraint firstItem="8wz-GU-O52" firstAttribute="top" secondItem="Nu5-KQ-5Nk" secondAttribute="top" id="D6T-Qv-SGn"/>
                     <constraint firstItem="Nu5-KQ-5Nk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="Gmu-UA-ZhW"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="UEm-fZ-NnW" secondAttribute="bottom" constant="4" id="Mpa-LC-xGL"/>

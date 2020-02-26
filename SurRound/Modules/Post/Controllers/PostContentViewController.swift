@@ -41,7 +41,6 @@ class PostContentViewController: UIViewController {
     @IBOutlet weak var replyTextView: KMPlaceholderTextView! {
         didSet {
             replyTextView.placeholder = "輸入回覆內容"
-            replyTextView.isScrollEnabled = false
             replyTextView.delegate = self
             replyTextView.layer.cornerRadius = 8
         }
