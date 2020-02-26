@@ -10,6 +10,8 @@
 		2EF1CEBADE690ED00BC543CF /* Pods_SurRound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090114F8BBA92ECF2E1DD7CD /* Pods_SurRound.framework */; };
 		6B104B6DE82318AB35B2993A /* Pods_SurRoundTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 341633E2C017048820A8225D /* Pods_SurRoundTests.framework */; };
 		7C27B20724058296008EEA1B /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C27B20624058296008EEA1B /* NotificationViewModel.swift */; };
+		7C3AD08124065B7A00DF40EE /* GuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3AD08024065B7A00DF40EE /* GuestViewController.swift */; };
+		7C3AD08324065C8B00DF40EE /* Guest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C3AD08224065C8B00DF40EE /* Guest.storyboard */; };
 		D3086B6E23DB57E80071F378 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B6D23DB57E80071F378 /* AuthManager.swift */; };
 		D3086B7023DB59950071F378 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B6F23DB59950071F378 /* UserService.swift */; };
 		D3086B7523DB763A0071F378 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B7423DB763A0071F378 /* HomeViewController.swift */; };
@@ -169,6 +171,8 @@
 		6947236A34D429003EC74666 /* Pods-SurRoundUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRoundUITests.release.xcconfig"; path = "Target Support Files/Pods-SurRoundUITests/Pods-SurRoundUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6E3D9FDE9141C0D31127148A /* Pods_SurRoundUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurRoundUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C27B20624058296008EEA1B /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		7C3AD08024065B7A00DF40EE /* GuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestViewController.swift; sourceTree = "<group>"; };
+		7C3AD08224065C8B00DF40EE /* Guest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Guest.storyboard; sourceTree = "<group>"; };
 		8EEF37FDB33146FC6FC83E90 /* Pods-SurRoundTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRoundTests.debug.xcconfig"; path = "Target Support Files/Pods-SurRoundTests/Pods-SurRoundTests.debug.xcconfig"; sourceTree = "<group>"; };
 		934CDAF51DE8A38F689F9CA3 /* Pods-SurRound-SurRoundUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRound-SurRoundUITests.debug.xcconfig"; path = "Target Support Files/Pods-SurRound-SurRoundUITests/Pods-SurRound-SurRoundUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D3086B6D23DB57E80071F378 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -352,6 +356,15 @@
 				7C27B20624058296008EEA1B /* NotificationViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7C3AD07F24065B5600DF40EE /* Guest */ = {
+			isa = PBXGroup;
+			children = (
+				7C3AD08024065B7A00DF40EE /* GuestViewController.swift */,
+				7C3AD08224065C8B00DF40EE /* Guest.storyboard */,
+			);
+			path = Guest;
 			sourceTree = "<group>";
 		};
 		B6AEF570355B0B7E8A70D414 /* Pods */ = {
@@ -563,6 +576,7 @@
 		D3AD56312403EC330051A58D /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				7C3AD07F24065B5600DF40EE /* Guest */,
 				D3AD56452403EE3E0051A58D /* Base */,
 				D3AD56422403EE0A0051A58D /* Auth */,
 				D3AD56322403EC390051A58D /* HomeMap */,
@@ -1042,6 +1056,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C3AD08324065C8B00DF40EE /* Guest.storyboard in Resources */,
 				D3433E2823F7EACC009006BA /* PostReplyCell.xib in Resources */,
 				D3949AF823D9A81E006DA9AA /* Auth.storyboard in Resources */,
 				D3949AFB23D9A912006DA9AA /* NewPost.storyboard in Resources */,
@@ -1303,6 +1318,7 @@
 				D3431E9223FD60DF00680A79 /* SRBaseTableViewCell.swift in Sources */,
 				D3A07CFC23F54C7200CE3F26 /* UserListTableViewCell.swift in Sources */,
 				D3137AB023F93BD000FD1772 /* Observable.swift in Sources */,
+				7C3AD08124065B7A00DF40EE /* GuestViewController.swift in Sources */,
 				D3A3B5F123E29C35003201E1 /* NewPostCellType.swift in Sources */,
 				D3949B0123D9ACBB006DA9AA /* SignInViewController.swift in Sources */,
 				D338FF3F23E8119700CAB8CB /* StoryPreviewCell.swift in Sources */,

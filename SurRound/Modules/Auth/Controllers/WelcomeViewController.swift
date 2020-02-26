@@ -35,8 +35,12 @@ class WelcomeViewController: UIViewController {
                                  padding: UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0),
                                  widthConstant: 0,
                                  heightConstant: 48)
+        
+        let backBarButtton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backBarButtton
     }
     
+    // MARK: - User Actions
     @objc func signInWithApple(_ sender: ASAuthorizationAppleIDButton) {
         
         let provider = ASAuthorizationAppleIDProvider()
@@ -46,6 +50,15 @@ class WelcomeViewController: UIViewController {
         controller.delegate = self
         controller.presentationContextProvider = self
         controller.performRequests()
+    }
+    
+    @IBAction func signInAsGuest(_ sender: UIButton) {
+        
+        if let guestVC = UIStoryboard.guest.instantiateInitialViewController() {
+            guestVC.modalPresentationStyle = .overCurrentContext
+            present(guestVC, animated: true, completion: nil)
+        }
+        
     }
     
     private func displayMainView() {

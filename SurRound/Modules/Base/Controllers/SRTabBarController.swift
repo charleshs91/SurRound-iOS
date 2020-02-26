@@ -94,6 +94,7 @@ class SRTabBarController: UITabBarController {
     }
 }
 
+// MARK: - UITabBarControllerDelegate
 extension SRTabBarController: UITabBarControllerDelegate {
     
     func tabBarController(

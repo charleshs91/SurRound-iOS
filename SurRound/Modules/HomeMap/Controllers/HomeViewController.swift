@@ -56,7 +56,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-    // MARK: - Private Constants
     private let cellHeightInset: CGFloat = 10
     private let cellLeadingInset: CGFloat = 8
     
@@ -65,18 +64,13 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         styleNagivationLeftTitle()
-        
         updateLocation()
-        
         configureMap()
-        
         fetchPosts()
-        
         fetchStories()
         
         NotificationCenter.default.addObserver(self, selector: #selector(fetchPosts),
                                                name: Constant.NotificationId.newPost, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(fetchStories),
                                                name: Constant.NotificationId.newStory, object: nil)
     }
@@ -341,10 +335,8 @@ extension HomeViewController: UIImagePickerControllerDelegate {
             let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL else {
                 return
         }
-        
         sendStory(url)
     }
-    
 }
 
 // MARK: - UINavigationControllerDelegate
