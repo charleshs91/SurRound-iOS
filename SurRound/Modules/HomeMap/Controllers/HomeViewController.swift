@@ -81,7 +81,7 @@ class HomeViewController: UIViewController {
         displayNewStoryActionSheet()
     }
     
-    // MARK: - Private Methods
+    // MARK: - Fetching Data
     @objc private func fetchStories() {
         
         storyEntities.removeAll()
@@ -119,6 +119,7 @@ class HomeViewController: UIViewController {
         }
     }
     
+    // MARK: - Private Methods
     private func styleNagivationLeftTitle() {
         
         let label = UILabel()
@@ -318,6 +319,15 @@ extension HomeViewController: GMSMapViewDelegate {
         nav.modalPresentationStyle = .overCurrentContext
         present(nav, animated: true, completion: nil)
         return true
+    }
+    
+    func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
+        
+        if let myLocation = mapView.myLocation {
+            mapView.animate(to: GMSCameraPosition(target: myLocation.coordinate, zoom: 18))
+            return true
+        }
+        return false
     }
 }
 
