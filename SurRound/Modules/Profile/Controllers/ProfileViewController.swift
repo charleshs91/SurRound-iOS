@@ -17,12 +17,12 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var selectionView: SelectionView! {
-        didSet {
-            selectionView.dataSource = self
-            selectionView.delegate = self
-        }
-    }
+//    @IBOutlet weak var selectionView: SelectionView! {
+//        didSet {
+//            selectionView.dataSource = self
+//            selectionView.delegate = self
+//        }
+//    }
     
     @IBOutlet weak var profileHeaderView: ProfileHeaderView!
     
@@ -119,7 +119,7 @@ class ProfileViewController: UIViewController {
                 self?.profileHeaderView.followButtonStopAnimating()
                 switch result {
                 case .success:
-                    SRProgressHUD.showSuccess(text: "追蹤成功")
+                    SRProgressHUD.showSuccess()
                 case .failure(let error):
                     SRProgressHUD.showFailure(text: error.localizedDescription)
                 }
@@ -170,15 +170,15 @@ class ProfileViewController: UIViewController {
         let alertVC = UIAlertController(
             title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let reportListAction = UIAlertAction(title: "封鎖列表", style: .default) { _ in
+        let reportListAction = UIAlertAction(title: "Blocked Users", style: .default) { _ in
             print("Blocked user list")
         }
         
-        let signOutAction = UIAlertAction(title: "登出", style: .default) { [unowned self] _ in
+        let signOutAction = UIAlertAction(title: "Sign Out", style: .default) { [unowned self] _ in
             self.signOut()
         }
         
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { _ in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
             alertVC.dismiss(animated: true, completion: nil)
         }
         
@@ -194,23 +194,23 @@ class ProfileViewController: UIViewController {
         let alertVC = UIAlertController(
             title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let reportAction = UIAlertAction(title: "檢舉", style: .default) { _ in
-            SRProgressHUD.showSuccess(text: "我們已收到您的檢舉")
+        let reportAction = UIAlertAction(title: "Report", style: .default) { _ in
+            SRProgressHUD.showSuccess(text: "We've received your report on the current user.")
         }
         
-        let blockAction = UIAlertAction(title: "封鎖", style: .default) { [unowned self] _ in
+        let blockAction = UIAlertAction(title: "Block", style: .default) { [unowned self] _ in
             let manager = ProfileManager()
             manager.blockUser(target: self.userToDisplay) { (result) in
                 switch result {
                 case .failure(let error):
                     print(error)
                 case .success:
-                    SRProgressHUD.showSuccess(text: "封鎖成功")
+                    SRProgressHUD.showSuccess(text: "Successful")
                 }
             }
         }
         
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { _ in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
             alertVC.dismiss(animated: true, completion: nil)
         }
         
@@ -343,32 +343,32 @@ extension ProfileViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - SelectionViewDataSource
-extension ProfileViewController: SelectionViewDataSource {
-    
-    func numberOfSelectionItems(_ selectionView: SelectionView) -> Int {
-        
-        return 2
-    }
-    
-    func selectionItemTitle(_ selectionView: SelectionView, for index: Int) -> String {
-        
-        return tabTitle[index]
-    }
-    
-    func textColor(_ selectionView: SelectionView) -> UIColor {
-        
-        return .systemGray2
-    }
-    
-    func indicatorLineColor(_ selectionView: SelectionView) -> UIColor {
-        return .red
-    }
-}
-
-extension ProfileViewController: SelectionViewDelegate {
-    
-}
+//// MARK: - SelectionViewDataSource
+//extension ProfileViewController: SelectionViewDataSource {
+//
+//    func numberOfSelectionItems(_ selectionView: SelectionView) -> Int {
+//
+//        return 2
+//    }
+//
+//    func selectionItemTitle(_ selectionView: SelectionView, for index: Int) -> String {
+//
+//        return tabTitle[index]
+//    }
+//
+//    func textColor(_ selectionView: SelectionView) -> UIColor {
+//
+//        return .systemGray2
+//    }
+//
+//    func indicatorLineColor(_ selectionView: SelectionView) -> UIColor {
+//        return .red
+//    }
+//}
+//
+//extension ProfileViewController: SelectionViewDelegate {
+//
+//}
 
 // MARK: - IGImagePickerControllerDelegate
 extension ProfileViewController: IGImagePickerControllerDelegate {
