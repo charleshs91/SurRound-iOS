@@ -252,7 +252,7 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         
-        return storyEntities.count
+        return storyEntities.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -265,9 +265,14 @@ extension HomeViewController: UICollectionViewDataSource {
             return cell
         }
         
-        let storyEntity = storyEntities[indexPath.item]
-        storyCell.layoutCell(image: storyEntity.author.avatar,
-                             text: storyEntity.author.username)
+        if indexPath.item == 0 {
+            storyCell.showAsNewStoryButton()
+            
+        } else {
+            let storyEntity = storyEntities[indexPath.item - 1]
+            storyCell.layoutCell(image: storyEntity.author.avatar,
+                                 text: storyEntity.author.username)
+        }
         return storyCell
     }
 }
@@ -309,7 +314,7 @@ extension HomeViewController: GMSMapViewDelegate {
             let first = matches.first,
             let nav = UIStoryboard.post.instantiateInitialViewController() as? UINavigationController,
             let postVC = nav.topViewController as? PostContentViewController else {
-                    return false
+                return false
         }
         postVC.post = first.post
         nav.modalPresentationStyle = .overCurrentContext
@@ -334,8 +339,8 @@ extension HomeViewController: UIImagePickerControllerDelegate {
         }
         
         sendStory(url)
-//        newStoryVC.videoURL = url
-//        self.present(newStoryVC, animated: true, completion: nil)
+        //        newStoryVC.videoURL = url
+        //        self.present(newStoryVC, animated: true, completion: nil)
     }
     
 }

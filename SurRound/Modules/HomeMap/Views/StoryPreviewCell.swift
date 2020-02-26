@@ -38,4 +38,14 @@ class StoryPreviewCell: UICollectionViewCell {
         avatarImageView.loadImage(image, placeholder: UIImage.asset(.Icons_Avatar))
         usernameLabel.text = text
     }
+    
+    func showAsNewStoryButton() {
+        usernameLabel.text = "New Story"
+        let btnImage = UIImageView(image: UIImage(named: "Icon_Video"))
+        btnImage.tintColor = .systemGray
+        contentView.addSubview(btnImage)
+        btnImage.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, padding: .zero, widthConstant: 24, heightConstant: 24)
+        btnImage.centerXAnchor.constraint(equalTo: avatarImageView.centerXAnchor).isActive = true
+        btnImage.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor).isActive = true
+    }
 }
