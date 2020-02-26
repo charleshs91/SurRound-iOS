@@ -23,17 +23,17 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string></string>
+	<string>$(PRODUCT_NAME) requires your location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>$(PRODUCT_NAME) requires your location</string>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>$(PRODUCT_NAME) needs to take photos via camera</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string></string>
+	<string>$(PRODUCT_NAME) needs to access your photo library</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>$(PRODUCT_NAME) needs to access your photo library</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string></string>
+	<string>$(PRODUCT_NAME) may need to use your microphone for video recording</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -20,12 +20,12 @@ enum PostCategory: Int {
     var text: String {
         
         switch self {
-        case .food: return "美食"
-        case .scenary: return "風景"
-        case .shopping: return "購物"
-        case .chat: return "閒聊"
-        case .question: return "發問"
-        case .cancel: return "關閉"
+        case .food: return "Food"
+        case .scenary: return "Scenary"
+        case .shopping: return "Shopping"
+        case .chat: return "Chat"
+        case .question: return "Question"
+        case .cancel: return "Close"
         }
     }
     
