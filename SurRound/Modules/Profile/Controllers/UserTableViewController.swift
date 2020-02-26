@@ -25,6 +25,15 @@ enum UserListType {
             return profile.following
         }
     }
+    
+    var title: String {
+        switch self {
+        case .follower:
+            return "Followers"
+        case .following:
+            return "Following"
+        }
+    }
 }
 
 class UserTableViewController: UITableViewController {
@@ -45,6 +54,8 @@ class UserTableViewController: UITableViewController {
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0)
         
         fetchUserList()
+        
+        navigationItem.title = listType.title
     }
     
     func fetchUserList() {
@@ -66,15 +77,15 @@ class UserTableViewController: UITableViewController {
         let alertVC = UIAlertController(
             title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let reportAction = UIAlertAction(title: "檢舉", style: .default) { _ in
+        let reportAction = UIAlertAction(title: "Report", style: .default) { _ in
             print("檢舉你")
         }
         
-        let blockAction = UIAlertAction(title: "封鎖", style: .default) { _ in
+        let blockAction = UIAlertAction(title: "Block", style: .default) { _ in
             print("封鎖你")
         }
         
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { _ in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
             alertVC.dismiss(animated: true, completion: nil)
         }
         
@@ -98,19 +109,12 @@ extension UserTableViewController {
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: UserListTableViewCell.reuseIdentifier, for: indexPath)
-        
-        guard let userCell = cell as? UserListTableViewCell else {
-            return cell
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: UserListTableViewCell.reuseIdentifier,
+                                                 for: indexPath)
+        guard let userCell = cell as? UserListTableViewCell else { return cell }
         
         let user = userList[indexPath.row]
-        
-        userCell.setupCell(user: user, buttonHandler: { [weak self] cell in
-            
-            self?.onCellTapMoreButton(cell)
-        })
-        
+        userCell.setupCell(user: user)
         return userCell
     }
 }
@@ -119,14 +123,11 @@ extension UserTableViewController {
 extension UserTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            
-        if let profileVC = ProfileViewController.storyInstance() {
-            
-            let selectedUser = userList[indexPath.row]
-            
-            profileVC.userToDisplay = selectedUser
-            
-            show(profileVC, sender: nil)
-        }
+        
+        guard let profileVC = ProfileViewController.storyInstance() else { return }
+        
+        let selectedUser = userList[indexPath.row]
+        profileVC.userToDisplay = selectedUser
+        navigationController?.pushViewController(profileVC, animated: true)
     }
 }

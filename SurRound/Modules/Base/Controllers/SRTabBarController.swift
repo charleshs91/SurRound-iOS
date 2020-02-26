@@ -12,7 +12,7 @@ private enum Tab {
     
     case home
     case explore
-    case message
+    case notification
     case profile
     case create
     
@@ -23,7 +23,7 @@ private enum Tab {
         switch self {
         case .home: controller = UIStoryboard.home.instantiateInitialViewController()!
         case .explore: controller = UIStoryboard.explore.instantiateInitialViewController()!
-        case .message: controller = UIStoryboard.notification.instantiateInitialViewController()!
+        case .notification: controller = UIStoryboard.notification.instantiateInitialViewController()!
         case .profile: controller = UIStoryboard.profile.instantiateInitialViewController()!
         case .create: controller = UIStoryboard.newPost.instantiateInitialViewController()!
         }
@@ -55,11 +55,11 @@ private enum Tab {
                 image: UIImage.asset(ImageAsset.TabBarIcon_42px_Explore),
                 selectedImage: UIImage.asset(.TabBarIcon_42px_Explore_Selected))
             
-        case .message:
+        case .notification:
             return UITabBarItem(
                 title: nil,
-                image: UIImage.asset(ImageAsset.TabBarIcon_42px_Message),
-                selectedImage: UIImage.asset(.TabBarIcon_42px_Message_Selected))
+                image: UIImage.asset(.TabBarIcon_Bell),
+                selectedImage: UIImage.asset(.TabBarIcon_Bell_Selected))
             
         case .profile:
             return UITabBarItem(
@@ -80,7 +80,7 @@ class SRTabBarController: UITabBarController {
     
     @IBOutlet var newPostSelectorView: UIView!
     
-    private let tabs: [Tab] = [.home, .explore, .create, .message, .profile]
+    private let tabs: [Tab] = [.home, .explore, .create, .notification, .profile]
     
     override func viewDidLoad() {
         super.viewDidLoad()

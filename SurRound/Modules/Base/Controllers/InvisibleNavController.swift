@@ -9,13 +9,16 @@
 import UIKit
 
 class InvisibleNavController: UINavigationController {
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
     
-    navigationBar.isTranslucent = true
-    navigationBar.setBackgroundImage(UIImage(), for: .default)
-    navigationBar.shadowImage = UIImage()
-  }
-  
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationBar.isTranslucent = true
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
+        
+        navigationBar.tintColor = .darkGray
+        navigationBar.barStyle = .default
+    }
+    
 }

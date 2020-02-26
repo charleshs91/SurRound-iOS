@@ -93,10 +93,10 @@
             </objects>
             <point key="canvasLocation" x="1073.913043478261" y="128.57142857142856"/>
         </scene>
-        <!--Colored Nav Controller-->
+        <!--Invisible Nav Controller-->
         <scene sceneID="h7p-iX-EEg">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5zd-uY-xgV" customClass="SRColoredNavController" customModule="SurRound" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5zd-uY-xgV" customClass="InvisibleNavController" customModule="SurRound" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="f2f-Wi-9Tc">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

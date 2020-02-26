@@ -84,42 +84,7 @@ class HomeViewController: UIViewController {
     // MARK: - User Actions
     @IBAction func showVideoRecording(_ sender: UIBarButtonItem) {
         
-        let imagePicker = UIImagePickerController()
-        
-        imagePicker.delegate = self
-        
-        let imagePickerAlert = UIAlertController(title: "Post Video Story",
-                                                 message: "Select video source from",
-                                                 preferredStyle: .actionSheet)
-        
-        imagePickerAlert.addAction(
-            UIAlertAction(title: "Library", style: .default) { [weak self] _ in
-                
-                if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
-                    imagePicker.sourceType = .photoLibrary
-                    imagePicker.mediaTypes = [kUTTypeMovie as String]
-                    self?.present(imagePicker, animated: true, completion: nil)
-                }
-        })
-        
-        imagePickerAlert.addAction(
-            UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
-                
-                if UIImagePickerController.isSourceTypeAvailable(.camera) {
-                    imagePicker.sourceType = .camera
-                    imagePicker.mediaTypes = [kUTTypeMovie as String]
-                    imagePicker.videoQuality = .typeHigh
-                    self?.present(imagePicker, animated: true, completion: nil)
-                }
-        })
-        
-        imagePickerAlert.addAction(
-            UIAlertAction(title: "Cancel", style: .cancel) { _ in
-                
-                imagePickerAlert.dismiss(animated: true, completion: nil)
-        })
-        
-        present(imagePickerAlert, animated: true, completion: nil)
+        displayNewStoryActionSheet()
     }
     
     // MARK: - Private Methods
@@ -244,6 +209,41 @@ class HomeViewController: UIViewController {
             SRProgressHUD.showFailure(text: "Unable to convert file to Data")
         }
     }
+    
+    private func displayNewStoryActionSheet() {
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        let imagePickerAlert = UIAlertController(title: "Post Video Story",
+                                                 message: "Select video source from",
+                                                 preferredStyle: .actionSheet)
+        imagePickerAlert.addAction(
+            UIAlertAction(title: "Library", style: .default) { [weak self] _ in
+                
+                if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+                    imagePicker.sourceType = .photoLibrary
+                    imagePicker.mediaTypes = [kUTTypeMovie as String]
+                    self?.present(imagePicker, animated: true, completion: nil)
+                }
+        })
+        imagePickerAlert.addAction(
+            UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
+                
+                if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                    imagePicker.sourceType = .camera
+                    imagePicker.mediaTypes = [kUTTypeMovie as String]
+                    imagePicker.videoQuality = .typeHigh
+                    self?.present(imagePicker, animated: true, completion: nil)
+                }
+        })
+        imagePickerAlert.addAction(
+            UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                
+                imagePickerAlert.dismiss(animated: true, completion: nil)
+        })
+        present(imagePickerAlert, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -290,6 +290,10 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if indexPath.item == 0 {
+            displayNewStoryActionSheet()
+        }
         
         guard let storyVC = UIStoryboard.story.instantiateInitialViewController()
             as? StoryViewController else {
@@ -339,8 +343,6 @@ extension HomeViewController: UIImagePickerControllerDelegate {
         }
         
         sendStory(url)
-        //        newStoryVC.videoURL = url
-        //        self.present(newStoryVC, animated: true, completion: nil)
     }
     
 }

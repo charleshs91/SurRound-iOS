@@ -84,7 +84,6 @@
 		D365E4DC23E4542A00480F11 /* TrendingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365E4DB23E4542A00480F11 /* TrendingListViewController.swift */; };
 		D365E4DE23E4546300480F11 /* NearestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365E4DD23E4546300480F11 /* NearestListViewController.swift */; };
 		D365E4E123E455C000480F11 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365E4E023E455C000480F11 /* ExploreView.swift */; };
-		D365E4E323E4720900480F11 /* SRColoredNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D365E4E223E4720900480F11 /* SRColoredNavController.swift */; };
 		D36B694523F28A8800AAED0D /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B694423F28A8800AAED0D /* ProfileHeaderView.swift */; };
 		D36B695123F29F2300AAED0D /* GenericFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B695023F29F2300AAED0D /* GenericFetcher.swift */; };
 		D36B695323F29FA100AAED0D /* GenericParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36B695223F29FA100AAED0D /* GenericParser.swift */; };
@@ -252,7 +251,6 @@
 		D365E4DB23E4542A00480F11 /* TrendingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingListViewController.swift; sourceTree = "<group>"; };
 		D365E4DD23E4546300480F11 /* NearestListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearestListViewController.swift; sourceTree = "<group>"; };
 		D365E4E023E455C000480F11 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
-		D365E4E223E4720900480F11 /* SRColoredNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRColoredNavController.swift; sourceTree = "<group>"; };
 		D36B694423F28A8800AAED0D /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		D36B695023F29F2300AAED0D /* GenericFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericFetcher.swift; sourceTree = "<group>"; };
 		D36B695223F29FA100AAED0D /* GenericParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericParser.swift; sourceTree = "<group>"; };
@@ -787,7 +785,6 @@
 			isa = PBXGroup;
 			children = (
 				D39A754123D5DACF00A20879 /* SRTabBarController.swift */,
-				D365E4E223E4720900480F11 /* SRColoredNavController.swift */,
 				D3949B0223D9AE12006DA9AA /* InvisibleNavController.swift */,
 			);
 			path = Controllers;
@@ -1251,7 +1248,6 @@
 				D32F7F3E23EAB30300FBC0D3 /* SRRoundedLabel.swift in Sources */,
 				D3A3B5F823E31E9B003201E1 /* StorageManager.swift in Sources */,
 				D3E6AF9223F4000000897AFF /* ProfileManager.swift in Sources */,
-				D365E4E323E4720900480F11 /* SRColoredNavController.swift in Sources */,
 				7C27B20724058296008EEA1B /* NotificationViewModel.swift in Sources */,
 				D34DCA862404FB3900ABC0FA /* DateManager.swift in Sources */,
 				D36106D023EFC1C0007AFDC2 /* AnimatedCollectionViewLayoutWrapper.swift in Sources */,

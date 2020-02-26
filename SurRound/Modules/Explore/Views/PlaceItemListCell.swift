@@ -10,14 +10,11 @@ import UIKit
 
 class PlaceItemListCell: SRBaseTableViewCell {
     
+    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var placeNameLabel: UILabel!
     
-    @IBOutlet weak var addressLabel: UILabel!
-    
-    @IBOutlet weak var categoryLabel: UILabel!
-    
     @IBOutlet weak var distanceLabel: UILabel!
-    
     @IBOutlet weak var postImageView: UIImageView!
     
     override func awakeFromNib() {
@@ -26,10 +23,11 @@ class PlaceItemListCell: SRBaseTableViewCell {
     
     func setupCell(_ post: Post, distance: Double) {
         placeNameLabel.text = post.place.name
-        addressLabel.text = post.place.address
-        categoryLabel.text = post.category
+        
         distanceLabel.text = textForDistance(distance: distance)
-        postImageView.loadImage(post.mediaLink)
+        postImageView.loadImage(post.mediaLink, placeholder: UIImage.asset(.Image_Placeholder))
+        usernameLabel.text = post.author.username
+        avatarImageView.loadImage(post.author.avatar, placeholder: UIImage.asset(.Icons_Avatar))
     }
     
     private func textForDistance(distance: Double) -> String {

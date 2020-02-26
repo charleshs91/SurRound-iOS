@@ -65,6 +65,9 @@ class ProfileViewController: UIViewController {
         fetchUserPost()
         
         profileHeaderView.setupView(user: userToDisplay)
+        
+        let backBarButtton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backBarButtton
     }
     
     override func viewWillAppear(_ animated: Bool) {

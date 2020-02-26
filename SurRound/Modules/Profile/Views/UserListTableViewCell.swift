@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserListTableViewCell: UITableViewCell {
+class UserListTableViewCell: SRBaseTableViewCell {
 
     typealias ButtonHandler = (UserListTableViewCell) -> Void
     
@@ -16,19 +16,9 @@ class UserListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var usernameLabel: SRMediumTextLabel!
     
-    var handler: ButtonHandler?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        selectionStyle = .none
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        handler = nil
-    }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -36,15 +26,9 @@ class UserListTableViewCell: UITableViewCell {
         avatarImageView.roundToHalfHeight()
     }
     
-    func setupCell(user: SRUser, buttonHandler: ButtonHandler? = nil) {
+    func setupCell(user: SRUser) {
         
         avatarImageView.loadImage(user.avatar, placeholder: UIImage.asset(.Icons_Avatar))
         usernameLabel.text = user.username
-        handler = buttonHandler
-    }
-    
-    @IBAction func didTapMoreButton(_ sender: UIButton) {
-        
-        handler?(self)
     }
 }
