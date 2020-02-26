@@ -62,6 +62,7 @@ class FollowingListViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension FollowingListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -88,6 +89,7 @@ extension FollowingListViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension FollowingListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

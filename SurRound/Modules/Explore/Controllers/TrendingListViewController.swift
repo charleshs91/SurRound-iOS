@@ -92,10 +92,12 @@ extension TrendingListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        guard let postDetailVC = UIStoryboard.post.instantiateInitialViewController() as? PostContentViewController else { return }
-        postDetailVC.post = posts[indexPath.item]
-        postDetailVC.modalPresentationStyle = .overCurrentContext
-        present(postDetailVC, animated: true, completion: nil)
+        guard
+            let nav = UIStoryboard.post.instantiateInitialViewController() as? UINavigationController,
+            let postDetailVC = nav.topViewController as? PostContentViewController else { return }
+        postDetailVC.post = posts[indexPath.row]
+        nav.modalPresentationStyle = .overCurrentContext
+        present(nav, animated: true, completion: nil)
     }
     
 }

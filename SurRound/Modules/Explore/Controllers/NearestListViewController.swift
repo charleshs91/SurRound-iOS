@@ -87,4 +87,13 @@ extension NearestListViewController: UITableViewDelegate {
         return UITableView.automaticDimension
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard
+            let nav = UIStoryboard.post.instantiateInitialViewController() as? UINavigationController,
+            let postDetailVC = nav.topViewController as? PostContentViewController else { return }
+        postDetailVC.post = data[indexPath.row].post
+        nav.modalPresentationStyle = .overCurrentContext
+        present(nav, animated: true, completion: nil)
+    }
 }

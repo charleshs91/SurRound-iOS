@@ -38,7 +38,6 @@ class StoryPlayerCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-//        contentView.frame = contentView.frame.inset(by: padding)
         playerLayer.frame = contentView.bounds
     }
     
@@ -69,6 +68,11 @@ class StoryPlayerCell: UICollectionViewCell {
                 self.delegate?.didEndPlayingVideo(self)
             }
         }
+    }
+    
+    func stopPlaying() {
+        player?.pause()
+        removeTimeObserver()
     }
         
     func configurePlayer() {

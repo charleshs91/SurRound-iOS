@@ -218,6 +218,32 @@ class HomeViewController: UIViewController {
             postPin.mapMarker.map = self?.mapView
         }
     }
+    
+    private func sendStory(_ url: URL?) {
+        
+        guard let url = url else { return }
+        guard let place = PlaceManager.current.place else {
+            return
+        }
+        
+        SRProgressHUD.showLoading(text: "Uploading Video...")
+        do {
+            try StoryManager().createStory(url, at: place) { result in
+                
+                SRProgressHUD.dismiss()
+                switch result {
+                case .success:
+                    SRProgressHUD.showSuccess()
+                    NotificationCenter.default.post(name: Constant.NotificationId.newStory, object: nil)
+                    
+                case .failure(let error):
+                    SRProgressHUD.showFailure(text: error.localizedDescription)
+                }
+            }
+        } catch {
+            SRProgressHUD.showFailure(text: "Unable to convert file to Data")
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -303,13 +329,13 @@ extension HomeViewController: UIImagePickerControllerDelegate {
         guard
             let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String,
             mediaType == (kUTTypeMovie as String),
-            let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL,
-            let newStoryVC = NewStoryViewController.storyboardInstance() else {
+            let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL else {
                 return
         }
         
-        newStoryVC.videoURL = url
-        self.present(newStoryVC, animated: true, completion: nil)
+        sendStory(url)
+//        newStoryVC.videoURL = url
+//        self.present(newStoryVC, animated: true, completion: nil)
     }
     
 }
