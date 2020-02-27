@@ -68,6 +68,9 @@ class ProfileViewController: UIViewController {
         
         let backBarButtton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backBarButtton
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchUserPost),
+        name: Constant.NotificationId.newPost, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -259,7 +262,7 @@ class ProfileViewController: UIViewController {
         profileHeaderView.editAvatarButton.addTarget(self, action: #selector(handleEditAvatar(_:)), for: .touchUpInside)
     }
     
-    private func fetchUserPost() {
+    @objc private func fetchUserPost() {
         
         guard let user = userToDisplay else {
             return

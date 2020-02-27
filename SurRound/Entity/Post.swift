@@ -26,6 +26,7 @@ struct Post: Codable, Hashable, Equatable {
         case mediaLink = "media_link"
         case likeCount = "like_count"
         case replyCount = "reply_count"
+        case likedBy = "liked_by"
     }
     
     static func == (lhs: Self, rhs: Self) -> Bool {
@@ -59,6 +60,7 @@ struct Post: Codable, Hashable, Equatable {
     var mediaLink: String?
     var likeCount: Int = 0
     var replyCount: Int = 0
+    var likedBy: [String] = []
     
     var datetimeString: String {
         

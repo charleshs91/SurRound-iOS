@@ -316,7 +316,7 @@ extension HomeViewController: GMSMapViewDelegate {
                 return false
         }
         postVC.post = first.post
-        nav.modalPresentationStyle = .overCurrentContext
+        nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
         return true
     }

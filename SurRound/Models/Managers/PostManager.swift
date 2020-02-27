@@ -34,7 +34,7 @@ extension PostManager {
         let docRef = FirestoreDB.posts.document(postId)
         
         docRef.setData([
-            "likedBy": FieldValue.arrayUnion([uid]),
+            "liked_by": FieldValue.arrayUnion([uid]),
             Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(1))
         ], merge: true) { (error) in
             
@@ -48,7 +48,7 @@ extension PostManager {
         let docRef = FirestoreDB.posts.document(postId)
         
         docRef.setData([
-            "likedBy": FieldValue.arrayRemove([uid]),
+            "liked_by": FieldValue.arrayRemove([uid]),
             Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(-1))
         ], merge: true) { (error) in
             
