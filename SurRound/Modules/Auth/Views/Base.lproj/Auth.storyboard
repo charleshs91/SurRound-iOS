@@ -215,59 +215,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="2Do-yG-BOO">
-                                <rect key="frame" x="40" y="475" width="334" height="120"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGM-Th-GW3" customClass="SRAuthButton" customModule="SurRound" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="48"/>
-                                        <color key="backgroundColor" red="0.22352941179999999" green="0.2156862745" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="HTF-id-OjO"/>
-                                        </constraints>
-                                        <state key="normal" title="Sign in as guest">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="signInAsGuest:" destination="E2W-PK-tTe" eventType="touchUpInside" id="uco-1T-1E2"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ugi-4O-osZ" customClass="SRAuthButton" customModule="SurRound" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="334" height="48"/>
-                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="JTc-8t-N42"/>
-                                        </constraints>
-                                        <state key="normal" title="Sign in with email">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="QgZ-3P-hBg" kind="show" identifier="SegueLoginWithEmail" id="qLO-fB-mok"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ugi-4O-osZ" customClass="SRAuthButton" customModule="SurRound" customModuleProvider="target">
+                                <rect key="frame" x="40" y="484" width="334" height="48"/>
+                                <color key="backgroundColor" red="0.22352941176470587" green="0.21568627450980393" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="JTc-8t-N42"/>
+                                </constraints>
+                                <state key="normal" title="Sign in with email">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="QgZ-3P-hBg" kind="show" identifier="SegueLoginWithEmail" id="qLO-fB-mok"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SurRound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l86-pH-7zC">
                                 <rect key="frame" x="40" y="215.5" width="334" height="42"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="36"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Surf Around Things Surrounding You" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7v-ac-Mm6">
                                 <rect key="frame" x="40" y="273.5" width="334" height="22.5"/>
                                 <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="18"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGM-Th-GW3" customClass="SRAuthButton" customModule="SurRound" customModuleProvider="target">
+                                <rect key="frame" x="40" y="640" width="334" height="48"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="HTF-id-OjO"/>
+                                </constraints>
+                                <state key="normal" title="Sign in as Guest">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="signInAsGuest:" destination="E2W-PK-tTe" eventType="touchUpInside" id="uco-1T-1E2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="wbW-gQ-ZPS" firstAttribute="trailing" secondItem="2Do-yG-BOO" secondAttribute="trailing" constant="40" id="1QJ-sU-aHx"/>
                             <constraint firstItem="r7v-ac-Mm6" firstAttribute="top" secondItem="l86-pH-7zC" secondAttribute="bottom" constant="16" id="Aw1-Re-gjm"/>
                             <constraint firstItem="r7v-ac-Mm6" firstAttribute="leading" secondItem="wbW-gQ-ZPS" secondAttribute="leading" constant="40" id="Jes-Ef-MCS"/>
                             <constraint firstItem="l86-pH-7zC" firstAttribute="leading" secondItem="wbW-gQ-ZPS" secondAttribute="leading" constant="40" id="NDD-Nz-DDc"/>
-                            <constraint firstItem="2Do-yG-BOO" firstAttribute="top" secondItem="wbW-gQ-ZPS" secondAttribute="centerY" id="TYg-2O-rOv"/>
                             <constraint firstItem="l86-pH-7zC" firstAttribute="top" secondItem="wbW-gQ-ZPS" secondAttribute="bottom" multiplier="0.25" id="Yfg-Xl-3P8"/>
-                            <constraint firstItem="2Do-yG-BOO" firstAttribute="leading" secondItem="wbW-gQ-ZPS" secondAttribute="leading" constant="40" id="cHm-8Q-2yo"/>
                             <constraint firstItem="wbW-gQ-ZPS" firstAttribute="trailing" secondItem="r7v-ac-Mm6" secondAttribute="trailing" constant="40" id="eUp-Bq-CK5"/>
                             <constraint firstItem="wbW-gQ-ZPS" firstAttribute="trailing" secondItem="l86-pH-7zC" secondAttribute="trailing" constant="40" id="tjr-c8-gGx"/>
                         </constraints>
@@ -281,7 +273,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JXP-E7-F0E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="243" y="-384"/>
+            <point key="canvasLocation" x="242.0289855072464" y="-384.375"/>
         </scene>
         <!--User Info Form View Controller-->
         <scene sceneID="3sc-F7-Vfb">

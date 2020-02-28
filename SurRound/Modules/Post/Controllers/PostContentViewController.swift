@@ -11,6 +11,10 @@ import KMPlaceholderTextView
 
 class PostContentViewController: UIViewController {
     
+    deinit {
+        print("$ PostContentViewController deinit")
+    }
+    
     var post: Post! {
         didSet {
             postBodyViewModel = PostBodyViewModel(post: post, onReply: { [weak self] in
@@ -24,8 +28,8 @@ class PostContentViewController: UIViewController {
     
     var reviews = [Review]() {
         didSet {
-            DispatchQueue.main.async {
-                self.postContentView.tableView.reloadData()
+            DispatchQueue.main.async { [weak self] in
+                self?.postContentView.tableView.reloadData()
             }
         }
     }
@@ -154,12 +158,12 @@ extension PostContentViewController: UITableViewDataSource {
                 guard let infoCell = cell as? PostInfoTableViewCell else {
                     break
                 }
-                infoCell.setupCell(with: post!, userProfileHandler: { user in
+                infoCell.setupCell(with: post!, userProfileHandler: { [weak self] user in
                     guard let nav = UIStoryboard.profile.instantiateInitialViewController() as? UINavigationController,
                         let profileVC = nav.topViewController as? ProfileViewController else { return }
                     profileVC.userToDisplay = user
                     profileVC.modalPresentationStyle = .overCurrentContext
-                    self.present(nav, animated: true, completion: nil)
+                    self?.present(nav, animated: true, completion: nil)
                 })
                 
             case .body:

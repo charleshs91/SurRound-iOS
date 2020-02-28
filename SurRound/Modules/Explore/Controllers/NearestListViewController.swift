@@ -36,6 +36,7 @@ class NearestListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.definesPresentationContext = true
         
         fetchData()
     }
@@ -93,7 +94,7 @@ extension NearestListViewController: UITableViewDelegate {
             let nav = UIStoryboard.post.instantiateInitialViewController() as? UINavigationController,
             let postDetailVC = nav.topViewController as? PostContentViewController else { return }
         postDetailVC.post = data[indexPath.row].post
-        nav.modalPresentationStyle = .fullScreen
+        nav.modalPresentationStyle = .overCurrentContext
         present(nav, animated: true, completion: nil)
     }
 }

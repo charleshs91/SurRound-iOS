@@ -30,6 +30,7 @@ class TrendingListViewController: UIViewController {
     // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.definesPresentationContext = true
         
         fetchData()
     }
@@ -96,7 +97,7 @@ extension TrendingListViewController: UICollectionViewDelegate {
             let nav = UIStoryboard.post.instantiateInitialViewController() as? UINavigationController,
             let postDetailVC = nav.topViewController as? PostContentViewController else { return }
         postDetailVC.post = posts[indexPath.row]
-        nav.modalPresentationStyle = .fullScreen
+        nav.modalPresentationStyle = .overCurrentContext
         present(nav, animated: true, completion: nil)
     }
     

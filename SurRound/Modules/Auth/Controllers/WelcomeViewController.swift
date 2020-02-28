@@ -15,6 +15,12 @@ class WelcomeViewController: UIViewController {
     
     @IBOutlet weak var guestSignInBtn: SRAuthButton!
     
+    private let curveShapeView: CurveShapeView = {
+        let view = CurveShapeView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let appleSignInButton: ASAuthorizationAppleIDButton = {
         let btn = ASAuthorizationAppleIDButton(authorizationButtonType: .default,
                                                authorizationButtonStyle: .black)
@@ -27,14 +33,22 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(appleSignInButton)
-        appleSignInButton.anchor(top: emailSignInBtn.bottomAnchor,
-                                 leading: emailSignInBtn.leadingAnchor,
-                                 bottom: nil,
-                                 trailing: emailSignInBtn.trailingAnchor,
-                                 padding: UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0),
-                                 widthConstant: 0,
-                                 heightConstant: 48)
+        view.insertSubview(curveShapeView, at: 0)
+        curveShapeView.shapeColor = UIColor.hexStringToUIColor(hex: "39375B")
+        curveShapeView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 500)
+        
+        let vStack = UIStackView(arrangedSubviews: [emailSignInBtn, appleSignInButton, guestSignInBtn])
+        view.addSubview(vStack)
+
+        vStack.axis = .vertical
+        vStack.spacing = 24
+           
+        vStack.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50), widthConstant: 0, heightConstant: 0)
+        
+        NSLayoutConstraint(item: vStack, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 0.75, constant: 0).isActive = true
+        
+        appleSignInButton.anchor(top: nil, leading: nil, bottom: nil, trailing: nil,
+                                 padding: .zero, widthConstant: 0, heightConstant: 48)
         
         let backBarButtton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backBarButtton

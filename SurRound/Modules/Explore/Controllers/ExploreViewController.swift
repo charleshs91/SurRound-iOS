@@ -15,7 +15,7 @@ class ExploreViewController: UIViewController {
     // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.definesPresentationContext = true
         navigationController?.navigationBar.isHidden = true
         
         guard let exploreView = view as? ExploreView else { return }

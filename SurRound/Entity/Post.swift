@@ -61,6 +61,7 @@ struct Post: Codable, Hashable, Equatable {
     var likeCount: Int = 0
     var replyCount: Int = 0
     var likedBy: [String] = []
+    var isLiked: Bool = false
     
     var datetimeString: String {
         

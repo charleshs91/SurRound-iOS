@@ -159,19 +159,6 @@ extension PostManager {
             }
         }
     }
-    
-//    private func attachImage(to documentRef: DocumentReference, image: UIImage) {
-//
-//        StorageManager().uploadImage(image, filename: NSUUID().uuidString) { url in
-//            guard let url = url else {
-//                return
-//            }
-//            documentRef.setData([
-//                "media_type": "image",
-//                "media_link": url.absoluteString
-//            ], merge: true)
-//        }
-//    }
 }
 
 // MARK: - `Create` Functions
