@@ -48,8 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if AuthManager.shared.currentUser == nil {
             window?.rootViewController = UIStoryboard.auth.instantiateInitialViewController()
-        } else {
-            AuthManager.shared.updateProfile()
         }
     }
 }

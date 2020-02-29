@@ -128,6 +128,14 @@ extension PostManager {
         _fetch(from: query, completion: completion)
     }
     
+    func fetchAllPostWithBlocking(blockingUsers: [String], completion: @escaping PostsResult) {
+        
+        let query = FirestoreDB.posts
+            .order(by: Post.CodingKeys.createdTime.rawValue, descending: true)
+        
+        _fetch(from: query, blockingUsers: blockingUsers, completion: completion)
+    }
+    
     func fetchAllPost(completion: @escaping PostsResult) {
         
         let query = FirestoreDB.posts
@@ -136,7 +144,7 @@ extension PostManager {
         _fetch(from: query, completion: completion)
     }
     
-    private func _fetch(from query: Query, completion: @escaping PostsResult) {
+    private func _fetch(from query: Query, blockingUsers: [String] = [], completion: @escaping PostsResult) {
         
         dataFetcher.fetch(from: query) { (result) in
             
@@ -153,8 +161,20 @@ extension PostManager {
                     }
                     return
                 }
-                DispatchQueue.main.async {
-                    completion(.success(posts))
+                if blockingUsers.count > 0 {
+                    var filteredPosts: [Post] = []
+                    posts.forEach { post in
+                        if !blockingUsers.contains(post.authorId) {
+                            filteredPosts.append(post)
+                        }
+                    }
+                    DispatchQueue.main.async {
+                        completion(.success(filteredPosts))
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completion(.success(posts))
+                    }
                 }
             }
         }

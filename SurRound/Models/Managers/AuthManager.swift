@@ -37,25 +37,22 @@ class AuthManager {
             UserDefaults.standard.setValue(user.username, forKey: Constant.Auth.username)
             UserDefaults.standard.setValue(user.email, forKey: Constant.Auth.email)
             UserDefaults.standard.setValue(user.avatar, forKey: Constant.Auth.avatar)
-            
-            updateProfile()
         }
     }
     
-    func updateProfile() {
+    func updateProfile(completion: @escaping (SRUserProfile) -> Void) {
         
         guard let user = currentUser else {
             return
         }
-        
         let manager = ProfileManager()
         manager.fetchProfile(user: user.uid, completion: { profile in
             
             guard let profile = profile else {
                 return
             }
-            
             self.userProfile = profile
+            completion(profile)
         })
     }
     

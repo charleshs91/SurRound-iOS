@@ -66,8 +66,16 @@ class HomeViewController: UIViewController {
         styleNagivationLeftTitle()
         updateLocation()
         configureMap()
-        fetchPosts()
-        fetchStories()
+        
+        if AuthManager.shared.currentUser != nil {
+            AuthManager.shared.updateProfile(completion: { [weak self] profile in
+                self?.fetchPosts(blockingUsers: profile.blocking)
+                self?.fetchStories()
+            })
+        } else {
+            fetchPosts()
+            fetchStories()
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(fetchPosts),
                                                name: Constant.NotificationId.newPost, object: nil)
@@ -98,7 +106,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @objc private func fetchPosts() {
+    @objc private func fetchPosts(blockingUsers: [String] = []) {
         
         postMarkers.removeAll()
         
