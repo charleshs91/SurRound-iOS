@@ -101,7 +101,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h8D-VC-kys" customClass="SRAuthTextField" customModule="SurRound" customModuleProvider="target">
-                                <rect key="frame" x="50" y="112" width="314" height="48"/>
+                                <rect key="frame" x="50" y="137" width="314" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="sPl-Hd-1ys"/>
                                 </constraints>
@@ -109,7 +109,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WCu-Yh-jV7" customClass="SRAuthTextField" customModule="SurRound" customModuleProvider="target">
-                                <rect key="frame" x="50" y="176" width="314" height="48"/>
+                                <rect key="frame" x="50" y="201" width="314" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="agD-bV-bAr"/>
                                 </constraints>
@@ -117,7 +117,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="username"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gbg-W8-HNQ" customClass="SRAuthTextField" customModule="SurRound" customModuleProvider="target">
-                                <rect key="frame" x="50" y="240" width="314" height="48"/>
+                                <rect key="frame" x="50" y="265" width="314" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="ccM-iZ-oqQ"/>
                                 </constraints>
@@ -125,7 +125,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="prw-ZG-J9l" customClass="SRAuthTextField" customModule="SurRound" customModuleProvider="target">
-                                <rect key="frame" x="50" y="304" width="314" height="48"/>
+                                <rect key="frame" x="50" y="329" width="314" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="caG-8U-QXZ"/>
                                 </constraints>
@@ -133,7 +133,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Raj-7U-7hH" customClass="SRAuthButton" customModule="SurRound" customModuleProvider="target">
-                                <rect key="frame" x="50" y="398.5" width="314" height="42"/>
+                                <rect key="frame" x="50" y="423.5" width="314" height="42"/>
                                 <color key="backgroundColor" red="0.22352941179999999" green="0.2156862745" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="VvB-rQ-Hjs"/>
@@ -147,9 +147,15 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="error label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVU-cY-1gb">
-                                <rect key="frame" x="178" y="368" width="58" height="14.5"/>
+                                <rect key="frame" x="178" y="393" width="58" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgm-AV-pzx" userLabel="Description Label">
+                                <rect key="frame" x="50" y="104" width="314" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -157,13 +163,16 @@
                         <constraints>
                             <constraint firstItem="xVU-cY-1gb" firstAttribute="centerX" secondItem="mDo-fb-WAL" secondAttribute="centerX" id="4W1-oV-hVl"/>
                             <constraint firstItem="Raj-7U-7hH" firstAttribute="leading" secondItem="prw-ZG-J9l" secondAttribute="leading" id="A0O-qD-uLf"/>
-                            <constraint firstItem="h8D-VC-kys" firstAttribute="top" secondItem="cao-iK-JEP" secondAttribute="top" constant="24" id="FWm-io-RaJ"/>
+                            <constraint firstItem="xgm-AV-pzx" firstAttribute="leading" secondItem="h8D-VC-kys" secondAttribute="leading" id="Dmm-yo-PRV"/>
+                            <constraint firstItem="xgm-AV-pzx" firstAttribute="trailing" secondItem="h8D-VC-kys" secondAttribute="trailing" id="LUe-Ch-vOE"/>
+                            <constraint firstItem="xgm-AV-pzx" firstAttribute="centerX" secondItem="mDo-fb-WAL" secondAttribute="centerX" id="M6o-de-nUL"/>
                             <constraint firstItem="xVU-cY-1gb" firstAttribute="top" secondItem="prw-ZG-J9l" secondAttribute="bottom" constant="16" id="Mde-Io-B1G"/>
                             <constraint firstItem="h8D-VC-kys" firstAttribute="leading" secondItem="WCu-Yh-jV7" secondAttribute="leading" id="N0o-hq-pK9"/>
                             <constraint firstItem="prw-ZG-J9l" firstAttribute="top" secondItem="gbg-W8-HNQ" secondAttribute="bottom" constant="16" id="Q3v-53-WMF"/>
                             <constraint firstItem="WCu-Yh-jV7" firstAttribute="trailing" secondItem="gbg-W8-HNQ" secondAttribute="trailing" id="QEv-Ef-kd6"/>
                             <constraint firstItem="Raj-7U-7hH" firstAttribute="top" secondItem="xVU-cY-1gb" secondAttribute="bottom" constant="16" id="QvU-Bu-Ldv"/>
                             <constraint firstItem="Raj-7U-7hH" firstAttribute="trailing" secondItem="prw-ZG-J9l" secondAttribute="trailing" id="VrA-su-zg7"/>
+                            <constraint firstItem="xgm-AV-pzx" firstAttribute="top" secondItem="cao-iK-JEP" secondAttribute="top" constant="16" id="YFa-kA-cbv"/>
                             <constraint firstItem="WCu-Yh-jV7" firstAttribute="leading" secondItem="gbg-W8-HNQ" secondAttribute="leading" id="akj-0K-aCa"/>
                             <constraint firstItem="prw-ZG-J9l" firstAttribute="trailing" secondItem="gbg-W8-HNQ" secondAttribute="trailing" id="c1X-65-pzA"/>
                             <constraint firstItem="gbg-W8-HNQ" firstAttribute="top" secondItem="WCu-Yh-jV7" secondAttribute="bottom" constant="16" id="caj-3D-94M"/>
@@ -171,6 +180,7 @@
                             <constraint firstItem="cao-iK-JEP" firstAttribute="trailing" secondItem="gbg-W8-HNQ" secondAttribute="trailing" constant="50" id="mtV-hQ-h9h"/>
                             <constraint firstItem="h8D-VC-kys" firstAttribute="trailing" secondItem="WCu-Yh-jV7" secondAttribute="trailing" id="pKh-yJ-Uhz"/>
                             <constraint firstItem="WCu-Yh-jV7" firstAttribute="top" secondItem="h8D-VC-kys" secondAttribute="bottom" constant="16" id="tHy-qC-BXZ"/>
+                            <constraint firstItem="h8D-VC-kys" firstAttribute="top" secondItem="xgm-AV-pzx" secondAttribute="bottom" constant="16" id="uIt-77-NMQ"/>
                             <constraint firstItem="prw-ZG-J9l" firstAttribute="leading" secondItem="gbg-W8-HNQ" secondAttribute="leading" id="win-TB-xM2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cao-iK-JEP"/>
@@ -178,6 +188,7 @@
                     <navigationItem key="navigationItem" id="WhT-x6-IdV"/>
                     <connections>
                         <outlet property="confirmPwdTextField" destination="prw-ZG-J9l" id="UWy-If-lVx"/>
+                        <outlet property="descLabel" destination="xgm-AV-pzx" id="3rP-jr-lW2"/>
                         <outlet property="emailTextField" destination="h8D-VC-kys" id="Aqc-ke-dlU"/>
                         <outlet property="errorLabel" destination="xVU-cY-1gb" id="6q4-Du-V0c"/>
                         <outlet property="passwordTextField" destination="gbg-W8-HNQ" id="d4K-xd-wCz"/>

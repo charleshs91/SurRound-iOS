@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16085" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="98S-tq-NqU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16092.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="98S-tq-NqU">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16078.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16082.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -164,6 +164,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="734"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="hhn-oo-dOz">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have not followed any user yet." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGY-Lk-lsl">
+                                    <rect key="frame" x="79.5" y="16" width="255" height="53"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhB-V9-RsI">
+                                    <rect key="frame" x="73" y="37" width="0.0" height="0.0"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstItem="mGY-Lk-lsl" firstAttribute="top" secondItem="hhn-oo-dOz" secondAttribute="top" constant="16" id="1fl-41-Bye"/>
+                                <constraint firstAttribute="bottom" secondItem="mGY-Lk-lsl" secondAttribute="bottom" constant="16" id="C9u-zE-ZJ3"/>
+                                <constraint firstItem="mGY-Lk-lsl" firstAttribute="centerX" secondItem="hhn-oo-dOz" secondAttribute="centerX" id="mfk-Gq-UcP"/>
+                            </constraints>
+                        </view>
                         <connections>
                             <outlet property="dataSource" destination="VDG-fr-PYK" id="koR-Xa-TJp"/>
                             <outlet property="delegate" destination="VDG-fr-PYK" id="VAs-cH-9H6"/>
@@ -175,7 +200,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hKN-cj-Ugo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="223" y="726"/>
+            <point key="canvasLocation" x="221.73913043478262" y="725.89285714285711"/>
         </scene>
     </scenes>
 </document>

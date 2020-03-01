@@ -331,11 +331,12 @@ extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let postDetailVC = UIStoryboard.post.instantiateInitialViewController() as? PostContentViewController else { return }
-        
+        guard
+            let nav = UIStoryboard.post.instantiateInitialViewController() as? UINavigationController,
+            let postDetailVC = nav.topViewController as? PostContentViewController else { return }
         postDetailVC.post = posts[indexPath.row]
-        
-        present(postDetailVC, animated: true, completion: nil)
+        nav.modalPresentationStyle = .overCurrentContext
+        present(nav, animated: true, completion: nil)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

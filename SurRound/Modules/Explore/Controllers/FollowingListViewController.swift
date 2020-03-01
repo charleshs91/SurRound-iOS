@@ -42,21 +42,43 @@ class FollowingListViewController: UIViewController {
     // MARK: - Private Methods
     private func refreshPosts() {
         
+        guard let userProfile = AuthManager.shared.userProfile else {
+            return
+        }
         posts.removeAll()
         viewModels.removeAll()
         
-        PostManager.shared.fetchAllPost { [weak self] result in
-            
-            self?.tableView.endHeaderRefreshing()
-            
-            switch result {
-            case .success(let posts):
-                self?.posts.append(contentsOf: posts)
-                self?.viewModels.append(contentsOf: ViewModelFactory.viewModelFromPosts(posts))
+        if userProfile.following.count == 0 {
+            PostManager.shared.fetchAllPost { [weak self] result in
                 
-            case .failure(let error):
-                print(error)
-                SRProgressHUD.showFailure(text: error.localizedDescription)
+                self?.tableView.endHeaderRefreshing()
+                
+                switch result {
+                case .success(let posts):
+                    self?.posts.append(contentsOf: posts)
+                    self?.viewModels.append(contentsOf: ViewModelFactory.viewModelFromPosts(posts))
+                    
+                case .failure(let error):
+                    print(error)
+                    SRProgressHUD.showFailure(text: error.localizedDescription)
+                }
+            }
+        } else {
+            tableView.tableHeaderView = nil
+            
+            PostManager.shared.fetchPostOfUsers(uids: userProfile.following) {  [weak self] result in
+                
+                self?.tableView.endHeaderRefreshing()
+                
+                switch result {
+                case .success(let posts):
+                    self?.posts.append(contentsOf: posts)
+                    self?.viewModels.append(contentsOf: ViewModelFactory.viewModelFromPosts(posts))
+                    
+                case .failure(let error):
+                    print(error)
+                    SRProgressHUD.showFailure(text: error.localizedDescription)
+                }
             }
         }
     }
