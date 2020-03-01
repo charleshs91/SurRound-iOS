@@ -29,8 +29,9 @@ class PostBodyViewModel {
 class PostBodyCell: SRBaseTableViewCell {
     
     @IBOutlet weak var postTextLabel: UILabel!
-    
     @IBOutlet weak var likeButton: UIButton!
+    
+    var onMoreActionTapped: (() -> Void)?
     
     private var viewModel: PostBodyViewModel? {
         didSet {
@@ -74,8 +75,13 @@ class PostBodyCell: SRBaseTableViewCell {
         
         viewModel?.onReplyTapped?()
     }
+    @IBAction func moreActionTapped(_ sender: UIButton) {
+        
+        onMoreActionTapped?()
+    }
     
     private func updateLikeButton() {
+        
         likeButton.isSelected.toggle()
         likeButton.tintColor = likeButton.isSelected ? .yellow : .darkGray
     }

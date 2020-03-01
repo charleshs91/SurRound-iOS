@@ -124,7 +124,7 @@ class ProfileManager {
         }
     }
     
-    func blockUser(target: SRUser, completion: @escaping (Result<Void, Error>) -> Void) {
+    func blockUser(targetUid: String, completion: @escaping (Result<Void, Error>) -> Void) {
         
         guard let currentUser = AuthManager.shared.currentUser else {
             return
@@ -133,7 +133,7 @@ class ProfileManager {
         let userRef = FirestoreDB.users.document(currentUser.uid)
         
         userRef.setData(
-            ["blocking": FieldValue.arrayUnion([target.uid])],
+            ["blocking": FieldValue.arrayUnion([targetUid])],
             merge: true,
             completion: { error in
                 guard error == nil else {

@@ -203,7 +203,7 @@ class ProfileViewController: UIViewController {
         
         let blockAction = UIAlertAction(title: "Block", style: .default) { [unowned self] _ in
             let manager = ProfileManager()
-            manager.blockUser(target: self.userToDisplay) { (result) in
+            manager.blockUser(targetUid: self.userToDisplay.uid) { (result) in
                 switch result {
                 case .failure(let error):
                     print(error)

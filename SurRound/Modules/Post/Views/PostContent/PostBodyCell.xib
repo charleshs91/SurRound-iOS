@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16085" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16092.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16078.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16082.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,10 +44,20 @@
                             <action selector="didTapReplyButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Xc7-KU-c9M"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edn-Qc-WL8">
+                        <rect key="frame" x="285" y="79" width="19" height="22"/>
+                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" image="ellipsis" catalog="system"/>
+                        <connections>
+                            <action selector="moreActionTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="tHO-lQ-YFi"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="edn-Qc-WL8" firstAttribute="centerY" secondItem="n2z-f8-fzY" secondAttribute="centerY" id="4ry-Fe-y6k"/>
                     <constraint firstAttribute="bottom" secondItem="tpN-jw-Rg5" secondAttribute="bottom" constant="16" id="J4y-am-8ct"/>
                     <constraint firstItem="5B3-iI-J4w" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="OMj-s8-54L"/>
+                    <constraint firstAttribute="trailing" secondItem="edn-Qc-WL8" secondAttribute="trailing" constant="16" id="XZp-YL-fjm"/>
                     <constraint firstItem="5B3-iI-J4w" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="dGJ-je-oZd"/>
                     <constraint firstItem="tpN-jw-Rg5" firstAttribute="top" secondItem="5B3-iI-J4w" secondAttribute="bottom" constant="16" id="eQg-TA-6Hw"/>
                     <constraint firstItem="tpN-jw-Rg5" firstAttribute="leading" secondItem="5B3-iI-J4w" secondAttribute="leading" id="mXh-3f-usN"/>
@@ -65,6 +75,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="suit.heart" catalog="system" width="128" height="109"/>
         <image name="suit.heart.fill" catalog="system" width="128" height="109"/>
         <image name="text.bubble" catalog="system" width="128" height="110"/>

@@ -50,9 +50,11 @@ class PostContentViewController: UIViewController {
         }
     }
     
-    let sections: [PostDetailSectionType] = [.content, .review]
+    private let manager = ProfileManager()
     
-    let cellItems: [PostBodyCellType] = [.info, .body]
+    private let sections: [PostDetailSectionType] = [.content, .review]
+    
+    private let cellItems: [PostBodyCellType] = [.info, .body]
     
     // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
@@ -94,6 +96,50 @@ class PostContentViewController: UIViewController {
     }
     
     // MARK: Private Methods
+    private func showMoreActions() {
+        
+        let alertVC = UIAlertController(
+            title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let reportAction = UIAlertAction(title: "Report", style: .default) { [unowned self] _ in
+            
+            SRProgressHUD.showLoading()
+            self.manager.blockUser(targetUid: self.post.authorId) { (result) in
+                SRProgressHUD.dismiss()
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .success:
+                    SRProgressHUD.showSuccess(text: "We've received your report on the current user.")
+                }
+            }
+        }
+        
+        let blockAction = UIAlertAction(title: "Block", style: .default) { [unowned self] _ in
+            
+            SRProgressHUD.showLoading()
+            self.manager.blockUser(targetUid: self.post.authorId) { (result) in
+                SRProgressHUD.dismiss()
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .success:
+                    SRProgressHUD.showSuccess(text: "Successful. You'll no longer see content from this user.")
+                }
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            alertVC.dismiss(animated: true, completion: nil)
+        }
+        
+        [reportAction, blockAction, cancelAction].forEach {
+            alertVC.addAction($0)
+        }
+        
+        present(alertVC, animated: true, completion: nil)
+    }
+    
     private func updateReviews(completion: (() -> Void)? = nil) {
         
         ReviewManager().fetchAllReviews(postId: post.id) { [weak self] (result) in
@@ -171,6 +217,9 @@ extension PostContentViewController: UITableViewDataSource {
                     break
                 }
                 bodyCell.configure(with: postBodyViewModel)
+                bodyCell.onMoreActionTapped = { [weak self] in
+                    self?.showMoreActions()
+                }
             }
             return cell
             

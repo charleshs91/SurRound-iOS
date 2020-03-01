@@ -61,7 +61,7 @@ class SRProgressHUD {
         shared.hud.dismiss(afterDelay: delay)
     }
     
-    static func showLoading(text: String = "Loading") {
+    static func showLoading(text: String? = nil) {
         if !Thread.isMainThread {
             DispatchQueue.main.async {
                 showLoading()
