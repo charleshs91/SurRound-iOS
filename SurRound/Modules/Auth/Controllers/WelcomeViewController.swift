@@ -41,7 +41,7 @@ class WelcomeViewController: UIViewController {
         let backBarButtton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backBarButtton
     }
-    
+   
     // MARK: - User Actions
     @objc func signInWithApple(_ sender: ASAuthorizationAppleIDButton) {
         

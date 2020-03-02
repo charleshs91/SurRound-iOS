@@ -24,6 +24,10 @@ target 'SurRound' do
   pod 'FirebaseFirestoreSwift'
   pod 'Firebase/Storage'
 
+  pod 'Firebase/Analytics'
+  pod 'Fabric', '~> 1.10.2'
+  pod 'Crashlytics', '~> 3.14.0'
+
   # Google Maps
   pod 'GoogleMaps'
   pod 'GooglePlaces'
