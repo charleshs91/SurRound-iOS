@@ -37,10 +37,13 @@ class FollowingListViewController: UIViewController {
         super.viewDidLoad()
         
         refreshPosts()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshPosts),
+                                               name: Constant.NotificationId.newPost, object: nil)
     }
     
     // MARK: - Private Methods
-    private func refreshPosts() {
+    @objc func refreshPosts() {
         
         guard let userProfile = AuthManager.shared.userProfile else {
             return

@@ -262,7 +262,7 @@ class ProfileViewController: UIViewController {
         profileHeaderView.editAvatarButton.addTarget(self, action: #selector(handleEditAvatar(_:)), for: .touchUpInside)
     }
     
-    @objc private func fetchUserPost() {
+    @objc func fetchUserPost() {
         
         guard let user = userToDisplay else {
             return

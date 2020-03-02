@@ -10,7 +10,6 @@ import UIKit
 
 class SignUpViewController: UIViewController {
     
-    @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var emailTextField: SRAuthTextField!
     @IBOutlet weak var usernameTextField: SRAuthTextField!
     @IBOutlet weak var passwordTextField: SRAuthTextField!
@@ -24,7 +23,7 @@ class SignUpViewController: UIViewController {
         
         setupTextField()
         checkTextFieldsContent()
-        setupDescLabel()
+//        setupDescLabel()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,6 +45,12 @@ class SignUpViewController: UIViewController {
                 SRProgressHUD.showFailure(text: error.localizedDescription)
             }
         })
+    }
+    
+    @IBAction func showPrivacyPolicy(_ sender: UIButton) {
+        let wkWebVC = WKWebViewController()
+        wkWebVC.urlString = "https://sites.google.com/view/charleshs"
+        navigationController?.pushViewController(wkWebVC, animated: true)
     }
     
     // MARK: - Private Methods
@@ -106,27 +111,27 @@ class SignUpViewController: UIViewController {
             passwordTextField.text == confirmPwdTextField.text
     }
     
-    private func setupDescLabel() {
-        
-        descLabel.textAlignment = .center
-        descLabel.numberOfLines = 0
-        
-        let titleText = "Sign up with Email"
-        let titleAttributes = [
-            NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline),
-            .foregroundColor: UIColor.darkGray
-        ]
-        let titleString = NSMutableAttributedString(string: titleText, attributes: titleAttributes)
-        
-        let captionText = "\nThe email address is only for logging into our app and won't be seen by others. Therefore, the username is required to be displayed on your posts and will be seen by others."
-        let captionAttributes = [
-            NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption1),
-            .foregroundColor: UIColor.gray
-        ]
-        let captionString = NSAttributedString(string: captionText, attributes: captionAttributes)
-        titleString.append(captionString)
-        descLabel.attributedText = titleString
-    }
+//    private func setupDescLabel() {
+//
+//        descLabel.textAlignment = .center
+//        descLabel.numberOfLines = 0
+//
+//        let titleText = "Sign up with Email"
+//        let titleAttributes = [
+//            NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline),
+//            .foregroundColor: UIColor.darkGray
+//        ]
+//        let titleString = NSMutableAttributedString(string: titleText, attributes: titleAttributes)
+//
+//        let captionText = "\nThe email address is only for logging into our app and won't be seen by others. Therefore, the username is required to be displayed on your posts and will be seen by others."
+//        let captionAttributes = [
+//            NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption1),
+//            .foregroundColor: UIColor.gray
+//        ]
+//        let captionString = NSAttributedString(string: captionText, attributes: captionAttributes)
+//        titleString.append(captionString)
+//        descLabel.attributedText = titleString
+//    }
     
     @objc func textFieldDidChange(_ sender: UITextField) {
         

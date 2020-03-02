@@ -77,7 +77,7 @@ class HomeViewController: UIViewController {
             fetchStories()
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(fetchPosts),
+        NotificationCenter.default.addObserver(self, selector: #selector(newPostHandler),
                                                name: Constant.NotificationId.newPost, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(fetchStories),
                                                name: Constant.NotificationId.newStory, object: nil)
@@ -89,8 +89,15 @@ class HomeViewController: UIViewController {
         displayNewStoryActionSheet()
     }
     
+    @objc func newPostHandler(_ sender: Any) {
+        guard let profile = AuthManager.shared.userProfile else {
+            return
+        }
+        fetchPosts(blockingUsers: profile.blocking)
+    }
+    
     // MARK: - Fetching Data
-    @objc private func fetchStories() {
+    @objc func fetchStories() {
         
         storyEntities.removeAll()
         
@@ -106,7 +113,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @objc private func fetchPosts(blockingUsers: [String] = []) {
+    @objc func fetchPosts(blockingUsers: [String] = []) {
         
         postMarkers.removeAll()
         

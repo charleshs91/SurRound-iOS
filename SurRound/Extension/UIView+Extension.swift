@@ -133,6 +133,8 @@ extension UIView {
         self.removeFromSuperview()
         superview.addSubview(self)
         
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             self.topAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor),
             self.leadingAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.leadingAnchor),
@@ -145,6 +147,8 @@ extension UIView {
         
         self.removeFromSuperview()
         superview.addSubview(self)
+        
+        self.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             self.topAnchor.constraint(equalTo: superview.topAnchor),
