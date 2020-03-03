@@ -10,13 +10,6 @@ import UIKit
 import GoogleMaps
 import MobileCoreServices
 
-struct PostMarker {
-    
-    let post: Post
-    
-    let mapMarker: GMSMarker
-}
-
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView! {
@@ -40,14 +33,14 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var mapView: GMSMapView!
     
-    private var postMarkers: [PostMarker] = [] {
+    private var mapPostViewModels: [MapPostViewModel] = [] {
         didSet {
-            DispatchQueue.main.async { [weak self] in
-                self?.displayPostsOnMap()
+            mapPostViewModels.forEach {
+                $0.displayMarker(onMap: mapView)
             }
         }
     }
-    
+        
     private var storyEntities = [StoryCollection]() {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -115,17 +108,19 @@ class HomeViewController: UIViewController {
     
     @objc func fetchPosts(blockingUsers: [String] = []) {
         
-        postMarkers.removeAll()
+        mapPostViewModels.removeAll()
         
         PostManager.shared.fetchAllPost { [weak self] result in
             
             switch result {
             case .success(let posts):
-                posts.forEach { post in
-                    let position = CLLocationCoordinate2D(latitude: post.place.coordinate.latitude,
-                                                          longitude: post.place.coordinate.longitude)
-                    let marker = GMSMarker(position: position)
-                    self?.postMarkers.append(PostMarker(post: post, mapMarker: marker))
+                
+                let viewModels = posts.map { post in
+                    MapPostViewModel(post: post)
+                }
+                
+                DispatchQueue.main.async {
+                    self?.mapPostViewModels = viewModels
                 }
                 
             case .failure(let error):
@@ -175,22 +170,6 @@ class HomeViewController: UIViewController {
         
         if let location = PlaceManager.current.location {
             mapView.camera = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 18.0)
-        }
-    }
-    
-    private func displayPostsOnMap() {
-        
-        postMarkers.forEach { [weak self] postPin in
-            
-            let imgView = SRMapMarker(avatar: postPin.post.author.avatar,
-                                      text: postPin.post.text,
-                                      category: nil,
-                                      placeholder: UIImage.asset(.Icons_Avatar))
-            
-            postPin.mapMarker.iconView = imgView
-            postPin.mapMarker.iconView?.frame = CGRect(x: 0, y: 0, width: 120, height: 48)
-            
-            postPin.mapMarker.map = self?.mapView
         }
     }
     
@@ -321,8 +300,8 @@ extension HomeViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
-        let matches = postMarkers.filter { (postMarker) -> Bool in
-            return postMarker.mapMarker == marker
+        let matches = mapPostViewModels.filter { (mapPost) -> Bool in
+            return marker == mapPost.mapMarker
         }
         guard
             let first = matches.first,

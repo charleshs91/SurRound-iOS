@@ -26,6 +26,7 @@ class GuestViewController: HomeViewController {
     
     private let buttonHeight: CGFloat = 40
     
+    // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         

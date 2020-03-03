@@ -34,6 +34,11 @@ struct Post: Codable, Hashable, Equatable {
         return lhs.id == rhs.id
     }
     
+    static var dateFormatter: DateFormatter = {
+        
+        return DateManager.shared.postDateFormatter()
+    }()
+    
     init(id: String, category: String, author: Author, text: String, place: SRPlace) {
         
         self.id = id
@@ -65,7 +70,7 @@ struct Post: Codable, Hashable, Equatable {
     
     var datetimeString: String {
         
-        return DateManager.shared.postDateFormatter().string(from: createdTime)
+        return Post.dateFormatter.string(from: createdTime)
     }
     
     func hash(into hasher: inout Hasher) {
