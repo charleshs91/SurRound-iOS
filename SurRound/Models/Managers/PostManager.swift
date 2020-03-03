@@ -29,31 +29,37 @@ class PostManager {
 // MARK: - `Like` Functions
 extension PostManager {
     
-    func likePost(postId: String, uid: String, completion: @escaping () -> Void) {
+    func likePost(postId: String, uid: String, completion: @escaping (Result<Void, Error>) -> Void) {
         
         let docRef = FirestoreDB.posts.document(postId)
         
         docRef.setData([
-            "liked_by": FieldValue.arrayUnion([uid]),
+            Post.CodingKeys.likedBy.rawValue: FieldValue.arrayUnion([uid]),
             Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(1))
         ], merge: true) { (error) in
             
-            guard error == nil else { return }
-            completion()
+            guard error == nil else {
+                completion(.failure(error!))
+                return
+            }
+            completion(.success(()))
         }
     }
     
-    func dislikePost(postId: String, uid: String, completion: @escaping () -> Void) {
+    func dislikePost(postId: String, uid: String, completion: @escaping (Result<Void, Error>) -> Void) {
         
         let docRef = FirestoreDB.posts.document(postId)
         
         docRef.setData([
-            "liked_by": FieldValue.arrayRemove([uid]),
+            Post.CodingKeys.likedBy.rawValue: FieldValue.arrayRemove([uid]),
             Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(-1))
         ], merge: true) { (error) in
             
-            guard error == nil else { return }
-            completion()
+            guard error == nil else {
+                completion(.failure(error!))
+                return
+            }
+            completion(.success(()))
         }
     }
 }
@@ -203,7 +209,7 @@ extension PostManager {
     }
     
     private func _create(_ post: Post, completion: @escaping (Result<Void, Error>) -> Void) {
-
+        
         guard let user = AuthManager.shared.currentUser else { return }
         let documentRef = FirestoreDB.posts.document(post.id)
         do {

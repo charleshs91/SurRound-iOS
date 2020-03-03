@@ -12,6 +12,7 @@
 		7C124A0A240CE08A0087033A /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C124A09240CE08A0087033A /* WKWebViewController.swift */; };
 		7C250E8A2409833D0037A54C /* CurveShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C250E892409833D0037A54C /* CurveShapeView.swift */; };
 		7C27B20724058296008EEA1B /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C27B20624058296008EEA1B /* NotificationViewModel.swift */; };
+		7C3606B5240E429C00270EE9 /* SwipeTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3606B4240E429C00270EE9 /* SwipeTransitionAnimator.swift */; };
 		7C3AD08124065B7A00DF40EE /* GuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3AD08024065B7A00DF40EE /* GuestViewController.swift */; };
 		7C3AD08324065C8B00DF40EE /* Guest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C3AD08224065C8B00DF40EE /* Guest.storyboard */; };
 		D3086B6E23DB57E80071F378 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B6D23DB57E80071F378 /* AuthManager.swift */; };
@@ -175,6 +176,7 @@
 		7C124A09240CE08A0087033A /* WKWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		7C250E892409833D0037A54C /* CurveShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveShapeView.swift; sourceTree = "<group>"; };
 		7C27B20624058296008EEA1B /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		7C3606B4240E429C00270EE9 /* SwipeTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTransitionAnimator.swift; sourceTree = "<group>"; };
 		7C3AD08024065B7A00DF40EE /* GuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestViewController.swift; sourceTree = "<group>"; };
 		7C3AD08224065C8B00DF40EE /* Guest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Guest.storyboard; sourceTree = "<group>"; };
 		8EEF37FDB33146FC6FC83E90 /* Pods-SurRoundTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRoundTests.debug.xcconfig"; path = "Target Support Files/Pods-SurRoundTests/Pods-SurRoundTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -360,6 +362,14 @@
 				7C27B20624058296008EEA1B /* NotificationViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7C3606B6240E42ED00270EE9 /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				7C3606B4240E429C00270EE9 /* SwipeTransitionAnimator.swift */,
+			);
+			path = Animator;
 			sourceTree = "<group>";
 		};
 		7C3AD07F24065B5600DF40EE /* Guest */ = {
@@ -795,6 +805,7 @@
 		D3AD56452403EE3E0051A58D /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				7C3606B6240E42ED00270EE9 /* Animator */,
 				D3AD56462403EE430051A58D /* Controllers */,
 				D3AD56472403EE490051A58D /* Views */,
 			);
@@ -1324,6 +1335,7 @@
 				D3A3B5F423E2A7E1003201E1 /* PlaceManager.swift in Sources */,
 				D36B695123F29F2300AAED0D /* GenericFetcher.swift in Sources */,
 				D3086B8C23DC8E7B0071F378 /* Constant.swift in Sources */,
+				7C3606B5240E429C00270EE9 /* SwipeTransitionAnimator.swift in Sources */,
 				D3086B8F23DC9D3A0071F378 /* PostInfoTableViewCell.swift in Sources */,
 				D3A07CF323F547FF00CE3F26 /* SRMediumTextLabel.swift in Sources */,
 				D3850D7E23DAD879008F1F7E /* UIWindow+Extension.swift in Sources */,
@@ -1589,7 +1601,7 @@
 				CODE_SIGN_ENTITLEMENTS = SurRound/SurRound.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = HW9KY3R5BK;
 				INFOPLIST_FILE = SurRound/Resources/Info.plist;
@@ -1615,7 +1627,7 @@
 				CODE_SIGN_ENTITLEMENTS = SurRound/SurRound.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = HW9KY3R5BK;
 				INFOPLIST_FILE = SurRound/Resources/Info.plist;

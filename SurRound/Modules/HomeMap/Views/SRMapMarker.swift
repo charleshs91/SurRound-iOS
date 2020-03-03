@@ -52,14 +52,6 @@ class SRMapMarker: UIView {
     private let iconSize = CGSize(width: 20, height: 20)
     
     // MARK: - Initializers
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
     convenience init(avatar: String,
                      text: String,
                      category icon: UIImage? = nil,

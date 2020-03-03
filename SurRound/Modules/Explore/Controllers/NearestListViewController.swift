@@ -36,8 +36,7 @@ class NearestListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.definesPresentationContext = true
-        
+
         fetchData()
     }
     

@@ -126,4 +126,9 @@ extension SRTabBarController: UITabBarControllerDelegate {
         
         return true
     }
+    
+    func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        return SwipeTransitionAnimator(viewControllers: tabBarController.viewControllers, duration: 0.25)
+    }
 }

@@ -53,12 +53,22 @@ class PostBodyCell: SRBaseTableViewCell {
         viewModel.isLiked.addObserver(fireNow: false) { (state) in
             
             if state {
-                PostManager.shared.likePost(postId: viewModel.postId, uid: user.uid) { [weak self] in
-                    self?.updateLikeButton()
+                PostManager.shared.likePost(postId: viewModel.postId, uid: user.uid) { [weak self] result in
+                    switch result {
+                    case .failure(let error):
+                        SRProgressHUD.showFailure(text: error.localizedDescription)
+                    case .success:
+                        self?.updateLikeButton()
+                    }
                 }
             } else {
-                PostManager.shared.dislikePost(postId: viewModel.postId, uid: user.uid) { [weak self] in
-                    self?.updateLikeButton()
+                PostManager.shared.dislikePost(postId: viewModel.postId, uid: user.uid) { [weak self] result in
+                    switch result {
+                    case .failure(let error):
+                        SRProgressHUD.showFailure(text: error.localizedDescription)
+                    case .success:
+                        self?.updateLikeButton()
+                    }
                 }
             }
         }

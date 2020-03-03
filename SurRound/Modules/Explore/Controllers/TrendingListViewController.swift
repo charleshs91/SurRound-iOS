@@ -30,8 +30,7 @@ class TrendingListViewController: UIViewController {
     // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.definesPresentationContext = true
-        
+
         fetchData()
     }
     
