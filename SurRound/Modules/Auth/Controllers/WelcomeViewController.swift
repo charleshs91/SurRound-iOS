@@ -42,7 +42,7 @@ class WelcomeViewController: SRBaseViewController {
         
         setupViews()
     }
-   
+    
     // MARK: - User Actions
     @objc func signInWithApple(_ sender: ASAuthorizationAppleIDButton) {
         
@@ -92,6 +92,29 @@ class WelcomeViewController: SRBaseViewController {
         NSLayoutConstraint(item: loginButtonsStackView, attribute: .centerY, relatedBy: .equal,
                            toItem: view, attribute: .bottom, multiplier: 0.75, constant: 0).isActive = true
     }
+    
+    private func appleSignIn(uid: String) {
+        
+        UserService.queryUser(uid: uid) { [weak self] user in
+            
+            guard user != nil else {
+                DispatchQueue.main.async {
+                    let newVC = UIStoryboard.auth.instantiateViewController(identifier:
+                        String(describing: UserInfoFormViewController.self))
+                    guard let userInfoVC = newVC as? UserInfoFormViewController else { return }
+                    userInfoVC.uid = uid
+                    self?.navigationController?.pushViewController(userInfoVC, animated: true)
+                }
+                return
+            }
+            
+            AuthManager.shared.currentUser = user!
+            
+            DispatchQueue.main.async {
+                self?.displayMainView()
+            }
+        }
+    }
 }
 
 // MARK: - ASAuthorizationControllerDelegate
@@ -100,7 +123,10 @@ extension WelcomeViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController,
                                  didCompleteWithAuthorization authorization: ASAuthorization) {
         
-        guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
+        guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else {
+            return
+        }
+        
         let userId = credential.user
         let uid = String(userId.split(separator: ".")[1])
         
@@ -109,24 +135,7 @@ extension WelcomeViewController: ASAuthorizationControllerDelegate {
             
             switch credentialState {
             case .authorized:
-                
-                UserService.queryUser(uid: uid) { (srUser) in
-                    
-                    guard let user = srUser else {
-                        DispatchQueue.main.async {
-                            let newVC = UIStoryboard.auth.instantiateViewController(identifier: "UserInfoFormViewController")
-                            guard let userInfoVC = newVC as? UserInfoFormViewController else { return }
-                            userInfoVC.uid = uid
-                            self?.navigationController?.show(userInfoVC, sender: nil)
-                        }
-                        return
-                    }
-                    
-                    AuthManager.shared.currentUser = user
-                    DispatchQueue.main.async {
-                        self?.displayMainView()
-                    }
-                }
+                self?.appleSignIn(uid: uid)
                 
             default:
                 break
@@ -136,7 +145,7 @@ extension WelcomeViewController: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         
-        SRProgressHUD.showFailure(text: error.localizedDescription)
+        print(error)
     }
 }
 
