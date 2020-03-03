@@ -9,17 +9,10 @@
 import UIKit
 import AuthenticationServices
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController: SRBaseViewController {
     
     @IBOutlet weak var emailSignInBtn: SRAuthButton!
-    
     @IBOutlet weak var guestSignInBtn: SRAuthButton!
-    
-    private let curveShapeView: CurveShapeView = {
-        let view = CurveShapeView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
     
     private let appleSignInButton: ASAuthorizationAppleIDButton = {
         let btn = ASAuthorizationAppleIDButton(authorizationButtonType: .default,
@@ -30,16 +23,24 @@ class WelcomeViewController: UIViewController {
         return btn
     }()
     
+    private lazy var loginButtonsStackView: UIStackView = {
+        let vStack = UIStackView(arrangedSubviews: [emailSignInBtn, appleSignInButton, guestSignInBtn])
+        vStack.axis = .vertical
+        vStack.spacing = 24
+        return vStack
+    }()
+    
+    private let curveShapeView: CurveShapeView = create {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.shapeColor = UIColor.hexStringToUIColor(hex: "39375B")
+        $0.frame = CGRect(x: 0, y: 0, width: UIScreen.width, height: UIScreen.height / 1.6)
+    }
+    
+    // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBackgroundView()
-        
-        appleSignInButton.anchor(top: nil, leading: nil, bottom: nil, trailing: nil,
-                                 padding: .zero, widthConstant: 0, heightConstant: 48)
-        
-        let backBarButtton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backBarButtton
+        setupViews()
     }
    
     // MARK: - User Actions
@@ -60,9 +61,9 @@ class WelcomeViewController: UIViewController {
             guestVC.modalPresentationStyle = .overCurrentContext
             present(guestVC, animated: true, completion: nil)
         }
-        
     }
     
+    // MARK: - Private Methods
     private func displayMainView() {
         
         if let window = AppDelegate.shared.window {
@@ -71,24 +72,29 @@ class WelcomeViewController: UIViewController {
         }
     }
     
-    private func setupBackgroundView() {
+    private func setupViews() {
         
         view.insertSubview(curveShapeView, at: 0)
-        curveShapeView.shapeColor = UIColor.hexStringToUIColor(hex: "39375B")
-        curveShapeView.frame = CGRect(x: 0, y: 0, width: UIScreen.width, height: UIScreen.height / 1.6)
         
-        let vStack = UIStackView(arrangedSubviews: [emailSignInBtn, appleSignInButton, guestSignInBtn])
-        view.addSubview(vStack)
-
-        vStack.axis = .vertical
-        vStack.spacing = 24
-           
-        vStack.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50), widthConstant: 0, heightConstant: 0)
+        setupLoginButtonsStackView()
+    }
+    
+    private func setupLoginButtonsStackView() {
         
-        NSLayoutConstraint(item: vStack, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 0.75, constant: 0).isActive = true
+        view.addSubview(loginButtonsStackView)
+        loginButtonsStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,
+                                     padding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50),
+                                     widthConstant: 0, heightConstant: 0)
         
+        appleSignInButton.anchor(top: nil, leading: nil, bottom: nil, trailing: nil,
+                                 padding: .zero, widthConstant: 0, heightConstant: 48)
+        
+        NSLayoutConstraint(item: loginButtonsStackView, attribute: .centerY, relatedBy: .equal,
+                           toItem: view, attribute: .bottom, multiplier: 0.75, constant: 0).isActive = true
     }
 }
+
+// MARK: - ASAuthorizationControllerDelegate
 extension WelcomeViewController: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController,
@@ -129,10 +135,12 @@ extension WelcomeViewController: ASAuthorizationControllerDelegate {
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print(error)
+        
+        SRProgressHUD.showFailure(text: error.localizedDescription)
     }
 }
 
+// MARK: - ASAuthorizationControllerPresentationContextProviding
 extension WelcomeViewController: ASAuthorizationControllerPresentationContextProviding {
     
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {

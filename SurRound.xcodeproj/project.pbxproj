@@ -16,6 +16,8 @@
 		7C3AD08124065B7A00DF40EE /* GuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3AD08024065B7A00DF40EE /* GuestViewController.swift */; };
 		7C3AD08324065C8B00DF40EE /* Guest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C3AD08224065C8B00DF40EE /* Guest.storyboard */; };
 		7CBBE824240E4C9700681B00 /* MapPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBE823240E4C9700681B00 /* MapPostViewModel.swift */; };
+		7CBBE826240E544800681B00 /* SRBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBE825240E544800681B00 /* SRBaseViewController.swift */; };
+		7CBBE828240E558B00681B00 /* CreateClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBE827240E558B00681B00 /* CreateClosure.swift */; };
 		D3086B6E23DB57E80071F378 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B6D23DB57E80071F378 /* AuthManager.swift */; };
 		D3086B7023DB59950071F378 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B6F23DB59950071F378 /* UserService.swift */; };
 		D3086B7523DB763A0071F378 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3086B7423DB763A0071F378 /* HomeViewController.swift */; };
@@ -181,6 +183,8 @@
 		7C3AD08024065B7A00DF40EE /* GuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestViewController.swift; sourceTree = "<group>"; };
 		7C3AD08224065C8B00DF40EE /* Guest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Guest.storyboard; sourceTree = "<group>"; };
 		7CBBE823240E4C9700681B00 /* MapPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPostViewModel.swift; sourceTree = "<group>"; };
+		7CBBE825240E544800681B00 /* SRBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRBaseViewController.swift; sourceTree = "<group>"; };
+		7CBBE827240E558B00681B00 /* CreateClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClosure.swift; sourceTree = "<group>"; };
 		8EEF37FDB33146FC6FC83E90 /* Pods-SurRoundTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRoundTests.debug.xcconfig"; path = "Target Support Files/Pods-SurRoundTests/Pods-SurRoundTests.debug.xcconfig"; sourceTree = "<group>"; };
 		934CDAF51DE8A38F689F9CA3 /* Pods-SurRound-SurRoundUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurRound-SurRoundUITests.debug.xcconfig"; path = "Target Support Files/Pods-SurRound-SurRoundUITests/Pods-SurRound-SurRoundUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D3086B6D23DB57E80071F378 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -439,6 +443,7 @@
 			isa = PBXGroup;
 			children = (
 				D34DCA852404FB3900ABC0FA /* DateManager.swift */,
+				7CBBE827240E558B00681B00 /* CreateClosure.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -828,6 +833,7 @@
 			children = (
 				D39A754123D5DACF00A20879 /* SRTabBarController.swift */,
 				D3949B0223D9AE12006DA9AA /* InvisibleNavController.swift */,
+				7CBBE825240E544800681B00 /* SRBaseViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1319,11 +1325,13 @@
 				D3768B692403F7A200BD0651 /* ExplorePageType.swift in Sources */,
 				7C124A0A240CE08A0087033A /* WKWebViewController.swift in Sources */,
 				7CBBE824240E4C9700681B00 /* MapPostViewModel.swift in Sources */,
+				7CBBE828240E558B00681B00 /* CreateClosure.swift in Sources */,
 				D3850D7C23DAC5FC008F1F7E /* JGProgressHUDWrapper.swift in Sources */,
 				D3086B8323DC83110071F378 /* NewPostViewController.swift in Sources */,
 				D39A754223D5DACF00A20879 /* SRTabBarController.swift in Sources */,
 				D3A3B5FD23E3F5E6003201E1 /* PostManager.swift in Sources */,
 				D3AD56202403E8D50051A58D /* NotificationManager.swift in Sources */,
+				7CBBE826240E544800681B00 /* SRBaseViewController.swift in Sources */,
 				D32F7F3623EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift in Sources */,
 				D36B695323F29FA100AAED0D /* GenericParser.swift in Sources */,
 				D3A4BB6323F15678005E8196 /* Numbers+Extension.swift in Sources */,
