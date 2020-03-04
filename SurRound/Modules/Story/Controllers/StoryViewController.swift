@@ -10,20 +10,26 @@ import UIKit
 
 class StoryViewController: UIViewController {
     
+    deinit {
+        print("$ StoryViewController deinit")
+    }
+    
     var storyEntities: [StoryCollection] = []
     
-    var indexPath: IndexPath! {
+    var initialIndexPath: IndexPath! {
         didSet {
-            currentSection = indexPath.section
+            currentSection = initialIndexPath.section
         }
     }
 
     var currentSection: Int = 0 {
         didSet {
-            progressBarCollectionView.reloadData()
+            if currentSection != oldValue { progressBarCollectionView.reloadData() }
         }
     }
-        
+    
+    private var onShowUpFlag: Bool = true
+    
     private lazy var closeButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -65,13 +71,12 @@ class StoryViewController: UIViewController {
         view.backgroundColor = .black
         setupCollectionViews()
         setupCloseButton()
+        storyCollectionView.scrollToItem(at: initialIndexPath, at: .right, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        storyCollectionView.scrollToItem(at: indexPath, at: .left, animated: false)
-        startPlayerCellAt(indexPath: indexPath)
+        startPlayerCellAt(indexPath: initialIndexPath)
     }
     
     override func viewDidLayoutSubviews() {
@@ -120,6 +125,7 @@ class StoryViewController: UIViewController {
         
         if let playerCell = storyCollectionView.cellForItem(at: indexPath) as? StoryPlayerCell {
             playerCell.startPlaying(updateFrequency: 0.1)
+            currentSection = indexPath.section
         }
     }
     
@@ -127,6 +133,7 @@ class StoryViewController: UIViewController {
         
         if let playerCell = storyCollectionView.cellForItem(at: indexPath) as? StoryPlayerCell {
             playerCell.stopPlaying()
+            currentSection = indexPath.section
         }
     }
 }
@@ -164,6 +171,7 @@ extension StoryViewController: UICollectionViewDataSource, UICollectionViewDeleg
             
             let url = URL(string: storyEntities[indexPath.section].stories[indexPath.item].videoLink)!
             storyCell.configurePlayer(for: url)
+            storyCell.delegate = self
             return storyCell
             
         } else {
@@ -181,17 +189,28 @@ extension StoryViewController: UICollectionViewDataSource, UICollectionViewDeleg
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
         
-        if collectionView == storyCollectionView {
-            
-            guard let storyCell = cell as? StoryPlayerCell else { return }
-            storyCell.delegate = self
-            
-            if currentSection != indexPath.section {
-                currentSection = indexPath.section
-            }
+        if collectionView == storyCollectionView && onShowUpFlag {
+            storyCollectionView.scrollToItem(at: initialIndexPath, at: .left, animated: false)
+            onShowUpFlag = false
         }
     }
     
+    // MARK: - sizeForItemAt
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if collectionView == storyCollectionView {
+            return collectionView.frame.size
+            
+        } else {
+            let counts = storyEntities[currentSection].stories.count.cgFloat
+            let width = (collectionView.frame.size.width - 2) / counts
+            return CGSize(width: width, height: 4)
+        }
+    }
+    
+    // MARK: - UIScrollViewDelegate
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         
         let point = CGPoint(x: scrollView.contentOffset.x + 100, y: 0)
@@ -215,26 +234,15 @@ extension StoryViewController: UICollectionViewDataSource, UICollectionViewDeleg
             let indexPath = collectionView.indexPathForItem(at: point) else {
                 return
         }
-        if let progressCell = progressBarCollectionView.cellForItem(at:
+        if let previousProgressCell = progressBarCollectionView.cellForItem(at:
             IndexPath(item: indexPath.item - 1, section: 0)) as? StoryCounterCell {
-            progressCell.timerBar.progress = 1
+            previousProgressCell.timerBar.progress = 1
+        }
+        if let nextProgressCell = progressBarCollectionView.cellForItem(at:
+            IndexPath(item: indexPath.item + 1, section: 0)) as? StoryCounterCell {
+            nextProgressCell.timerBar.progress = 0
         }
         startPlayerCellAt(indexPath: indexPath)
-    }
-    
-    // MARK: - sizeForItemAt
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        if collectionView == storyCollectionView {
-            return collectionView.frame.size
-            
-        } else {
-            let counts = storyEntities[currentSection].stories.count.cgFloat
-            let width = (collectionView.frame.size.width - 2) / counts
-            return CGSize(width: width, height: 4)
-        }
     }
 }
 

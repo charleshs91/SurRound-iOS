@@ -52,20 +52,21 @@ class StoryPlayerCell: UICollectionViewCell {
         guard let player = self.player, let playerItem = self.playerItem else {
             return
         }
-        
+        player.seek(to: .zero)
         player.play()
-        
+
         timeObserverToken = player.addPeriodicTimeObserver(
             forInterval: CMTime(seconds: updateFrequency, preferredTimescale: CMTimeScale(NSEC_PER_SEC)),
             queue: DispatchQueue.main
         ) { [weak self] time in
             
-            guard let self = self else { return }
+            guard let strongSelf = self else { return }
             
-            self.delegate?.updateCurrentTime(self, current: time.seconds, duration: playerItem.duration.seconds)
+            strongSelf.delegate?.updateCurrentTime(strongSelf, current: time.seconds, duration: playerItem.duration.seconds)
             
             if time >= playerItem.duration {
-                self.delegate?.didEndPlayingVideo(self)
+                strongSelf.removeTimeObserver()
+                strongSelf.delegate?.didEndPlayingVideo(strongSelf)
             }
         }
     }

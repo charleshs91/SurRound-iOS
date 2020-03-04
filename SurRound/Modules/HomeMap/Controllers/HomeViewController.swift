@@ -291,7 +291,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
             }
             storyVC.modalPresentationStyle = .overCurrentContext
             storyVC.storyEntities = storyEntities
-            storyVC.indexPath = IndexPath(item: 0, section: indexPath.item - 1)
+            storyVC.initialIndexPath = IndexPath(item: 0, section: indexPath.item - 1)
             tabBarController?.present(storyVC, animated: true, completion: nil)
         }
     }
