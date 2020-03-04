@@ -9,11 +9,7 @@
 import UIKit
 
 class StoryViewController: UIViewController {
-    
-    deinit {
-        print("$ StoryViewController deinit")
-    }
-    
+
     var storyEntities: [StoryCollection] = []
     
     var initialIndexPath: IndexPath! {
@@ -24,7 +20,10 @@ class StoryViewController: UIViewController {
 
     var currentSection: Int = 0 {
         didSet {
-            if currentSection != oldValue { progressBarCollectionView.reloadData() }
+            if currentSection != oldValue {
+                progressBarCollectionView.reloadData()
+                updateHeaderInfo(index: currentSection)
+            }
         }
     }
     
@@ -64,14 +63,42 @@ class StoryViewController: UIViewController {
         return clv
     }()
 
+    private let userPicture: UIImageView = {
+        let imageView = UIImageView(frame: .zero)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
+    private let usernameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.font = .preferredFont(forTextStyle: .subheadline)
+        return label
+    }()
+    
+    private let datetimeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .systemGray5
+        label.font = .preferredFont(forTextStyle: .caption1)
+        return label
+    }()
+    
+    private lazy var headerInfoStackView: UIStackView = {
+        let vStack = UIStackView(arrangedSubviews: [usernameLabel, UIView(), datetimeLabel])
+        vStack.axis = .vertical
+        vStack.distribution = .fill
+        return vStack
+    }()
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .black
-        setupCollectionViews()
-        setupCloseButton()
-        storyCollectionView.scrollToItem(at: initialIndexPath, at: .right, animated: false)
+        setupViews()
+        updateHeaderInfo(index: currentSection)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -96,6 +123,15 @@ class StoryViewController: UIViewController {
     }
     
     // MARK: - Private Methods
+    private func setupViews() {
+        
+        view.backgroundColor = .black
+
+        setupCollectionViews()
+        setupCloseButton()
+        setupHeaderInfoViews()
+    }
+    
     private func setupCollectionViews() {
         
         storyCollectionView.dataSource = self
@@ -103,9 +139,9 @@ class StoryViewController: UIViewController {
         storyCollectionView.stickToSafeArea(view)
         storyCollectionView.registerCellWithNib(cellWithClass: StoryPlayerCell.self)
         
+        view.addSubview(progressBarCollectionView)
         progressBarCollectionView.dataSource = self
         progressBarCollectionView.delegate = self
-        view.addSubview(progressBarCollectionView)
         progressBarCollectionView.setConstraints(
             to: view.safeAreaLayoutGuide, top: 4, leading: 0, trailing: 0)
         progressBarCollectionView.heightAnchor.constraint(equalToConstant: 4).isActive = true
@@ -119,6 +155,33 @@ class StoryViewController: UIViewController {
                                    top: 18, leading: nil, trailing: -12, bottom: nil)
         closeButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         closeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    private func setupHeaderInfoViews() {
+        
+        let imageWidth: CGFloat = 40
+        view.addSubview(userPicture)
+        userPicture.anchor(top: progressBarCollectionView.bottomAnchor,
+                           leading: view.safeAreaLayoutGuide.leadingAnchor,
+                           bottom: nil, trailing: nil,
+                           padding: .init(top: 8, left: 16, bottom: 0, right: 0),
+                           widthConstant: imageWidth, heightConstant: imageWidth)
+        userPicture.layer.cornerRadius = imageWidth / 2
+        
+        view.addSubview(headerInfoStackView)
+        headerInfoStackView.anchor(top: userPicture.topAnchor,
+                                   leading: userPicture.trailingAnchor,
+                                   bottom: userPicture.bottomAnchor,
+                                   trailing: closeButton.leadingAnchor,
+                                   padding: .init(top: 0, left: 8, bottom: 0, right: 8),
+                                   widthConstant: 0, heightConstant: 0)
+    }
+    
+    private func updateHeaderInfo(index: Int) {
+        
+        let user = storyEntities[index]
+        userPicture.loadImage(user.author.avatar)
+        usernameLabel.text = user.author.username
     }
     
     private func startPlayerCellAt(indexPath: IndexPath) {
