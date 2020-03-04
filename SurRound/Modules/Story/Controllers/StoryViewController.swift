@@ -10,14 +10,20 @@ import UIKit
 
 class StoryViewController: UIViewController {
     
-    var indexPath: IndexPath = IndexPath(item: 0, section: 0)
+    var storyEntities: [StoryCollection] = []
     
-    var storyEntities = [StoryCollection]()
-    
-    var currentSection: Int = 0 {
-        didSet { progressBarCollectionView.reloadData() }
+    var indexPath: IndexPath! {
+        didSet {
+            currentSection = indexPath.section
+        }
     }
-    
+
+    var currentSection: Int = 0 {
+        didSet {
+            progressBarCollectionView.reloadData()
+        }
+    }
+        
     private lazy var closeButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -51,13 +57,12 @@ class StoryViewController: UIViewController {
         clv.backgroundColor = .clear
         return clv
     }()
-    
+
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .black
-        
         setupCollectionViews()
         setupCloseButton()
     }
@@ -65,8 +70,8 @@ class StoryViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        storyCollectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
-        currentSection = indexPath.section
+        storyCollectionView.scrollToItem(at: indexPath, at: .left, animated: false)
+        startPlayerCellAt(indexPath: indexPath)
     }
     
     override func viewDidLayoutSubviews() {
@@ -110,10 +115,24 @@ class StoryViewController: UIViewController {
         closeButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         closeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
+    
+    private func startPlayerCellAt(indexPath: IndexPath) {
+        
+        if let playerCell = storyCollectionView.cellForItem(at: indexPath) as? StoryPlayerCell {
+            playerCell.startPlaying(updateFrequency: 0.1)
+        }
+    }
+    
+    private func stopPlayerCellAt(indexPath: IndexPath) {
+        
+        if let playerCell = storyCollectionView.cellForItem(at: indexPath) as? StoryPlayerCell {
+            playerCell.stopPlaying()
+        }
+    }
 }
 
-// MARK: - UICollectionViewDataSource
-extension StoryViewController: UICollectionViewDataSource {
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+extension StoryViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
@@ -143,25 +162,67 @@ extension StoryViewController: UICollectionViewDataSource {
                 StoryPlayerCell.reuseIdentifier, for: indexPath)
             guard let storyCell = cell as? StoryPlayerCell else { return cell }
             
-            storyCell.url = URL(string: storyEntities[indexPath.section].stories[indexPath.item].videoLink)!
-            storyCell.configurePlayer()
+            let url = URL(string: storyEntities[indexPath.section].stories[indexPath.item].videoLink)!
+            storyCell.configurePlayer(for: url)
             return storyCell
             
         } else {
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StoryCounterCell.reuseIdentifier, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+                StoryCounterCell.reuseIdentifier, for: indexPath)
             guard let counterCell = cell as? StoryCounterCell else { return cell }
             
             counterCell.timerBar.progress = 0
-            
             return counterCell
         }
     }
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-extension StoryViewController: UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        
+        if collectionView == storyCollectionView {
+            
+            guard let storyCell = cell as? StoryPlayerCell else { return }
+            storyCell.delegate = self
+            
+            if currentSection != indexPath.section {
+                currentSection = indexPath.section
+            }
+        }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+        let point = CGPoint(x: scrollView.contentOffset.x + 100, y: 0)
+        
+        guard
+            let collectionView = scrollView as? UICollectionView,
+            collectionView == storyCollectionView,
+            let indexPath = collectionView.indexPathForItem(at: point) else {
+                return
+        }
+        stopPlayerCellAt(indexPath: indexPath)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+
+        let point = CGPoint(x: scrollView.contentOffset.x + 100, y: 0)
+        
+        guard
+            let collectionView = scrollView as? UICollectionView,
+            collectionView == storyCollectionView,
+            let indexPath = collectionView.indexPathForItem(at: point) else {
+                return
+        }
+        if let progressCell = progressBarCollectionView.cellForItem(at:
+            IndexPath(item: indexPath.item - 1, section: 0)) as? StoryCounterCell {
+            progressCell.timerBar.progress = 1
+        }
+        startPlayerCellAt(indexPath: indexPath)
+    }
+    
+    // MARK: - sizeForItemAt
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -174,27 +235,6 @@ extension StoryViewController: UICollectionViewDelegateFlowLayout {
             let width = (collectionView.frame.size.width - 2) / counts
             return CGSize(width: width, height: 4)
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        willDisplay cell: UICollectionViewCell,
-                        forItemAt indexPath: IndexPath) {
-        
-        if collectionView == storyCollectionView {
-            guard let storyCell = cell as? StoryPlayerCell else { return }
-            storyCell.delegate = self
-            storyCell.startPlaying(updateFrequency: 0.1)
-            
-            if currentSection != indexPath.section {
-                currentSection = indexPath.section
-            }
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        didEndDisplaying cell: UICollectionViewCell,
-                        forItemAt indexPath: IndexPath) {
-
     }
 }
 
@@ -229,10 +269,12 @@ extension StoryViewController: StoryPlayerCellDelegate {
         case (true, false):
             let nextIndexPath = IndexPath(item: 0, section: indexPath.section + 1)
             storyCollectionView.scrollToItem(at: nextIndexPath, at: .left, animated: true)
-
+            startPlayerCellAt(indexPath: nextIndexPath)
+            
         case (false, false), (false, true):
             let nextIndexPath = IndexPath(item: indexPath.item + 1, section: indexPath.section)
             storyCollectionView.scrollToItem(at: nextIndexPath, at: .left, animated: true)
+            startPlayerCellAt(indexPath: nextIndexPath)
         }
     }
 }

@@ -18,7 +18,7 @@ protocol StoryPlayerCellDelegate: AnyObject {
 
 class StoryPlayerCell: UICollectionViewCell {
     
-    var url: URL!
+    private var url: URL!
     
     weak var delegate: StoryPlayerCellDelegate?
     
@@ -71,12 +71,14 @@ class StoryPlayerCell: UICollectionViewCell {
     }
     
     func stopPlaying() {
+        
         player?.pause()
         removeTimeObserver()
     }
         
-    func configurePlayer() {
+    func configurePlayer(for url: URL) {
         
+        self.url = url
         prepareToPlay()
         setupPlayerLayer()
     }

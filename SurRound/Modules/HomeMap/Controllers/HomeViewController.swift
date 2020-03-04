@@ -180,7 +180,7 @@ class HomeViewController: UIViewController {
             return
         }
         
-        SRProgressHUD.showLoading(text: "Uploading Video...")
+        SRProgressHUD.showLoading()
         do {
             try StoryManager().createStory(url, at: place) { result in
                 
@@ -203,6 +203,7 @@ class HomeViewController: UIViewController {
         
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
+        imagePicker.allowsEditing = false
         
         let imagePickerAlert = UIAlertController(title: "Post Video Story",
                                                  message: "Select video source from",
@@ -282,16 +283,17 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         
         if indexPath.item == 0 {
             displayNewStoryActionSheet()
+            
+        } else {
+            guard let storyVC = UIStoryboard.story.instantiateInitialViewController()
+                as? StoryViewController else {
+                    return
+            }
+            storyVC.modalPresentationStyle = .overCurrentContext
+            storyVC.storyEntities = storyEntities
+            storyVC.indexPath = IndexPath(item: 0, section: indexPath.item - 1)
+            tabBarController?.present(storyVC, animated: true, completion: nil)
         }
-        
-        guard let storyVC = UIStoryboard.story.instantiateInitialViewController()
-            as? StoryViewController else {
-                return
-        }
-        storyVC.modalPresentationStyle = .overCurrentContext
-        storyVC.storyEntities = storyEntities
-        storyVC.indexPath = IndexPath(item: 0, section: indexPath.item - 1)
-        tabBarController?.present(storyVC, animated: true, completion: nil)
     }
 }
 
@@ -330,16 +332,15 @@ extension HomeViewController: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        
-        dismiss(animated: true, completion: nil)
-        
         guard
             let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String,
             mediaType == (kUTTypeMovie as String),
             let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL else {
                 return
         }
-        sendStory(url)
+        dismiss(animated: true, completion: { [weak self] in
+            self?.sendStory(url)
+        })
     }
 }
 
