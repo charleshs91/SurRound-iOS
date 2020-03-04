@@ -10,123 +10,57 @@ import UIKit
 import GoogleMaps
 import MobileCoreServices
 
+fileprivate let cellHeightInset: CGFloat = 10
+fileprivate let cellLeadingInset: CGFloat = 8
+
 class HomeViewController: UIViewController {
     
+    // MARK: - iVars
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             collectionView.backgroundColor = .white
-            
             collectionView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
             collectionView.layer.cornerRadius = 8
-            
             collectionView.layer.shadowOffset = CGSize(width: 0, height: 2)
             collectionView.layer.shadowOpacity = 0.6
             collectionView.layer.shadowColor = UIColor.lightGray.cgColor
             collectionView.layer.shadowRadius = 4
-            
-            collectionView.contentInset = UIEdgeInsets(top: cellHeightInset / 4,
-                                                       left: cellLeadingInset,
-                                                       bottom: 0,
-                                                       right: 0)
+            collectionView.contentInset = UIEdgeInsets(top: cellHeightInset / 4, left: cellLeadingInset, bottom: 0, right: 0)
         }
     }
     
     @IBOutlet weak var mapView: GMSMapView!
     
-    private var mapPostViewModels: [MapPostViewModel] = [] {
-        didSet {
-            mapPostViewModels.forEach {
-                $0.displayMarker(onMap: mapView)
-            }
-        }
-    }
-        
-    private var storyEntities = [StoryCollection]() {
-        didSet {
-            DispatchQueue.main.async { [weak self] in
-                self?.collectionView.reloadData()
-            }
-        }
-    }
-    
-    private let cellHeightInset: CGFloat = 10
-    private let cellLeadingInset: CGFloat = 8
+    private var homeViewModel: HomeViewModel!
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        homeViewModel = HomeViewModel()
+        
+        homeViewModel.bindMapPost { [weak self] mapPosts in
+            guard let strongSelf = self else { return }
+            mapPosts.forEach {
+                $0.displayMarker(onMap: strongSelf.mapView)
+            }
+        }
+        
+        homeViewModel.bindStory { [weak self] _ in
+            self?.collectionView.reloadData()
+        }
+        
+        homeViewModel.start()
+
         styleNagivationLeftTitle()
         updateLocation()
         configureMap()
-        
-        if AuthManager.shared.currentUser != nil {
-            AuthManager.shared.updateProfile(completion: { [weak self] profile in
-                self?.fetchPosts(blockingUsers: profile.blocking)
-                self?.fetchStories()
-            })
-        } else {
-            fetchPosts()
-            fetchStories()
-        }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(newPostHandler),
-                                               name: Constant.NotificationId.newPost, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(fetchStories),
-                                               name: Constant.NotificationId.newStory, object: nil)
     }
     
     // MARK: - User Actions
     @IBAction func showVideoRecording(_ sender: UIBarButtonItem) {
         
         displayNewStoryActionSheet()
-    }
-    
-    @objc func newPostHandler(_ sender: Any) {
-        guard let profile = AuthManager.shared.userProfile else {
-            return
-        }
-        fetchPosts(blockingUsers: profile.blocking)
-    }
-    
-    // MARK: - Fetching Data
-    @objc func fetchStories() {
-        
-        storyEntities.removeAll()
-        
-        StoryManager().fetchStoryCollection { [weak self] result in
-            
-            switch result {
-            case .success(let entities):
-                self?.storyEntities.append(contentsOf: entities)
-                
-            case .failure(let error):
-                SRProgressHUD.showFailure(text: error.localizedDescription)
-            }
-        }
-    }
-    
-    @objc func fetchPosts(blockingUsers: [String] = []) {
-        
-        mapPostViewModels.removeAll()
-        
-        PostManager.shared.fetchAllPost { [weak self] result in
-            
-            switch result {
-            case .success(let posts):
-                
-                let viewModels = posts.map { post in
-                    MapPostViewModel(post: post)
-                }
-                
-                DispatchQueue.main.async {
-                    self?.mapPostViewModels = viewModels
-                }
-                
-            case .failure(let error):
-                SRProgressHUD.showFailure(text: error.localizedDescription)
-            }
-        }
     }
     
     // MARK: - Private Methods
@@ -242,7 +176,7 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         
-        return storyEntities.count + 1
+        return homeViewModel.numberOfStoryCollections + 1
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -250,18 +184,19 @@ extension HomeViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: StoryPreviewCell.reuseIdentifier, for: indexPath)
-        
         guard let storyCell = cell as? StoryPreviewCell else {
             return cell
         }
         
-        if indexPath.item == 0 {
+        switch indexPath.item {
+        case 0:
             storyCell.showAsNewStoryButton()
-            
-        } else {
-            let storyEntity = storyEntities[indexPath.item - 1]
-            storyCell.layoutCell(image: storyEntity.author.avatar,
-                                 text: storyEntity.author.username)
+        default:
+            if let storyCollection = homeViewModel.getStoryCollectionAt(index: indexPath.item - 1) {
+                print(indexPath.item, storyCollection.author.username)
+                storyCell.layoutCell(image: storyCollection.author.avatar,
+                                     text: storyCollection.author.username)
+            }
         }
         return storyCell
     }
@@ -275,22 +210,22 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let cellHeight = collectionView.frame.size.height - cellHeightInset
-        
         return CGSize(width: cellHeight, height: cellHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.item == 0 {
+        switch indexPath.item {
+        case 0:
             displayNewStoryActionSheet()
-            
-        } else {
-            guard let storyVC = UIStoryboard.story.instantiateInitialViewController()
-                as? StoryViewController else {
+        default:
+            guard
+                let storyVC = UIStoryboard.story.instantiateInitialViewController() as? StoryViewController
+                else {
                     return
             }
             storyVC.modalPresentationStyle = .overCurrentContext
-            storyVC.storyEntities = storyEntities
+            storyVC.storyEntities = homeViewModel.storyEntities
             storyVC.initialIndexPath = IndexPath(item: 0, section: indexPath.item - 1)
             tabBarController?.present(storyVC, animated: true, completion: nil)
         }
@@ -302,16 +237,13 @@ extension HomeViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
-        let matches = mapPostViewModels.filter { (mapPost) -> Bool in
-            return marker == mapPost.mapMarker
-        }
         guard
-            let first = matches.first,
+            let post = homeViewModel.getPostFromMarker(marker),
             let nav = UIStoryboard.post.instantiateInitialViewController() as? UINavigationController,
             let postVC = nav.topViewController as? PostContentViewController else {
                 return false
         }
-        postVC.post = first.post
+        postVC.post = post
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
         return true
@@ -327,8 +259,8 @@ extension HomeViewController: GMSMapViewDelegate {
     }
 }
 
-// MARK: - UIImagePickerControllerDelegate
-extension HomeViewController: UIImagePickerControllerDelegate {
+// MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
+extension HomeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
@@ -342,9 +274,4 @@ extension HomeViewController: UIImagePickerControllerDelegate {
             self?.sendStory(url)
         })
     }
-}
-
-// MARK: - UINavigationControllerDelegate
-extension HomeViewController: UINavigationControllerDelegate {
-    
 }

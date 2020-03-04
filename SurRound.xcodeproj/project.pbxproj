@@ -15,6 +15,7 @@
 		7C3606B5240E429C00270EE9 /* SwipeTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3606B4240E429C00270EE9 /* SwipeTransitionAnimator.swift */; };
 		7C3AD08124065B7A00DF40EE /* GuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3AD08024065B7A00DF40EE /* GuestViewController.swift */; };
 		7C3AD08324065C8B00DF40EE /* Guest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C3AD08224065C8B00DF40EE /* Guest.storyboard */; };
+		7C43FD67240FB3EF00A930ED /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C43FD66240FB3EF00A930ED /* HomeViewModel.swift */; };
 		7CBBE824240E4C9700681B00 /* MapPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBE823240E4C9700681B00 /* MapPostViewModel.swift */; };
 		7CBBE826240E544800681B00 /* SRBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBE825240E544800681B00 /* SRBaseViewController.swift */; };
 		7CBBE828240E558B00681B00 /* CreateClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBE827240E558B00681B00 /* CreateClosure.swift */; };
@@ -181,6 +182,7 @@
 		7C3606B4240E429C00270EE9 /* SwipeTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTransitionAnimator.swift; sourceTree = "<group>"; };
 		7C3AD08024065B7A00DF40EE /* GuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestViewController.swift; sourceTree = "<group>"; };
 		7C3AD08224065C8B00DF40EE /* Guest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Guest.storyboard; sourceTree = "<group>"; };
+		7C43FD66240FB3EF00A930ED /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		7CBBE823240E4C9700681B00 /* MapPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPostViewModel.swift; sourceTree = "<group>"; };
 		7CBBE825240E544800681B00 /* SRBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRBaseViewController.swift; sourceTree = "<group>"; };
 		7CBBE827240E558B00681B00 /* CreateClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClosure.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 		7CBBE822240E4C5500681B00 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				7C43FD66240FB3EF00A930ED /* HomeViewModel.swift */,
 				7CBBE823240E4C9700681B00 /* MapPostViewModel.swift */,
 			);
 			path = ViewModels;
@@ -1328,6 +1331,7 @@
 				D39A754223D5DACF00A20879 /* SRTabBarController.swift in Sources */,
 				D3A3B5FD23E3F5E6003201E1 /* PostManager.swift in Sources */,
 				D3AD56202403E8D50051A58D /* NotificationManager.swift in Sources */,
+				7C43FD67240FB3EF00A930ED /* HomeViewModel.swift in Sources */,
 				7CBBE826240E544800681B00 /* SRBaseViewController.swift in Sources */,
 				D32F7F3623EA8DDF00FBC0D3 /* SRVerticalAlignedButton.swift in Sources */,
 				D36B695323F29FA100AAED0D /* GenericParser.swift in Sources */,
