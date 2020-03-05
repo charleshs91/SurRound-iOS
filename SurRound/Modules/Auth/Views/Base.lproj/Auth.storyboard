@@ -152,8 +152,8 @@
                                     <action selector="didTapSignUpBtn:" destination="Col-S6-O24" eventType="touchUpInside" id="Knl-2d-rGG"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rta-Bz-7tM">
-                                <rect key="frame" x="110" y="414.5" width="194.5" height="29"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Rta-Bz-7tM">
+                                <rect key="frame" x="83.5" y="414.5" width="247.5" height="29"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="註冊即代表您同意" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgm-AV-pzx" userLabel="Description Label">
                                         <rect key="frame" x="0.0" y="0.0" width="114.5" height="29"/>
@@ -162,9 +162,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJD-cC-xeX">
-                                        <rect key="frame" x="122.5" y="0.0" width="72" height="29"/>
+                                        <rect key="frame" x="118.5" y="0.0" width="129" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="隱私權條款"/>
+                                        <state key="normal" title="隱私權及使用者條款"/>
                                         <connections>
                                             <action selector="showPrivacyPolicy:" destination="Col-S6-O24" eventType="touchUpInside" id="bcj-dt-E8t"/>
                                         </connections>

@@ -387,6 +387,16 @@
 			path = Guest;
 			sourceTree = "<group>";
 		};
+		7C4C42512410174E0059FC69 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7CBBE827240E558B00681B00 /* CreateClosure.swift */,
+				D34DCA852404FB3900ABC0FA /* DateManager.swift */,
+				D3137AAF23F93BD000FD1772 /* Observable.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		7CBBE822240E4C5500681B00 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,15 +450,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		D34DCA842404FAC300ABC0FA /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				D34DCA852404FB3900ABC0FA /* DateManager.swift */,
-				7CBBE827240E558B00681B00 /* CreateClosure.swift */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
 		D35C488223CF352B000951D2 = {
 			isa = PBXGroup;
 			children = (
@@ -478,6 +479,7 @@
 				D338FF4723E9577700CAB8CB /* Resources */,
 				D364978323D82B4D0078C4E0 /* Third Party Wrapper */,
 				D39A755023D5E50400A20879 /* Extension */,
+				7C4C42512410174E0059FC69 /* Helpers */,
 				D3AD56212403E9540051A58D /* Entity */,
 				D39997F023DB4F9F00595B2F /* Models */,
 				D3AD56312403EC330051A58D /* Modules */,
@@ -548,7 +550,6 @@
 		D39997F023DB4F9F00595B2F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D34DCA842404FAC300ABC0FA /* Utilities */,
 				D3AD564E2403F11C0051A58D /* FirebaseUtilites */,
 				D3AD564F2403F1520051A58D /* Managers */,
 				D39997F123DB4FB600595B2F /* PresentationModels */,
@@ -864,7 +865,6 @@
 		D3AD56492403EEE00051A58D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				D3137AAF23F93BD000FD1772 /* Observable.swift */,
 				D36D8F9D23EC688C00E6348D /* ViewModelFactory.swift */,
 				D36D8F9123EC51F900E6348D /* PostListCellViewModel.swift */,
 			);
@@ -1621,7 +1621,7 @@
 				CODE_SIGN_ENTITLEMENTS = SurRound/SurRound.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = HW9KY3R5BK;
 				INFOPLIST_FILE = SurRound/Resources/Info.plist;
@@ -1630,7 +1630,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.charleshs.SurRound;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1647,7 +1647,7 @@
 				CODE_SIGN_ENTITLEMENTS = SurRound/SurRound.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = HW9KY3R5BK;
 				INFOPLIST_FILE = SurRound/Resources/Info.plist;
@@ -1656,7 +1656,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.charleshs.SurRound;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

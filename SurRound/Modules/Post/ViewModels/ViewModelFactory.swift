@@ -20,8 +20,6 @@ class ViewModelFactory {
                 viewModels.append(TextPostListCellViewModel(post))
             case "image":
                 viewModels.append(ImagePostListCellViewModel(post))
-            case "video":
-                viewModels.append(VideoPostListCellViewModel(post))
             default:
                 return
             }

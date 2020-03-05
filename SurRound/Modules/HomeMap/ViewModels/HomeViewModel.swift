@@ -11,29 +11,35 @@ import GoogleMaps
 
 class HomeViewModel {
     
+    // MARK: - Public iVars
     var numberOfStoryCollections: Int {
-        return storyCollections.value.count
+        return _storyCollections.value.count
     }
-    var storyEntities: [StoryCollection] {
-        return storyCollections.value
+    var storyCollections: [StoryCollection] {
+        return _storyCollections.value
     }
     
+    // MARK: - Private iVars
     private var mapPostViewModels: Observable<[MapPostViewModel]> = .init([])
-    private var storyCollections: Observable<[StoryCollection]> = .init([])
+    private var _storyCollections: Observable<[StoryCollection]> = .init([])
     
     private let storyManager = StoryManager()
     private let postManager = PostManager.shared
+    
+    init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(newPostHandler),
+                                               name: Constant.NotificationId.newPost, object: nil)
+        fetchStory()
+        fetchMapPost()
+    }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
+    // MARK: - Public Methods
     func start() {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(newPostHandler),
-                                               name: Constant.NotificationId.newPost, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(newStoryHandler),
-                                               name: Constant.NotificationId.newStory, object: nil)
         fetchStory()
         fetchMapPost()
     }
@@ -41,10 +47,10 @@ class HomeViewModel {
     func bindStory(handlerForStory: (([StoryCollection]) -> Void)?) {
         
         guard let handler = handlerForStory else {
-            storyCollections.removeObserver()
+            _storyCollections.removeObserver()
             return
         }
-        storyCollections.addObserver(fireNow: false, onChanged: handler)
+        _storyCollections.addObserver(onChanged: handler)
     }
     
     func bindMapPost(handlerForMapPost: (([MapPostViewModel]) -> Void)?) {
@@ -53,12 +59,12 @@ class HomeViewModel {
             mapPostViewModels.removeObserver()
             return
         }
-        mapPostViewModels.addObserver(fireNow: false, onChanged: handler)
+        mapPostViewModels.addObserver(onChanged: handler)
     }
     
     func unbind() {
         
-        storyCollections.removeObserver()
+        _storyCollections.removeObserver()
         mapPostViewModels.removeObserver()
     }
     
@@ -72,29 +78,52 @@ class HomeViewModel {
     
     func getStoryCollectionAt(index: Int) -> StoryCollection? {
         
-        guard index >= 0 && index < storyCollections.value.count else {
+        guard index >= 0 && index < _storyCollections.value.count else {
             return nil
         }
-        return storyCollections.value[index]
+        return _storyCollections.value[index]
     }
     
+    func sendStory(videoURL: URL?) {
+        
+        guard let url = videoURL,
+              let place = PlaceManager.current.place else {
+                return
+        }
+        do {
+            SRProgressHUD.showLoading()
+            try storyManager.createStory(url, at: place) { [weak self] result in
+                
+                SRProgressHUD.dismiss()
+                switch result {
+                case .success:
+                    SRProgressHUD.showSuccess()
+                    self?.fetchStory()
+                    
+                case .failure(let error):
+                    SRProgressHUD.showFailure(text: error.localizedDescription)
+                }
+            }
+        } catch {
+            SRProgressHUD.showFailure(text: "Fail to convert video to Data")
+        }
+    }
+    
+    // MARK: - Selectors
     @objc func newPostHandler() {
         fetchMapPost()
     }
     
-    @objc func newStoryHandler() {
-        fetchStory()
-    }
-    
+    // MARK: - Private Methods
     private func fetchStory() {
         
-        storyCollections.value.removeAll()
+        _storyCollections.value.removeAll()
         storyManager.fetchStoryCollection { [weak self] result in
             
             switch result {
             case .success(let stories):
                 DispatchQueue.main.async {
-                    self?.storyCollections.value.append(contentsOf: stories)
+                    self?._storyCollections.value.append(contentsOf: stories)
                 }
                 
             case .failure(let error):

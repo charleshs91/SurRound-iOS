@@ -16,14 +16,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBOutlet weak var tableView: UITableView!
-    
-//    @IBOutlet weak var selectionView: SelectionView! {
-//        didSet {
-//            selectionView.dataSource = self
-//            selectionView.delegate = self
-//        }
-//    }
-    
+        
     @IBOutlet weak var profileHeaderView: ProfileHeaderView!
     
     var userToDisplay: SRUser!
@@ -346,33 +339,6 @@ extension ProfileViewController: UITableViewDelegate {
         profileHeaderView.transform = CGAffineTransform(translationX: 0, y: -yOffset)
     }
 }
-
-// MARK: - SelectionViewDataSource
-//extension ProfileViewController: SelectionViewDataSource {
-//
-//    func numberOfSelectionItems(_ selectionView: SelectionView) -> Int {
-//
-//        return 2
-//    }
-//
-//    func selectionItemTitle(_ selectionView: SelectionView, for index: Int) -> String {
-//
-//        return tabTitle[index]
-//    }
-//
-//    func textColor(_ selectionView: SelectionView) -> UIColor {
-//
-//        return .systemGray2
-//    }
-//
-//    func indicatorLineColor(_ selectionView: SelectionView) -> UIColor {
-//        return .red
-//    }
-//}
-//
-//extension ProfileViewController: SelectionViewDelegate {
-//
-//}
 
 // MARK: - IGImagePickerControllerDelegate
 extension ProfileViewController: IGImagePickerControllerDelegate {

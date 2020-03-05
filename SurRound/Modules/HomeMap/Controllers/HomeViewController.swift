@@ -10,8 +10,8 @@ import UIKit
 import GoogleMaps
 import MobileCoreServices
 
-fileprivate let cellHeightInset: CGFloat = 10
-fileprivate let cellLeadingInset: CGFloat = 8
+private let cellHeightInset: CGFloat = 10
+private let cellLeadingInset: CGFloat = 8
 
 class HomeViewController: UIViewController {
     
@@ -25,7 +25,8 @@ class HomeViewController: UIViewController {
             collectionView.layer.shadowOpacity = 0.6
             collectionView.layer.shadowColor = UIColor.lightGray.cgColor
             collectionView.layer.shadowRadius = 4
-            collectionView.contentInset = UIEdgeInsets(top: cellHeightInset / 4, left: cellLeadingInset, bottom: 0, right: 0)
+            collectionView.contentInset =
+                UIEdgeInsets(top: cellHeightInset / 4, left: cellLeadingInset, bottom: 0, right: 0)
         }
     }
     
@@ -37,28 +38,14 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        homeViewModel = HomeViewModel()
-        
-        homeViewModel.bindMapPost { [weak self] mapPosts in
-            guard let strongSelf = self else { return }
-            mapPosts.forEach {
-                $0.displayMarker(onMap: strongSelf.mapView)
-            }
-        }
-        
-        homeViewModel.bindStory { [weak self] _ in
-            self?.collectionView.reloadData()
-        }
-        
-        homeViewModel.start()
-
         styleNagivationLeftTitle()
         updateLocation()
         configureMap()
+        fireUpViewModel()
     }
     
     // MARK: - User Actions
-    @IBAction func showVideoRecording(_ sender: UIBarButtonItem) {
+    @IBAction func showNewStoryAction(_ sender: UIBarButtonItem) {
         
         displayNewStoryActionSheet()
     }
@@ -101,38 +88,31 @@ class HomeViewController: UIViewController {
         if let mapStyleURL = Bundle.main.url(forResource: "MapStyle", withExtension: "json") {
             mapView.mapStyle = try? GMSMapStyle(contentsOfFileURL: mapStyleURL)
         }
-        
         if let location = PlaceManager.current.location {
             mapView.camera = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 18.0)
         }
     }
     
-    private func sendStory(_ url: URL?) {
+    private func fireUpViewModel() {
         
-        guard let url = url else { return }
-        guard let place = PlaceManager.current.place else {
-            return
-        }
+        homeViewModel = HomeViewModel()
         
-        SRProgressHUD.showLoading()
-        do {
-            try StoryManager().createStory(url, at: place) { result in
-                
-                SRProgressHUD.dismiss()
-                switch result {
-                case .success:
-                    SRProgressHUD.showSuccess()
-                    NotificationCenter.default.post(name: Constant.NotificationId.newStory, object: nil)
-                    
-                case .failure(let error):
-                    SRProgressHUD.showFailure(text: error.localizedDescription)
-                }
+        homeViewModel.bindMapPost { [weak self] mapPosts in
+            
+            guard let strongSelf = self else {
+                return
             }
-        } catch {
-            SRProgressHUD.showFailure(text: "Unable to convert file to Data")
+            
+            mapPosts.forEach {
+                $0.displayMarker(onMap: strongSelf.mapView)
+            }
+        }
+        homeViewModel.bindStory { [weak self] _ in
+            
+            self?.collectionView.reloadData()
         }
     }
-    
+        
     private func displayNewStoryActionSheet() {
         
         let imagePicker = UIImagePickerController()
@@ -142,31 +122,42 @@ class HomeViewController: UIViewController {
         let imagePickerAlert = UIAlertController(title: "Post Video Story",
                                                  message: "Select video source from",
                                                  preferredStyle: .actionSheet)
-        imagePickerAlert.addAction(
-            UIAlertAction(title: "Library", style: .default) { [weak self] _ in
-                
-                if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
-                    imagePicker.sourceType = .photoLibrary
-                    imagePicker.mediaTypes = [kUTTypeMovie as String]
-                    self?.present(imagePicker, animated: true, completion: nil)
-                }
+        
+        imagePickerAlert.addAction(UIAlertAction(title: "Library", style: .default) { [weak self] _ in
+            
+                self?.presentImagePickerForPhotosAlbum(imagePicker)
         })
-        imagePickerAlert.addAction(
-            UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
-                
-                if UIImagePickerController.isSourceTypeAvailable(.camera) {
-                    imagePicker.sourceType = .camera
-                    imagePicker.mediaTypes = [kUTTypeMovie as String]
-                    imagePicker.videoQuality = .typeHigh
-                    self?.present(imagePicker, animated: true, completion: nil)
-                }
+        
+        imagePickerAlert.addAction(UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
+            
+                self?.presentImagePickerForCamera(imagePicker)
         })
-        imagePickerAlert.addAction(
-            UIAlertAction(title: "Cancel", style: .cancel) { _ in
-                
+        
+        imagePickerAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            
                 imagePickerAlert.dismiss(animated: true, completion: nil)
         })
+        
         present(imagePickerAlert, animated: true, completion: nil)
+    }
+    
+    private func presentImagePickerForPhotosAlbum(_ imagePicker: UIImagePickerController) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.mediaTypes = [kUTTypeMovie as String]
+            present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    private func presentImagePickerForCamera(_ imagePicker: UIImagePickerController) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePicker.sourceType = .camera
+            imagePicker.mediaTypes = [kUTTypeMovie as String]
+            imagePicker.videoQuality = .typeHigh
+            present(imagePicker, animated: true, completion: nil)
+        }
     }
 }
 
@@ -193,7 +184,6 @@ extension HomeViewController: UICollectionViewDataSource {
             storyCell.showAsNewStoryButton()
         default:
             if let storyCollection = homeViewModel.getStoryCollectionAt(index: indexPath.item - 1) {
-                print(indexPath.item, storyCollection.author.username)
                 storyCell.layoutCell(image: storyCollection.author.avatar,
                                      text: storyCollection.author.username)
             }
@@ -225,7 +215,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
                     return
             }
             storyVC.modalPresentationStyle = .overCurrentContext
-            storyVC.storyEntities = homeViewModel.storyEntities
+            storyVC.storyEntities = homeViewModel.storyCollections
             storyVC.initialIndexPath = IndexPath(item: 0, section: indexPath.item - 1)
             tabBarController?.present(storyVC, animated: true, completion: nil)
         }
@@ -271,7 +261,7 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
                 return
         }
         dismiss(animated: true, completion: { [weak self] in
-            self?.sendStory(url)
+            self?.homeViewModel.sendStory(videoURL: url)
         })
     }
 }
