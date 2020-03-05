@@ -12,9 +12,9 @@ protocol PostListCellViewModel: AnyObject {
     
     var cellType: PostListCellType { get }
     
-    var isFollowing: Bool { get }
-    
     var onRequestUserProfile: ((SRUser) -> Void)? { get set }
+    
+    var post: Post { get }
 }
 
 class BasePostListCellViewModel: PostListCellViewModel {
@@ -34,13 +34,7 @@ class BasePostListCellViewModel: PostListCellViewModel {
     
     var onRequestUserProfile: ((SRUser) -> Void)?
 
-    var isFollowing: Bool {
-        
-        guard let userProfile = AuthManager.shared.userProfile else {
-            return false
-        }
-        return userProfile.following.contains(authorId)
-    }
+    let post: Post
     
     init(_ post: Post) {
         
@@ -52,6 +46,8 @@ class BasePostListCellViewModel: PostListCellViewModel {
         self.text = post.text
         self.likeCount = post.likeCount
         self.replyCount = post.replyCount
+        
+        self.post = post
     }
 }
 

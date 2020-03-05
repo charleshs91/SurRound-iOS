@@ -8,85 +8,36 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, Storyboarded {
+class ProfileViewController: HiddenNavBarViewController, Storyboarded {
     
     // Storyboarded Protocol
     static var storyboard: UIStoryboard {
         return UIStoryboard.profile
     }
     
+    var userToDisplay: SRUser!
+    
     @IBOutlet weak var tableView: UITableView!
         
     @IBOutlet weak var profileHeaderView: ProfileHeaderView!
     
-    var userToDisplay: SRUser!
-    
-    var profile: SRUserProfile? {
-        didSet {
-            guard profile != nil else {
-                return
-            }
-            DispatchQueue.main.async { [weak self] in
-                self?.headerUpdateSemaphore.wait()
-                self?.profileHeaderView.updateProfile(profile: self!.profile!,
-                                                      postCount: self!.viewModels.count)
-            }
-        }
-    }
-    
-    private let headerUpdateSemaphore = DispatchSemaphore(value: 0)
-    
-    private let tabTitle = ["All posts", "Saved"]
-    
-    private var posts = [Post]()
-    
-    private var viewModels = [PostListCellViewModel]() {
-        didSet {
-            headerUpdateSemaphore.signal()
-            self.tableView.reloadData()
-        }
-    }
+    private var profileViewModel: ProfileViewModel!
     
     // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fireUpViewModel()
         setupViews()
-        
-        updateUserProfile()
-        
-        fetchUserPost()
-        
         profileHeaderView.setupView(user: userToDisplay)
-        
-        let backBarButtton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backBarButtton
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(fetchUserPost),
-        name: Constant.NotificationId.newPost, object: nil)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        navigationController?.navigationBar.isHidden = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        navigationController?.navigationBar.isHidden = false
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         let size = profileHeaderView.sizeThatFits(.zero)
         
-        profileHeaderView.frame = CGRect(x: 0,
-                                         y: 0,
-                                         width: UIScreen.width,
-                                         height: size.height)
+        profileHeaderView.frame = CGRect(x: 0, y: 0, width: UIScreen.width, height: size.height)
         profileHeaderView.layoutIfNeeded()
         
         tableView.contentInset = UIEdgeInsets(top: size.height - view.safeAreaInsets.top, left: 0, bottom: 0, right: 0)
@@ -109,13 +60,17 @@ class ProfileViewController: UIViewController, Storyboarded {
         
         if !sender.isSelected {
             guard let currentUser = AuthManager.shared.currentUser else { return }
-            profileHeaderView.followButtonStartAnimating()
+            
             let manager = ProfileManager()
+            
+            SRProgressHUD.showLoading()
             manager.followUser(receiverId: userToDisplay.uid, current: currentUser) { [weak self] result in
-                self?.profileHeaderView.followButtonStopAnimating()
+                
+                SRProgressHUD.dismiss()
                 switch result {
                 case .success:
                     SRProgressHUD.showSuccess()
+                    
                 case .failure(let error):
                     SRProgressHUD.showFailure(text: error.localizedDescription)
                 }
@@ -125,16 +80,14 @@ class ProfileViewController: UIViewController, Storyboarded {
     
     @IBAction func moreActionButton(_ sender: UIButton) {
         
-        if userToDisplay.uid == AuthManager.shared.currentUser!.uid {
-            showAccountActions()
-        } else {
-            showUserActions()
-        }
+        userToDisplay.uid == AuthManager.shared.currentUser!.uid
+            ? showAccountActions()
+            : showUserActions()
     }
     
     @objc func showFollowingUsers(_ sender: UITapGestureRecognizer) {
         
-        guard let profile = profile else {
+        guard let profile = profileViewModel.userProfile else {
             return
         }
         
@@ -143,7 +96,7 @@ class ProfileViewController: UIViewController, Storyboarded {
     }
     @objc func showFollowers(_ sender: UITapGestureRecognizer) {
         
-        guard let profile = profile else {
+        guard let profile = profileViewModel.userProfile else {
             return
         }
         
@@ -159,26 +112,37 @@ class ProfileViewController: UIViewController, Storyboarded {
     }
     
     // MARK: - Private Methods
+    private func fireUpViewModel() {
+        
+        profileViewModel = ProfileViewModel(userToDisplay: userToDisplay)
+        
+        profileViewModel.bindUserPost { [weak self] _ in
+            self?.tableView.reloadData()
+        }
+        
+        profileViewModel.bindUserProfile { [weak self] userProfile in
+            guard let userProfile = userProfile else {
+                return
+            }
+            self?.profileHeaderView.updateProfile(profile: userProfile, postCount: userProfile.posts.count)
+        }
+    }
+    
     private func showAccountActions() {
         
-        let alertVC = UIAlertController(
-            title: nil, message: nil, preferredStyle: .actionSheet)
+        let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let reportListAction = UIAlertAction(title: "Blocked Users", style: .default) { _ in
+        alertVC.addAction(UIAlertAction(title: "Blocked Users", style: .default) { _ in
             print("Blocked user list")
-        }
+        })
         
-        let signOutAction = UIAlertAction(title: "Sign Out", style: .default) { [unowned self] _ in
+        alertVC.addAction(UIAlertAction(title: "Sign Out", style: .default) { [unowned self] _ in
             self.signOut()
-        }
+        })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
             alertVC.dismiss(animated: true, completion: nil)
-        }
-        
-        [reportListAction, signOutAction, cancelAction].forEach {
-            alertVC.addAction($0)
-        }
+        })
         
         present(alertVC, animated: true, completion: nil)
     }
@@ -252,41 +216,6 @@ class ProfileViewController: UIViewController, Storyboarded {
         
         profileHeaderView.editAvatarButton.addTarget(self, action: #selector(handleEditAvatar(_:)), for: .touchUpInside)
     }
-    
-    @objc func fetchUserPost() {
-        
-        guard let user = userToDisplay else {
-            return
-        }
-        
-        posts.removeAll()
-        viewModels.removeAll()
-        
-        PostManager.shared.fetchPostOfUsers(uids: [user.uid]) { [weak self] result in
-            
-            switch result {
-            case .success(let posts):
-                self?.posts.append(contentsOf: posts)
-                self?.viewModels.append(contentsOf: ViewModelFactory.viewModelFromPosts(posts))
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    private func updateUserProfile() {
-        
-        let manager = ProfileManager()
-        
-        manager.fetchProfile(user: userToDisplay.uid) { [weak self] profile in
-            
-            guard let profile = profile else {
-                return
-            }
-            self?.profile = profile
-        }
-    }
 }
 
 // MARK: - UITableViewDataSource
@@ -294,20 +223,18 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.viewModels.count
+        return profileViewModel.numberOfPosts
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let viewModel = viewModels[indexPath.row]
+        let cellViewModel = profileViewModel.getPostListCellViewModelAt(index: indexPath.row)!
         
-        let cell = viewModel.cellType.makeCell(tableView, at: indexPath)
-        
+        let cell = cellViewModel.cellType.makeCell(tableView, at: indexPath)
         guard let postListCell = cell as? PostListCell else {
             return cell
         }
-        
-        postListCell.layoutCell(with: viewModel)
+        postListCell.layoutCell(with: cellViewModel)
         return postListCell
     }
 }
@@ -323,9 +250,11 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard
+            let post = profileViewModel.getPostListCellViewModelAt(index: indexPath.row)?.post,
             let nav = UIStoryboard.post.instantiateInitialViewController() as? UINavigationController,
             let postDetailVC = nav.topViewController as? PostContentViewController else { return }
-        postDetailVC.post = posts[indexPath.row]
+        
+        postDetailVC.post = post
         nav.modalPresentationStyle = .overCurrentContext
         present(nav, animated: true, completion: nil)
     }
@@ -333,7 +262,6 @@ extension ProfileViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let yOffset = scrollView.contentInset.top + scrollView.contentOffset.y
-        
         profileHeaderView.transform = CGAffineTransform(translationX: 0, y: -yOffset)
     }
 }

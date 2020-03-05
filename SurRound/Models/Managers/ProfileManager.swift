@@ -64,53 +64,33 @@ class ProfileManager {
     
     func fetchProfile(user uid: String, completion: @escaping (SRUserProfile?) -> Void) {
         
-        let group = DispatchGroup()
         let docRef = FirestoreDB.users.document(uid)
-        var userProfile: SRUserProfile?
-        
-        group.enter()
-        dataFetcher.fetch(from: docRef) {result in
-            
-            switch result {
-            case .success(let document):
-                let profile = GenericParser.parse(document, of: SRUserProfile.self)
-                userProfile = profile
-                group.leave()
-                
-            case .failure(let error):
-                print(error)
-                completion(nil)
-            }
-        }
-        
         let userPostRef = FirestoreDB.userPosts(userId: uid)
-        
-        group.enter()
-        dataFetcher.fetch(from: userPostRef) { result in
-            
-            switch result {
-            case .success(let documents):
-                if let userPosts = GenericParser.parse(documents, of: UserPost.self) {
-                    userProfile?.posts = userPosts
-                    group.leave()
-                }
-                
-            case .failure(let error):
-                print(error)
-                completion(nil)
-            }
-        }
-        
         let userStoryRef = FirestoreDB.userStories(userId: uid)
         
-        group.enter()
-        dataFetcher.fetch(from: userStoryRef) { result in
-            
+        dataFetcher.fetch(from: docRef) { [weak self] result in
             switch result {
-            case .success(let documents):
-                if let userStories = GenericParser.parse(documents, of: UserStory.self) {
-                    userProfile?.stories = userStories
+            case .success(let document):
+                guard let userProfile = GenericParser.parse(document, of: SRUserProfile.self) else {
+                    completion(nil)
+                    return
+                }
+                let group = DispatchGroup()
+                
+                group.enter()
+                self?.fetchSubCollection(ref: userPostRef, of: UserPost.self, completion: { userPosts in
+                    userProfile.posts = userPosts
                     group.leave()
+                })
+                
+                group.enter()
+                self?.fetchSubCollection(ref: userStoryRef, of: UserStory.self, completion: { userStories in
+                    userProfile.stories = userStories
+                    group.leave()
+                })
+                
+                group.notify(queue: .main) {
+                    completion(userProfile)
                 }
                 
             case .failure(let error):
@@ -118,9 +98,21 @@ class ProfileManager {
                 completion(nil)
             }
         }
+    }
+    
+    private func fetchSubCollection<T: Codable>(ref: CollectionReference, of type: T.Type,
+                                                completion: @escaping ([T]) -> Void) {
         
-        group.notify(queue: .main) {
-            completion(userProfile)
+        dataFetcher.fetch(from: ref) { result in
+            var results: [T] = []
+            switch result {
+            case .success(let documents):
+                results = GenericParser.parse(documents, of: T.self) ?? []
+                
+            case .failure(let error):
+                print(error)
+            }
+            completion(results)
         }
     }
     
