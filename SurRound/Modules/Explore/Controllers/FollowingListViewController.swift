@@ -104,11 +104,12 @@ extension FollowingListViewController: UITableViewDataSource {
             return cell
         }
         viewModel.onRequestUserProfile = { [weak self] user in
-            if let profileVC = ProfileViewController.storyInstance() {
-                profileVC.userToDisplay = user
-                self?.show(profileVC, sender: nil)
-            }
+            
+            let profileVC = ProfileViewController.instantiate()
+            profileVC.userToDisplay = user
+            self?.show(profileVC, sender: nil)
         }
+        
         postListCell.layoutCell(with: viewModel)
         return postListCell
     }

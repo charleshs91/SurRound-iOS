@@ -11,11 +11,8 @@ import Foundation
 enum AuthInputCategory {
     
     case email
-    
     case username
-    
     case password
-    
     case confirmPwd
     
     var placeholder: String {

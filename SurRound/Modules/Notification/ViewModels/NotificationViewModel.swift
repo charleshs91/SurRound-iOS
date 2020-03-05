@@ -2,7 +2,7 @@
 //  NotificationViewModel.swift
 //  SurRound
 //
-//  Created by Charles Hsieh on 2020/2/26.
+//  Created by Charles Hsieh on 2020/3/5.
 //  Copyright © 2020 Kai-Ta Hsieh. All rights reserved.
 //
 
@@ -10,71 +10,64 @@ import Foundation
 
 class NotificationViewModel {
     
-    var type: String {
-        return notification.type
-    }
-    var username: String {
-        return notification.senderName
-    }
-    var avatarImage: String? {
-        didSet {
-            guard avatarImage != nil else { return }
-            DispatchQueue.main.async { [weak self] in
-                self?.avatarImageCallback?(self!.avatarImage!)
-            }
-        }
+    var numberOfItems: Int {
+        return notificationCellViewModels.value.count
     }
     
-    var postImage: String? {
-        didSet {
-            guard postImage != nil else { return }
-            DispatchQueue.main.async { [weak self] in
-                self?.postImageCallback?(self!.postImage!)
-            }
-        }
-    }
+    private let notificationManager: NotificationManager
+    private var notificationCellViewModels: Observable<[NotificationCellViewModel]> = .init([])
     
-    var datetime: Date {
-        return notification.created
-    }
-    
-    private var notification: SRNotification
-    private var avatarImageCallback: ((String) -> Void)?
-    private var postImageCallback: ((String) -> Void)?
-    
-    init(notification: SRNotification) {
-        self.notification = notification
+    init() {
+        self.notificationManager = NotificationManager()
+        fetchNotifications()
     }
     
     deinit {
-        postImageCallback = nil
-        avatarImageCallback = nil
+        unbind()
     }
     
-    func updateAvatarImage(callback: ((String) -> Void)?) {
+    // MARK: Public Methods
+    func bind(handler: @escaping ([NotificationCellViewModel]) -> Void) {
         
-        self.avatarImageCallback = callback
+        notificationCellViewModels.addObserver(onChanged: handler)
+    }
+    
+    func unbind() {
         
-        UserService.queryUser(uid: notification.senderId) { [weak self] (user) in
-            guard let user = user else { return }
-            self?.avatarImage = user.avatar
+        notificationCellViewModels.removeObserver()
+    }
+    
+    func getCellViewModelAt(index: Int) -> NotificationCellViewModel? {
+        
+        guard index >= 0 && index < self.notificationCellViewModels.value.count else {
+            return nil
+        }
+        return self.notificationCellViewModels.value[index]
+    }
+    
+    // MARK: - Private Methods
+    private func fetchNotifications() {
+        
+        guard let userId = AuthManager.shared.currentUser?.uid else {
+            return
         }
         
-    }
-    
-    func updatePostImage(callback: ((String) -> Void)?) {
-        
-        guard let postId = notification.postId else { return }
-        
-        self.postImageCallback = callback
-        
-        PostManager.shared.fetchSinglePost(postId) { [weak self] (result) in
+        notificationCellViewModels.value.removeAll()
+        notificationManager.fetchNotifications(userId: userId) { [weak self] result in
+            
+            guard let strongSelf = self else {
+                return
+            }
+            
             switch result {
-            case .success(let post):
-                self?.postImage = post.mediaType
+            case .success(let notifications):
+                let cellViewModels = notifications.map { notification in
+                    return NotificationCellViewModel(notification: notification)
+                }
+                strongSelf.notificationCellViewModels.value.append(contentsOf: cellViewModels)
                 
             case .failure(let error):
-                print(error)
+                SRProgressHUD.showFailure(text: error.localizedDescription)
             }
         }
     }

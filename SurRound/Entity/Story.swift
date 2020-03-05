@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class StoryCollection {
+struct StoryCollection {
     
     var stories: [Story]
     var author: Author
@@ -22,7 +22,7 @@ class StoryCollection {
     }
 }
 
-class Story: Codable {
+struct Story: Codable {
     
     static var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()

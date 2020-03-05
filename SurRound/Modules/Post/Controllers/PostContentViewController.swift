@@ -157,13 +157,14 @@ class PostContentViewController: UIViewController {
     
     @objc func tapOnUser(_ sender: UITapGestureRecognizer) {
         
-        if let profileVC = ProfileViewController.storyInstance() {
-            let userId = post!.authorId
-            UserService.queryUser(uid: userId) { [weak self] (srUser) in
-                if let user = srUser {
-                    profileVC.userToDisplay = user
-                    self?.show(profileVC, sender: nil)
-                }
+        let profileVC = ProfileViewController.instantiate()
+        
+        let userId = post!.authorId
+        
+        UserService.queryUser(uid: userId) { [weak self] (srUser) in
+            if let user = srUser {
+                profileVC.userToDisplay = user
+                self?.show(profileVC, sender: nil)
             }
         }
     }

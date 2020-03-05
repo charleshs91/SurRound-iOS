@@ -15,13 +15,13 @@ protocol SelectLocationViewControllerDelegate: AnyObject {
     func didSelectLocation(_ controller: SelectLocationViewController, with place: SRPlace)
 }
 
-class SelectLocationViewController: UIViewController {
+class SelectLocationViewController: UIViewController, Storyboarded {
     
-    static func storyboardInstance() -> SelectLocationViewController? {
-        return UIStoryboard.newPost.instantiateViewController(
-            identifier: String(describing: self)) as? SelectLocationViewController
+    // Storyboarded Protocol
+    static var storyboard: UIStoryboard {
+        return UIStoryboard.newPost
     }
-    
+
     @IBOutlet weak var mapView: GMSMapView!
     
     weak var delegate: SelectLocationViewControllerDelegate?

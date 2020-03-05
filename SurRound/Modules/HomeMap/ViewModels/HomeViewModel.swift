@@ -23,10 +23,12 @@ class HomeViewModel {
     private var mapPostViewModels: Observable<[MapPostViewModel]> = .init([])
     private var _storyCollections: Observable<[StoryCollection]> = .init([])
     
-    private let storyManager = StoryManager()
-    private let postManager = PostManager.shared
+    private let storyManager: StoryManager
+    private let postManager: PostManager
     
     init() {
+        self.storyManager = StoryManager()
+        self.postManager = PostManager.shared
         NotificationCenter.default.addObserver(self, selector: #selector(newPostHandler),
                                                name: Constant.NotificationId.newPost, object: nil)
         fetchStory()

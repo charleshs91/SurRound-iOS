@@ -124,10 +124,11 @@ extension UserTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let profileVC = ProfileViewController.storyInstance() else { return }
-        
         let selectedUser = userList[indexPath.row]
+        
+        let profileVC = ProfileViewController.instantiate()
         profileVC.userToDisplay = selectedUser
+        
         navigationController?.pushViewController(profileVC, animated: true)
     }
 }

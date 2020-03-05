@@ -8,15 +8,22 @@
 
 import UIKit
 
+protocol NotificationCellDelegate: AnyObject {
+    
+    func didTapOnAvatar(_ cell: NotificationCell)
+}
+
 class NotificationCell: SRBaseTableViewCell {
+    
+    weak var delegate: NotificationCellDelegate?
     
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var descTrailingConstraint: NSLayoutConstraint!
     
-    private lazy var avatarTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnAvatar(_:)))
-    private var viewModel: NotificationViewModel!
+    private var avatarTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnAvatar(_:)))
+    private var viewModel: NotificationCellViewModel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,16 +36,19 @@ class NotificationCell: SRBaseTableViewCell {
         avatarImageView.roundToHalfHeight()
     }
     
-    func setupCell(_ viewModel: NotificationViewModel) {
+    func setupCell(_ viewModel: NotificationCellViewModel) {
         
-        var text: String = ""
         self.viewModel = viewModel
-        if viewModel.type == "follow" {
-            text = "\(viewModel.username)已開始追蹤你。"
-        } else if viewModel.type == "reply" {
-            text = "\(viewModel.username)在你的文章中留言。"
-        }
-        descLabel.text = text
+
+        descLabel.text = {
+            switch viewModel.type {
+            case "follow": return "\(viewModel.username)已開始追蹤你。"
+            case "reply": return "\(viewModel.username)在你的文章中留言。"
+            default: return ""
+            }
+        }()
+        
+        fetchImages(from: viewModel)
     }
     
     func showPostImage() {
@@ -62,7 +72,18 @@ class NotificationCell: SRBaseTableViewCell {
         avatarImageView.addGestureRecognizer(avatarTapGesture)
     }
     
+    private func fetchImages(from viewModel: NotificationCellViewModel) {
+        
+        viewModel.updateAvatarImage { [weak self] urlString in
+            self?.avatarImageView.loadImage(urlString)
+        }
+        viewModel.updatePostImage { [weak self] urlString in
+            self?.postImageView.loadImage(urlString)
+        }
+    }
+    
     @objc func handleTapOnAvatar(_ sender: UITapGestureRecognizer) {
-        print(123)
+        
+        delegate?.didTapOnAvatar(self)
     }
 }

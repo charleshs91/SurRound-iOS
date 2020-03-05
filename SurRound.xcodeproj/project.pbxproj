@@ -11,11 +11,13 @@
 		6B104B6DE82318AB35B2993A /* Pods_SurRoundTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 341633E2C017048820A8225D /* Pods_SurRoundTests.framework */; };
 		7C124A0A240CE08A0087033A /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C124A09240CE08A0087033A /* WKWebViewController.swift */; };
 		7C250E8A2409833D0037A54C /* CurveShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C250E892409833D0037A54C /* CurveShapeView.swift */; };
-		7C27B20724058296008EEA1B /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C27B20624058296008EEA1B /* NotificationViewModel.swift */; };
+		7C27B20724058296008EEA1B /* NotificationCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C27B20624058296008EEA1B /* NotificationCellViewModel.swift */; };
 		7C3606B5240E429C00270EE9 /* SwipeTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3606B4240E429C00270EE9 /* SwipeTransitionAnimator.swift */; };
 		7C3AD08124065B7A00DF40EE /* GuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3AD08024065B7A00DF40EE /* GuestViewController.swift */; };
 		7C3AD08324065C8B00DF40EE /* Guest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C3AD08224065C8B00DF40EE /* Guest.storyboard */; };
 		7C43FD67240FB3EF00A930ED /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C43FD66240FB3EF00A930ED /* HomeViewModel.swift */; };
+		7C55ADEF2410A477001D305D /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55ADEE2410A477001D305D /* Storyboarded.swift */; };
+		7C55ADF12410D919001D305D /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55ADF02410D919001D305D /* NotificationViewModel.swift */; };
 		7CBBE824240E4C9700681B00 /* MapPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBE823240E4C9700681B00 /* MapPostViewModel.swift */; };
 		7CBBE826240E544800681B00 /* SRBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBE825240E544800681B00 /* SRBaseViewController.swift */; };
 		7CBBE828240E558B00681B00 /* CreateClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBE827240E558B00681B00 /* CreateClosure.swift */; };
@@ -178,11 +180,13 @@
 		6E3D9FDE9141C0D31127148A /* Pods_SurRoundUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurRoundUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C124A09240CE08A0087033A /* WKWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		7C250E892409833D0037A54C /* CurveShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveShapeView.swift; sourceTree = "<group>"; };
-		7C27B20624058296008EEA1B /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		7C27B20624058296008EEA1B /* NotificationCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCellViewModel.swift; sourceTree = "<group>"; };
 		7C3606B4240E429C00270EE9 /* SwipeTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTransitionAnimator.swift; sourceTree = "<group>"; };
 		7C3AD08024065B7A00DF40EE /* GuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestViewController.swift; sourceTree = "<group>"; };
 		7C3AD08224065C8B00DF40EE /* Guest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Guest.storyboard; sourceTree = "<group>"; };
 		7C43FD66240FB3EF00A930ED /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		7C55ADEE2410A477001D305D /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
+		7C55ADF02410D919001D305D /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		7CBBE823240E4C9700681B00 /* MapPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPostViewModel.swift; sourceTree = "<group>"; };
 		7CBBE825240E544800681B00 /* SRBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRBaseViewController.swift; sourceTree = "<group>"; };
 		7CBBE827240E558B00681B00 /* CreateClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClosure.swift; sourceTree = "<group>"; };
@@ -365,7 +369,8 @@
 		7C27B20524058274008EEA1B /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				7C27B20624058296008EEA1B /* NotificationViewModel.swift */,
+				7C27B20624058296008EEA1B /* NotificationCellViewModel.swift */,
+				7C55ADF02410D919001D305D /* NotificationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -393,6 +398,7 @@
 				7CBBE827240E558B00681B00 /* CreateClosure.swift */,
 				D34DCA852404FB3900ABC0FA /* DateManager.swift */,
 				D3137AAF23F93BD000FD1772 /* Observable.swift */,
+				7C55ADEE2410A477001D305D /* Storyboarded.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1305,6 +1311,7 @@
 				D365E4DA23E4541A00480F11 /* FollowingListViewController.swift in Sources */,
 				D338FF4423E945F500CAB8CB /* ProfileViewController.swift in Sources */,
 				D3086B7023DB59950071F378 /* UserService.swift in Sources */,
+				7C55ADEF2410A477001D305D /* Storyboarded.swift in Sources */,
 				D326796323E2940100F94BFD /* NewPostMapCell.swift in Sources */,
 				D34A5C0323ED5F7F00F76172 /* StoryViewController.swift in Sources */,
 				D3949B0523D9B07B006DA9AA /* UIView+Extension.swift in Sources */,
@@ -1317,7 +1324,7 @@
 				D32F7F3E23EAB30300FBC0D3 /* SRRoundedLabel.swift in Sources */,
 				D3A3B5F823E31E9B003201E1 /* StorageManager.swift in Sources */,
 				D3E6AF9223F4000000897AFF /* ProfileManager.swift in Sources */,
-				7C27B20724058296008EEA1B /* NotificationViewModel.swift in Sources */,
+				7C27B20724058296008EEA1B /* NotificationCellViewModel.swift in Sources */,
 				D34DCA862404FB3900ABC0FA /* DateManager.swift in Sources */,
 				D36106D023EFC1C0007AFDC2 /* AnimatedCollectionViewLayoutWrapper.swift in Sources */,
 				D3086B7523DB763A0071F378 /* HomeViewController.swift in Sources */,
@@ -1355,6 +1362,7 @@
 				D3A3B5F423E2A7E1003201E1 /* PlaceManager.swift in Sources */,
 				D36B695123F29F2300AAED0D /* GenericFetcher.swift in Sources */,
 				D3086B8C23DC8E7B0071F378 /* Constant.swift in Sources */,
+				7C55ADF12410D919001D305D /* NotificationViewModel.swift in Sources */,
 				7C3606B5240E429C00270EE9 /* SwipeTransitionAnimator.swift in Sources */,
 				D3086B8F23DC9D3A0071F378 /* PostInfoTableViewCell.swift in Sources */,
 				D3A07CF323F547FF00CE3F26 /* SRMediumTextLabel.swift in Sources */,

@@ -8,13 +8,13 @@
 
 import UIKit
 
-private enum Tab {
+private enum Tab: CaseIterable {
     
     case home
     case explore
+    case create
     case notification
     case profile
-    case create
     
     func controller() -> UIViewController {
         
@@ -55,6 +55,12 @@ private enum Tab {
                 image: UIImage.asset(ImageAsset.TabBarIcon_42px_Explore),
                 selectedImage: UIImage.asset(.TabBarIcon_42px_Explore_Selected))
             
+        case .create:
+            return UITabBarItem(
+                title: nil,
+                image: UIImage.asset(ImageAsset.Icons_Add02),
+                selectedImage: UIImage.asset(.Icons_Add02))
+            
         case .notification:
             return UITabBarItem(
                 title: nil,
@@ -66,12 +72,6 @@ private enum Tab {
                 title: nil,
                 image: UIImage.asset(ImageAsset.TabBarIcon_42px_Profile),
                 selectedImage: UIImage.asset(.TabBarIcon_42px_Profile_Selected))
-            
-        case .create:
-            return UITabBarItem(
-                title: nil,
-                image: UIImage.asset(ImageAsset.Icons_Add02),
-                selectedImage: UIImage.asset(.Icons_Add02))
         }
     }
 }
@@ -80,7 +80,7 @@ class SRTabBarController: UITabBarController {
     
     @IBOutlet var newPostSelectorView: UIView!
     
-    private let tabs: [Tab] = [.home, .explore, .create, .notification, .profile]
+    private let tabs: [Tab] = Tab.allCases
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,14 +97,13 @@ class SRTabBarController: UITabBarController {
 // MARK: - UITabBarControllerDelegate
 extension SRTabBarController: UITabBarControllerDelegate {
     
-    func tabBarController(
-        _ tabBarController: UITabBarController,
-        shouldSelect viewController: UIViewController) -> Bool {
+    func tabBarController(_ tabBarController: UITabBarController,
+                          shouldSelect viewController: UIViewController) -> Bool {
         
         if let nav = viewController as? UINavigationController,
             nav.viewControllers.first is NewPostViewController {
             
-            let newVC = CategorySelectorViewController.storyboardInstance()!
+            let newVC = CategorySelectorViewController.instantiate()
             newVC.modalPresentationStyle = .overCurrentContext
             self.present(newVC, animated: false, completion: nil)
             
@@ -127,7 +126,9 @@ extension SRTabBarController: UITabBarControllerDelegate {
         return true
     }
     
-    func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func tabBarController(_ tabBarController: UITabBarController,
+                          animationControllerForTransitionFrom fromVC: UIViewController,
+                          to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         return SwipeTransitionAnimator(viewControllers: tabBarController.viewControllers, duration: 0.25)
     }

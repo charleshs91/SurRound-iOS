@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, Storyboarded {
     
-    static func storyInstance() -> ProfileViewController? {
-        return UIStoryboard.profile.instantiateViewController(
-            identifier: "\(ProfileViewController.self)") as? ProfileViewController
+    // Storyboarded Protocol
+    static var storyboard: UIStoryboard {
+        return UIStoryboard.profile
     }
     
     @IBOutlet weak var tableView: UITableView!
@@ -153,9 +153,7 @@ class ProfileViewController: UIViewController {
     
     @objc func handleEditAvatar(_ sender: UIButton) {
         
-        guard let pickerVC = IGImagePickerController.storyboardInstance() else {
-            return
-        }
+        let pickerVC = IGImagePickerController.instantiate()
         pickerVC.delegate = self
         navigationController?.show(pickerVC, sender: nil)
     }

@@ -10,20 +10,11 @@ import UIKit
 
 class NotificationViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView! {
-        didSet {
-            tableView.dataSource = self
-            tableView.delegate = self
-        }
-    }
+    var notificationViewModel: NotificationViewModel!
     
-    private let manager = NotificationManager()
+    @IBOutlet weak var tableView: UITableView!
     
-    var viewModels: [NotificationViewModel] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    private let notificationManager = NotificationManager()
     
     // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
@@ -31,48 +22,40 @@ class NotificationViewController: UIViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        fetchData()
+        fireUpViewModel()
     }
     
-    private func fetchData() {
+    private func fireUpViewModel() {
         
-        guard let userId = AuthManager.shared.currentUser?.uid else { return }
+        notificationViewModel = NotificationViewModel()
         
-        viewModels.removeAll()
-        
-        manager.fetchNotifications(userId: userId) { [weak self] (result) in
+        notificationViewModel.bind { [weak self] _ in
             
-            switch result {
-            case .failure(let error):
-                SRProgressHUD.showFailure(text: error.localizedDescription)
-                
-            case .success(let notifications):
-                var viewModels: [NotificationViewModel] = []
-                notifications.forEach {
-                    viewModels.append(NotificationViewModel(notification: $0))
-                }
-                self?.viewModels.append(contentsOf: viewModels)
-            }
+            self?.tableView.reloadData()
         }
     }
 }
 
+// MARK: - UITableViewDataSource
 extension NotificationViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         
-        return viewModels.count
+        return notificationViewModel.numberOfItems
     }
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier:
-            NotificationCell.reuseIdentifier, for: indexPath)
-        guard let notificationCell = cell as? NotificationCell else { return cell }
+        let cell = tableView.dequeueReusableCell(withIdentifier: NotificationCell.reuseIdentifier, for: indexPath)
         
-        let viewModel = viewModels[indexPath.row]
+        guard
+            let notificationCell = cell as? NotificationCell,
+            let viewModel = notificationViewModel.getCellViewModelAt(index: indexPath.row)
+        else {
+            return cell
+        }
         
         viewModel.postImage == nil
             ? notificationCell.hidePostImage()
@@ -80,17 +63,14 @@ extension NotificationViewController: UITableViewDataSource {
         
         notificationCell.setupCell(viewModel)
         
-        viewModel.updateAvatarImage { (urlString) in
-            notificationCell.avatarImageView.loadImage(urlString)
-        }
-        viewModel.updatePostImage { (urlString) in
-            notificationCell.postImageView.loadImage(urlString)
-        }
-        
         return notificationCell
     }
 }
 
+// MARK: - UITableViewDelegate
 extension NotificationViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }

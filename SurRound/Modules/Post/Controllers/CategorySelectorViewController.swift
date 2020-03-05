@@ -8,15 +8,13 @@
 
 import UIKit
 
-class CategorySelectorViewController: UIViewController {
+class CategorySelectorViewController: UIViewController, Storyboarded {
     
-    static func storyboardInstance() -> CategorySelectorViewController? {
-        
-        return UIStoryboard.newPost.instantiateViewController(
-            identifier: String(describing: CategorySelectorViewController.self)
-            ) as? CategorySelectorViewController
+    static var storyboard: UIStoryboard {
+        return UIStoryboard.newPost
     }
     
+    // MARK: - iVars
     @IBOutlet weak var btnsCollectionView: UICollectionView! {
         didSet {
             btnsCollectionView.backgroundColor = .clear
@@ -34,9 +32,7 @@ class CategorySelectorViewController: UIViewController {
         }
     }
     
-    // Private Constants
     private let popUpViewHeight: CGFloat = 300
-    
     private let categories: [PostCategory] = [.chat, .question, .food, .scenary, .shopping, .cancel]
     
     // MARK: - ViewController Life Cycle
@@ -62,7 +58,10 @@ class CategorySelectorViewController: UIViewController {
         
         guard
             let nav = UIStoryboard.newPost.instantiateInitialViewController() as? UINavigationController,
-            let newPostVC = nav.viewControllers.first as? NewPostViewController else { return }
+            let newPostVC = nav.viewControllers.first as? NewPostViewController
+            else {
+                return
+        }
         
         let category = categories[sender.tag]
         
@@ -76,18 +75,18 @@ class CategorySelectorViewController: UIViewController {
         
         popUpView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         popUpView.layer.cornerRadius = 16
-        // initial position of popUpView
         popUpView.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: popUpViewHeight)
         view.addSubview(popUpView)
         
-        UIViewPropertyAnimator(
-            duration: 0.3,
-            curve: .easeInOut,
-            animations: {
-                self.popUpView.transform = CGAffineTransform(translationX: 0,
-                                                             y: -self.popUpView.frame.height)
-        }
-        ).startAnimation()
+        UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: 0.3,
+            delay: 0.0,
+            options: .curveEaseInOut,
+            animations: { [unowned self] in
+                self.popUpView.transform = CGAffineTransform(translationX: 0, y: -self.popUpView.frame.height)
+            },
+            completion: nil
+        )
     }
     
     private func dismissPopUpView(completion: (() -> Void)? = nil) {
@@ -96,11 +95,12 @@ class CategorySelectorViewController: UIViewController {
             withDuration: 0.3,
             delay: 0,
             options: .curveEaseInOut,
-            animations: {
+            animations: { [unowned self] in
                 self.popUpView.transform = .identity
-        }, completion: { _ in
-            self.popUpView.removeFromSuperview()
-            self.presentingViewController?.dismiss(animated: false, completion: completion)
+            },
+            completion: { _ in
+                self.popUpView.removeFromSuperview()
+                self.presentingViewController?.dismiss(animated: false, completion: completion)
         })
     }
     

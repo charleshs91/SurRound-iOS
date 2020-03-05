@@ -11,6 +11,7 @@ import GooglePlaces
 
 class NewPostViewController: UIViewController {
 
+    // MARK: iVars
     @IBOutlet weak var postButton: UIBarButtonItem!
     
     @IBOutlet weak var newPostTableView: UITableView! {
@@ -30,7 +31,6 @@ class NewPostViewController: UIViewController {
     private weak var mapCell: NewPostMapCell?
     
     private var postPlace: SRPlace?
-    
     private let cellFields: [NewPostCellType] = [.text, .media, .map]
     
     // MARK: - ViewController Life Cycle
@@ -60,10 +60,9 @@ class NewPostViewController: UIViewController {
                         place: place)
         
         SRProgressHUD.showLoading(text: "Creating post")
-        
         PostManager.shared.createPost(post, image: mediaCell?.pickedImage) { [weak self] result in
-            SRProgressHUD.dismiss()
             
+            SRProgressHUD.dismiss()
             switch result {
             case .success:
                 self?.postSuccessHandler()
@@ -76,7 +75,7 @@ class NewPostViewController: UIViewController {
     
     @objc func handleLocationSelection(_ sender: UIButton) {
         
-        guard let newVC = SelectLocationViewController.storyboardInstance() else { return }
+        let newVC = SelectLocationViewController.instantiate()
         newVC.delegate = self
         navigationController?.show(newVC, sender: nil)
     }
@@ -131,9 +130,7 @@ class NewPostViewController: UIViewController {
     private func postSuccessHandler() {
         
         NotificationCenter.default.post(name: Constant.NotificationId.newPost, object: nil)
-        
         SRProgressHUD.showSuccess(text: "New post created")
-        
         dismiss(animated: true, completion: nil)
     }
     

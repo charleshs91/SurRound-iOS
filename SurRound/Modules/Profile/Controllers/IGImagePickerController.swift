@@ -19,11 +19,10 @@ protocol IGImagePickerControllerDelegate: AnyObject {
     func didSelectImage(_ controller: IGImagePickerController, with image: UIImage)
 }
 
-class IGImagePickerController: UIViewController {
+class IGImagePickerController: UIViewController, Storyboarded {
     
-    static func storyboardInstance() -> IGImagePickerController? {
-        return UIStoryboard.profile.instantiateViewController(
-            identifier: String(describing: self)) as? IGImagePickerController
+    static var storyboard: UIStoryboard {
+        return UIStoryboard.profile
     }
     
     weak var delegate: IGImagePickerControllerDelegate?
