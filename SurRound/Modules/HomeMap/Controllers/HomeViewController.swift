@@ -32,7 +32,7 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var mapView: GMSMapView!
     
-    private var homeViewModel: HomeViewModel!
+    var homeViewModel: HomeViewModel = HomeViewModel()
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -95,14 +95,11 @@ class HomeViewController: UIViewController {
     
     private func fireUpViewModel() {
         
-        homeViewModel = HomeViewModel()
-        
         homeViewModel.bindMapPost { [weak self] mapPosts in
             
             guard let strongSelf = self else {
                 return
             }
-            
             mapPosts.forEach {
                 $0.displayMarker(onMap: strongSelf.mapView)
             }
@@ -111,6 +108,7 @@ class HomeViewController: UIViewController {
             
             self?.collectionView.reloadData()
         }
+        homeViewModel.start()
     }
         
     private func displayNewStoryActionSheet() {
@@ -215,7 +213,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
                     return
             }
             storyVC.modalPresentationStyle = .overCurrentContext
-            storyVC.storyEntities = homeViewModel.storyCollections
+            storyVC.storyEntities = homeViewModel.getStoryCollections()
             storyVC.initialIndexPath = IndexPath(item: 0, section: indexPath.item - 1)
             tabBarController?.present(storyVC, animated: true, completion: nil)
         }

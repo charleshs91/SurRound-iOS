@@ -15,8 +15,6 @@ class AuthManager {
     
     static let shared = AuthManager()
     
-    private init() { }
-    
     var userProfile: SRUserProfile?
     
     var currentUser: SRUser? {
@@ -40,13 +38,18 @@ class AuthManager {
         }
     }
     
-    func updateProfile(completion: @escaping (SRUserProfile) -> Void) {
+    private let profileManager = ProfileManager()
+    
+    private init() { }
+    
+    func updateProfile(completion: @escaping (SRUserProfile?) -> Void) {
         
         guard let user = currentUser else {
+            completion(nil)
             return
         }
-        let manager = ProfileManager()
-        manager.fetchProfile(user: user.uid, completion: { profile in
+        
+        profileManager.fetchProfile(user: user.uid, completion: { profile in
             
             guard let profile = profile else {
                 return

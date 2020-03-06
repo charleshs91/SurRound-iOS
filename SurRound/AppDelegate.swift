@@ -20,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // swiftlint:enable force_cast
     var window: UIWindow?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         IQKeyboardManager.shared.enable = true
         
@@ -35,11 +36,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func setupGMSServices() {
         
-        guard let path = Bundle.main.path(forResource: Constant.Google.googleServiceInfo,
-                                          ofType: Constant.Google.plist),
+        guard
+            let path = Bundle.main.path(forResource: Constant.Google.googleServiceInfo,
+                                        ofType: Constant.Google.plist),
             let dict = NSDictionary(contentsOfFile: path),
-            let apiKey = dict[Constant.Google.apiKey] as? String else { return }
-        
+            let apiKey = dict[Constant.Google.apiKey] as? String
+        else {
+            return
+        }
         GMSServices.provideAPIKey(apiKey)
         GMSPlacesClient.provideAPIKey(apiKey)
     }

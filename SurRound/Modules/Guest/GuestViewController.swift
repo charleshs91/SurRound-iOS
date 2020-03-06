@@ -10,13 +10,13 @@ import UIKit
 import GoogleMaps
 
 class GuestViewController: HomeViewController {
-
+    
     private lazy var backToSignInButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("Back To Login")
         btn.titleLabel?.font = .systemFont(ofSize: 18, weight: .medium)
         btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = .systemGray
+        btn.backgroundColor = .darkGray
         btn.clipsToBounds = true
         btn.layer.cornerRadius = self.buttonHeight / 2
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -28,6 +28,7 @@ class GuestViewController: HomeViewController {
     
     // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
+        homeViewModel = HomeViewModel(isLoggedIn: false)
         super.viewDidLoad()
         
         view.addSubview(backToSignInButton)
@@ -41,6 +42,7 @@ class GuestViewController: HomeViewController {
         
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
+    
 }
 
 extension GuestViewController {

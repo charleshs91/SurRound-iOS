@@ -13,26 +13,23 @@ class HomeViewModel {
     
     // MARK: - Public iVars
     var numberOfStoryCollections: Int {
-        return _storyCollections.value.count
+        return storyCollections.value.count
     }
-    var storyCollections: [StoryCollection] {
-        return _storyCollections.value
-    }
-    
+
     // MARK: - Private iVars
     private var mapPostViewModels: Observable<[MapPostViewModel]> = .init([])
-    private var _storyCollections: Observable<[StoryCollection]> = .init([])
+    private var storyCollections: Observable<[StoryCollection]> = .init([])
     
+    private let isLoggedIn: Bool
     private let storyManager: StoryManager
     private let postManager: PostManager
     
-    init() {
+    init(isLoggedIn: Bool = true) {
+        self.isLoggedIn = isLoggedIn
         self.storyManager = StoryManager()
         self.postManager = PostManager.shared
         NotificationCenter.default.addObserver(self, selector: #selector(newPostHandler),
                                                name: Constant.NotificationId.newPost, object: nil)
-        fetchStory()
-        fetchMapPost()
     }
     
     deinit {
@@ -49,10 +46,10 @@ class HomeViewModel {
     func bindStory(handlerForStory: (([StoryCollection]) -> Void)?) {
         
         guard let handler = handlerForStory else {
-            _storyCollections.removeObserver()
+            storyCollections.removeObserver()
             return
         }
-        _storyCollections.addObserver(onChanged: handler)
+        storyCollections.addObserver(onChanged: handler)
     }
     
     func bindMapPost(handlerForMapPost: (([MapPostViewModel]) -> Void)?) {
@@ -66,24 +63,31 @@ class HomeViewModel {
     
     func unbind() {
         
-        _storyCollections.removeObserver()
+        storyCollections.removeObserver()
         mapPostViewModels.removeObserver()
     }
-    
+        
     func getPostFromMarker(_ marker: GMSMarker) -> Post? {
         
         let matchedMapPost = mapPostViewModels.value.filter { mapPost in
             return marker == mapPost.mapMarker
         }.first
+        
         return matchedMapPost?.post
     }
     
     func getStoryCollectionAt(index: Int) -> StoryCollection? {
         
-        guard index >= 0 && index < _storyCollections.value.count else {
+        guard index >= 0 && index < storyCollections.value.count else {
             return nil
         }
-        return _storyCollections.value[index]
+        
+        return storyCollections.value[index]
+    }
+    
+    func getStoryCollections() -> [StoryCollection] {
+        
+        return storyCollections.value
     }
     
     func sendStory(videoURL: URL?) {
@@ -113,19 +117,20 @@ class HomeViewModel {
     
     // MARK: - Selectors
     @objc func newPostHandler() {
+        
         fetchMapPost()
     }
     
     // MARK: - Private Methods
     private func fetchStory() {
         
-        _storyCollections.value.removeAll()
+        storyCollections.value.removeAll()
         storyManager.fetchStoryCollection { [weak self] result in
             
             switch result {
             case .success(let stories):
                 DispatchQueue.main.async {
-                    self?._storyCollections.value.append(contentsOf: stories)
+                    self?.storyCollections.value.append(contentsOf: stories)
                 }
                 
             case .failure(let error):
@@ -133,19 +138,22 @@ class HomeViewModel {
             }
         }
     }
-    
-    private func fetchMapPost() {
         
-        if AuthManager.shared.currentUser != nil {
-            AuthManager.shared.updateProfile(completion: { [weak self] profile in
-                self?._fetchMapPost(blockingUsers: profile.blocking)
-            })
-        } else {
-            _fetchMapPost()
+    private func fetchMapPost(blockingUsers: [String] = []) {
+        
+        if isLoggedIn {
+            guard AuthManager.shared.userProfile != nil else {
+                
+                AuthManager.shared.updateProfile { [weak self] userProfile in
+                    
+                    guard let userProfile = userProfile else {
+                        return
+                    }
+                    self?.fetchMapPost(blockingUsers: userProfile.blocking)
+                }
+                return
+            }
         }
-    }
-    
-    private func _fetchMapPost(blockingUsers: [String] = []) {
         
         mapPostViewModels.value.removeAll()
         postManager.fetchAllPostWithBlocking(blockingUsers: blockingUsers) { [weak self] result in

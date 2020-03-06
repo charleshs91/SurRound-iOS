@@ -21,17 +21,16 @@ class SelectLocationViewController: UIViewController, Storyboarded {
     static var storyboard: UIStoryboard {
         return UIStoryboard.newPost
     }
-
+    
+    // MARK: - Public iVars
     @IBOutlet weak var mapView: GMSMapView!
-    
     weak var delegate: SelectLocationViewControllerDelegate?
-    
     var place: SRPlace?
     
+    // MARK: - Private iVars
     private var resultsViewController: GMSAutocompleteResultsViewController?
     private var searchController: UISearchController?
     private var resultView: UITextView?
-    
     private var isPlaceDefinedByScrolling: Bool = false
     
     // MARK: - View Life Cycle
@@ -95,6 +94,7 @@ class SelectLocationViewController: UIViewController, Storyboarded {
     }
 }
 
+// MARK: - GMSMapViewDelegate
 extension SelectLocationViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {

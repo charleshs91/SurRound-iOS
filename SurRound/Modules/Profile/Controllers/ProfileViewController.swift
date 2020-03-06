@@ -64,7 +64,7 @@ class ProfileViewController: HiddenNavBarViewController, Storyboarded {
             let manager = ProfileManager()
             
             SRProgressHUD.showLoading()
-            manager.followUser(receiverId: userToDisplay.uid, current: currentUser) { [weak self] result in
+            manager.followUser(receiverId: userToDisplay.uid, current: currentUser) { result in
                 
                 SRProgressHUD.dismiss()
                 switch result {

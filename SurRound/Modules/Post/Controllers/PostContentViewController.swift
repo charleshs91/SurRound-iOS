@@ -155,18 +155,17 @@ class PostContentViewController: UIViewController {
         }
     }
     
-    @objc func tapOnUser(_ sender: UITapGestureRecognizer) {
+    func tapOnUser(userToDisplay: SRUser) {
         
-        let profileVC = ProfileViewController.instantiate()
-        
-        let userId = post!.authorId
-        
-        UserService.queryUser(uid: userId) { [weak self] (srUser) in
-            if let user = srUser {
-                profileVC.userToDisplay = user
-                self?.show(profileVC, sender: nil)
-            }
+        guard
+            let nav = UIStoryboard.profile.instantiateInitialViewController() as? UINavigationController,
+            let profileVC = nav.topViewController as? ProfileViewController
+            else {
+                return
         }
+        
+        profileVC.userToDisplay = userToDisplay
+        navigationController?.pushViewController(profileVC, animated: true)
     }
 }
 
@@ -206,11 +205,8 @@ extension PostContentViewController: UITableViewDataSource {
                     break
                 }
                 infoCell.setupCell(with: post!, userProfileHandler: { [weak self] user in
-                    guard let nav = UIStoryboard.profile.instantiateInitialViewController() as? UINavigationController,
-                        let profileVC = nav.topViewController as? ProfileViewController else { return }
-                    profileVC.userToDisplay = user
-                    profileVC.modalPresentationStyle = .overCurrentContext
-                    self?.present(nav, animated: true, completion: nil)
+                    
+                    self?.tapOnUser(userToDisplay: user)
                 })
                 
             case .body:
