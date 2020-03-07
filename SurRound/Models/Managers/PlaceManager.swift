@@ -18,33 +18,34 @@ class PlaceManager: NSObject {
     
     static let current = PlaceManager()
     
-    let manager = CLLocationManager()
-    
     var coordinate: Coordinate?
     
     var place: SRPlace? {
         guard let location = self.location else { return nil }
-        
         return SRPlace(location.coordinate)
     }
     
     var location: CLLocation? {
-        return manager.location
+        return clLocationManager.location
     }
+    
+    private let clLocationManager = CLLocationManager()
+    
+    private var onUpdated: ((CLLocation?) -> Void)?
     
     override init() {
         super.init()
         
-        manager.delegate = self
+        clLocationManager.delegate = self
     }
     
-    func updateLocation() throws {
+    func updateLocation(completion: @escaping (CLLocation?) -> Void) throws {
         
         let status = CLLocationManager.authorizationStatus()
         
         switch status {
         case .notDetermined:
-            manager.requestWhenInUseAuthorization()
+            clLocationManager.requestWhenInUseAuthorization()
             
         case .denied, .restricted:
             throw PlaceManagerError.accessDenied
@@ -56,7 +57,8 @@ class PlaceManager: NSObject {
             return
         }
         
-        manager.startUpdatingLocation()
+        self.onUpdated = completion
+        clLocationManager.startUpdatingLocation()
     }
     
     static func calculateDistance(_ target: Coordinate, reference: Coordinate) -> Double {
@@ -71,8 +73,9 @@ extension PlaceManager: CLLocationManagerDelegate {
         
         if let location = locations.last {
             coordinate = Coordinate(location)
-            manager.stopUpdatingLocation()
+            onUpdated?(location)
         }
+        manager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

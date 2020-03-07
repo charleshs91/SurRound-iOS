@@ -63,7 +63,11 @@ class HomeViewController: UIViewController {
     private func updateLocation() {
         
         do {
-            try PlaceManager.current.updateLocation()
+            try PlaceManager.current.updateLocation(completion: { [weak self] location in
+                if let location = location {
+                    self?.mapView.animate(to: GMSCameraPosition(target: location.coordinate, zoom: 18))
+                }
+            })
             
         } catch PlaceManagerError.accessDenied {
             let alert = UIAlertController(title: "Location Services disabled",
@@ -110,7 +114,7 @@ class HomeViewController: UIViewController {
         }
         homeViewModel.start()
     }
-        
+    
     private func displayNewStoryActionSheet() {
         
         let imagePicker = UIImagePickerController()
@@ -123,17 +127,17 @@ class HomeViewController: UIViewController {
         
         imagePickerAlert.addAction(UIAlertAction(title: "Library", style: .default) { [weak self] _ in
             
-                self?.presentImagePickerForPhotosAlbum(imagePicker)
+            self?.presentImagePickerForPhotosAlbum(imagePicker)
         })
         
         imagePickerAlert.addAction(UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
             
-                self?.presentImagePickerForCamera(imagePicker)
+            self?.presentImagePickerForCamera(imagePicker)
         })
         
         imagePickerAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
             
-                imagePickerAlert.dismiss(animated: true, completion: nil)
+            imagePickerAlert.dismiss(animated: true, completion: nil)
         })
         
         present(imagePickerAlert, animated: true, completion: nil)
