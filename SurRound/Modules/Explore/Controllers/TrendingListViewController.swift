@@ -27,6 +27,8 @@ class TrendingListViewController: UIViewController {
         }
     }
     
+    private let postFetcher: PostFetchable = PostManager.shared
+    
     // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +49,7 @@ class TrendingListViewController: UIViewController {
     
     private func fetchData() {
         
-        PostManager.shared.fetchTrendingPost { [weak self] (result) in
+        postFetcher.fetchPostList(listCategory: .byLikedCounts, blockingUserList: []) {[weak self] (result) in
             
             self?.collectionView.endHeaderRefreshing()
             
@@ -58,7 +60,9 @@ class TrendingListViewController: UIViewController {
             case .failure(let error):
                 SRProgressHUD.showFailure(text: error.localizedDescription)
             }
+            
         }
+
     }
 }
 

@@ -78,7 +78,11 @@ class ProfileViewModel {
     @objc private func fetchUserPost() {
         
         userPostViewModels.value.removeAll()
-        postManager.fetchPostOfUsers(uids: [thisUser.uid]) { [weak self] result in
+        
+        postManager.fetchPostList(
+            listCategory: .byAuthor(authorList: [thisUser.uid]),
+            blockingUserList: []
+        ) { [weak self] result in
             
             switch result {
             case .success(let posts):

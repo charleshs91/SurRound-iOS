@@ -21,13 +21,16 @@ class HomeViewModel {
     private var storyCollections: Observable<[StoryCollection]> = .init([])
     
     private let isLoggedIn: Bool
+    private let postFetcher: PostFetchable
     private let storyManager: StoryManager
-    private let postManager: PostManager
     
-    init(isLoggedIn: Bool = true) {
+    init(isLoggedIn: Bool = true,
+         postFetcher: PostFetchable = PostManager.shared,
+         storyManager: StoryManager = StoryManager()) {
+        
         self.isLoggedIn = isLoggedIn
+        self.postFetcher = postFetcher
         self.storyManager = StoryManager()
-        self.postManager = PostManager.shared
         NotificationCenter.default.addObserver(self, selector: #selector(newPostHandler),
                                                name: Constant.NotificationId.newPost, object: nil)
     }
@@ -156,7 +159,8 @@ class HomeViewModel {
         }
         
         mapPostViewModels.value.removeAll()
-        postManager.fetchAllPostWithBlocking(blockingUsers: blockingUsers) { [weak self] result in
+        
+        postFetcher.fetchPostList(listCategory: .none, blockingUserList: blockingUsers) { [weak self] result in
             
             switch result {
             case .success(let posts):

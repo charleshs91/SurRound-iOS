@@ -32,6 +32,8 @@ class FollowingListViewController: UIViewController {
         }
     }
     
+    private let postFetcher: PostFetchable = PostManager.shared
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,40 +53,36 @@ class FollowingListViewController: UIViewController {
         posts.removeAll()
         viewModels.removeAll()
         
+        let listCategory: ListCategory
+        
         if userProfile.following.count == 0 {
-            PostManager.shared.fetchAllPost { [weak self] result in
-                
-                self?.tableView.endHeaderRefreshing()
-                
-                switch result {
-                case .success(let posts):
-                    self?.posts.append(contentsOf: posts)
-                    self?.viewModels.append(contentsOf: ViewModelFactory.viewModelFromPosts(posts))
-                    
-                case .failure(let error):
-                    print(error)
-                    SRProgressHUD.showFailure(text: error.localizedDescription)
-                }
-            }
+            listCategory = .none
         } else {
+            listCategory = .byAuthor(authorList: userProfile.following)
             tableView.tableHeaderView = nil
+        }
+        
+        postFetcher.fetchPostList(listCategory: listCategory, blockingUserList: userProfile.blocking) { [weak self] result in
             
-            PostManager.shared.fetchPostOfUsers(uids: userProfile.following) {  [weak self] result in
-                
-                self?.tableView.endHeaderRefreshing()
-                
-                switch result {
-                case .success(let posts):
-                    self?.posts.append(contentsOf: posts)
-                    self?.viewModels.append(contentsOf: ViewModelFactory.viewModelFromPosts(posts))
-                    
-                case .failure(let error):
-                    print(error)
-                    SRProgressHUD.showFailure(text: error.localizedDescription)
-                }
-            }
+            self?.handlePostsResult(result: result)
         }
     }
+    
+    private func handlePostsResult(result: Result<[Post], DataFetchingError>) {
+        
+        tableView.endHeaderRefreshing()
+        
+        switch result {
+        case .success(let posts):
+            self.posts.append(contentsOf: posts)
+            viewModels.append(contentsOf: ViewModelFactory.viewModelFromPosts(posts))
+            
+        case .failure(let error):
+            print(error)
+            SRProgressHUD.showFailure(text: error.localizedDescription)
+        }
+    }
+    
 }
 
 // MARK: - UITableViewDataSource

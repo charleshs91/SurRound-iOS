@@ -34,6 +34,8 @@ class NearestListViewController: UIViewController {
         }
     }
     
+    private let postFetcher: PostFetchable = PostManager.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,14 +49,18 @@ class NearestListViewController: UIViewController {
             return
         }
         
-        PostManager.shared.fetchNearestPost(coordinate: currentCoordinate) { [weak self] (result) in
+        postFetcher.fetchPostList(
+            listCategory: .byLeastDistance(coordinate: currentCoordinate),
+            blockingUserList: []
+        ) { [weak self] (result) in
+            
             do {
                 let posts = try result.get()
                 posts.forEach { post in
                     self?.data.append(.init(post: post, currentCoordinate: currentCoordinate))
                 }
             } catch {
-                print(error)
+                SRProgressHUD.showFailure(text: error.localizedDescription)
             }
         }
     }
