@@ -14,6 +14,9 @@ class WelcomeViewController: SRBaseViewController {
     @IBOutlet weak var emailSignInBtn: SRAuthButton!
     @IBOutlet weak var guestSignInBtn: SRAuthButton!
     
+    var appleSignInViewModel: AppleSignInAction?
+    
+    // MARK: - Private iVars
     private let appleSignInButton: ASAuthorizationAppleIDButton = {
         let btn = ASAuthorizationAppleIDButton(authorizationButtonType: .default,
                                                authorizationButtonStyle: .black)
@@ -46,13 +49,8 @@ class WelcomeViewController: SRBaseViewController {
     // MARK: - User Actions
     @objc func signInWithApple(_ sender: ASAuthorizationAppleIDButton) {
         
-        let provider = ASAuthorizationAppleIDProvider()
-        let request = provider.createRequest()
-        request.requestedScopes = [.email, .fullName]
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.delegate = self
-        controller.presentationContextProvider = self
-        controller.performRequests()
+        appleSignInViewModel = AppleSignInViewModel(presentationAnchor: self.view.window!)
+        appleSignInViewModel?.executeSignIn(delegate: self)
     }
     
     @IBAction func signInAsGuest(_ sender: UIButton) {
@@ -75,7 +73,6 @@ class WelcomeViewController: SRBaseViewController {
     private func setupViews() {
         
         view.insertSubview(curveShapeView, at: 0)
-        
         setupLoginButtonsStackView()
     }
     
@@ -92,68 +89,27 @@ class WelcomeViewController: SRBaseViewController {
         NSLayoutConstraint(item: loginButtonsStackView, attribute: .centerY, relatedBy: .equal,
                            toItem: view, attribute: .bottom, multiplier: 0.75, constant: 0).isActive = true
     }
-    
-    private func appleSignIn(uid: String) {
-        
-        UserService.queryUser(uid: uid) { [weak self] user in
-            
-            guard user != nil else {
-                DispatchQueue.main.async {
-                    let newVC = UIStoryboard.auth.instantiateViewController(identifier:
-                        String(describing: UserInfoFormViewController.self))
-                    guard let userInfoVC = newVC as? UserInfoFormViewController else { return }
-                    userInfoVC.uid = uid
-                    self?.navigationController?.pushViewController(userInfoVC, animated: true)
-                }
-                return
-            }
-            
-            AuthManager.shared.currentUser = user!
-            
-            DispatchQueue.main.async {
-                self?.displayMainView()
-            }
-        }
-    }
 }
 
-// MARK: - ASAuthorizationControllerDelegate
-extension WelcomeViewController: ASAuthorizationControllerDelegate {
+// MARK: - AppleSignInViewModelDelegate
+extension WelcomeViewController: AppleSignInViewModelDelegate {
     
-    func authorizationController(controller: ASAuthorizationController,
-                                 didCompleteWithAuthorization authorization: ASAuthorization) {
+    func didSignInAsNewUser(_ viewModel: AppleSignInViewModel, userId: String) {
         
-        guard let credential = authorization.credential as? ASAuthorizationAppleIDCredential else {
-            return
-        }
-        
-        let userId = credential.user
-        let uid = String(userId.split(separator: ".")[1])
-        
-        let provider = ASAuthorizationAppleIDProvider()
-        provider.getCredentialState(forUserID: userId) { [weak self] (credentialState, _) in
-            
-            switch credentialState {
-            case .authorized:
-                self?.appleSignIn(uid: uid)
-                
-            default:
-                break
-            }
-        }
+        let userInfoVC = UserInfoFormViewController.instantiate()
+        userInfoVC.uid = userId
+        userInfoVC.appleSignInViewModel = appleSignInViewModel
+        navigationController?.pushViewController(userInfoVC, animated: true)
     }
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+    func didSignInAsExistingUser(_ viewModel: AppleSignInViewModel) {
         
-        print(error)
+        displayMainView()
     }
-}
-
-// MARK: - ASAuthorizationControllerPresentationContextProviding
-extension WelcomeViewController: ASAuthorizationControllerPresentationContextProviding {
     
-    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+    func didFailSignIn(_ viewModel: AppleSignInViewModel, with error: Error) {
         
-        return self.view.window!
+        SRProgressHUD.showFailure(text: error.localizedDescription)
     }
+    
 }

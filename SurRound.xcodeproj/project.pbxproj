@@ -15,7 +15,9 @@
 		7C3606B5240E429C00270EE9 /* SwipeTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3606B4240E429C00270EE9 /* SwipeTransitionAnimator.swift */; };
 		7C3AD08124065B7A00DF40EE /* GuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3AD08024065B7A00DF40EE /* GuestViewController.swift */; };
 		7C3AD08324065C8B00DF40EE /* Guest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C3AD08224065C8B00DF40EE /* Guest.storyboard */; };
+		7C3F608A2415D4FD00621FE4 /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F60892415D4FD00621FE4 /* AuthManagerTests.swift */; };
 		7C43FD67240FB3EF00A930ED /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C43FD66240FB3EF00A930ED /* HomeViewModel.swift */; };
+		7C54FCF024160EAD005AF65E /* AppleSignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54FCEF24160EAD005AF65E /* AppleSignInViewModel.swift */; };
 		7C55ADEF2410A477001D305D /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55ADEE2410A477001D305D /* Storyboarded.swift */; };
 		7C55ADF12410D919001D305D /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55ADF02410D919001D305D /* NotificationViewModel.swift */; };
 		7C60EBFF2411002000E225B9 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60EBFE2411002000E225B9 /* ProfileViewModel.swift */; };
@@ -186,7 +188,9 @@
 		7C3606B4240E429C00270EE9 /* SwipeTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTransitionAnimator.swift; sourceTree = "<group>"; };
 		7C3AD08024065B7A00DF40EE /* GuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestViewController.swift; sourceTree = "<group>"; };
 		7C3AD08224065C8B00DF40EE /* Guest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Guest.storyboard; sourceTree = "<group>"; };
+		7C3F60892415D4FD00621FE4 /* AuthManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManagerTests.swift; sourceTree = "<group>"; };
 		7C43FD66240FB3EF00A930ED /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		7C54FCEF24160EAD005AF65E /* AppleSignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInViewModel.swift; sourceTree = "<group>"; };
 		7C55ADEE2410A477001D305D /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		7C55ADF02410D919001D305D /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		7C60EBFE2411002000E225B9 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -407,6 +411,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		7C54FCEC24160E61005AF65E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7C54FCEF24160EAD005AF65E /* AppleSignInViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		7C60EBFD2411001000E225B9 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -509,6 +521,7 @@
 		D35C48A423CF352E000951D2 /* SurRoundTests */ = {
 			isa = PBXGroup;
 			children = (
+				7C3F60892415D4FD00621FE4 /* AuthManagerTests.swift */,
 				D35C48A523CF352E000951D2 /* SurRoundTests.swift */,
 				D35C48A723CF352E000951D2 /* Info.plist */,
 			);
@@ -809,6 +822,7 @@
 		D3AD56422403EE0A0051A58D /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				7C54FCEC24160E61005AF65E /* ViewModels */,
 				D3AD56432403EE130051A58D /* Controllers */,
 				D3AD56442403EE1A0051A58D /* Views */,
 			);
@@ -1412,6 +1426,7 @@
 				D32F7F3423EA6D9100FBC0D3 /* CategorySelectorViewController.swift in Sources */,
 				D361071523F050B4007AFDC2 /* CategoryButtonCell.swift in Sources */,
 				D3086B9323DCA0940071F378 /* PostBodyCell.swift in Sources */,
+				7C54FCF024160EAD005AF65E /* AppleSignInViewModel.swift in Sources */,
 				D38C570223E43111001C6C9D /* SelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1421,6 +1436,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D35C48A623CF352E000951D2 /* SurRoundTests.swift in Sources */,
+				7C3F608A2415D4FD00621FE4 /* AuthManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

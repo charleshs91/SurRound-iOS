@@ -8,33 +8,38 @@
 
 import UIKit
 
-class UserInfoFormViewController: UIViewController {
+class UserInfoFormViewController: UIViewController, Storyboarded {
+    
+    static var storyboard: UIStoryboard {
+        return UIStoryboard.auth
+    }
+
+    var uid: String!
+    var appleSignInViewModel: AppleSignInAction?
     
     @IBOutlet weak var usernameTextField: SRAuthTextField!
-    
     @IBOutlet weak var emailTextField: SRAuthTextField!
-    
     @IBOutlet weak var continueButton: SRAuthButton!
-    
-    var uid: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         usernameTextField.becomeFirstResponder()
-        
         setupTextField()
     }
     
     @IBAction func didTapContinue(_ sender: UIButton) {
         
-        guard let username = usernameTextField.text,
-            let email = emailTextField.text else {
+        guard
+            let username = usernameTextField.text,
+            let email = emailTextField.text
+            else {
                 return
         }
+        let srUser = SRUser(uid: uid, email: email, username: username)
         
         SRProgressHUD.showLoading()
-        AuthManager.shared.signUpWithApple(uid: uid, email: email, username: username) { [weak self] (result) in
+        appleSignInViewModel?.createAcountInDatabase(srUser: srUser) { [weak self] result in
             
             SRProgressHUD.dismiss()
             switch result {
