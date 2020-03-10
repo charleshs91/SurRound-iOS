@@ -14,13 +14,12 @@ class FollowingListViewController: UIViewController {
         didSet {
             tableView.registerCellWithNib(withCellClass: TextPostListCell.self)
             tableView.registerCellWithNib(withCellClass: ImagePostListCell.self)
-            tableView.registerCellWithNib(withCellClass: VideoPostListCell.self)
-            
-            tableView.separatorStyle = .none
             
             tableView.addHeaderRefreshing { [weak self] in
                 self?.refreshPosts()
             }
+            
+            tableView.separatorStyle = .none
         }
     }
     
@@ -62,7 +61,10 @@ class FollowingListViewController: UIViewController {
             tableView.tableHeaderView = nil
         }
         
-        postFetcher.fetchPostList(listCategory: listCategory, blockingUserList: userProfile.blocking) { [weak self] result in
+        postFetcher.fetchPostList(
+            listCategory: listCategory,
+            blockingUserList: userProfile.blocking
+        ) { [weak self] result in
             
             self?.handlePostsResult(result: result)
         }

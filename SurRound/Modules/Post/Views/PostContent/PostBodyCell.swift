@@ -8,91 +8,61 @@
 
 import UIKit
 
-class PostBodyViewModel {
+protocol PostBodyCellDelegate: AnyObject {
     
-    var postId: String
-    var postText: String
-    var isLiked: Observable<Bool>
-    var likeCount: Int
+    func didTapLikeButton(_ cell: PostBodyCell)
     
-    var onReplyTapped: (() -> Void)?
+    func didTapReplyButton(_ cell: PostBodyCell)
     
-    init(post: Post, isLiked: Bool = false, likeCount: Int = 0, onReply: @escaping () -> Void) {
-        self.postId = post.id
-        self.postText = post.text
-        self.isLiked = Observable(isLiked)
-        self.likeCount = likeCount
-        self.onReplyTapped = onReply
-    }
+    func didTapMoreAction(_ cell: PostBodyCell)
 }
 
 class PostBodyCell: SRBaseTableViewCell {
     
+    weak var delegate: PostBodyCellDelegate?
+    
     @IBOutlet weak var postTextLabel: UILabel!
+    
     @IBOutlet weak var likeButton: UIButton!
     
     var onMoreActionTapped: (() -> Void)?
     
-    private var viewModel: PostBodyViewModel? {
-        didSet {
-            guard let viewModel = viewModel else { return }
-            postTextLabel.text = viewModel.postText
-            likeButton.isSelected = viewModel.isLiked.value
-        }
-    }
+    private var viewModel: PostContentViewModelInterface?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
     }
     
-    func configure(with viewModel: PostBodyViewModel) {
+    func configure(with viewModel: PostContentViewModelInterface) {
         
-        guard let user = AuthManager.shared.currentUser else { return }
+        postTextLabel.text = viewModel.postText
+        likeButton.isSelected = viewModel.isLiked.value
         
-        viewModel.isLiked.addObserver(fireNow: false) { (state) in
-            
-            if state {
-                PostManager.shared.likePost(postId: viewModel.postId, userId: user.uid) { [weak self] result in
-                    switch result {
-                    case .failure(let error):
-                        SRProgressHUD.showFailure(text: error.localizedDescription)
-                    case .success:
-                        self?.updateLikeButton()
-                    }
-                }
-            } else {
-                PostManager.shared.dislikePost(postId: viewModel.postId, userId: user.uid) { [weak self] result in
-                    switch result {
-                    case .failure(let error):
-                        SRProgressHUD.showFailure(text: error.localizedDescription)
-                    case .success:
-                        self?.updateLikeButton()
-                    }
-                }
-            }
+        viewModel.isLiked.addObserver(fireNow: true) { [weak self] isLiked in
+            self?.updateLikeButton(isSelected: isLiked)
         }
-        
         self.viewModel = viewModel
     }
     
     @IBAction func didTapLikeButton(_ sender: UIButton) {
         
-        viewModel?.isLiked.value.toggle()
+        delegate?.didTapLikeButton(self)
     }
     
     @IBAction func didTapReplyButton(_ sender: UIButton) {
         
-        viewModel?.onReplyTapped?()
-    }
-    @IBAction func moreActionTapped(_ sender: UIButton) {
-        
-        onMoreActionTapped?()
+        delegate?.didTapReplyButton(self)
     }
     
-    private func updateLikeButton() {
+    @IBAction func moreActionTapped(_ sender: UIButton) {
         
-        likeButton.isSelected.toggle()
-        likeButton.tintColor = likeButton.isSelected ? .yellow : .darkGray
+        delegate?.didTapMoreAction(self)
+    }
+    
+    private func updateLikeButton(isSelected: Bool) {
+        
+//        likeButton.isSelected.toggle()
+        likeButton.tintColor = isSelected ? .yellow : .darkGray
     }
 }

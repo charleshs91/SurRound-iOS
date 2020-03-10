@@ -12,39 +12,39 @@ class ExploreViewController: UIViewController {
     
     private let pages: [ExplorePageType] = [.following, .trending, .nearest]
     
+    private var exploreView: ExploreView! {
+        return view as? ExploreView
+    }
+    
     // MARK: - ViewController Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.definesPresentationContext = true
         navigationController?.navigationBar.isHidden = true
         
-        guard let exploreView = view as? ExploreView else { return }
         exploreView.selectionView.dataSource = self
         exploreView.selectionView.delegate = self
+        
         let tabBarHeight = tabBarController?.tabBar.frame.height
         exploreView.arrangeViews(tabBarHeight: tabBarHeight ?? 0)
+        
         setupGestureRecognizers()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     }
     
     // MARK: - Private Methods
     private func setupGestureRecognizers() {
         
-        guard let exploreView = view as? ExploreView else { return }
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeGestureHandler(_:)))
         swipeLeft.direction = .left
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeGestureHandler(_:)))
         swipeRight.direction = .right
+        
         exploreView.addGestureRecognizer(swipeLeft)
         exploreView.addGestureRecognizer(swipeRight)
     }
     
     @objc func swipeGestureHandler(_ sender: UISwipeGestureRecognizer) {
-        
-        guard let exploreView = view as? ExploreView else { return }
         
         switch sender.direction {
         case .left:
@@ -90,8 +90,6 @@ extension ExploreViewController: SelectionViewDataSource {
 extension ExploreViewController: SelectionViewDelegate {
     
     func selectionView(_ selectionView: SelectionView, didSelectItemAt index: Int) {
-        
-        guard let exploreView = view as? ExploreView else { return }
         
         exploreView.animateToPage(type: pages[index])
     }

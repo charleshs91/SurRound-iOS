@@ -11,20 +11,14 @@ import KMPlaceholderTextView
 
 class PostContentViewController: UIViewController {
     
-    deinit {
-        print("$ PostContentViewController deinit")
-    }
-    
     var post: Post! {
         didSet {
-            postBodyViewModel = PostBodyViewModel(post: post, onReply: { [weak self] in
-                self?.replyTextView.becomeFirstResponder()
-                self?.postContentView.tableView.scrollToBottom(animated: true)
-            })
+            guard let currentUser = AuthManager.shared.currentUser else { return }
+            postContentViewModel = PostContentViewModel(post: post, viewerUser: currentUser)
         }
     }
-    
-    var postBodyViewModel: PostBodyViewModel!
+
+    var postContentViewModel: PostContentViewModelInterface!
     
     var reviews = [Review]() {
         didSet {
@@ -51,9 +45,7 @@ class PostContentViewController: UIViewController {
     }
     
     private let manager = ProfileManager()
-    
     private let sections: [PostDetailSectionType] = [.content, .review]
-    
     private let cellItems: [PostBodyCellType] = [.info, .body]
     
     // MARK: - ViewController Life Cycle
@@ -67,6 +59,7 @@ class PostContentViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationController?.setToolbarHidden(true, animated: false)
     }
     
@@ -76,21 +69,21 @@ class PostContentViewController: UIViewController {
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func didTapReply(_ sender: UIButton) {
-        
-        guard let currentUser = AuthManager.shared.currentUser else { return }
-        let author = Author(currentUser)
+    @IBAction func sendReply(_ sender: UIButton) {
         
         SRProgressHUD.showLoading()
-        ReviewManager.shared.sendReview(postAuthorId: post.author.uid, postId: post.id, replyAuthor: author, text: replyTextView.text) { [weak self] (error) in
+        postContentViewModel.reply(text: replyTextView.text) { [weak self] result in
             
             SRProgressHUD.dismiss()
-            if error == nil {
-                SRProgressHUD.showSuccess(text: "留言成功")
+            switch result {
+            case .success:
+                SRProgressHUD.showSuccess(text: "Reply Success")
                 self?.replyTextView.clear()
                 self?.updateReviews {
                     self?.postContentView.tableView.scrollToBottom(animated: true)
                 }
+            case .failure(let error):
+                SRProgressHUD.showFailure(text: "Reply Failure: \(error.localizedDescription)")
             }
         }
     }
@@ -98,44 +91,19 @@ class PostContentViewController: UIViewController {
     // MARK: Private Methods
     private func showMoreActions() {
         
-        let alertVC = UIAlertController(
-            title: nil, message: nil, preferredStyle: .actionSheet)
+        let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let reportAction = UIAlertAction(title: "Report", style: .default) { [unowned self] _ in
-            
-            SRProgressHUD.showLoading()
-            self.manager.blockUser(targetUid: self.post.authorId) { (result) in
-                SRProgressHUD.dismiss()
-                switch result {
-                case .failure(let error):
-                    print(error)
-                case .success:
-                    SRProgressHUD.showSuccess(text: "We've received your report on the current user.")
-                }
-            }
-        }
+        alertVC.addAction(UIAlertAction(title: "Report", style: .default) { [unowned self] _ in
+            self.postContentViewModel.reportPost()
+        })
         
-        let blockAction = UIAlertAction(title: "Block", style: .default) { [unowned self] _ in
-            
-            SRProgressHUD.showLoading()
-            self.manager.blockUser(targetUid: self.post.authorId) { (result) in
-                SRProgressHUD.dismiss()
-                switch result {
-                case .failure(let error):
-                    print(error)
-                case .success:
-                    SRProgressHUD.showSuccess(text: "Successful. You'll no longer see content from this user.")
-                }
-            }
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+        alertVC.addAction(UIAlertAction(title: "Block", style: .default) { [unowned self] _ in
+            self.postContentViewModel.blockUser()
+        })
+
+        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
             alertVC.dismiss(animated: true, completion: nil)
-        }
-        
-        [reportAction, blockAction, cancelAction].forEach {
-            alertVC.addAction($0)
-        }
+        })
         
         present(alertVC, animated: true, completion: nil)
     }
@@ -153,19 +121,6 @@ class PostContentViewController: UIViewController {
                 completion?()
             }
         }
-    }
-    
-    func tapOnUser(userToDisplay: SRUser) {
-        
-        guard
-            let nav = UIStoryboard.profile.instantiateInitialViewController() as? UINavigationController,
-            let profileVC = nav.topViewController as? ProfileViewController
-            else {
-                return
-        }
-        
-        profileVC.userToDisplay = userToDisplay
-        navigationController?.pushViewController(profileVC, animated: true)
     }
 }
 
@@ -204,24 +159,21 @@ extension PostContentViewController: UITableViewDataSource {
                 guard let infoCell = cell as? PostInfoTableViewCell else {
                     break
                 }
-                infoCell.setupCell(with: post!, userProfileHandler: { [weak self] user in
-                    
-                    self?.tapOnUser(userToDisplay: user)
-                })
+                infoCell.configure(with: postContentViewModel)
+                infoCell.delegate = self
                 
             case .body:
                 guard let bodyCell = cell as? PostBodyCell else {
                     break
                 }
-                bodyCell.configure(with: postBodyViewModel)
-                bodyCell.onMoreActionTapped = { [weak self] in
-                    self?.showMoreActions()
-                }
+                bodyCell.configure(with: postContentViewModel)
+                bodyCell.delegate = self
             }
             return cell
             
         case .review:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: PostReplyCell.reuseIdentifier, for: indexPath) as? PostReplyCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier:
+                PostReplyCell.reuseIdentifier, for: indexPath) as? PostReplyCell else {
                 return UITableViewCell()
             }
             cell.updateCell(reviews[indexPath.row])
@@ -246,4 +198,49 @@ extension PostContentViewController: UITextViewDelegate {
         
         replyButton.isEnabled = !textView.isEmpty
     }
+}
+
+// MARK: - PostInfoTableViewCellDelegate
+extension PostContentViewController: PostInfoTableViewCellDelegate {
+    
+    func didTapOnUser(_ cell: PostInfoTableViewCell, user: SRUser) {
+        
+        guard
+            let nav = UIStoryboard.profile.instantiateInitialViewController() as? UINavigationController,
+            let profileVC = nav.topViewController as? ProfileViewController
+            else {
+                return
+        }
+        
+        profileVC.userToDisplay = user
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
+}
+
+// MARK: - PostBodyCellDelegate
+extension PostContentViewController: PostBodyCellDelegate {
+    
+    func didTapLikeButton(_ cell: PostBodyCell) {
+        
+        postContentViewModel.tapLikeButton { result in
+            switch result {
+            case .success:
+                SRProgressHUD.showSuccess()
+            case .failure(let error):
+                SRProgressHUD.showFailure(text: error.localizedDescription)
+            }
+        }
+    }
+    
+    func didTapReplyButton(_ cell: PostBodyCell) {
+        
+        replyTextView.becomeFirstResponder()
+        postContentView.tableView.scrollToBottom(animated: true)
+    }
+    
+    func didTapMoreAction(_ cell: PostBodyCell) {
+        
+        showMoreActions()
+    }
+    
 }

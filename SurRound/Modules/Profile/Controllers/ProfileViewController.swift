@@ -195,7 +195,6 @@ class ProfileViewController: HiddenNavBarViewController, Storyboarded {
         
         tableView.registerCellWithNib(withCellClass: ImagePostListCell.self)
         tableView.registerCellWithNib(withCellClass: TextPostListCell.self)
-        tableView.registerCellWithNib(withCellClass: VideoPostListCell.self)
         
         let guide = view.safeAreaLayoutGuide
         tableView.anchor(top: guide.topAnchor,
