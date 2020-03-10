@@ -24,6 +24,9 @@ class NearestListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.registerCellWithNib(withCellClass: PlaceItemListCell.self)
+            tableView.addHeaderRefreshing { [weak self] in
+                self?.fetchData()
+            }
             tableView.separatorStyle = .none
         }
     }
@@ -53,6 +56,8 @@ class NearestListViewController: UIViewController {
             listCategory: .byLeastDistance(coordinate: currentCoordinate),
             blockingUserList: []
         ) { [weak self] (result) in
+            
+            self?.tableView.endHeaderRefreshing()
             
             do {
                 let posts = try result.get()

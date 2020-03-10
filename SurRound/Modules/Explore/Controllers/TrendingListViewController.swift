@@ -60,9 +60,7 @@ class TrendingListViewController: UIViewController {
             case .failure(let error):
                 SRProgressHUD.showFailure(text: error.localizedDescription)
             }
-            
         }
-
     }
 }
 

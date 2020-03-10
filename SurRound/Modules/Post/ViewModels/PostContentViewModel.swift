@@ -82,6 +82,10 @@ class PostContentViewModel: PostContentViewModelInterface {
         self.profileManager = ProfileManager()
     }
     
+    deinit {
+        print("$ PostContentViewModel deinit")
+    }
+    
     // MARK: - Public Methods
     func reply(text: String, completion: @escaping (Result<Void, Error>) -> Void) {
         

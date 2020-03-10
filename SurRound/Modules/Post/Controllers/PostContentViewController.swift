@@ -11,6 +11,10 @@ import KMPlaceholderTextView
 
 class PostContentViewController: UIViewController {
     
+    deinit {
+        print("$ PostContentViewController deinit")
+    }
+    
     var post: Post! {
         didSet {
             guard let currentUser = AuthManager.shared.currentUser else { return }
