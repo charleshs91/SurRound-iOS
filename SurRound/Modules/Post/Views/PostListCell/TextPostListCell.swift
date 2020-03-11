@@ -36,7 +36,7 @@ class TextPostListCell: PostListCell {
         setupViews()
     }
     
-    override func layoutCell(with viewModel: PostListCellViewModel) {
+    override func configure(with viewModel: PostListCellViewModel) {
         
         guard let viewModel = viewModel as? TextPostListCellViewModel else { return }
         

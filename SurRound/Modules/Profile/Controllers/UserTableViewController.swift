@@ -8,37 +8,9 @@
 
 import UIKit
 
-enum UserListType {
-    
-    case following(SRUserProfile)
-    
-    case follower(SRUserProfile)
-    
-    var uids: [String] {
-        
-        switch self {
-            
-        case .follower(let profile):
-            return profile.follower
-            
-        case .following(let profile):
-            return profile.following
-        }
-    }
-    
-    var title: String {
-        switch self {
-        case .follower:
-            return "Followers"
-        case .following:
-            return "Following"
-        }
-    }
-}
-
 class UserTableViewController: UITableViewController {
     
-    var listType: UserListType!
+    var listType: ProfileUserListModel!
     
     private var userList: [SRUser] = [] {
         didSet {
@@ -67,33 +39,8 @@ class UserTableViewController: UITableViewController {
         let manager = ProfileManager()
         
         manager.fetchUserList(uids: listType.uids) { [weak self] srUsers in
-            
             self?.userList = srUsers
         }
-    }
-    
-    private func onCellTapMoreButton(_ cell: UserListTableViewCell) {
-        
-        let alertVC = UIAlertController(
-            title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let reportAction = UIAlertAction(title: "Report", style: .default) { _ in
-            print("檢舉你")
-        }
-        
-        let blockAction = UIAlertAction(title: "Block", style: .default) { _ in
-            print("封鎖你")
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-            alertVC.dismiss(animated: true, completion: nil)
-        }
-        
-        [reportAction, blockAction, cancelAction].forEach {
-            alertVC.addAction($0)
-        }
-        
-        present(alertVC, animated: true, completion: nil)
     }
 }
 

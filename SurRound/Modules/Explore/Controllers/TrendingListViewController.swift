@@ -9,7 +9,7 @@
 import UIKit
 import collection_view_layouts
 
-class TrendingListViewController: UIViewController {
+class TrendingListViewController: SRBaseViewController {
     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {

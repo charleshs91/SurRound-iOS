@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CategorySelectorViewController: UIViewController, Storyboarded {
+class CategorySelectorViewController: SRBaseViewController, Storyboarded {
     
     static var storyboard: UIStoryboard {
         return UIStoryboard.newPost

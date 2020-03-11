@@ -42,19 +42,17 @@ class ImagePostListCell: PostListCell {
         viewModel.onRequestUserProfile = nil
     }
     
-    override func layoutCell(with viewModel: PostListCellViewModel) {
+    override func configure(with viewModel: PostListCellViewModel) {
         
         guard let viewModel = viewModel as? ImagePostListCellViewModel else { return }
         
         // Top Section
-        avatarImageView.loadImage(viewModel.userImageUrlString,
-                                  placeholder: UIImage.asset(.Icons_Avatar))
+        avatarImageView.loadImage(viewModel.userImageUrlString, placeholder: UIImage.asset(.Icons_Avatar))
         usernameLabel.text = viewModel.username
         placeNameLabel.text = viewModel.placeName
         datetimeLabel.text = viewModel.datetime
         // Middle Section
-        postImageView.loadImage(viewModel.postImageUrlString,
-                                placeholder: UIImage.asset(.Image_Placeholder))
+        postImageView.loadImage(viewModel.postImageUrlString, placeholder: UIImage.asset(.Image_Placeholder))
         captionTextLabel.text = viewModel.text
         likedCountLabel.text = String(viewModel.likeCount)
         reviewCountLabel.text = String(viewModel.replyCount)

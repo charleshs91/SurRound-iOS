@@ -19,7 +19,7 @@ struct PostWithDistance {
     }
 }
 
-class NearestListViewController: UIViewController {
+class NearestListViewController: SRBaseViewController {
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {

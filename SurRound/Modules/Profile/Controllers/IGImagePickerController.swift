@@ -19,7 +19,7 @@ protocol IGImagePickerControllerDelegate: AnyObject {
     func didSelectImage(_ controller: IGImagePickerController, with image: UIImage)
 }
 
-class IGImagePickerController: UIViewController, Storyboarded {
+class IGImagePickerController: SRBaseViewController, Storyboarded {
     
     static var storyboard: UIStoryboard {
         return UIStoryboard.profile

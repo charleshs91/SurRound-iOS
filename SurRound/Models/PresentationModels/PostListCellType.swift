@@ -10,9 +10,8 @@ import UIKit
 
 class PostListCell: UITableViewCell {
     
-    func layoutCell(with viewModel: PostListCellViewModel) {
-        
-        fatalError("Class inheritting `PostListCell` must override `layoutCell` method")
+    func configure(with viewModel: PostListCellViewModel) {
+        fatalError("Subclasses of PostListCell should override configure(with:)")
     }
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FollowingListViewController: UIViewController {
+class FollowingListViewController: SRBaseViewController {
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -110,7 +110,7 @@ extension FollowingListViewController: UITableViewDataSource {
             self?.show(profileVC, sender: nil)
         }
         
-        postListCell.layoutCell(with: viewModel)
+        postListCell.configure(with: viewModel)
         return postListCell
     }
 }

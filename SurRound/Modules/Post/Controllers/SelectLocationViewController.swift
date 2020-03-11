@@ -15,7 +15,7 @@ protocol SelectLocationViewControllerDelegate: AnyObject {
     func didSelectLocation(_ controller: SelectLocationViewController, with place: SRPlace)
 }
 
-class SelectLocationViewController: UIViewController, Storyboarded {
+class SelectLocationViewController: SRBaseViewController, Storyboarded {
     
     // Storyboarded Protocol
     static var storyboard: UIStoryboard {

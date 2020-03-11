@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StoryViewController: UIViewController {
+class StoryViewController: SRBaseViewController {
 
     var storyEntities: [StoryCollection] = []
     

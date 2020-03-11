@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserInfoFormViewController: UIViewController, Storyboarded {
+class UserInfoFormViewController: SRBaseViewController, Storyboarded {
     
     static var storyboard: UIStoryboard {
         return UIStoryboard.auth

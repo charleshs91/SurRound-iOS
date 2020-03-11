@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: SRBaseViewController {
     
     @IBOutlet weak var emailTextField: SRAuthTextField!
     @IBOutlet weak var usernameTextField: SRAuthTextField!

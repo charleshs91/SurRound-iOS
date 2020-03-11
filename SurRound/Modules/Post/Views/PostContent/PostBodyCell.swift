@@ -62,7 +62,7 @@ class PostBodyCell: SRBaseTableViewCell {
     
     private func updateLikeButton(isSelected: Bool) {
         
-//        likeButton.isSelected.toggle()
-        likeButton.tintColor = isSelected ? .yellow : .darkGray
+        likeButton.isSelected = isSelected
+        likeButton.tintColor = isSelected ? .red : .darkGray
     }
 }

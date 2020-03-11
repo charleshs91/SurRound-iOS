@@ -13,7 +13,7 @@ import MobileCoreServices
 private let cellHeightInset: CGFloat = 10
 private let cellLeadingInset: CGFloat = 8
 
-class HomeViewController: UIViewController {
+class HomeViewController: SRBaseViewController {
     
     // MARK: - iVars
     @IBOutlet weak var collectionView: UICollectionView! {

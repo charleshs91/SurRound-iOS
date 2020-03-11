@@ -9,7 +9,7 @@
 import UIKit
 import GooglePlaces
 
-class NewPostViewController: UIViewController {
+class NewPostViewController: SRBaseViewController {
 
     // MARK: iVars
     @IBOutlet weak var postButton: UIBarButtonItem!

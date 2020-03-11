@@ -16,7 +16,7 @@ target 'SurRound' do
   pod 'collection-view-layouts'
   pod 'AnimatedCollectionViewLayout'
   pod 'MaterialDesignWidgets'
-  
+
   # Firebase
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
@@ -37,9 +37,9 @@ target 'SurRound' do
     # Pods for testing
   end
 
-  target 'SurRoundUITests' do
-    inherit! :search_paths
+  # target 'SurRoundUITests' do
+    # inherit! :search_paths
     # Pods for testing
-  end
+  # end
 
 end

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExploreViewController: UIViewController {
+class ExploreViewController: SRBaseViewController {
     
     private let pages: [ExplorePageType] = [.following, .trending, .nearest]
     

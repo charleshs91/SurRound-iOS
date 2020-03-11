@@ -49,16 +49,6 @@ class PostInfoTableViewCell: SRBaseTableViewCell {
         self.postContentViewModel = viewModel
     }
     
-//    func setupCell(with post: Post, userProfileHandler: ((SRUser) -> Void)? = nil) {
-//
-//        userImageView.loadImage(post.author.avatar, placeholder: UIImage.asset(.Icons_Avatar))
-//        usernameLabel.text = post.author.username
-//        datetimeLabel.text = post.datetimeString
-//        placeLabel.text = post.place.name
-//        onTappingUserInfo = userProfileHandler
-//        self.post = post
-//    }
-    
     private func styleCell() {
         
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -68,7 +58,6 @@ class PostInfoTableViewCell: SRBaseTableViewCell {
     @IBAction func didTapOnUserInfo(_ sender: UIButton) {
         
         let user = SRUser(uid: post.authorId, email: "", username: post.author.username, avatar: post.author.avatar)
-//        onTappingUserInfo?(user)
         delegate?.didTapOnUser(self, user: user)
     }
 }

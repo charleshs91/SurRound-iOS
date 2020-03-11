@@ -9,7 +9,7 @@
 import UIKit
 import KMPlaceholderTextView
 
-class PostContentViewController: UIViewController {
+class PostContentViewController: SRBaseViewController {
     
     deinit {
         print("$ PostContentViewController deinit")

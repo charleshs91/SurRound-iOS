@@ -48,7 +48,7 @@ class ProfileViewController: HiddenNavBarViewController, Storyboarded {
         if segue.identifier == "\(UserTableViewController.self)" {
             
             guard let destVC = segue.destination as? UserTableViewController,
-                let listType = sender as? UserListType else {
+                let listType = sender as? ProfileUserListModel else {
                     return
             }
             destVC.listType = listType
@@ -92,7 +92,7 @@ class ProfileViewController: HiddenNavBarViewController, Storyboarded {
         }
         
         performSegue(withIdentifier: "\(UserTableViewController.self)",
-            sender: UserListType.following(profile))
+            sender: ProfileUserListModel.following(profile))
     }
     @objc func showFollowers(_ sender: UITapGestureRecognizer) {
         
@@ -101,7 +101,7 @@ class ProfileViewController: HiddenNavBarViewController, Storyboarded {
         }
         
         performSegue(withIdentifier: "\(UserTableViewController.self)",
-            sender: UserListType.follower(profile))
+            sender: ProfileUserListModel.follower(profile))
     }
     
     @objc func handleEditAvatar(_ sender: UIButton) {
@@ -233,7 +233,7 @@ extension ProfileViewController: UITableViewDataSource {
         guard let postListCell = cell as? PostListCell else {
             return cell
         }
-        postListCell.layoutCell(with: cellViewModel)
+        postListCell.configure(with: cellViewModel)
         return postListCell
     }
 }

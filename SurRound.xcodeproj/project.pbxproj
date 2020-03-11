@@ -16,6 +16,7 @@
 		7C3AD08124065B7A00DF40EE /* GuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3AD08024065B7A00DF40EE /* GuestViewController.swift */; };
 		7C3AD08324065C8B00DF40EE /* Guest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C3AD08224065C8B00DF40EE /* Guest.storyboard */; };
 		7C43FD67240FB3EF00A930ED /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C43FD66240FB3EF00A930ED /* HomeViewModel.swift */; };
+		7C476FFE2417AA6D003D4576 /* ProfileUserListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C476FFD2417AA6D003D4576 /* ProfileUserListModel.swift */; };
 		7C4F8BBA241732F1005D91D3 /* PostContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4F8BB9241732F1005D91D3 /* PostContentViewModel.swift */; };
 		7C4F8BBC24176A6A005D91D3 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4F8BBB24176A6A005D91D3 /* FirestoreManager.swift */; };
 		7C4F8BBE24177BDE005D91D3 /* FirestoreManagerResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4F8BBD24177BDE005D91D3 /* FirestoreManagerResourceTests.swift */; };
@@ -181,6 +182,7 @@
 		7C3AD08024065B7A00DF40EE /* GuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestViewController.swift; sourceTree = "<group>"; };
 		7C3AD08224065C8B00DF40EE /* Guest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Guest.storyboard; sourceTree = "<group>"; };
 		7C43FD66240FB3EF00A930ED /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		7C476FFD2417AA6D003D4576 /* ProfileUserListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserListModel.swift; sourceTree = "<group>"; };
 		7C4F8BB9241732F1005D91D3 /* PostContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentViewModel.swift; sourceTree = "<group>"; };
 		7C4F8BBB24176A6A005D91D3 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		7C4F8BBD24177BDE005D91D3 /* FirestoreManagerResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManagerResourceTests.swift; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 				D3A3B5F023E29C35003201E1 /* NewPostCellType.swift */,
 				D39997F223DB4FD000595B2F /* AuthInputCategory.swift */,
 				D3768B682403F7A200BD0651 /* ExplorePageType.swift */,
+				7C476FFD2417AA6D003D4576 /* ProfileUserListModel.swift */,
 			);
 			path = PresentationModels;
 			sourceTree = "<group>";
@@ -1356,6 +1359,7 @@
 				D3086B9323DCA0940071F378 /* PostBodyCell.swift in Sources */,
 				7C54FCF024160EAD005AF65E /* AppleSignInViewModel.swift in Sources */,
 				D38C570223E43111001C6C9D /* SelectionView.swift in Sources */,
+				7C476FFE2417AA6D003D4576 /* ProfileUserListModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1585,7 +1589,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.charleshs.SurRound;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1611,7 +1615,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.charleshs.SurRound;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
