@@ -17,4 +17,11 @@ extension UIImageView {
         let url = URL(string: urlString!)
         self.kf.setImage(with: url, placeholder: placeholder)
     }
+    
+    static func clearCache() {
+        
+        let cache = ImageCache.default
+        cache.clearMemoryCache()
+        cache.clearDiskCache()
+    }
 }

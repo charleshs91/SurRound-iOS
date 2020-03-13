@@ -10,16 +10,14 @@ import UIKit
 
 extension UIView {
     
+    /// Add anchors from any side of the current view into the specified anchors and returns the newly added constraints.
     @discardableResult
     func anchor(
         top: NSLayoutYAxisAnchor? = nil,
-        left: NSLayoutXAxisAnchor? = nil,
+        leading: NSLayoutXAxisAnchor? = nil,
         bottom: NSLayoutYAxisAnchor? = nil,
-        right: NSLayoutXAxisAnchor? = nil,
-        topConstant: CGFloat = 0,
-        leftConstant: CGFloat = 0,
-        bottomConstant: CGFloat = 0,
-        rightConstant: CGFloat = 0,
+        trailing: NSLayoutXAxisAnchor? = nil,
+        padding: UIEdgeInsets,
         widthConstant: CGFloat = 0,
         heightConstant: CGFloat = 0) -> [NSLayoutConstraint] {
         
@@ -28,19 +26,19 @@ extension UIView {
         var anchors = [NSLayoutConstraint]()
         
         if let top = top {
-            anchors.append(topAnchor.constraint(equalTo: top, constant: topConstant))
+            anchors.append(topAnchor.constraint(equalTo: top, constant: padding.top))
         }
         
-        if let left = left {
-            anchors.append(leftAnchor.constraint(equalTo: left, constant: leftConstant))
+        if let leading = leading {
+            anchors.append(leadingAnchor.constraint(equalTo: leading, constant: padding.left))
         }
         
         if let bottom = bottom {
-            anchors.append(bottomAnchor.constraint(equalTo: bottom, constant: -bottomConstant))
+            anchors.append(bottomAnchor.constraint(equalTo: bottom, constant: -padding.bottom))
         }
         
-        if let right = right {
-            anchors.append(rightAnchor.constraint(equalTo: right, constant: -rightConstant))
+        if let trailing = trailing {
+            anchors.append(trailingAnchor.constraint(equalTo: trailing, constant: -padding.right))
         }
         
         if widthConstant > 0 {
@@ -54,6 +52,30 @@ extension UIView {
         anchors.forEach({$0.isActive = true})
         
         return anchors
+    }
+    
+    func anchorCenterXToSuperview(constant: CGFloat = 0) {
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        if let anchor = superview?.centerXAnchor {
+            centerXAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
+        }
+    }
+    
+    func anchorCenterYToSuperview(constant: CGFloat = 0) {
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        if let anchor = superview?.centerYAnchor {
+            centerYAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
+        }
+    }
+    
+    func anchorCenterSuperview() {
+        
+        anchorCenterXToSuperview()
+        anchorCenterYToSuperview()
     }
     
     func setConstraints(to layoutGuide: UILayoutGuide,
@@ -111,6 +133,8 @@ extension UIView {
         self.removeFromSuperview()
         superview.addSubview(self)
         
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             self.topAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor),
             self.leadingAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.leadingAnchor),
@@ -123,6 +147,8 @@ extension UIView {
         
         self.removeFromSuperview()
         superview.addSubview(self)
+        
+        self.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             self.topAnchor.constraint(equalTo: superview.topAnchor),

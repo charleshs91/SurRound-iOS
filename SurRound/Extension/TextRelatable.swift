@@ -29,6 +29,7 @@ extension TextRelatable {
 }
 
 extension UITextField: TextRelatable { }
+
 extension UILabel: TextRelatable { }
 
 extension UITextView {

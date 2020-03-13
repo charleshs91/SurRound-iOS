@@ -158,7 +158,6 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
-  - Alamofire (5.0.0-rc.3)
   - AnimatedCollectionViewLayout (1.0.1)
   - BoringSSL-GRPC (0.0.3):
     - BoringSSL-GRPC/Implementation (= 0.0.3)
@@ -190,7 +189,12 @@ PODS:
     - collection-view-layouts/Core
   - collection-view-layouts/TagsLayout (0.2.2):
     - collection-view-layouts/Core
+  - Crashlytics (3.14.0):
+    - Fabric (~> 1.10.2)
   - ESPullToRefresh (2.9.2)
+  - Fabric (1.10.2)
+  - Firebase/Analytics (6.16.0):
+    - Firebase/Core
   - Firebase/Auth (6.16.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.4.3)
@@ -252,7 +256,7 @@ PODS:
     - FirebaseCore (~> 6.6)
     - GoogleUtilities/UserDefaults (~> 6.5)
     - PromisesObjC (~> 1.2)
-  - FirebaseInstanceID (4.3.0):
+  - FirebaseInstanceID (4.3.2):
     - FirebaseCore (~> 6.6)
     - FirebaseInstallations (~> 1.0)
     - GoogleUtilities/Environment (~> 6.5)
@@ -330,10 +334,12 @@ PODS:
   - SwiftLint (0.38.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 5.0.0-rc.3)
   - AnimatedCollectionViewLayout
   - collection-view-layouts
+  - Crashlytics (~> 3.14.0)
   - ESPullToRefresh
+  - Fabric (~> 1.10.2)
+  - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
@@ -351,11 +357,12 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
-    - Alamofire
     - AnimatedCollectionViewLayout
     - BoringSSL-GRPC
     - collection-view-layouts
+    - Crashlytics
     - ESPullToRefresh
+    - Fabric
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -389,11 +396,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
-  Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
   AnimatedCollectionViewLayout: 00f0997fd26f0fd02d8b99765023b95570b5d826
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   collection-view-layouts: 474ec4cce601a26247737227a97fa6a4eb30213f
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   ESPullToRefresh: efed00d52597065e9a84e1e52fa444fdb1a1dee0
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   Firebase: 497158b816d0a86fc31babbd05546fcd7e6083ff
   FirebaseAnalytics: cf95d3aab897612783020fbd98401d5366f135ee
   FirebaseAuth: 5ce2b03a3d7fe56b7a6e4c5ec7ff1522890b1d6f
@@ -404,7 +412,7 @@ SPEC CHECKSUMS:
   FirebaseFirestore: cee8f861d68dadce998876b78a4b75701bc94302
   FirebaseFirestoreSwift: 0437bb10d83f8161a9131da1739998254c78fdf5
   FirebaseInstallations: 575cd32f2aec0feeb0e44f5d0110a09e5e60b47b
-  FirebaseInstanceID: 6668efc1655a4052c083f287a7141f1ead12f9c2
+  FirebaseInstanceID: 7ee0d6777013bb952f377b41965bf132b6a075be
   FirebaseStorage: 6c5263796af3b1be82ed173598aade47535fe125
   GoogleAppMeasurement: d0560d915abf15e692e8538ba1d58442217b6aff
   GoogleDataTransport: 0048df6388dab1c254799f2a30365b1dffe20422
@@ -425,6 +433,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SwiftLint: 8f5d2f903e1c9bcbc832fd16771e80a263ac6cbb
 
-PODFILE CHECKSUM: 7ab351fc1518e3b7f3bc113ed3ba34981b1475f0
+PODFILE CHECKSUM: 3ec8644557e0afa75ae9c63ec4dbed14aa0fc429
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.0

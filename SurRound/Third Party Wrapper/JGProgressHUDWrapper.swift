@@ -49,7 +49,7 @@ class SRProgressHUD {
         show(type: .failure(text))
     }
     
-    static func show(type: HUDType, delay: TimeInterval = 1.0) {
+    static func show(type: HUDType, delay: TimeInterval = 1.2) {
         if !Thread.isMainThread {
             DispatchQueue.main.async {
                 show(type: type, delay: delay)
@@ -61,7 +61,7 @@ class SRProgressHUD {
         shared.hud.dismiss(afterDelay: delay)
     }
     
-    static func showLoading(text: String = "Loading") {
+    static func showLoading(text: String? = nil) {
         if !Thread.isMainThread {
             DispatchQueue.main.async {
                 showLoading()

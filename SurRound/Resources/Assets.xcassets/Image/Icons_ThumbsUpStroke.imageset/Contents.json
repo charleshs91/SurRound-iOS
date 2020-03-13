@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "Icons_ThumbsUpStroke.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Icons_ThumbsUpStroke@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Icons_ThumbsUpStroke@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

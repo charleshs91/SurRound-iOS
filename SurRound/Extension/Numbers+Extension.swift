@@ -14,3 +14,10 @@ extension Int {
         return CGFloat(self)
     }
 }
+
+extension Double {
+    
+    var squared: Double {
+        return self * self
+    }
+}

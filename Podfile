@@ -15,15 +15,18 @@ target 'SurRound' do
   pod 'KMPlaceholderTextView', '~> 1.4.0'
   pod 'collection-view-layouts'
   pod 'AnimatedCollectionViewLayout'
-  pod 'Alamofire', '~> 5.0.0-rc.3'
   pod 'MaterialDesignWidgets'
-  
+
   # Firebase
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
   pod 'Firebase/Storage'
+
+  pod 'Firebase/Analytics'
+  pod 'Fabric', '~> 1.10.2'
+  pod 'Crashlytics', '~> 3.14.0'
 
   # Google Maps
   pod 'GoogleMaps'
@@ -34,9 +37,9 @@ target 'SurRound' do
     # Pods for testing
   end
 
-  target 'SurRoundUITests' do
-    inherit! :search_paths
+  # target 'SurRoundUITests' do
+    # inherit! :search_paths
     # Pods for testing
-  end
+  # end
 
 end

@@ -8,13 +8,24 @@
 
 import UIKit
 
-class BodyTableViewCell: UITableViewCell {
+class
+
+class PostDetailBodyCell: UITableViewCell {
     
     @IBOutlet weak var descriptionLabel: UILabel!
+    
+    @IBOutlet weak var likeButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
+    @IBAction func didTapLikeButton(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func didTapReplyButton(_ sender: UIButton) {
+        
+    }
 }
