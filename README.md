@@ -7,16 +7,34 @@ SurRound is a map-based social networking application, which allows users to loo
 ## Features
 
 ### Home
++ Browse neighboring post feeds and check out video stories
+
+<img src="https://raw.githubusercontent.com/charleshs/SurRound-iOS/develop/Resources/GitHub-screenshots/Home1.png" height=500>
 
 ### Explore
++ Explore post feeds of following users, trending feeds, and feeds that are close to you
+
+<img src="https://raw.githubusercontent.com/charleshs/SurRound-iOS/develop/Resources/GitHub-screenshots/Explore1.png" height=500> <img src="https://raw.githubusercontent.com/charleshs/SurRound-iOS/develop/Resources/GitHub-screenshots/Explore2.png" height=500> <img src="https://raw.githubusercontent.com/charleshs/SurRound-iOS/develop/Resources/GitHub-screenshots/Explore3.png" height=500>
 
 ### Post
++ 
+
+<img src="https://raw.githubusercontent.com/charleshs/SurRound-iOS/develop/Resources/GitHub-screenshots/Post1.png" height=500> <img src="https://raw.githubusercontent.com/charleshs/SurRound-iOS/develop/Resources/GitHub-screenshots/Post2.png" height=500>
 
 ### Story
++ Watch videos in an Instagram-like fashion
+
+<img src="https://raw.githubusercontent.com/charleshs/SurRound-iOS/develop/Resources/GitHub-screenshots/Story1.png" height=500>
 
 ### Notification
++ Get notified when followed by others and replied on posts
+
+<img src="https://raw.githubusercontent.com/charleshs/SurRound-iOS/develop/Resources/GitHub-screenshots/Notification1.png" height=500>
 
 ### Profile
++ Check your old posts and following and followed users
+
+<img src="https://raw.githubusercontent.com/charleshs/SurRound-iOS/develop/Resources/GitHub-screenshots/Profile1.png" height=500>
 
 ## Libraries
 + Firebase
