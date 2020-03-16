@@ -8,14 +8,8 @@
 
 import Foundation
 
-protocol PostContentViewModelDelegate: AnyObject {
-    
-}
-
 protocol PostContentViewModelInterface {
-    
-    var delegate: PostContentViewModelDelegate? { get set }
-    
+
     var userId: String { get }
     var avatarImage: String { get }
     var username: String { get }
@@ -28,6 +22,8 @@ protocol PostContentViewModelInterface {
     var isLiked: Observable<Bool> { get }
     var datetime: String { get }
     
+    var didChangeLikeStatus: ((Bool) -> Void)? { get set }
+    
     func reply(text: String, completion: @escaping (Result<Void, Error>) -> Void)
     func tapLikeButton(completion: @escaping (Result<Void, Error>) -> Void)
     func reportPost()
@@ -37,8 +33,6 @@ protocol PostContentViewModelInterface {
 class PostContentViewModel: PostContentViewModelInterface {
     
     // MARK: - Public iVars
-    weak var delegate: PostContentViewModelDelegate?
-    
     var userId: String {
         return post.authorId
     }
@@ -73,6 +67,8 @@ class PostContentViewModel: PostContentViewModelInterface {
     var datetime: String {
         return post.datetimeString
     }
+    
+    var didChangeLikeStatus: ((Bool) -> Void)?
     
     // MARK: - Private iVars
     private let post: Post
@@ -117,6 +113,7 @@ class PostContentViewModel: PostContentViewModelInterface {
             postOperator.likePost(postId: postId, userId: viewerUser.uid) { [weak self] result in
                 guard let self = self else { return }
                 let handledResult = self.handleLikeResult(result: result)
+                self.didChangeLikeStatus?(true)
                 completion(handledResult)
             }
             
@@ -124,6 +121,7 @@ class PostContentViewModel: PostContentViewModelInterface {
             postOperator.dislikePost(postId: postId, userId: viewerUser.uid) { [weak self] result in
                 guard let self = self else { return }
                 let handledResult = self.handleLikeResult(result: result)
+                self.didChangeLikeStatus?(false)
                 completion(handledResult)
             }
         }

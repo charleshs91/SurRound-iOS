@@ -84,9 +84,11 @@ class ProfileViewModel {
             blockingUserList: []
         ) { [weak self] result in
             
+            guard let self = self else { return }
+            
             switch result {
             case .success(let posts):
-                self?.userPostViewModels.value =  ViewModelFactory.viewModelFromPosts(posts)
+                self.userPostViewModels.value =  ViewModelFactory.viewModelFromPosts(posts, viewerUser: self.thisUser)
                 
             case .failure(let error):
                 SRProgressHUD.showFailure(text: error.localizedDescription)

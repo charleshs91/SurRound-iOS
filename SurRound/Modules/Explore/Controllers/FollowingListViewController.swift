@@ -14,16 +14,12 @@ class FollowingListViewController: SRBaseViewController {
         didSet {
             tableView.registerCellWithNib(withCellClass: TextPostListCell.self)
             tableView.registerCellWithNib(withCellClass: ImagePostListCell.self)
-            
             tableView.addHeaderRefreshing { [weak self] in
                 self?.refreshPosts()
             }
-            
             tableView.separatorStyle = .none
         }
     }
-    
-    private var posts: [Post] = []
     
     private var viewModels: [PostListCellViewModel] = [] {
         didSet {
@@ -46,10 +42,13 @@ class FollowingListViewController: SRBaseViewController {
     // MARK: - Private Methods
     @objc func refreshPosts() {
         
-        guard let userProfile = AuthManager.shared.userProfile else {
+        guard
+            let userProfile = AuthManager.shared.userProfile,
+            let viewerUser = AuthManager.shared.currentUser
+        else {
             return
         }
-        posts.removeAll()
+        
         viewModels.removeAll()
         
         let listCategory: ListCategory
@@ -66,18 +65,17 @@ class FollowingListViewController: SRBaseViewController {
             blockingUserList: userProfile.blocking
         ) { [weak self] result in
             
-            self?.handlePostsResult(result: result)
+            self?.handlePostsResult(result: result, viewerUser: viewerUser)
         }
     }
     
-    private func handlePostsResult(result: Result<[Post], DataFetchingError>) {
+    private func handlePostsResult(result: Result<[Post], DataFetchingError>, viewerUser: SRUser) {
         
         tableView.endHeaderRefreshing()
         
         switch result {
         case .success(let posts):
-            self.posts.append(contentsOf: posts)
-            viewModels.append(contentsOf: ViewModelFactory.viewModelFromPosts(posts))
+            viewModels.append(contentsOf: ViewModelFactory.viewModelFromPosts(posts, viewerUser: viewerUser))
             
         case .failure(let error):
             print(error)
@@ -127,8 +125,18 @@ extension FollowingListViewController: UITableViewDelegate {
         
         guard
             let nav = UIStoryboard.post.instantiateInitialViewController() as? UINavigationController,
-            let postDetailVC = nav.topViewController as? PostContentViewController else { return }
-        postDetailVC.post = posts[indexPath.row]
+            let postDetailVC = nav.topViewController as? PostContentViewController,
+            let currentUser = AuthManager.shared.currentUser
+        else {
+            return
+        }
+        
+        let post = viewModels[indexPath.row].post
+        postDetailVC.postContentViewModel = PostContentViewModel(post: post, viewerUser: currentUser)
+        postDetailVC.postContentViewModel.didChangeLikeStatus = { [weak self] status in
+            self?.viewModels[indexPath.row].isLiked.value = status
+            self?.viewModels[indexPath.row].increaseLikeCount(value: status ? 1 : -1)
+        }
         nav.modalPresentationStyle = .overCurrentContext
         present(nav, animated: true, completion: nil)
     }

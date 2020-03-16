@@ -11,17 +11,6 @@ import KMPlaceholderTextView
 
 class PostContentViewController: SRBaseViewController {
     
-    deinit {
-        print("$ PostContentViewController deinit")
-    }
-    
-    var post: Post! {
-        didSet {
-            guard let currentUser = AuthManager.shared.currentUser else { return }
-            postContentViewModel = PostContentViewModel(post: post, viewerUser: currentUser)
-        }
-    }
-
     var postContentViewModel: PostContentViewModelInterface!
     
     var reviews = [Review]() {
@@ -56,7 +45,7 @@ class PostContentViewController: SRBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        postContentView.layoutView(from: post)
+        postContentView.layoutView(image: postContentViewModel.postImageLink)
         navigationController?.navigationBar.isHidden = true
         updateReviews()
     }
@@ -114,7 +103,7 @@ class PostContentViewController: SRBaseViewController {
     
     private func updateReviews(completion: (() -> Void)? = nil) {
         
-        ReviewManager().fetchAllReviews(postId: post.id) { [weak self] (result) in
+        ReviewManager().fetchAllReviews(postId: postContentViewModel.postId) { [weak self] (result) in
             
             switch result {
             case .failure(let error):

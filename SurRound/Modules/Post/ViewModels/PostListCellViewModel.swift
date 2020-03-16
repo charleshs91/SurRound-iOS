@@ -8,16 +8,20 @@
 
 import UIKit
 
-protocol PostListCellViewModel: AnyObject {
-    
-    var cellType: PostListCellType { get }
-    
-    var onRequestUserProfile: ((SRUser) -> Void)? { get set }
-    
-    var post: Post { get }
-}
+//protocol PostListCellViewModel: AnyObject {
+//
+//    var cellType: PostListCellType { get }
+//
+//    var onRequestUserProfile: ((SRUser) -> Void)? { get set }
+//
+//    var post: Post { get }
+//
+//    var isLiked: Observable<Bool> { get set }
+//
+//    func increaseLikeCount(value: Int)
+//}
 
-class BasePostListCellViewModel: PostListCellViewModel {
+class PostListCellViewModel {
     
     var cellType: PostListCellType {
         fatalError("Hasn't overridden `var cellType`")
@@ -29,29 +33,38 @@ class BasePostListCellViewModel: PostListCellViewModel {
     var placeName: String?
     var datetime: String
     var text: String
-    var likeCount: Int
-    var replyCount: Int
+    var likeCount: Observable<Int>
+    var replyCount: Observable<Int>
+    lazy var isLiked: Observable<Bool> = {
+        let isLiked = post.likedBy.contains(self.viewerUser.uid)
+        return Observable(isLiked)
+    }()
     
     var onRequestUserProfile: ((SRUser) -> Void)?
 
     let post: Post
     
-    init(_ post: Post) {
-        
+    private let viewerUser: SRUser
+    
+    init(_ post: Post, viewerUser: SRUser) {
         self.authorId = post.authorId
         self.username = post.author.username
         self.userImageUrlString = post.author.avatar
         self.placeName = post.place.name
         self.datetime = post.datetimeString
         self.text = post.text
-        self.likeCount = post.likeCount
-        self.replyCount = post.replyCount
-        
+        self.likeCount = .init(post.likeCount)
+        self.replyCount = .init(post.replyCount)
+        self.viewerUser = viewerUser
         self.post = post
+    }
+    
+    func increaseLikeCount(value: Int) {
+        likeCount.value += value
     }
 }
 
-class ImagePostListCellViewModel: BasePostListCellViewModel {
+class ImagePostListCellViewModel: PostListCellViewModel {
     
     override var cellType: PostListCellType {
         return PostListCellType.image
@@ -59,13 +72,13 @@ class ImagePostListCellViewModel: BasePostListCellViewModel {
     
     var postImageUrlString: String?
     
-    override init(_ post: Post) {
+    override init(_ post: Post, viewerUser: SRUser) {
         self.postImageUrlString = post.mediaLink
-        super.init(post)
+        super.init(post, viewerUser: viewerUser)
     }
 }
 
-class TextPostListCellViewModel: BasePostListCellViewModel {
+class TextPostListCellViewModel: PostListCellViewModel {
     
     override var cellType: PostListCellType {
         return PostListCellType.text

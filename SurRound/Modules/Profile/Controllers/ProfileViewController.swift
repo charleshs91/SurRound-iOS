@@ -252,9 +252,13 @@ extension ProfileViewController: UITableViewDelegate {
         guard
             let post = profileViewModel.getPostListCellViewModelAt(index: indexPath.row)?.post,
             let nav = UIStoryboard.post.instantiateInitialViewController() as? UINavigationController,
-            let postDetailVC = nav.topViewController as? PostContentViewController else { return }
+            let postDetailVC = nav.topViewController as? PostContentViewController,
+            let user = AuthManager.shared.currentUser
+        else {
+            return
+        }
         
-        postDetailVC.post = post
+        postDetailVC.postContentViewModel = PostContentViewModel(post: post, viewerUser: user)
         nav.modalPresentationStyle = .overCurrentContext
         present(nav, animated: true, completion: nil)
     }

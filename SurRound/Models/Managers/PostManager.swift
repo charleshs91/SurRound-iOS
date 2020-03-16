@@ -65,25 +65,25 @@ extension PostManager: PostLikable {
     func likePost(postId: String, userId: String,
                   completion: @escaping (Result<Void, Error>) -> Void) {
         
-        executeLikeAction(postId: postId, userId: userId, isLiking: true, completion: completion)
+        FirestoreDB.posts.document(postId).setData([
+            Post.CodingKeys.likedBy.rawValue: FieldValue.arrayUnion([userId]),
+            Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(1))
+        ], merge: true) { (error) in
+            
+            guard error == nil else {
+                completion(.failure(error!))
+                return
+            }
+            completion(.success(()))
+        }
     }
     
     func dislikePost(postId: String, userId: String,
                      completion: @escaping (Result<Void, Error>) -> Void) {
         
-        executeLikeAction(postId: postId, userId: userId, isLiking: false, completion: completion)
-    }
-    
-    private func executeLikeAction(postId: String, userId: String, isLiking: Bool,
-                                   completion: @escaping (Result<Void, Error>) -> Void) {
-        
-        let docRef = FirestoreDB.posts.document(postId)
-        
-        let value = isLiking ? 1 : -1
-        
-        docRef.setData([
+        FirestoreDB.posts.document(postId).setData([
             Post.CodingKeys.likedBy.rawValue: FieldValue.arrayRemove([userId]),
-            Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(value))
+            Post.CodingKeys.likeCount.rawValue: FieldValue.increment(Int64(-1))
         ], merge: true) { (error) in
             
             guard error == nil else {

@@ -102,8 +102,14 @@ extension NearestListViewController: UITableViewDelegate {
         
         guard
             let nav = UIStoryboard.post.instantiateInitialViewController() as? UINavigationController,
-            let postDetailVC = nav.topViewController as? PostContentViewController else { return }
-        postDetailVC.post = data[indexPath.row].post
+            let postDetailVC = nav.topViewController as? PostContentViewController,
+            let currentUser = AuthManager.shared.currentUser
+        else {
+            return
+        }
+        
+        let post = data[indexPath.row].post
+        postDetailVC.postContentViewModel = PostContentViewModel(post: post, viewerUser: currentUser)
         nav.modalPresentationStyle = .overCurrentContext
         present(nav, animated: true, completion: nil)
     }

@@ -10,16 +10,16 @@ import Foundation
 
 class ViewModelFactory {
     
-    static func viewModelFromPosts(_ posts: [Post]) -> [PostListCellViewModel] {
+    static func viewModelFromPosts(_ posts: [Post], viewerUser: SRUser) -> [PostListCellViewModel] {
         
         var viewModels: [PostListCellViewModel] = []
         
         posts.forEach { post in
             switch post.mediaType {
             case nil:
-                viewModels.append(TextPostListCellViewModel(post))
+                viewModels.append(TextPostListCellViewModel(post, viewerUser: viewerUser))
             case "image":
-                viewModels.append(ImagePostListCellViewModel(post))
+                viewModels.append(ImagePostListCellViewModel(post, viewerUser: viewerUser))
             default:
                 return
             }

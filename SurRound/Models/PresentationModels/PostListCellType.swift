@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PostListCell: UITableViewCell {
+class PostListCell: SRBaseTableViewCell {
     
     func configure(with viewModel: PostListCellViewModel) {
         fatalError("Subclasses of PostListCell should override configure(with:)")

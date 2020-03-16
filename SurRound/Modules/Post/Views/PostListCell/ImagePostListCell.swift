@@ -40,6 +40,9 @@ class ImagePostListCell: PostListCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         viewModel.onRequestUserProfile = nil
+        viewModel.isLiked.removeObserver()
+        viewModel.likeCount.removeObserver()
+        viewModel.replyCount.removeObserver()
     }
     
     override func configure(with viewModel: PostListCellViewModel) {
@@ -54,10 +57,23 @@ class ImagePostListCell: PostListCell {
         // Middle Section
         postImageView.loadImage(viewModel.postImageUrlString, placeholder: UIImage.asset(.Image_Placeholder))
         captionTextLabel.text = viewModel.text
-        likedCountLabel.text = String(viewModel.likeCount)
-        reviewCountLabel.text = String(viewModel.replyCount)
+        likedCountLabel.text = String(viewModel.likeCount.value)
+        reviewCountLabel.text = String(viewModel.replyCount.value)
         
         self.viewModel = viewModel
+        self.viewModel.isLiked.addObserver { [weak self] status in
+            guard let self = self else { return }
+            self.likedButton.isSelected = status
+            self.likedButton.tintColor = status ? .red : .darkGray
+        }
+        self.viewModel.likeCount.addObserver { [weak self] value in
+            guard let self = self else { return }
+            self.likedCountLabel.text = String(value)
+        }
+        self.viewModel.replyCount.addObserver { [weak self] value in
+            guard let self = self else { return }
+            self.reviewCountLabel.text = String(value)
+        }
     }
     
     // MARK: - User Actions
@@ -72,17 +88,12 @@ class ImagePostListCell: PostListCell {
     // MARK: - Private Methods
     private func setupViews() {
         
-        selectionStyle = .none
-        
         avatarImageView.roundToHalfHeight()
-        
         postImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         postImageView.layer.cornerRadius = 8
-        
         let tapOnUser = UITapGestureRecognizer(target: self, action: #selector(onTappingUser(_:)))
         avatarImageView.addGestureRecognizer(tapOnUser)
         usernameLabel.addGestureRecognizer(tapOnUser)
-        
         styleSubstrateView()
     }
     
@@ -94,18 +105,13 @@ class ImagePostListCell: PostListCell {
         substrateView.layer.shadowRadius = 4
         substrateView.layer.shadowOffset = CGSize(width: 0, height: 0)
     }
-    
-    private func isUserPostAuthor(_ authorId: String) -> Bool {
-        
-        guard let user = AuthManager.shared.currentUser else {
-            return false
-        }
-        return user.uid == authorId
-    }
-    
+
     @objc private func onTappingUser(_ sender: UITapGestureRecognizer) {
         
-        let srUser = SRUser(uid: viewModel.authorId, email: "", username: viewModel.username, avatar: viewModel.userImageUrlString)
+        let srUser = SRUser(uid: viewModel.authorId,
+                            email: "",
+                            username: viewModel.username,
+                            avatar: viewModel.userImageUrlString)
         viewModel.onRequestUserProfile?(srUser)
     }
 }

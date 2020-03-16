@@ -32,8 +32,15 @@ class TextPostListCell: PostListCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         setupViews()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        viewModel.onRequestUserProfile = nil
+        viewModel.isLiked.removeObserver()
+        viewModel.likeCount.removeObserver()
+        viewModel.replyCount.removeObserver()
     }
     
     override func configure(with viewModel: PostListCellViewModel) {
@@ -49,10 +56,23 @@ class TextPostListCell: PostListCell {
         
         // Middle Section
         largeTextLabel.text = viewModel.text
-        likedCountLabel.text = String(viewModel.likeCount)
-        reviewCountLabel.text = String(viewModel.replyCount)
+        likedCountLabel.text = String(viewModel.likeCount.value)
+        reviewCountLabel.text = String(viewModel.replyCount.value)
         
         self.viewModel = viewModel
+        self.viewModel.isLiked.addObserver { [weak self] status in
+            guard let self = self else { return }
+            self.likedButton.isSelected = status
+            self.likedButton.tintColor = status ? .red : .darkGray
+        }
+        self.viewModel.likeCount.addObserver { [weak self] value in
+            guard let self = self else { return }
+            self.likedCountLabel.text = String(value)
+        }
+        self.viewModel.replyCount.addObserver { [weak self] value in
+            guard let self = self else { return }
+            self.reviewCountLabel.text = String(value)
+        }
     }
     
     // MARK: - User Actions
@@ -67,10 +87,10 @@ class TextPostListCell: PostListCell {
     // MARK: - Private Methods
     private func setupViews() {
         
-        selectionStyle = .none
-        
         avatarImageView.roundToHalfHeight()
-        
+        let tapOnUser = UITapGestureRecognizer(target: self, action: #selector(onTappingUser(_:)))
+        avatarImageView.addGestureRecognizer(tapOnUser)
+        usernameLabel.addGestureRecognizer(tapOnUser)
         styleSubstrateView()
     }
     
@@ -83,11 +103,12 @@ class TextPostListCell: PostListCell {
         substrateView.layer.shadowOffset = CGSize(width: 0, height: 0)
     }
     
-    private func isUserPostAuthor(_ authorId: String) -> Bool {
+    @objc private func onTappingUser(_ sender: UITapGestureRecognizer) {
         
-        guard let user = AuthManager.shared.currentUser else {
-            return false
-        }
-        return user.uid == authorId
+        let srUser = SRUser(uid: viewModel.authorId,
+                            email: "",
+                            username: viewModel.username,
+                            avatar: viewModel.userImageUrlString)
+        viewModel.onRequestUserProfile?(srUser)
     }
 }

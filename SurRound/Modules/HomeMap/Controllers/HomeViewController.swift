@@ -232,10 +232,12 @@ extension HomeViewController: GMSMapViewDelegate {
         guard
             let post = homeViewModel.getPostFromMarker(marker),
             let nav = UIStoryboard.post.instantiateInitialViewController() as? UINavigationController,
-            let postVC = nav.topViewController as? PostContentViewController else {
+            let postVC = nav.topViewController as? PostContentViewController,
+            let user = AuthManager.shared.currentUser
+        else {
                 return false
         }
-        postVC.post = post
+        postVC.postContentViewModel = PostContentViewModel(post: post, viewerUser: user)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
         return true

@@ -29,10 +29,9 @@ class PostContentView: UIView {
     }
     
     // MARK: - Public Methods
-    func layoutView(from post: Post?) {
+    func layoutView(image: String?) {
         
-        guard let post = post else { return }
-        postImageView.loadImage(post.mediaLink, placeholder: UIImage.asset(.Image_Placeholder))
+        postImageView.loadImage(image, placeholder: UIImage.asset(.Image_Placeholder))
     }
     
     // MARK: - Private Methods
