@@ -11,11 +11,11 @@ import FirebaseAuth
 
 typealias SRUserResult = (Result<SRUser, Error>) -> Void
 
-class AuthManager {
+class AuthManager: NSObject {
     
     static let shared = AuthManager()
     
-    var userProfile: SRUserProfile?
+    @objc dynamic var userProfile: SRUserProfile?
     
     var currentUser: SRUser? {
         get {
@@ -40,7 +40,7 @@ class AuthManager {
     
     private let profileManager = ProfileManager()
     
-    private init() { }
+    private override init() { }
     
     func updateProfile(completion: @escaping (SRUserProfile?) -> Void) {
         

@@ -31,7 +31,6 @@ class PostInfoTableViewCell: SRBaseTableViewCell {
     }
     
     private var onTappingUserInfo: ((SRUser) -> Void)?
-    private var post: Post!
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -57,7 +56,10 @@ class PostInfoTableViewCell: SRBaseTableViewCell {
     
     @IBAction func didTapOnUserInfo(_ sender: UIButton) {
         
-        let user = SRUser(uid: post.authorId, email: "", username: post.author.username, avatar: post.author.avatar)
+        let user = SRUser(uid: postContentViewModel.userId,
+                          email: "",
+                          username: postContentViewModel.username,
+                          avatar: postContentViewModel.avatarImage)
         delegate?.didTapOnUser(self, user: user)
     }
 }

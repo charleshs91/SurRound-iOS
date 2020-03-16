@@ -16,6 +16,7 @@ protocol PostContentViewModelInterface {
     
     var delegate: PostContentViewModelDelegate? { get set }
     
+    var userId: String { get }
     var avatarImage: String { get }
     var username: String { get }
     var placeName: String? { get }
@@ -38,6 +39,9 @@ class PostContentViewModel: PostContentViewModelInterface {
     // MARK: - Public iVars
     weak var delegate: PostContentViewModelDelegate?
     
+    var userId: String {
+        return post.authorId
+    }
     var avatarImage: String {
         return post.author.avatar
     }
@@ -69,6 +73,7 @@ class PostContentViewModel: PostContentViewModelInterface {
     var datetime: String {
         return post.datetimeString
     }
+    
     // MARK: - Private iVars
     private let post: Post
     private let viewerUser: SRUser

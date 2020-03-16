@@ -68,7 +68,7 @@ class ProfileViewModel {
         return userPostViewModels.value[index]
     }
     
-    private func fetchUserProfile() {
+    func fetchUserProfile() {
         
         profileManager.fetchProfile(user: thisUser.uid) { [weak self] profile in
             self?._userProfile.value = profile

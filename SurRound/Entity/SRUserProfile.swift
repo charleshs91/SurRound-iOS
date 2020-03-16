@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SRUserProfile: Codable {
+@objc class SRUserProfile: NSObject, Codable {
     
     let uid: String
     let email: String
