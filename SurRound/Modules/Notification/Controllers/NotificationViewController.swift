@@ -20,9 +20,19 @@ class NotificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
         fireUpViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     private func fireUpViewModel() {
@@ -57,11 +67,8 @@ extension NotificationViewController: UITableViewDataSource {
             return cell
         }
         
-        viewModel.postImage == nil
-            ? notificationCell.hidePostImage()
-            : notificationCell.showPostImage()
-        
         notificationCell.setupCell(viewModel)
+        notificationCell.delegate = self
         
         return notificationCell
     }
@@ -72,5 +79,13 @@ extension NotificationViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+}
+
+extension NotificationViewController: NotificationCellDelegate {
+    
+    func didTapOnAvatar(_ cell: NotificationCell, viewModel: NotificationCellViewModel) {
+        
+        print(123)
     }
 }

@@ -14,66 +14,45 @@ class NotificationCellViewModel {
     var type: String {
         return notification.type
     }
+    
     var username: String {
         return notification.senderName
     }
-    var avatarImage: String? {
-        didSet {
-            guard avatarImage != nil else { return }
-            DispatchQueue.main.async { [weak self] in
-                self?.avatarImageCallback?(self!.avatarImage!)
-            }
-        }
-    }
     
-    var postImage: String? {
-        didSet {
-            guard postImage != nil else { return }
-            DispatchQueue.main.async { [weak self] in
-                self?.postImageCallback?(self!.postImage!)
-            }
-        }
-    }
+    let avatarImage: Observable<String?> = .init(nil)
     
+    let postImage: Observable<String?> = .init(nil)
+
     var datetime: Date {
         return notification.created
     }
     
     private var notification: SRNotification
-    private var avatarImageCallback: ((String) -> Void)?
-    private var postImageCallback: ((String) -> Void)?
     
     init(notification: SRNotification) {
         self.notification = notification
-    }
-    
-    deinit {
-        postImageCallback = nil
-        avatarImageCallback = nil
-    }
-    
-    // MARK: - Public Methods
-    func updateAvatarImage(callback: ((String) -> Void)?) {
         
-        self.avatarImageCallback = callback
+        updateAvatarImage()
+        updatePostImage()
+    }
+
+    // MARK: - Public Methods
+    func updateAvatarImage() {
         
         UserService.queryUser(uid: notification.senderId) { [weak self] (user) in
             guard let user = user else { return }
-            self?.avatarImage = user.avatar
+            self?.avatarImage.value = user.avatar
         }
-        
     }
     
-    func updatePostImage(callback: ((String) -> Void)?) {
+    func updatePostImage() {
         
         guard let postId = notification.postId else { return }
-        
-        self.postImageCallback = callback
         
         PostManager.shared.fetchSinglePost(postId) { [weak self] (result) in
             switch result {
             case .success(let post):
-                self?.postImage = post.mediaType
+                self?.postImage.value = post.mediaLink
                 
             case .failure(let error):
                 print(error)

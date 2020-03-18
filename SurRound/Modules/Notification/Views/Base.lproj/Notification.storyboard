@@ -43,7 +43,7 @@
                                                 </label>
                                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f8k-M8-u93">
                                                     <rect key="frame" x="350" y="8" width="48" height="48"/>
-                                                    <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="f8k-M8-u93" secondAttribute="height" id="9L6-ZK-Vfy"/>
                                                         <constraint firstAttribute="width" constant="48" id="JPY-bV-XF3"/>
@@ -66,8 +66,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="avatarImageView" destination="wxu-dF-far" id="nlr-0D-kds"/>
-                                            <outlet property="descLabel" destination="wiz-P9-Syr" id="tip-rc-jnW"/>
                                             <outlet property="descTrailingConstraint" destination="Ib5-x7-17e" id="v6z-cO-FVs"/>
+                                            <outlet property="descriptionLabel" destination="wiz-P9-Syr" id="tip-rc-jnW"/>
                                             <outlet property="postImageView" destination="f8k-M8-u93" id="WtD-D8-Pmm"/>
                                         </connections>
                                     </tableViewCell>

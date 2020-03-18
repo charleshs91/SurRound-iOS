@@ -10,7 +10,7 @@ import UIKit
 
 protocol NotificationCellDelegate: AnyObject {
     
-    func didTapOnAvatar(_ cell: NotificationCell)
+    func didTapOnAvatar(_ cell: NotificationCell, viewModel: NotificationCellViewModel)
 }
 
 class NotificationCell: SRBaseTableViewCell {
@@ -18,7 +18,7 @@ class NotificationCell: SRBaseTableViewCell {
     weak var delegate: NotificationCellDelegate?
     
     @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var descTrailingConstraint: NSLayoutConstraint!
     
@@ -39,22 +39,16 @@ class NotificationCell: SRBaseTableViewCell {
     func setupCell(_ viewModel: NotificationCellViewModel) {
         
         self.viewModel = viewModel
-
-        descLabel.text = {
-            switch viewModel.type {
-            case "follow": return "\(viewModel.username)已開始追蹤你。"
-            case "reply": return "\(viewModel.username)在你的文章中留言。"
-            default: return ""
-            }
-        }()
         
-        fetchImages(from: viewModel)
+        bindAvatarImage()
+        bindPostImage()
+        showDescription()
     }
     
     func showPostImage() {
         
         descTrailingConstraint.isActive = false
-        descTrailingConstraint = descLabel.trailingAnchor.constraint(equalTo: postImageView.leadingAnchor, constant: -16)
+        descTrailingConstraint = descriptionLabel.trailingAnchor.constraint(equalTo: postImageView.leadingAnchor, constant: -16)
         descTrailingConstraint.isActive = true
         postImageView.isHidden = false
     }
@@ -62,7 +56,7 @@ class NotificationCell: SRBaseTableViewCell {
     func hidePostImage() {
         
         descTrailingConstraint.isActive = false
-        descTrailingConstraint = descLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+        descTrailingConstraint = descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         descTrailingConstraint.isActive = true
         postImageView.isHidden = true
     }
@@ -70,20 +64,50 @@ class NotificationCell: SRBaseTableViewCell {
     private func setupViews() {
         
         avatarImageView.addGestureRecognizer(avatarTapGesture)
+        postImageView.layer.cornerRadius = 8
     }
     
-    private func fetchImages(from viewModel: NotificationCellViewModel) {
+    private func showDescription() {
         
-        viewModel.updateAvatarImage { [weak self] urlString in
-            self?.avatarImageView.loadImage(urlString)
+        var text = ""
+        switch viewModel.type {
+        case "follow":
+            text = "\(viewModel.username)已開始追蹤你。"
+        case "reply":
+            text = "\(viewModel.username)在你的文章中留言。"
+        default:
+            break
         }
-        viewModel.updatePostImage { [weak self] urlString in
-            self?.postImageView.loadImage(urlString)
+        descriptionLabel.text = text
+    }
+    
+    private func bindAvatarImage() {
+        
+        viewModel.avatarImage.addObserver { [weak self] urlString in
+            self?.avatarImageView.loadImage(urlString, placeholder: UIImage.asset(.Image_Avatar_Placeholder))
         }
+    }
+    
+    private func bindPostImage() {
+        
+        viewModel.postImage.addObserver { [weak self] urlString in
+            if urlString == nil {
+                self?.hidePostImage()
+                return
+            }
+            self?.postImageView.loadImage(urlString, placeholder: UIImage.asset(.Image_Placeholder))
+            self?.showPostImage()
+        }
+    }
+    
+    private func unbind() {
+        
+        viewModel.avatarImage.removeObserver()
+        viewModel.postImage.removeObserver()
     }
     
     @objc func handleTapOnAvatar(_ sender: UITapGestureRecognizer) {
         
-        delegate?.didTapOnAvatar(self)
+        delegate?.didTapOnAvatar(self, viewModel: viewModel)
     }
 }
