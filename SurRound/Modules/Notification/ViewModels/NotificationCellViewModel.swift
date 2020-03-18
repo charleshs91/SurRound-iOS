@@ -14,11 +14,12 @@ class NotificationCellViewModel {
     var type: String {
         return notification.type
     }
-    
+    var uid: String {
+        return notification.senderId
+    }
     var username: String {
         return notification.senderName
     }
-    
     let avatarImage: Observable<String?> = .init(nil)
     
     let postImage: Observable<String?> = .init(nil)

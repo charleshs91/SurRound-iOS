@@ -11,6 +11,8 @@ import UIKit
 protocol NotificationCellDelegate: AnyObject {
     
     func didTapOnAvatar(_ cell: NotificationCell, viewModel: NotificationCellViewModel)
+    
+    func didTapOnPostImage(_ cell: NotificationCell, viewModel: NotificationCellViewModel)
 }
 
 class NotificationCell: SRBaseTableViewCell {
@@ -22,7 +24,6 @@ class NotificationCell: SRBaseTableViewCell {
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var descTrailingConstraint: NSLayoutConstraint!
     
-    private var avatarTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnAvatar(_:)))
     private var viewModel: NotificationCellViewModel!
     
     override func awakeFromNib() {
@@ -30,10 +31,17 @@ class NotificationCell: SRBaseTableViewCell {
         
         setupViews()
     }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
         avatarImageView.roundToHalfHeight()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        unbind()
     }
     
     func setupCell(_ viewModel: NotificationCellViewModel) {
@@ -61,9 +69,14 @@ class NotificationCell: SRBaseTableViewCell {
         postImageView.isHidden = true
     }
     
+    // MARK: - Private Methods
     private func setupViews() {
-        
+        let avatarTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnAvatar(_:)))
+        let postImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOnPostImage(_:)))
+        avatarImageView.isUserInteractionEnabled = true
         avatarImageView.addGestureRecognizer(avatarTapGesture)
+        postImageView.isUserInteractionEnabled = true
+        postImageView.addGestureRecognizer(postImageTapGesture)
         postImageView.layer.cornerRadius = 8
     }
     
@@ -106,8 +119,14 @@ class NotificationCell: SRBaseTableViewCell {
         viewModel.postImage.removeObserver()
     }
     
+    // MARK: - Selectors
     @objc func handleTapOnAvatar(_ sender: UITapGestureRecognizer) {
         
         delegate?.didTapOnAvatar(self, viewModel: viewModel)
+    }
+    
+    @objc func handleTapOnPostImage(_ sender: UITapGestureRecognizer) {
+        
+        delegate?.didTapOnPostImage(self, viewModel: viewModel)
     }
 }

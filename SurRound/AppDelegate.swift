@@ -24,13 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         IQKeyboardManager.shared.enable = true
-        
         FirebaseApp.configure()
-        
         setupGMSServices()
-        
         checkAuthStatus()
-        
         return true
     }
     

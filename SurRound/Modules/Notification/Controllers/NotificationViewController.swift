@@ -86,6 +86,14 @@ extension NotificationViewController: NotificationCellDelegate {
     
     func didTapOnAvatar(_ cell: NotificationCell, viewModel: NotificationCellViewModel) {
         
-        print(123)
+        let user = SRUser(uid: viewModel.uid, email: "", username: viewModel.username, avatar: viewModel.avatarImage.value)
+        let profileVC = ProfileViewController.instantiate()
+        profileVC.userToDisplay = user
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
+    
+    func didTapOnPostImage(_ cell: NotificationCell, viewModel: NotificationCellViewModel) {
+        
+        print("tapOnPostImage")
     }
 }
