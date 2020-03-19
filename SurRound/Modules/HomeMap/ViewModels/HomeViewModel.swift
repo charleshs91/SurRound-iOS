@@ -22,15 +22,16 @@ class HomeViewModel {
     
     private let isLoggedIn: Bool
     private let postFetcher: PostFetchable
-    private let storyManager: StoryManager
+    private let storyProvider: StoryProvider
+    private var storyCreator: StoryCreator?
     
     init(isLoggedIn: Bool = true,
          postFetcher: PostFetchable = PostManager.shared,
-         storyManager: StoryManager = StoryManager()) {
+         storyProvider: StoryProvider = StoryProvider()) {
         
         self.isLoggedIn = isLoggedIn
         self.postFetcher = postFetcher
-        self.storyManager = StoryManager()
+        self.storyProvider = storyProvider
         NotificationCenter.default.addObserver(self, selector: #selector(newPostHandler),
                                                name: Constant.NotificationId.newPost, object: nil)
     }
@@ -95,27 +96,22 @@ class HomeViewModel {
     
     func sendStory(videoURL: URL?) {
         
-        guard let url = videoURL,
+        guard let videoFileURL = videoURL,
               let place = PlaceManager.current.place else {
                 return
         }
-        do {
-            SRProgressHUD.showLoading()
-            try storyManager.createStory(url, at: place) { [weak self] result in
-                
-                SRProgressHUD.dismiss()
-                switch result {
-                case .success:
-                    SRProgressHUD.showSuccess()
-                    self?.fetchStory()
-                    
-                case .failure(let error):
-                    SRProgressHUD.showFailure(text: error.localizedDescription)
-                }
-            }
-        } catch {
-            SRProgressHUD.showFailure(text: "Fail to convert video to Data")
-        }
+        
+        storyCreator = StoryCreator(videoFileURL, place: place)
+        
+        SRProgressHUD.showLoading()
+        storyCreator?.create(completion: { [weak self] result in
+            SRProgressHUD.dismiss()
+            
+            result.handle({ _ in
+                SRProgressHUD.showSuccess()
+                self?.fetchStory()
+            })
+        })
     }
     
     // MARK: - Selectors
@@ -128,17 +124,13 @@ class HomeViewModel {
     private func fetchStory() {
         
         storyCollections.value.removeAll()
-        storyManager.fetchStoryCollection { [weak self] result in
+        storyProvider.fetchStoryCollection { [weak self] result in
             
-            switch result {
-            case .success(let stories):
+            result.handle({ stories in
                 DispatchQueue.main.async {
                     self?.storyCollections.value.append(contentsOf: stories)
                 }
-                
-            case .failure(let error):
-                SRProgressHUD.showFailure(text: error.localizedDescription)
-            }
+            })
         }
     }
         
@@ -162,18 +154,12 @@ class HomeViewModel {
         
         postFetcher.fetchPostList(listCategory: .none, blockingUserList: blockingUsers) { [weak self] result in
             
-            switch result {
-            case .success(let posts):
-                let viewModels = posts.map { post in
-                    MapPostViewModel(post: post)
-                }
+            result.handle({ posts in
+                let viewModels = posts.map { MapPostViewModel(post: $0) }
                 DispatchQueue.main.async {
                     self?.mapPostViewModels.value = viewModels
                 }
-                
-            case .failure(let error):
-                SRProgressHUD.showFailure(text: error.localizedDescription)
-            }
+            })
         }
     }
 }

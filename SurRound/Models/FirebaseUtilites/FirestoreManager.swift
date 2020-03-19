@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestoreSwift
 
 enum Path {
     
@@ -54,6 +55,7 @@ enum FirestoreManagerError: Error {
     
     case pathError
     case requestError
+    case conditionError
     case firestoreError(String)
 }
 
@@ -65,6 +67,22 @@ protocol Resource {
 }
 
 extension Resource {
+    
+    func query() throws -> Query {
+        
+        let collectionReference = try self.collectionReference()
+        
+        guard conditions.count > 0 else {
+            throw FirestoreManagerError.conditionError
+        }
+        
+        var query = conditions[0].apply(collectionReference)
+        
+        for index in 1 ..< conditions.count {
+            query = conditions[index].apply(query)
+        }
+        return query
+    }
     
     func collectionReference() throws -> CollectionReference {
         
@@ -117,13 +135,13 @@ class FirestoreManager {
     
     func request(resource: Resource,
                  completion: @escaping (Result<Data, FirestoreManagerError>) -> Void) throws {
-        
         switch resource.action {
         case .fetch:
             if case .collection = resource.paths.last {
                 let reference = try resource.collectionReference()
                 if resource.conditions.count > 0 {
-                    // To-do: Handle conditions
+                    let query = try resource.query()
+                    try fetchQuery(query: query, completion: completion)
                 } else {
                     try fetchCollection(reference: reference, completion: completion)
                 }
@@ -138,6 +156,24 @@ class FirestoreManager {
             }
             let reference = try resource.documentReference()
             try setData(reference: reference, dict: dict, completion: completion)
+        }
+    }
+
+    private func fetchQuery(query: Query,
+                            completion: @escaping (Result<Data, FirestoreManagerError>) -> Void) throws {
+        
+        query.getDocuments { (querySnapshot, error) in
+            guard error == nil else {
+                completion(.failure(.firestoreError(error!.localizedDescription)))
+                return
+            }
+            let dictArray = querySnapshot!.documents.map { $0.data() }
+            do {
+                let data = try JSONSerialization.data(withJSONObject: dictArray, options: .fragmentsAllowed)
+                completion(.success(data))
+            } catch {
+                completion(.failure(.firestoreError(error.localizedDescription)))
+            }
         }
     }
     
