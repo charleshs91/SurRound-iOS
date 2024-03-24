@@ -1,6 +1,6 @@
 # SurRound-iOS
 
-<a href="https://apple.co/2vgBh4j"><img src="https://i.imgur.com/eRntvcA.png" height="40"></a>
+<a href="https://apple.co/2vgBh4j"><img src="https://i.imgur.com/eRntvcA.png" height="40"></a> (Discontinued by the author)
 
 SurRound is a map-based social networking application, which allows users to look for feeds and stories around them, share their experiences of restaurants, scenary spots, shopping places, and even just chat with neighboring users.
 
